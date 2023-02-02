@@ -8,7 +8,7 @@ using PicoForth.Values;
 using PicoForth.Words;
 
 
-internal class Evaluator : IEvaluator
+public class Evaluator : IEvaluator
 {
     private const int DefaultStackSize = 10;
     private const int DefaultHeapSize = 64;

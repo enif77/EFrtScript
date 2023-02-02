@@ -1,6 +1,9 @@
 ﻿/* Copyright (C) Premysl Fara and Contributors */
 
-namespace PicoForth;
+namespace PicoForthApp;
+
+using PicoForth; 
+
 
 internal class Program
 {
