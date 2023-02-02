@@ -1,7 +1,12 @@
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth;
+
+
 internal class StringSourceReader : ISourceReader
 {
     public int CurrentChar =>
-         (_srcPos < 0 || _srcPos >= _src.Length)
+        (_srcPos < 0 || _srcPos >= _src.Length)
             ? -1
             : _src[_srcPos];
 

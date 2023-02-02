@@ -1,4 +1,8 @@
-using System;
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth.Words;
+
+using PicoForth.Values;
 
 
 internal class MinusWord : IWord

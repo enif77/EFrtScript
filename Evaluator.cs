@@ -1,6 +1,11 @@
-using System;
-using System.Collections.Generic;
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth;
+
 using System.Text;
+
+using PicoForth.Values;
+using PicoForth.Words;
 
 
 internal class Evaluator : IEvaluator

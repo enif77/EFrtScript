@@ -1,6 +1,6 @@
-﻿using System;
-using System.Text;
+﻿/* Copyright (C) Premysl Fara and Contributors */
 
+namespace PicoForth;
 
 internal class Program
 {

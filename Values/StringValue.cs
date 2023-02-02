@@ -1,4 +1,7 @@
-using System;
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth.Values;
+
 using System.Globalization;
 
 

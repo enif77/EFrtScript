@@ -1,4 +1,7 @@
-using System;
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth;
+
 using System.Text;
 
 

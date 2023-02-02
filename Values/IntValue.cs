@@ -1,3 +1,8 @@
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth.Values;
+
+
 internal class IntValue : IValue
 {
     public int Int { get; }

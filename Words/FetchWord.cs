@@ -1,4 +1,6 @@
-using System;
+/* Copyright (C) Premysl Fara and Contributors */
+
+namespace PicoForth.Words;
 
 
 internal class FetchWord : IWord
