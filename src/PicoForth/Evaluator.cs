@@ -134,6 +134,13 @@ public class Evaluator : IEvaluator
         RegisterWord(new FromReturnStackWord());
         RegisterWord(new FetchReturnStackWord());
 
+        RegisterWord(new ConditionalDuplicateWord());
+        RegisterWord(new DropWord());
+        RegisterWord(new DupWord());
+        RegisterWord(new SwapWord());
+        RegisterWord(new OverWord());
+        RegisterWord(new RotWord());
+
         RegisterWord(new DotWord());
         RegisterWord(new CrWord());
 

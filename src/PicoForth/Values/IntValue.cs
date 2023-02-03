@@ -7,6 +7,7 @@ using System.Globalization;
 
 internal class IntValue : IValue
 {
+    public bool Boolean => Int != 0;
     public int Int { get; }
     public long Long => (long)Int;
     public string String => Int.ToString(CultureInfo.InvariantCulture);
