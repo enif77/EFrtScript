@@ -11,6 +11,7 @@ using PicoForth.Words;
 public class Evaluator : IEvaluator
 {
     private const int DefaultStackSize = 10;
+    private const int DefaultReturnStackSize = 10;
     private const int DefaultHeapSize = 64;
 
 
@@ -19,6 +20,7 @@ public class Evaluator : IEvaluator
         _source = new StringSourceReader(string.Empty);
         _words = new Dictionary<string, IWord>();
         _stack = new Stack<IValue>(DefaultStackSize);
+        _returnStack = new Stack<IValue>(DefaultReturnStackSize);
         _heap = new IValue[DefaultHeapSize];
 
         RegisterBuildinWords();
@@ -128,6 +130,10 @@ public class Evaluator : IEvaluator
         RegisterWord(new StoreWord());
         RegisterWord(new FetchWord());
 
+        RegisterWord(new ToReturnStackWord());
+        RegisterWord(new FromReturnStackWord());
+        RegisterWord(new FetchReturnStackWord());
+
         RegisterWord(new DotWord());
         RegisterWord(new CrWord());
 
@@ -163,6 +169,29 @@ public class Evaluator : IEvaluator
 
     public IValue StackPop()
         => _stack.Pop();
+
+    #endregion
+
+
+    #region return stack
+
+    private Stack<IValue> _returnStack;
+
+
+    public void ReturnStackClear()
+        => _returnStack = new Stack<IValue>(DefaultReturnStackSize);
+
+    public bool ReturnStackIsEmpty()
+        => _returnStack.Count == 0;
+
+    public IValue ReturnStackPeek()
+        => _returnStack.Peek();
+
+    public void ReturnStackPush(IValue v)
+        => _returnStack.Push(v);
+
+    public IValue ReturnStackPop()
+        => _returnStack.Pop();
 
     #endregion
 

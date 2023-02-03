@@ -37,6 +37,17 @@ public interface IEvaluator
     #endregion
 
 
+    #region return stack
+
+    void ReturnStackClear();
+    bool ReturnStackIsEmpty();
+    IValue ReturnStackPeek();
+    void ReturnStackPush(IValue v);
+    IValue ReturnStackPop();
+
+    #endregion
+
+
     #region heap
 
     void HeapStore(int address, IValue value);
