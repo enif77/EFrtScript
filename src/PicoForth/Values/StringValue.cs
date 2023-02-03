@@ -21,20 +21,7 @@ internal class StringValue : IValue
             throw new Exception($"'{String}' cannot be converted to an Int");
         }
     }
-
-    public long Long
-    {
-        get
-        {
-            if (long.TryParse(String, NumberStyles.Integer, CultureInfo.InvariantCulture, out var i))
-            {
-                return i;
-            }
-
-            throw new Exception($"'{String}' cannot be converted to a Long");
-        }
-    }
-
+    
     public string String { get; }
 
 
