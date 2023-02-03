@@ -30,6 +30,6 @@ internal class StringSourceReader : ISourceReader
     }
 
 
-    private int _srcPos = -1;
-    private string _src = string.Empty;
+    private int _srcPos;
+    private readonly string _src;
 }

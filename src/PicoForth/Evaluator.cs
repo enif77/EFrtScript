@@ -23,7 +23,7 @@ public class Evaluator : IEvaluator
         _returnStack = new Stack<IValue>(DefaultReturnStackSize);
         _heap = new IValue[DefaultHeapSize];
 
-        RegisterBuildinWords();
+        RegisterBuildInWords();
     }
 
 
@@ -103,27 +103,18 @@ public class Evaluator : IEvaluator
 
     #region words
 
-    private IDictionary<string, IWord> _words;
+    private readonly IDictionary<string, IWord> _words;
 
 
     public bool IsWordRegistered(string wordName)
-    {
-        if (string.IsNullOrWhiteSpace(wordName))
-        {
-            return false;
-        }
-
-        return _words.ContainsKey(wordName);
-    }
+        => string.IsNullOrWhiteSpace(wordName) == false && _words.ContainsKey(wordName);
 
 
     public void RegisterWord(IWord word)
-    {
-        _words.Add(word.Name, word);
-    }
+        => _words.Add(word.Name, word);
 
 
-    private void RegisterBuildinWords()
+    private void RegisterBuildInWords()
     {
         RegisterWord(new CommentWord());
 
@@ -205,7 +196,7 @@ public class Evaluator : IEvaluator
 
     #region heap
 
-    private IValue[] _heap;
+    private readonly IValue[] _heap;
 
 
     public void HeapStore(int address, IValue value)

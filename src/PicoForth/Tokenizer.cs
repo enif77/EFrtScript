@@ -7,7 +7,7 @@ using System.Text;
 
 internal class Tokenizer
 {
-    private ISourceReader _src;
+    private readonly ISourceReader _src;
     
 
     public Tokenizer(ISourceReader src)
@@ -35,11 +35,7 @@ internal class Tokenizer
                 break;
             }
 
-            if (wordBuff == null)
-            {
-                wordBuff = new StringBuilder();
-            }
-
+            wordBuff ??= new StringBuilder();
             wordBuff.Append((char) c);
 
             c = _src.NextChar();
