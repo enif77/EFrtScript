@@ -10,6 +10,6 @@ internal class DotWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        Console.Write(evaluator.StackPop().Int);
+        Console.Write(evaluator.StackPop().Integer);
     }
 }

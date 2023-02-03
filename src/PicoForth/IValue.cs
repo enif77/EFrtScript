@@ -6,6 +6,6 @@ namespace PicoForth;
 public interface IValue
 {
     bool Boolean { get; }
-    int Int { get; }
+    int Integer { get; }
     string String { get; }
 }

@@ -12,7 +12,7 @@ internal class SlashWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        var b = evaluator.StackPop().Int;
-        evaluator.StackPush(new IntValue(evaluator.StackPop().Int / b));
+        var b = evaluator.StackPop().Integer;
+        evaluator.StackPush(new IntValue(evaluator.StackPop().Integer / b));
     }
 }

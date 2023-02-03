@@ -12,6 +12,6 @@ internal class StarWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        evaluator.StackPush(new IntValue(evaluator.StackPop().Int * evaluator.StackPop().Int));
+        evaluator.StackPush(new IntValue(evaluator.StackPop().Integer * evaluator.StackPop().Integer));
     }
 }

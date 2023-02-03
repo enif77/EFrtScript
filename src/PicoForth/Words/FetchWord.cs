@@ -10,6 +10,6 @@ internal class FetchWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        evaluator.StackPush(evaluator.HeapFetch(evaluator.StackPop().Int));
+        evaluator.StackPush(evaluator.HeapFetch(evaluator.StackPop().Integer));
     }
 }

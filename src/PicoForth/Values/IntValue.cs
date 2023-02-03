@@ -7,13 +7,13 @@ using System.Globalization;
 
 internal class IntValue : IValue
 {
-    public bool Boolean => Int != 0;
-    public int Int { get; }
-    public string String => Int.ToString(CultureInfo.InvariantCulture);
+    public bool Boolean => Integer != 0;
+    public int Integer { get; }
+    public string String => Integer.ToString(CultureInfo.InvariantCulture);
 
 
     public IntValue(int value)
     {
-        Int = value;
+        Integer = value;
     }
 }

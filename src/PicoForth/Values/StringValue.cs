@@ -9,7 +9,7 @@ internal class StringValue : IValue
 {
     public bool Boolean => string.IsNullOrEmpty(String) == false;
 
-    public int Int
+    public int Integer
     {
         get
         {

@@ -10,7 +10,7 @@ internal class StoreWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        var addr = evaluator.StackPop().Int;
+        var addr = evaluator.StackPop().Integer;
         evaluator.HeapStore(addr, evaluator.StackPop());
     }
 }
