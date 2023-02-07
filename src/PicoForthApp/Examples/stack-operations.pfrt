@@ -1,3 +1,5 @@
+." --- Swap operations ---" CR
+
 ( ?DUP - true )
 1 ?DUP . CR         ( 1)
 S" 1" ?DUP S. CR    ( 1)
@@ -20,3 +22,5 @@ S" " ?DUP . CR      ( 0)
 
 ( SWAP )
 1 2 SWAP . . CR     ( 12)
+
+CR

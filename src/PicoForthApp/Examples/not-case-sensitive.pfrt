@@ -1,2 +1,6 @@
+." --- Not case sensitive ---" CR
+
 ( DUP and dup are recognized )
 1 DUP dup . ."  " . ."  " . CR         ( 1 1 1)
+
+CR

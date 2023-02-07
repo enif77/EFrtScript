@@ -141,6 +141,12 @@ public class Evaluator : IEvaluator
         RegisterWord(new StarWord());
         RegisterWord(new SlashWord());
 
+        RegisterWord(new EqualToZeroWord());
+        RegisterWord(new EqualWord());
+        RegisterWord(new GreaterThanWord());
+        RegisterWord(new LessThanWord());
+        RegisterWord(new LessThanZeroWord());
+
         RegisterWord(new PrintStringLitWord());
         RegisterWord(new PrintStringWord());
         RegisterWord(new ReadStringLitWord());

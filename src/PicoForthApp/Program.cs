@@ -17,6 +17,9 @@ internal class Program
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
+
+        ev.Eval(".\" --- Mics ---\" CR");
 
         ev.Eval("30 3 * 1 + 2 / . CR");
         ev.Eval("30 3 !  3 @ . CR");
@@ -32,8 +35,7 @@ internal class Program
 ~/.../PicoForth/src$ dotnet run --project ./PicoForthApp/PicoForthApp.csproj
 
 https://github.com/enif77/EFrt
-
-0< 0= < = > 
+ 
 : ;
 >NUMBER S>D
 ,
