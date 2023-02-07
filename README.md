@@ -44,7 +44,10 @@ Common words for all base operations.
 | R>       | no   | IC   | **From return stack**<br>( -- n) [n - ]<br>The top value is removed from the return stack and pushed onto the stack. |
 | ROT      | no   | IC   | **Rotate 3 items**<br>(n1 n2 n3 -- n2 n3 n1)<br>The third item on the stack is placed on the top of the stack and the second and first items are moved down.  |
 | S" str   | yes  | IC   | **String literal**<br>( -- s)<br>Consume all source characters till the closing `"` character, creating a string from them and storing the result on the top of the stack. |
+| SPACE    | no   | IC   | **Print SPACE**<br>Prints out the SPACE character. |
+| SPACES   | no   | IC   | **Print spaces**<br>(n -- )<br>Prints out N characters of SPACE, where N is a number on the top of the stack. |
 | SWAP     | no   | IC   | **Swap top two items**<br>(n1 n2 -- n2 n1)<br>The top two stack items are interchanged. |
+| TYPE     | no   | IC   | **Print string**<br>(s -- )<br>Prints out a value on the top of the stack as a string. |
 
 
 # STRING library
