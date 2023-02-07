@@ -11,7 +11,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var ev = new Evaluator();
+        var ev = new Evaluator(new ConsoleOutputWriter());
 
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/hello-world.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));

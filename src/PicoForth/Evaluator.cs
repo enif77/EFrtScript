@@ -15,8 +15,13 @@ public class Evaluator : IEvaluator
     private const int DefaultHeapSize = 64;
 
 
-    public Evaluator()
+    public IOutputWriter OutputWriter { get; }
+
+    
+    public Evaluator(IOutputWriter outputWriter)
     {
+        OutputWriter = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
+
         _source = new StringSourceReader(string.Empty);
         _words = new Dictionary<string, IWord>();
         _stack = new Stack<IValue>(DefaultStackSize);
@@ -191,7 +196,7 @@ public class Evaluator : IEvaluator
 
 
     public int ReturnStackDepth => _returnStack.Count;
-
+    
 
     public void ReturnStackClear()
         => _returnStack = new Stack<IValue>(DefaultReturnStackSize);
@@ -214,7 +219,6 @@ public class Evaluator : IEvaluator
     #region heap
 
     private readonly IValue[] _heap;
-
 
     public void HeapStore(int address, IValue value)
         => _heap[address] = value;

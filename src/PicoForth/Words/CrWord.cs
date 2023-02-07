@@ -10,6 +10,6 @@ internal class CrWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        Console.WriteLine();
+        evaluator.OutputWriter.WriteLine();
     }
 }

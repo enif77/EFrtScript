@@ -5,6 +5,9 @@ namespace PicoForth;
 
 public interface IEvaluator
 {
+    IOutputWriter OutputWriter { get; }
+    
+
     void Eval(string src);
 
 

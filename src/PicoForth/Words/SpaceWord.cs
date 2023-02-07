@@ -10,6 +10,6 @@ internal class SpaceWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        Console.Write(" ");
+        evaluator.OutputWriter.Write(" ");
     }
 }

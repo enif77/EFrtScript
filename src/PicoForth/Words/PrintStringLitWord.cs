@@ -10,6 +10,6 @@ internal class PrintStringLitWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        Console.Write(evaluator.ReadStringFromSource());
+        evaluator.OutputWriter.Write(evaluator.ReadStringFromSource());
     }
 }

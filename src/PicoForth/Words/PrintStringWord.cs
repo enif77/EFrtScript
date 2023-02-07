@@ -10,6 +10,6 @@ internal class PrintStringWord : IWord
 
     public void Execute(IEvaluator evaluator)
     {
-        Console.Write(evaluator.StackPop().String);
+        evaluator.OutputWriter.Write(evaluator.StackPop().String);
     }
 }
