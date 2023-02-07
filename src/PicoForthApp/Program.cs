@@ -18,6 +18,9 @@ internal class Program
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
+        
+        ev.StackClear();
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
 
         ev.Eval(".\" --- Mics ---\" CR");
 
@@ -35,7 +38,12 @@ internal class Program
 ~/.../PicoForth/src$ dotnet run --project ./PicoForthApp/PicoForthApp.csproj
 
 https://github.com/enif77/EFrt
- 
+
+DEPTH
+BL SPACE SPACES TYPE
+COUNT
+EVALUATE
+
 : ;
 >NUMBER S>D
 ,
@@ -44,10 +52,6 @@ ABS LSHIFT RSHIFT MAX MIN MODE NEGATE
 +! 2! 2@
 "* /" "* /MOD" /MOD 1+ 1- 2* 2/ FM/MOD INVERT M* SM/REM
 AND OR XOR
-BL SPACE SPACES TYPE
-COUNT
-DEPTH
-EVALUATE
 QUIT
 
 */

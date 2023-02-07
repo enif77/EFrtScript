@@ -132,6 +132,7 @@ public class Evaluator : IEvaluator
         RegisterWord(new SwapWord());
         RegisterWord(new OverWord());
         RegisterWord(new RotWord());
+        RegisterWord(new DepthWord());
 
         RegisterWord(new DotWord());
         RegisterWord(new CrWord());
@@ -160,6 +161,9 @@ public class Evaluator : IEvaluator
     private Stack<IValue> _stack;
 
 
+    public int StackDepth => _stack.Count;
+
+
     public void StackClear()
         => _stack = new Stack<IValue>(DefaultStackSize);
 
@@ -181,6 +185,9 @@ public class Evaluator : IEvaluator
     #region return stack
 
     private Stack<IValue> _returnStack;
+
+
+    public int ReturnStackDepth => _returnStack.Count;
 
 
     public void ReturnStackClear()

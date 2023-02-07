@@ -28,6 +28,8 @@ public interface IEvaluator
 
     #region stack
 
+    int StackDepth { get; }
+
     void StackClear();
     bool StackIsEmpty();
     IValue StackPeek();
@@ -38,6 +40,8 @@ public interface IEvaluator
 
 
     #region return stack
+
+    int ReturnStackDepth { get; }
 
     void ReturnStackClear();
     bool ReturnStackIsEmpty();
