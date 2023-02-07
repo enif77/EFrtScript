@@ -18,6 +18,8 @@ internal class Program
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/type.pfrt"));
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/spaces.pfrt"));
         
         ev.StackClear();
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
@@ -39,8 +41,6 @@ internal class Program
 
 https://github.com/enif77/EFrt
 
-DEPTH
-BL SPACE SPACES TYPE
 COUNT
 EVALUATE
 

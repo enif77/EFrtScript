@@ -136,6 +136,9 @@ public class Evaluator : IEvaluator
 
         RegisterWord(new DotWord());
         RegisterWord(new CrWord());
+        RegisterWord(new SpaceWord());
+        RegisterWord(new SpacesWord());
+        RegisterWord(new TypeWord());
 
         RegisterWord(new PlusWord());
         RegisterWord(new MinusWord());

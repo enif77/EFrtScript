@@ -1,0 +1,5 @@
+." --- TYPE ---" CR
+
+1 TYPE CR  ( 1 )
+S" aaa" TYPE CR  ( aaa )
+S" aaa" S" bbb" SWAP TYPE  ( aaa )

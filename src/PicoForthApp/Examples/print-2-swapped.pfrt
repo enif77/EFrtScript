@@ -1,7 +1,7 @@
 ." --- Return stack swap ---" CR
 
 ( Pushes 2 nubers to the stack and prints them in reverse order.   )
-1 2 . . CR          ( 2 1)
-1 2 >R . R> . CR    ( 1 2)
+1 2 . SPACE . CR          ( 2 1)
+1 2 >R . SPACE R> . CR    ( 1 2)
 
 CR
