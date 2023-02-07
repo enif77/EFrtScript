@@ -16,6 +16,7 @@ internal class Program
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/hello-world.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
 
         ev.Eval("30 3 * 1 + 2 / . CR");
         ev.Eval("30 3 !  3 @ . CR");

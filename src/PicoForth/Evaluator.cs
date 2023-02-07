@@ -41,9 +41,10 @@ public class Evaluator : IEvaluator
                 break;
             }
 
-            if (IsWordRegistered(word))
+            var wordName = word.ToUpperInvariant();
+            if (IsWordRegistered(wordName))
             {
-                _words[word].Execute(this);
+                _words[wordName].Execute(this);
 
                 continue;
             }
@@ -111,7 +112,7 @@ public class Evaluator : IEvaluator
 
 
     public void RegisterWord(IWord word)
-        => _words.Add(word.Name, word);
+        => _words.Add(word.Name.ToUpperInvariant(), word);
 
 
     private void RegisterBuildInWords()
