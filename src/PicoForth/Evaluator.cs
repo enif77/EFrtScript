@@ -23,6 +23,7 @@ public class Evaluator : IEvaluator
         OutputWriter = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
 
         _source = new StringSourceReader(string.Empty);
+        _tokenizer = new Tokenizer(_source);
         _words = new Dictionary<string, IWord>();
         _stack = new Stack<IValue>(DefaultStackSize);
         _returnStack = new Stack<IValue>(DefaultReturnStackSize);
@@ -35,12 +36,11 @@ public class Evaluator : IEvaluator
     public void Eval(string src)
     {
         _source = new StringSourceReader(src);
-
-        var tokenizer = new Tokenizer(_source);
+        _tokenizer = new Tokenizer(_source);
         
         while (true)
         {
-            var word = tokenizer.NextWord();
+            var word = _tokenizer.NextWord();
             if (word == null)
             {
                 break;
@@ -69,6 +69,7 @@ public class Evaluator : IEvaluator
     #region source
 
     private ISourceReader _source;
+    private Tokenizer _tokenizer;
 
 
     public int CurrentChar => _source.CurrentChar;
@@ -77,6 +78,12 @@ public class Evaluator : IEvaluator
     public int NextChar()
     {
         return _source.NextChar();
+    }
+
+
+    public string? ReadWordFromSource()
+    {
+        return _tokenizer.NextWord();
     }
 
 

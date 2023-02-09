@@ -16,6 +16,7 @@ public interface IEvaluator
     int CurrentChar { get; }
 
     int NextChar();
+    string? ReadWordFromSource();
     string ReadStringFromSource();
 
     #endregion
