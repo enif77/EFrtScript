@@ -3,13 +3,33 @@
 namespace PicoForth.Words;
 
 
-internal class NonPrimitiveWord : IWord
+internal class NonPrimitiveWord : INonPrimitiveWord
 {
-    public string Name => "NonPrimitiveWord";
+    public string Name { get; }
+    public bool IsImmediate => false;
     
+
+    public NonPrimitiveWord(string wordName)
+    {
+        Name = wordName;
+        _words = new List<IWord>();
+    }
+
+
+    public void AddWord(IWord word)
+    {
+        _words.Add(word);
+    }
+
 
     public void Execute(IEvaluator evaluator)
     {
-        throw new NotImplementedException(Name);
+        foreach (var word in _words)
+        {
+            word.Execute(evaluator);
+        }
     }
+
+
+    private readonly IList<IWord> _words;
 }

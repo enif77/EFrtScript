@@ -8,6 +8,7 @@ namespace PicoForth.Words;
 internal class DepthWord : IWord
 {
     public string Name => "DEPTH";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

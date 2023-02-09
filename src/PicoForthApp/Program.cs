@@ -20,6 +20,7 @@ internal class Program
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/type.pfrt"));
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/spaces.pfrt"));
+        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/custom-words.pfrt"));
         
         ev.StackClear();
         ev.Eval(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));

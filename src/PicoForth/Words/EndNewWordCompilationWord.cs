@@ -5,26 +5,15 @@ namespace PicoForth.Words;
 
 internal class EndNewWordCompilationWord : IWord
 {
-    public string Name => "EndNewWordCompilation";
+    public string Name => ";";
+    public bool IsImmediate => true;
     
 
     public void Execute(IEvaluator evaluator)
     {
-        throw new NotImplementedException(Name);
+        // Each user defined word exits with the EXIT word.
+        //_interpreter.WordBeingDefined.AddWord(new ExitControlWord(_interpreter, _interpreter.WordBeingDefined));
+
+        evaluator.EndNewWordCompilation();
     }
 }
-
-/*
- 
-// : word-name body ;
-private int SemicolonAction()
-{
-    // Each user defined word exits with the EXIT word.
-    _interpreter.WordBeingDefined.AddWord(new ExitControlWord(_interpreter, _interpreter.WordBeingDefined));
-
-    _interpreter.EndNewWordCompilation();
-
-    return 1;
-} 
-  
- */

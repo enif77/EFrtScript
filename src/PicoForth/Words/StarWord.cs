@@ -8,6 +8,7 @@ using PicoForth.Values;
 internal class StarWord : IWord
 {
     public string Name => "*";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

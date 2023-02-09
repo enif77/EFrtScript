@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class RotWord : IWord
 {
     public string Name => "ROT";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

@@ -8,6 +8,7 @@ using PicoForth.Values;
 internal class ConditionalDuplicateWord : IWord
 {
     public string Name => "?DUP";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

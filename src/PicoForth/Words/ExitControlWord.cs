@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class ExitControlWord : IWord
 {
     public string Name => "Exit";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

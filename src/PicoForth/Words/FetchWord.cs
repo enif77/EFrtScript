@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class FetchWord : IWord
 {
     public string Name => "@";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

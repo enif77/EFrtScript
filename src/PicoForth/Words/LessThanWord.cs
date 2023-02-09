@@ -8,6 +8,7 @@ namespace PicoForth.Words;
 internal class LessThanWord : IWord
 {
     public string Name => "<";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

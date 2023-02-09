@@ -1,0 +1,25 @@
+." --- Custom words 1 ---" CR
+
+: print-ln . CR ;
+
+: print-one
+    ." One: " 1 print-ln ;
+
+print-one ( One: 1 )
+
+." --- Custom words 2 ---" CR
+
+( n1 n2 -- a s )
+: add-sub
+    dup     ( n1 n2 n2 -- , )
+    >R      ( n1 n2 -- , n2 -- )
+    swap    ( n2 n1 -- , n2 -- )
+    dup     ( n2 n1 n1 -- , n2 -- )
+    >R      ( n2 n1 -- , n2 n1 -- )
+    +       ( a -- , n2 n1 -- )
+    R> R>   ( n1 n2 -- , )
+    -       ( a s -- )
+    swap    ( s a )
+; 
+
+2 3 add-sub . SPACE . CR  ( 5 -1 )

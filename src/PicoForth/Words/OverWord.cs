@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class OverWord : IWord
 {
     public string Name => "OVER";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

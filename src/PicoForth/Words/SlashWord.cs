@@ -8,6 +8,7 @@ using PicoForth.Values;
 internal class SlashWord : IWord
 {
     public string Name => "/";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

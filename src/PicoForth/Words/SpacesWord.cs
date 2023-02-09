@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class SpacesWord : IWord
 {
     public string Name => "SPACES";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)

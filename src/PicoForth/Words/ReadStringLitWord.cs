@@ -8,6 +8,7 @@ using PicoForth.Values;
 internal class ReadStringLitWord : IWord
 {
     public string Name => "S\"";
+    public bool IsImmediate => true;
     
 
     public void Execute(IEvaluator evaluator)

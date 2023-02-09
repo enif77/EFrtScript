@@ -5,24 +5,13 @@ namespace PicoForth.Words;
 
 internal class BeginNewWordCompilationWord : IWord
 {
-    public string Name => "BeginNewWordCompilation";
+    public string Name => ":";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)
     {
-        throw new NotImplementedException(Name);
+        evaluator.BeginNewWordCompilation(
+            evaluator.ReadWordFromSource() ?? throw new Exception("A new word name expected."));
     }
 }
-
-/*
-
-// : word-name body ;
-private int ColonAction()
-{
-    _interpreter.BeginNewWordCompilation();
-    _interpreter.WordBeingDefined = new NonPrimitiveWord(_interpreter, _interpreter.ParseWord());
-
-    return 1;
-}
- 
- */

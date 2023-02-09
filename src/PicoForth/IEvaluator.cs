@@ -24,8 +24,14 @@ public interface IEvaluator
 
     #region words
 
+    bool IsCompiling { get; }
+    INonPrimitiveWord? WordBeingDefined { get; }
+
     bool IsWordRegistered(string wordName);
     void RegisterWord(IWord word);
+
+    void BeginNewWordCompilation(string wordName);
+    void EndNewWordCompilation();
 
     #endregion
 

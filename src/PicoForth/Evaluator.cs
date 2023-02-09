@@ -47,22 +47,84 @@ public class Evaluator : IEvaluator
             }
 
             var wordName = word.ToUpperInvariant();
-            if (IsWordRegistered(wordName))
-            {
-                _words[wordName].Execute(this);
 
-                continue;
+            if (IsCompiling)
+            {
+                CompileWord(wordName);
+            }
+            else
+            {
+                ExecuteWord(wordName);
             }
 
-            if (int.TryParse(word, out var val))
-            {
-                StackPush(new IntValue(val));
+            // if (IsWordRegistered(wordName))
+            // {
+            //     _words[wordName].Execute(this);
 
-                continue;
-            }
+            //     continue;
+            // }
+
+            // if (int.TryParse(word, out var val))
+            // {
+            //     StackPush(new IntValue(val));
+
+            //     continue;
+            // }
             
-            throw new Exception($"Unknown word: {word}");    
+            // throw new Exception($"Unknown word: {word}");    
         }
+    }
+
+
+    private void CompileWord(string wordName)
+    {
+        if (IsWordRegistered(wordName))
+        {
+            var word = _words[wordName];
+            if (word.IsImmediate)
+            {
+                word.Execute(this);
+            }
+            else if (word.Name == WordBeingDefined?.Name)
+            {
+                WordBeingDefined.AddWord(WordBeingDefined);
+            }
+            else
+            {
+                WordBeingDefined?.AddWord(word);
+            }
+
+            return;
+        }
+
+        if (int.TryParse(wordName, out var val))
+        {
+            WordBeingDefined?.AddWord(new IntegerConstantWord(val));
+
+            return;
+        }
+
+        throw new Exception($"Unknown word: {wordName}");
+    }
+
+
+    private void ExecuteWord(string wordName)
+    {
+        if (IsWordRegistered(wordName))
+        {
+            _words[wordName].Execute(this);
+
+            return;
+        }
+
+        if (int.TryParse(wordName, out var val))
+        {
+            StackPush(new IntValue(val));
+
+            return;
+        }
+
+        throw new Exception($"Unknown word: {wordName}");
     }
 
 
@@ -118,6 +180,9 @@ public class Evaluator : IEvaluator
 
     private readonly IDictionary<string, IWord> _words;
 
+    public bool IsCompiling { get; private set; }
+    public INonPrimitiveWord? WordBeingDefined { get; private set; }
+
 
     public bool IsWordRegistered(string wordName)
         => string.IsNullOrWhiteSpace(wordName) == false && _words.ContainsKey(wordName);
@@ -127,9 +192,38 @@ public class Evaluator : IEvaluator
         => _words.Add(word.Name.ToUpperInvariant(), word);
 
 
+    public void BeginNewWordCompilation(string wordName)
+    {
+        if (IsCompiling)
+        {
+            throw new Exception("A word compilation is already running.");
+        }
+
+        WordBeingDefined = new NonPrimitiveWord(wordName);
+        IsCompiling = true;
+    }
+
+
+    public void EndNewWordCompilation()
+    {
+        if (IsCompiling == false)
+        {
+            throw new Exception("Not in a new word compilation.");
+        }
+
+        RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
+
+        WordBeingDefined = null;
+        IsCompiling = false;
+    }
+
+
     private void RegisterBuildInWords()
     {
         RegisterWord(new CommentWord());
+
+        RegisterWord(new BeginNewWordCompilationWord());
+        RegisterWord(new EndNewWordCompilationWord());
 
         RegisterWord(new StoreWord());
         RegisterWord(new FetchWord());

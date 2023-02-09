@@ -6,6 +6,7 @@ namespace PicoForth.Words;
 internal class DupWord : IWord
 {
     public string Name => "DUP";
+    public bool IsImmediate => false;
     
 
     public void Execute(IEvaluator evaluator)
