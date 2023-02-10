@@ -56,22 +56,6 @@ public class Evaluator : IEvaluator
             {
                 ExecuteWord(wordName);
             }
-
-            // if (IsWordRegistered(wordName))
-            // {
-            //     _words[wordName].Execute(this);
-
-            //     continue;
-            // }
-
-            // if (int.TryParse(word, out var val))
-            // {
-            //     StackPush(new IntValue(val));
-
-            //     continue;
-            // }
-            
-            // throw new Exception($"Unknown word: {word}");    
         }
     }
 
@@ -99,7 +83,7 @@ public class Evaluator : IEvaluator
 
         if (int.TryParse(wordName, out var val))
         {
-            WordBeingDefined?.AddWord(new IntegerConstantWord(val));
+            WordBeingDefined?.AddWord(new ConstantValueWord(val));
 
             return;
         }
