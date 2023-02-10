@@ -7,8 +7,7 @@ internal class TypeWord : IWord
 {
     public string Name => "TYPE";
     public bool IsImmediate => false;
-    public bool IsControlWord => false;
-    
+
 
     public void Execute(IEvaluator evaluator)
     {

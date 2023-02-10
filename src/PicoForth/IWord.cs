@@ -18,11 +18,6 @@ public interface IWord
     /// </summary>
     bool IsImmediate { get; }
 
-    /// <summary>
-    /// Control words do some action, but are not in the words list.
-    /// </summary>
-    bool IsControlWord { get; }
-    
 
     /// <summary>
     /// Executes this word's action.

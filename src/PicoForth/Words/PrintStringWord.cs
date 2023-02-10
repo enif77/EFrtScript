@@ -7,8 +7,7 @@ internal class PrintStringWord : IWord
 {
     public string Name => "S.";
     public bool IsImmediate => false;
-    public bool IsControlWord => false;
-    
+
 
     public void Execute(IEvaluator evaluator)
     {

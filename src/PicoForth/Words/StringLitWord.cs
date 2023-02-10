@@ -7,8 +7,7 @@ internal class StringLitWord : IWord
 {
     public string Name => "S\"";
     public bool IsImmediate => true;
-    public bool IsControlWord => false;
-    
+
 
     public void Execute(IEvaluator evaluator)
     {
