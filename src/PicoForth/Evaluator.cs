@@ -75,7 +75,7 @@ public class Evaluator : IEvaluator
             }
             else
             {
-                WordBeingDefined?.AddWord(word);
+                WordBeingDefined!.AddWord(word);
             }
 
             return;
@@ -83,7 +83,7 @@ public class Evaluator : IEvaluator
 
         if (int.TryParse(wordName, out var val))
         {
-            WordBeingDefined?.AddWord(new ConstantValueWord(val));
+            WordBeingDefined!.AddWord(new ConstantValueWord(val));
 
             return;
         }
