@@ -31,8 +31,8 @@ internal class Program
         ev.Eval("30 3 !  3 @ . CR");
         ev.Eval("( 30) 40 ( )3 !  3 @ . CR ( comment... )");
 
-        ev.Eval(".\" aaa\" 3 . CR");
-        ev.Eval("S\" bbb\" S. CR");
+        ev.Eval(".\" aaa \" 3 . CR");
+        ev.Eval(": StrBbb S\" bbb\" ; StrBbb S. CR");
     }
 }
 

@@ -1,4 +1,4 @@
 ." --- SPACES ---" CR
 
 10 SPACES 1 TYPE CR  ( 1 )
-5 SPACES S" aaa" TYPE CR  ( aaa )
+5 SPACES ." aaa" TYPE CR  ( aaa )

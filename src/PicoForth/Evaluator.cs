@@ -243,7 +243,7 @@ public class Evaluator : IEvaluator
 
         RegisterWord(new PrintStringLitWord());
         RegisterWord(new PrintStringWord());
-        RegisterWord(new ReadStringLitWord());
+        RegisterWord(new StringLitWord());
     }
 
     #endregion

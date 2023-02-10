@@ -1,5 +1,5 @@
 ." --- TYPE ---" CR
 
 1 TYPE CR  ( 1 )
-S" aaa" TYPE CR  ( aaa )
-S" aaa" S" bbb" SWAP TYPE  ( aaa )
+: StrAaa S" aaa" ; StrAaa TYPE CR  ( aaa )
+: Str2 S" aaa" S" bbb" ; Str2 SWAP TYPE  ( aaa )
