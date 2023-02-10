@@ -69,10 +69,6 @@ public class Interpreter : IInterpreter
             {
                 word.Execute(this);
             }
-            else if (word.Name == WordBeingDefined?.Name)
-            {
-                WordBeingDefined.AddWord(WordBeingDefined);
-            }
             else
             {
                 WordBeingDefined!.AddWord(word);
@@ -80,7 +76,15 @@ public class Interpreter : IInterpreter
 
             return;
         }
-
+        
+        if (wordName == WordBeingDefined?.Name)
+        {
+            // Recursive call of the currently defined word.
+            WordBeingDefined.AddWord(WordBeingDefined);
+            
+            return;
+        }
+        
         if (int.TryParse(wordName, out var val))
         {
             WordBeingDefined!.AddWord(new ConstantValueWord(val));
