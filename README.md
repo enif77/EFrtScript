@@ -1,6 +1,17 @@
-# Pico Forth
+# Pico Forth 
 
-Miniature, toy grade, Forth language implementation.
+A miniature, toy grade, Forth language implementation.
+
+
+## Forth differences
+
+- Selected words are implemented only.
+- Words cannot be redefined.
+- Stack, return stack and the heap contains value objects (integers, strings etc.).
+- No exceptions handling.
+- No "direct" memory access.
+- No low level stuff.
+
 
 Words definition table columns:
 
