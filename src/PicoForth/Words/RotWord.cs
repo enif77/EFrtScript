@@ -7,6 +7,7 @@ internal class RotWord : IWord
 {
     public string Name => "ROT";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

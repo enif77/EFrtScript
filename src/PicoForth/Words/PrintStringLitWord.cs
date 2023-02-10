@@ -7,6 +7,7 @@ internal class PrintStringLitWord : IWord
 {
     public string Name => ".\"";
     public bool IsImmediate => true;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

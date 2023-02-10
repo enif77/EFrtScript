@@ -7,6 +7,7 @@ internal class CrWord : IWord
 {
     public string Name => "CR";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

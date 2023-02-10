@@ -7,6 +7,7 @@ internal class OverWord : IWord
 {
     public string Name => "OVER";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

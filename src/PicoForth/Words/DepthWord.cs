@@ -9,6 +9,7 @@ internal class DepthWord : IWord
 {
     public string Name => "DEPTH";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

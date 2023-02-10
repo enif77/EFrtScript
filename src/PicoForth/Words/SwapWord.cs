@@ -7,6 +7,7 @@ internal class SwapWord : IWord
 {
     public string Name => "SWAP";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)

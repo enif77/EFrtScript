@@ -9,6 +9,7 @@ internal class IntegerConstantWord : IWord
 {
     public string Name => "LITERAL";
     public bool IsImmediate => false;
+    public bool IsControlWord => true;
     
 
     public IntegerConstantWord(int value)

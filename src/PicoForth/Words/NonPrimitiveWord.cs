@@ -7,6 +7,7 @@ internal class NonPrimitiveWord : INonPrimitiveWord
 {
     public string Name { get; }
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public NonPrimitiveWord(string wordName)

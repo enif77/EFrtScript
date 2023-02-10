@@ -9,6 +9,7 @@ internal class EqualToZeroWord : IWord
 {
     public string Name => "0=";
     public bool IsImmediate => false;
+    public bool IsControlWord => false;
     
 
     public void Execute(IEvaluator evaluator)
