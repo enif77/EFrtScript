@@ -11,28 +11,28 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var ev = new Evaluator(new ConsoleOutputWriter());
+        var ev = new Interpreter(new ConsoleOutputWriter());
 
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/hello-world.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/type.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/spaces.pfrt"));
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/custom-words.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/hello-world.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/stack-operations.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/not-case-sensitive.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/comparisons.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/type.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/spaces.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/custom-words.pfrt"));
         
         ev.StackClear();
-        ev.Eval(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
 
-        ev.Eval(".\" --- Mics ---\" CR");
+        ev.Interpret(".\" --- Mics ---\" CR");
 
-        ev.Eval("30 3 * 1 + 2 / . CR");
-        ev.Eval("30 3 !  3 @ . CR");
-        ev.Eval("( 30) 40 ( )3 !  3 @ . CR ( comment... )");
+        ev.Interpret("30 3 * 1 + 2 / . CR");
+        ev.Interpret("30 3 !  3 @ . CR");
+        ev.Interpret("( 30) 40 ( )3 !  3 @ . CR ( comment... )");
 
-        ev.Eval(".\" aaa \" 3 . CR");
-        ev.Eval(": StrBbb S\" bbb\" ; StrBbb S. CR");
+        ev.Interpret(".\" aaa \" 3 . CR");
+        ev.Interpret(": StrBbb S\" bbb\" ; StrBbb S. CR");
     }
 }
 

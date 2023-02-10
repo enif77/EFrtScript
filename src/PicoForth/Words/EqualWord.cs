@@ -11,9 +11,9 @@ internal class EqualWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var b = evaluator.StackPop();
-        evaluator.StackPush(new IntValue(evaluator.StackPop().Integer == b.Integer ? -1 : 0));
+        var b = interpreter.StackPop();
+        interpreter.StackPush(new IntValue(interpreter.StackPop().Integer == b.Integer ? -1 : 0));
     }
 }

@@ -9,8 +9,8 @@ internal class CrWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.OutputWriter.WriteLine();
+        interpreter.OutputWriter.WriteLine();
     }
 }

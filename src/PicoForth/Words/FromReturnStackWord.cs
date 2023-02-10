@@ -11,8 +11,8 @@ internal class FromReturnStackWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.StackPush(evaluator.ReturnStackPop());
+        interpreter.StackPush(interpreter.ReturnStackPop());
     }
 }

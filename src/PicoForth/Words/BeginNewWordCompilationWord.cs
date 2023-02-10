@@ -9,9 +9,9 @@ internal class BeginNewWordCompilationWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.BeginNewWordCompilation(
-            evaluator.ReadWordFromSource() ?? throw new Exception("A new word name expected."));
+        interpreter.BeginNewWordCompilation(
+            interpreter.ReadWordFromSource() ?? throw new Exception("A new word name expected."));
     }
 }

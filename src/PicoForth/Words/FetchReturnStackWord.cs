@@ -11,8 +11,8 @@ internal class FetchReturnStackWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.StackPush(evaluator.ReturnStackPeek());
+        interpreter.StackPush(interpreter.ReturnStackPeek());
     }
 }

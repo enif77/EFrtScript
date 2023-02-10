@@ -8,7 +8,7 @@ using PicoForth.Values;
 using PicoForth.Words;
 
 
-public class Evaluator : IEvaluator
+public class Interpreter : IInterpreter
 {
     private const int DefaultStackSize = 10;
     private const int DefaultReturnStackSize = 10;
@@ -18,7 +18,7 @@ public class Evaluator : IEvaluator
     public IOutputWriter OutputWriter { get; }
 
     
-    public Evaluator(IOutputWriter outputWriter)
+    public Interpreter(IOutputWriter outputWriter)
     {
         OutputWriter = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
 
@@ -33,7 +33,7 @@ public class Evaluator : IEvaluator
     }
 
 
-    public void Eval(string src)
+    public void Interpret(string src)
     {
         _source = new StringSourceReader(src);
         _tokenizer = new Tokenizer(_source);

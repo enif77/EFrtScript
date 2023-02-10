@@ -3,6 +3,9 @@
 namespace PicoForth;
 
 
+/// <summary>
+/// An IOutputWriter implementation, that writes to Console.
+/// </summary>
 public class ConsoleOutputWriter : IOutputWriter
 {
     public void Write(string format, params object[] arg)

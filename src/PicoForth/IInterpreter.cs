@@ -3,12 +3,12 @@
 namespace PicoForth;
 
 
-public interface IEvaluator
+public interface IInterpreter
 {
     IOutputWriter OutputWriter { get; }
     
 
-    void Eval(string src);
+    void Interpret(string src);
 
 
     #region source

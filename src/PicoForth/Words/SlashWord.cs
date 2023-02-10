@@ -11,9 +11,9 @@ internal class SlashWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var b = evaluator.StackPop().Integer;
-        evaluator.StackPush(new IntValue(evaluator.StackPop().Integer / b));
+        var b = interpreter.StackPop().Integer;
+        interpreter.StackPush(new IntValue(interpreter.StackPop().Integer / b));
     }
 }

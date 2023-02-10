@@ -9,12 +9,12 @@ internal class SpacesWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var count = evaluator.StackPop().Integer;
+        var count = interpreter.StackPop().Integer;
         for (var i = 0; i < count; i++)
         {
-            evaluator.OutputWriter.Write(" ");
+            interpreter.OutputWriter.Write(" ");
         }
     }
 }

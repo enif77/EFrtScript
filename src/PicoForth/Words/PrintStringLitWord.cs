@@ -9,8 +9,8 @@ internal class PrintStringLitWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.OutputWriter.Write(evaluator.ReadStringFromSource());
+        interpreter.OutputWriter.Write(interpreter.ReadStringFromSource());
     }
 }

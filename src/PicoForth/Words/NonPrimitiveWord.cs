@@ -22,11 +22,11 @@ internal class NonPrimitiveWord : INonPrimitiveWord
     }
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
         foreach (var word in _words)
         {
-            word.Execute(evaluator);
+            word.Execute(interpreter);
         }
     }
 

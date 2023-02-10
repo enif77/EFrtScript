@@ -11,8 +11,8 @@ internal class LessThanZeroWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        evaluator.StackPush(new IntValue(evaluator.StackPop().Integer < 0 ? -1 : 0));
+        interpreter.StackPush(new IntValue(interpreter.StackPop().Integer < 0 ? -1 : 0));
     }
 }

@@ -22,6 +22,6 @@ public interface IWord
     /// <summary>
     /// Executes this word's action.
     /// </summary>
-    /// <param name="evaluator"></param>
-    void Execute(IEvaluator evaluator);
+    /// <param name="interpreter">An interpreter.</param>
+    void Execute(IInterpreter interpreter);
 }

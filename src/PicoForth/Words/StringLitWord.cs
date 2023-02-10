@@ -9,13 +9,13 @@ internal class StringLitWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        if (evaluator.IsCompiling == false)
+        if (interpreter.IsCompiling == false)
         {
             throw new Exception("S\" outside a new word definition.");
         }
         
-        evaluator.WordBeingDefined!.AddWord(new ConstantValueWord(evaluator.ReadStringFromSource()));
+        interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(interpreter.ReadStringFromSource()));
     }
 }

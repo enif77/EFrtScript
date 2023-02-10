@@ -9,12 +9,12 @@ internal class SwapWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var n2 = evaluator.StackPop();
-        var n1 = evaluator.StackPop();
+        var n2 = interpreter.StackPop();
+        var n1 = interpreter.StackPop();
 
-        evaluator.StackPush(n2);
-        evaluator.StackPush(n1);
+        interpreter.StackPush(n2);
+        interpreter.StackPush(n1);
     }
 }

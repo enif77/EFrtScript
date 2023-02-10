@@ -11,17 +11,17 @@ internal class ConditionalDuplicateWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var v = evaluator.StackPeek();
+        var v = interpreter.StackPeek();
         if (v.Boolean)
         {
-            evaluator.StackPush(v);
+            interpreter.StackPush(v);
         }
         else
         {
-            evaluator.StackPop();
-            evaluator.StackPush(new IntValue(0));
+            interpreter.StackPop();
+            interpreter.StackPush(new IntValue(0));
         }
     }
 }

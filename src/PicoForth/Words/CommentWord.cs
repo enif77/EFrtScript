@@ -9,9 +9,9 @@ internal class CommentWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IEvaluator evaluator)
+    public void Execute(IInterpreter interpreter)
     {
-        var c = evaluator.CurrentChar;
+        var c = interpreter.CurrentChar;
         while (c >= 0)
         {
             if (c == ')')
@@ -19,7 +19,7 @@ internal class CommentWord : IWord
                 break;
             }
 
-            c = evaluator.NextChar();
+            c = interpreter.NextChar();
         }
 
         if (c < 0)
