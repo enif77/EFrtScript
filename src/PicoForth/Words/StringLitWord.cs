@@ -1,5 +1,7 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
+using PicoForth.Values;
+
 namespace PicoForth.Words;
 
 
@@ -11,11 +13,15 @@ internal class StringLitWord : IWord
 
     public void Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
+        var stringLiteral = interpreter.ReadStringFromSource();
+
+        if (interpreter.IsCompiling)
         {
-            throw new Exception("S\" outside a new word definition.");
+            interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(stringLiteral));
         }
-        
-        interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(interpreter.ReadStringFromSource()));
+        else
+        {
+            interpreter.StackPush(new StringValue(stringLiteral));
+        }
     }
 }
