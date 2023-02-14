@@ -22,6 +22,7 @@ internal class Program
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/spaces.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/custom-words.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/if-then-else.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/do-loop.pfrt"));
         
         ev.StackClear();
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
@@ -43,10 +44,11 @@ internal class Program
 
 https://github.com/enif77/EFrt
 
+BEGIN ?DO +LOOP I J LEAVE REPEAT UNLOOP UNTIL WHILE AGAIN 
+
 COUNT
 EVALUATE
 
-: ;
 >NUMBER S>D
 ,
 2DROP 2DUP 2OVER 2SWAP

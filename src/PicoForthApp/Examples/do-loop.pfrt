@@ -1,0 +1,8 @@
+." --- DO LOOP ---" CR
+
+: test
+  5 0 DO
+    S" Hi!" TYPE CR
+  LOOP ;
+
+test

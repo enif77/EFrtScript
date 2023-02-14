@@ -252,6 +252,9 @@ public class Interpreter : IInterpreter
         RegisterWord(new IfWord());
         RegisterWord(new ThenWord());
         RegisterWord(new ElseWord());
+
+        RegisterWord(new DoWord());
+        RegisterWord(new LoopWord());
     }
 
     #endregion
