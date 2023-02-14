@@ -248,6 +248,10 @@ public class Interpreter : IInterpreter
         RegisterWord(new PrintStringLitWord());
         RegisterWord(new PrintStringWord());
         RegisterWord(new StringLitWord());
+
+        RegisterWord(new IfWord());
+        RegisterWord(new ThenWord());
+        RegisterWord(new ElseWord());
     }
 
     #endregion

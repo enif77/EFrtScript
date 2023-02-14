@@ -1,0 +1,19 @@
+." --- IF THEN ELSE ---" CR
+
+: check
+  IF 
+    S" true"
+  ELSE
+    S" false"
+  THEN ;
+
+  : check2
+  IF 
+    S" yes"
+  THEN ;
+
+-1 check TYPE CR  ( true )
+0 check TYPE CR   ( false )
+1 check TYPE CR   ( true )
+
+-1 check2 TYPE CR  ( yes )
