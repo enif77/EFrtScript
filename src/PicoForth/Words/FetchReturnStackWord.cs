@@ -2,8 +2,6 @@
 
 namespace PicoForth.Words;
 
-using PicoForth.Values;
-
 
 internal class FetchReturnStackWord : IWord
 {

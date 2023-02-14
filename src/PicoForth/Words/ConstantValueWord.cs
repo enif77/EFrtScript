@@ -1,8 +1,8 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using PicoForth.Values;
-
 namespace PicoForth.Words;
+
+using PicoForth.Values;
 
 
 internal class ConstantValueWord : IWord
