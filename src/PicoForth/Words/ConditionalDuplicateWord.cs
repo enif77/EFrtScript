@@ -11,7 +11,7 @@ internal class ConditionalDuplicateWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var v = interpreter.StackPeek();
         if (v.Boolean)
@@ -23,5 +23,7 @@ internal class ConditionalDuplicateWord : IWord
             interpreter.StackPop();
             interpreter.StackPush(new IntValue(0));
         }
+
+        return 1;
     }
 }

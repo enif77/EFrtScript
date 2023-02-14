@@ -35,9 +35,11 @@ internal class ConstantValueWord : IWord
     }
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.StackPush(_value);
+
+        return 1;
     }
 
 

@@ -9,9 +9,11 @@ internal class StoreWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var addr = interpreter.StackPop().Integer;
         interpreter.HeapStore(addr, interpreter.StackPop());
+
+        return 1;
     }
 }

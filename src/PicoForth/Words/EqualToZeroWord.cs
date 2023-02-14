@@ -11,8 +11,10 @@ internal class EqualToZeroWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.StackPush(new IntValue(interpreter.StackPop().Integer == 0 ? -1 : 0));
+
+        return 1;
     }
 }

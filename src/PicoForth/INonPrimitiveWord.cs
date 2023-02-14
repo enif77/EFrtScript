@@ -5,5 +5,5 @@ namespace PicoForth;
 
 public interface INonPrimitiveWord : IWord
 {
-    void AddWord(IWord word);
+    int AddWord(IWord word);
 }

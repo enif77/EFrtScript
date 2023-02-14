@@ -9,7 +9,7 @@ internal class RotWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var n3 = interpreter.StackPop();
         var n2 = interpreter.StackPop();
@@ -18,5 +18,7 @@ internal class RotWord : IWord
         interpreter.StackPush(n2);
         interpreter.StackPush(n3);
         interpreter.StackPush(n1);
+
+        return 1;
     }
 }

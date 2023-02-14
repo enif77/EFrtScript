@@ -9,7 +9,7 @@ internal class CommentWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var c = interpreter.CurrentChar;
         while (c >= 0)
@@ -26,5 +26,7 @@ internal class CommentWord : IWord
         {
             throw new Exception("A comment end expected");
         }
+
+        return 1;
     }
 }

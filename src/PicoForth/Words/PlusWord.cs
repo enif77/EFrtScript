@@ -11,8 +11,10 @@ internal class PlusWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.StackPush(new IntValue(interpreter.StackPop().Integer + interpreter.StackPop().Integer));
+
+        return 1;
     }
 }

@@ -9,8 +9,10 @@ internal class DupWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.StackPush(interpreter.StackPeek());
+
+        return 1;
     }
 }

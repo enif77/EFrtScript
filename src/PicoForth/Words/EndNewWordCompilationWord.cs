@@ -9,8 +9,10 @@ internal class EndNewWordCompilationWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.EndNewWordCompilation();
+
+        return 1;
     }
 }

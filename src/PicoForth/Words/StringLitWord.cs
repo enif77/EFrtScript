@@ -11,7 +11,7 @@ internal class StringLitWord : IWord
     public bool IsImmediate => true;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var stringLiteral = interpreter.ReadStringFromSource();
 
@@ -23,5 +23,7 @@ internal class StringLitWord : IWord
         {
             interpreter.StackPush(new StringValue(stringLiteral));
         }
+
+        return 1;
     }
 }

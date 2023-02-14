@@ -11,9 +11,11 @@ internal class GreaterThanWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var b = interpreter.StackPop();
         interpreter.StackPush(new IntValue(interpreter.StackPop().Integer > b.Integer ? -1 : 0));
+
+        return 1;
     }
 }

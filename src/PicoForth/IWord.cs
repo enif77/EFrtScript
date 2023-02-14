@@ -23,5 +23,6 @@ public interface IWord
     /// Executes this word's action.
     /// </summary>
     /// <param name="interpreter">An interpreter.</param>
-    void Execute(IInterpreter interpreter);
+    /// <returns>Next word index increment in a compiled word.</returns>
+    int Execute(IInterpreter interpreter);
 }

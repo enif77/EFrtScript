@@ -11,9 +11,11 @@ internal class MinusWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         var b = interpreter.StackPop().Integer;
         interpreter.StackPush(new IntValue(interpreter.StackPop().Integer - b));
+
+        return 1;
     }
 }

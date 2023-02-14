@@ -9,8 +9,10 @@ internal class TypeWord : IWord
     public bool IsImmediate => false;
 
 
-    public void Execute(IInterpreter interpreter)
+    public int Execute(IInterpreter interpreter)
     {
         interpreter.OutputWriter.Write(interpreter.StackPop().String);
+
+        return 1;
     }
 }
