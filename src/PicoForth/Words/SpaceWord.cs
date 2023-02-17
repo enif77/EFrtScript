@@ -11,7 +11,7 @@ internal class SpaceWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.OutputWriter.Write(" ");
+        interpreter.Output.Write(" ");
 
         return 1;
     }

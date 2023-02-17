@@ -11,7 +11,7 @@ internal class PrintStringLitWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.OutputWriter.Write(interpreter.ReadStringFromSource());
+        interpreter.Output.Write(interpreter.ReadStringFromSource());
 
         return 1;
     }

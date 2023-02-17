@@ -13,7 +13,7 @@ internal class DotWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.OutputWriter.Write($"{interpreter.StackPop().Integer}");
+        interpreter.Output.Write($"{interpreter.StackPop().Integer}");
 
         return 1;
     }

@@ -14,13 +14,13 @@ public class Interpreter : IInterpreter
 
 
     public IInterpreterState State { get; }
-    public IOutputWriter OutputWriter { get; }
+    public IOutputWriter Output { get; }
 
     
     public Interpreter(IOutputWriter outputWriter)
     {
         State = new InterpreterState();
-        OutputWriter = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
+        Output = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
 
         _source = new StringSourceReader(string.Empty);
         _tokenizer = new Tokenizer(_source);

@@ -16,7 +16,7 @@ internal class SpacesWord : IWord
         var count = interpreter.StackPop().Integer;
         for (var i = 0; i < count; i++)
         {
-            interpreter.OutputWriter.Write(" ");
+            interpreter.Output.Write(" ");
         }
 
         return 1;

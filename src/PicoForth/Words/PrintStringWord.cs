@@ -13,7 +13,7 @@ internal class PrintStringWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.OutputWriter.Write(interpreter.StackPop().String);
+        interpreter.Output.Write(interpreter.StackPop().String);
 
         return 1;
     }

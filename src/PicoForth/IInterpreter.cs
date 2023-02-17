@@ -6,7 +6,7 @@ namespace PicoForth;
 public interface IInterpreter
 {
     IInterpreterState State { get; }
-    IOutputWriter OutputWriter { get; }
+    IOutputWriter Output { get; }
     
 
     void Interpret(string src);

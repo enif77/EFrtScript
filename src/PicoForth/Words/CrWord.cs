@@ -11,7 +11,7 @@ internal class CrWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.OutputWriter.WriteLine();
+        interpreter.Output.WriteLine();
 
         return 1;
     }
