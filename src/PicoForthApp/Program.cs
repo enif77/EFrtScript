@@ -24,6 +24,7 @@ internal class Program
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/custom-words.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/if-then-else.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/do-loop.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/store-fetch.pfrt"));
         
         ev.StackClear();
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));

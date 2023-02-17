@@ -12,12 +12,14 @@ public class InterpreterState : IInterpreterState
 {
     public ValueStack Stack { get; }
     public ValueStack ReturnStack { get; }
+    public Heap Heap { get; }
 
 
     public InterpreterState()
     {
         Stack = new ValueStack();
         ReturnStack = new ValueStack();
+        Heap = new Heap();
     }
 
 
@@ -25,5 +27,6 @@ public class InterpreterState : IInterpreterState
     {
         Stack.Clear();
         ReturnStack.Clear();
+        Heap.Clear();
     }
 }

@@ -35,12 +35,4 @@ public interface IInterpreter
     void EndNewWordCompilation();
 
     #endregion
-
-
-    #region heap
-
-    void HeapStore(int address, IValue value);
-    IValue HeapFetch(int address);
-
-    #endregion
 }

@@ -20,6 +20,11 @@ public interface IInterpreterState
     /// </summary>
     ValueStack ReturnStack { get; }
     
+    /// <summary>
+    /// Heap.
+    /// </summary>
+    Heap Heap { get; }
+    
     
     /// <summary>
     /// Cleans up this state.

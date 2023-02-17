@@ -78,4 +78,16 @@ public static class InterpreterExtensions
         => new NullReferenceException("Null as value should not be stored in the return stack.");
 
     #endregion
+    
+
+    #region heap
+    
+    public static void HeapStore(this IInterpreter interpreter, int address, IValue value)
+        => interpreter.State.Heap.Store(address, value);
+
+
+    public static IValue HeapFetch(this IInterpreter interpreter, int address)
+        => interpreter.State.Heap.Fetch(address) ?? throw new NullReferenceException("Null as value should not be stored in the heap.");
+
+    #endregion
 }
