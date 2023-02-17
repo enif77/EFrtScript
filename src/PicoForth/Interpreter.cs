@@ -10,9 +10,6 @@ using PicoForth.Words;
 
 public class Interpreter : IInterpreter
 {
-    private const int DefaultHeapSize = 64;
-
-
     public IInterpreterState State { get; }
     public IOutputWriter Output { get; }
 
@@ -25,7 +22,6 @@ public class Interpreter : IInterpreter
         _source = new StringSourceReader(string.Empty);
         _tokenizer = new Tokenizer(_source);
         _words = new Dictionary<string, IWord>();
-        _heap = new IValue[DefaultHeapSize];
 
         RegisterBuildInWords();
     }
@@ -254,20 +250,6 @@ public class Interpreter : IInterpreter
         RegisterWord(new DoWord());
         RegisterWord(new LoopWord());
     }
-
-    #endregion
-
-
-    #region heap
-
-    private readonly IValue[] _heap;
-
-    public void HeapStore(int address, IValue value)
-        => _heap[address] = value;
-
-
-    public IValue HeapFetch(int address)
-        => _heap[address];
 
     #endregion
 }
