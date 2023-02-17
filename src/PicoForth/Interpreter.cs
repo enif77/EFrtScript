@@ -10,7 +10,6 @@ using PicoForth.Words;
 
 public class Interpreter : IInterpreter
 {
-    private const int DefaultReturnStackSize = 10;
     private const int DefaultHeapSize = 64;
 
 
@@ -26,8 +25,6 @@ public class Interpreter : IInterpreter
         _source = new StringSourceReader(string.Empty);
         _tokenizer = new Tokenizer(_source);
         _words = new Dictionary<string, IWord>();
-        // _stack = new Stack<IValue>(DefaultStackSize);
-        _returnStack = new Stack<IValue>(DefaultReturnStackSize);
         _heap = new IValue[DefaultHeapSize];
 
         RegisterBuildInWords();
@@ -257,32 +254,6 @@ public class Interpreter : IInterpreter
         RegisterWord(new DoWord());
         RegisterWord(new LoopWord());
     }
-
-    #endregion
-    
-    
-    #region return stack
-
-    private Stack<IValue> _returnStack;
-
-
-    public int ReturnStackDepth => _returnStack.Count;
-    
-
-    public void ReturnStackClear()
-        => _returnStack = new Stack<IValue>(DefaultReturnStackSize);
-
-    public bool ReturnStackIsEmpty()
-        => _returnStack.Count == 0;
-
-    public IValue ReturnStackPeek()
-        => _returnStack.Peek();
-
-    public void ReturnStackPush(IValue v)
-        => _returnStack.Push(v);
-
-    public IValue ReturnStackPop()
-        => _returnStack.Pop();
 
     #endregion
 
