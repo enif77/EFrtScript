@@ -2,6 +2,7 @@
 
 namespace PicoForth.Words;
 
+using PicoForth.Extensions;
 using PicoForth.Values;
 
 

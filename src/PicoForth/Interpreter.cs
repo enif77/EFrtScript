@@ -10,22 +10,23 @@ using PicoForth.Words;
 
 public class Interpreter : IInterpreter
 {
-    private const int DefaultStackSize = 10;
     private const int DefaultReturnStackSize = 10;
     private const int DefaultHeapSize = 64;
 
 
+    public IInterpreterState State { get; }
     public IOutputWriter OutputWriter { get; }
 
     
     public Interpreter(IOutputWriter outputWriter)
     {
+        State = new InterpreterState();
         OutputWriter = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
 
         _source = new StringSourceReader(string.Empty);
         _tokenizer = new Tokenizer(_source);
         _words = new Dictionary<string, IWord>();
-        _stack = new Stack<IValue>(DefaultStackSize);
+        // _stack = new Stack<IValue>(DefaultStackSize);
         _returnStack = new Stack<IValue>(DefaultReturnStackSize);
         _heap = new IValue[DefaultHeapSize];
 
@@ -107,7 +108,7 @@ public class Interpreter : IInterpreter
 
         if (int.TryParse(wordName, out var val))
         {
-            StackPush(new IntValue(val));
+            State.Stack.Push(new IntValue(val));
 
             return;
         }
@@ -258,34 +259,8 @@ public class Interpreter : IInterpreter
     }
 
     #endregion
-
-
-    #region stack
-
-    private Stack<IValue> _stack;
-
-
-    public int StackDepth => _stack.Count;
-
-
-    public void StackClear()
-        => _stack = new Stack<IValue>(DefaultStackSize);
-
-    public bool StackIsEmpty()
-        => _stack.Count == 0;
-
-    public IValue StackPeek()
-        => _stack.Peek();
-
-    public void StackPush(IValue v)
-        => _stack.Push(v);
-
-    public IValue StackPop()
-        => _stack.Pop();
-
-    #endregion
-
-
+    
+    
     #region return stack
 
     private Stack<IValue> _returnStack;

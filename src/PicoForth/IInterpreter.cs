@@ -5,6 +5,7 @@ namespace PicoForth;
 
 public interface IInterpreter
 {
+    IInterpreterState State { get; }
     IOutputWriter OutputWriter { get; }
     
 
@@ -32,19 +33,6 @@ public interface IInterpreter
 
     void BeginNewWordCompilation(string wordName);
     void EndNewWordCompilation();
-
-    #endregion
-
-
-    #region stack
-
-    int StackDepth { get; }
-
-    void StackClear();
-    bool StackIsEmpty();
-    IValue StackPeek();
-    void StackPush(IValue v);
-    IValue StackPop();
 
     #endregion
 

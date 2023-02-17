@@ -2,6 +2,8 @@
 
 namespace PicoForth.Words;
 
+using PicoForth.Extensions;
+
 
 /// <summary>
 /// A word, that is defining the DO loop beginning.
@@ -17,7 +19,7 @@ internal class DoControlWord : IWord
         var index = interpreter.StackPop();
 
         interpreter.ReturnStackPush(interpreter.StackPop());  // limit
-        interpreter.ReturnStackPush(index);                   // index
+        interpreter.ReturnStackPush(index);                     // index
 
         return 1;
     }

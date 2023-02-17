@@ -2,6 +2,8 @@
 
 namespace PicoForth.Words;
 
+using PicoForth.Extensions;
+
 
 /// <summary>
 /// A word that is defining IF-THEN-ELSE condition.

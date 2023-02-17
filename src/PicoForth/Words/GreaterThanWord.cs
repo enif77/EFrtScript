@@ -4,6 +4,8 @@ namespace PicoForth.Words;
 
 using PicoForth.Values;
 
+using PicoForth.Extensions;
+
 
 internal class GreaterThanWord : IWord
 {

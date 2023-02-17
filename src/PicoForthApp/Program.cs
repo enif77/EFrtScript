@@ -4,7 +4,8 @@ namespace PicoForthApp;
 
 using System.IO;
 
-using PicoForth; 
+using PicoForth;
+using PicoForth.Extensions;
 
 
 internal class Program

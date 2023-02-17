@@ -2,6 +2,8 @@
 
 namespace PicoForth.Words;
 
+using PicoForth.Extensions;
+
 
 internal class DotWord : IWord
 {
