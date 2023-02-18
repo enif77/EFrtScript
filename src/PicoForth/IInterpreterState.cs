@@ -21,6 +21,11 @@ public interface IInterpreterState
     ValueStack ReturnStack { get; }
     
     /// <summary>
+    /// Exception stack.
+    /// </summary>
+    ExceptionStack ExceptionStack { get; }
+    
+    /// <summary>
     /// Heap.
     /// </summary>
     Heap Heap { get; }

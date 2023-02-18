@@ -50,7 +50,24 @@ public class Interpreter : IInterpreter
             {
                 ExecuteWord(wordName);
             }
+            
+            if (IsExecutionTerminated)
+            {
+                break;
+            }
         }
+        
+        // Execution broken. Return to interpreting mode.
+        if (InterpreterState == InterpreterStateCode.Breaking)
+        {
+            InterpreterState = InterpreterStateCode.Interpreting;
+            //State.SetStateValue(false);
+        }
+            
+        // // Restore the previous input source, if any.
+        // InputSource = (State.InputSourceStack.Count > 0) 
+        //     ? State.InputSourceStack.Pop() 
+        //     : null;
     }
 
 
@@ -61,7 +78,20 @@ public class Interpreter : IInterpreter
             var word = _words[wordName];
             if (word.IsImmediate)
             {
-                word.Execute(this);
+                _currentWord = _words[wordName];
+                
+                try
+                {
+                    _currentWord.Execute(this);
+                }
+                catch (InterpreterException ex)
+                {
+                    Throw(ex.ExceptionCode, ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Throw(-100, ex.Message);
+                }
             }
             else
             {
@@ -86,7 +116,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        throw new Exception($"Unknown word: {wordName}");
+        Throw(-13, $"The '{wordName}' word is undefined.");
     }
 
 
@@ -94,8 +124,21 @@ public class Interpreter : IInterpreter
     {
         if (IsWordRegistered(wordName))
         {
-            _words[wordName].Execute(this);
+            _currentWord = _words[wordName];
 
+            try
+            {
+                _currentWord.Execute(this);
+            }
+            catch (InterpreterException ex)
+            {
+                Throw(ex.ExceptionCode, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Throw(-100, ex.Message);
+            }
+            
             return;
         }
 
@@ -106,7 +149,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        throw new Exception($"Unknown word: {wordName}");
+        Throw(-13, $"The '{wordName}' word is undefined.");
     }
 
 
@@ -161,8 +204,7 @@ public class Interpreter : IInterpreter
     #region words
 
     private readonly IDictionary<string, IWord> _words;
-
-    public bool IsCompiling { get; private set; }
+    
     public INonPrimitiveWord? WordBeingDefined { get; private set; }
 
 
@@ -182,7 +224,7 @@ public class Interpreter : IInterpreter
         }
 
         WordBeingDefined = new NonPrimitiveWord(wordName);
-        IsCompiling = true;
+        InterpreterState = InterpreterStateCode.Compiling;
     }
 
 
@@ -196,7 +238,7 @@ public class Interpreter : IInterpreter
         RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
 
         WordBeingDefined = null;
-        IsCompiling = false;
+        InterpreterState = InterpreterStateCode.Interpreting;
     }
 
 
@@ -249,6 +291,91 @@ public class Interpreter : IInterpreter
 
         RegisterWord(new DoWord());
         RegisterWord(new LoopWord());
+    }
+
+    #endregion
+
+
+    #region execution
+
+    public InterpreterStateCode InterpreterState { get; private set; }
+    public bool IsCompiling => InterpreterState == InterpreterStateCode.Compiling;
+    public bool IsExecutionTerminated => InterpreterState == InterpreterStateCode.Breaking || InterpreterState == InterpreterStateCode.Terminating;
+
+
+    /// <summary>
+    /// The currently running word.
+    /// </summary>
+    private IWord? _currentWord;
+    
+    
+    public void Reset()
+    {
+        State.Reset();
+        InterpreterState = InterpreterStateCode.Interpreting;
+    }
+    
+    
+    public void Abort()
+    {
+        State.Stack.Clear();
+        //State.InputSourceStack.Clear();
+
+        // TODO: Clear the heap?
+        // TODO: Clear the exception stack?
+
+        Quit();
+    }
+
+
+    public void Quit()
+    {
+        State.ReturnStack.Clear();
+        InterpreterState = InterpreterStateCode.Breaking;
+    }
+    
+    
+    public void Throw(int exceptionCode, string? message = null)
+    {
+        if (exceptionCode == 0)
+        {
+            return;
+        }
+
+        if (State.ExceptionStack.IsEmpty)
+        {
+            switch (exceptionCode)
+            {
+                case -1: break;
+                case -2: Output.WriteLine(message ?? "Execution aborted!"); break;
+                default:
+                    Output.WriteLine($"Execution aborted: [{exceptionCode}] {message ?? string.Empty}");
+                    break;
+            }
+
+            Abort();
+
+            return;
+        }
+
+        // Restore the previous execution state.
+        var exceptionFrame = State.ExceptionStack.Pop();
+
+        State.Stack.Top = exceptionFrame!.StackTop;
+        State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
+        //State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
+        _currentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
+
+        State.Stack.Push(new IntValue(exceptionCode));
+
+        // Will be caught by the CATCH word.
+        throw new InterpreterException(exceptionCode, message);
+    }
+    
+    
+    public void TerminateExecution()
+    {
+        InterpreterState = InterpreterStateCode.Terminating;
     }
 
     #endregion

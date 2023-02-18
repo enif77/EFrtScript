@@ -12,6 +12,7 @@ public class InterpreterState : IInterpreterState
 {
     public ValueStack Stack { get; }
     public ValueStack ReturnStack { get; }
+    public ExceptionStack ExceptionStack { get; }
     public Heap Heap { get; }
 
 
@@ -19,6 +20,7 @@ public class InterpreterState : IInterpreterState
     {
         Stack = new ValueStack();
         ReturnStack = new ValueStack();
+        ExceptionStack = new ExceptionStack();
         Heap = new Heap();
     }
 
@@ -27,6 +29,7 @@ public class InterpreterState : IInterpreterState
     {
         Stack.Clear();
         ReturnStack.Clear();
+        ExceptionStack.Clear();
         Heap.Clear();
     }
 }

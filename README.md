@@ -8,7 +8,6 @@ A miniature, toy grade, Forth language implementation.
 - Selected words are implemented only.
 - Words cannot be redefined.
 - Stack, return stack and the heap contains value objects (integers, strings etc.).
-- No exceptions handling.
 - No "direct" memory access.
 - No low level stuff.
 
