@@ -6,7 +6,7 @@ using PicoForth.Extensions;
 using PicoForth.Values;
 
 
-internal class ConstantValueWord : IWord
+public class ConstantValueWord : IWord
 {
     public string Name => "LITERAL";
     public bool IsImmediate => false;

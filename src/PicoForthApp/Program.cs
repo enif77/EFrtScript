@@ -1,5 +1,7 @@
 ﻿/* Copyright (C) Premysl Fara and Contributors */
 
+using PicoForth.Libs.Core;
+
 namespace PicoForthApp;
 
 using System.IO;
@@ -8,11 +10,14 @@ using PicoForth;
 using PicoForth.Extensions;
 
 
-internal class Program
+internal static class Program
 {
     private static void Main(string[] args)
     {
         var ev = new Interpreter(new ConsoleOutputWriter());
+
+        var coreLib = new Library();
+        coreLib.Initialize(ev);
 
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/hello-world.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/print-2-swapped.pfrt"));

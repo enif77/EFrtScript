@@ -1,5 +1,7 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
+using PicoForth.Values;
+
 namespace PicoForth.Extensions;
 
 
@@ -31,6 +33,18 @@ public static class InterpreterExtensions
         if (v == null) throw new ArgumentNullException(nameof(v));
         
         interpreter.State.Stack.Push(v);
+    }
+    
+    
+    public static void StackPush(this IInterpreter interpreter, int v)
+    {
+        StackPush(interpreter, new IntValue(v));
+    }
+    
+    
+    public static void StackPush(this IInterpreter interpreter, string v)
+    {
+        StackPush(interpreter, new StringValue(v));
     }
     
     
@@ -69,6 +83,12 @@ public static class InterpreterExtensions
         interpreter.State.ReturnStack.Push(v);
     }
 
+    
+    public static void ReturnStackPush(this IInterpreter interpreter, int v)
+    {
+        ReturnStackPush(interpreter, new IntValue(v));
+    }
+    
     
     public static IValue ReturnStackPop(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();

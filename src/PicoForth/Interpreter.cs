@@ -22,8 +22,6 @@ public class Interpreter : IInterpreter
         _source = new StringSourceReader(string.Empty);
         _tokenizer = new Tokenizer(_source);
         _words = new Dictionary<string, IWord>();
-
-        RegisterBuildInWords();
     }
 
 
@@ -250,66 +248,6 @@ public class Interpreter : IInterpreter
 
         WordBeingDefined = null;
         InterpreterState = InterpreterStateCode.Interpreting;
-    }
-
-
-    private void RegisterBuildInWords()
-    {
-        RegisterWord(new CommentWord());
-        RegisterWord(new LineCommentWord());
-
-        RegisterWord(new BeginNewWordCompilationWord());
-        RegisterWord(new EndNewWordCompilationWord());
-
-        RegisterWord(new StoreWord());
-        RegisterWord(new FetchWord());
-
-        RegisterWord(new ToReturnStackWord());
-        RegisterWord(new FromReturnStackWord());
-        RegisterWord(new FetchReturnStackWord());
-
-        RegisterWord(new ConditionalDuplicateWord());
-        RegisterWord(new DropWord());
-        RegisterWord(new DupWord());
-        RegisterWord(new SwapWord());
-        RegisterWord(new OverWord());
-        RegisterWord(new RotWord());
-        RegisterWord(new DepthWord());
-
-        RegisterWord(new DotWord());
-        RegisterWord(new CrWord());
-        RegisterWord(new SpaceWord());
-        RegisterWord(new SpacesWord());
-        RegisterWord(new TypeWord());
-
-        RegisterWord(new PlusWord());
-        RegisterWord(new MinusWord());
-        RegisterWord(new StarWord());
-        RegisterWord(new SlashWord());
-
-        RegisterWord(new EqualToZeroWord());
-        RegisterWord(new EqualWord());
-        RegisterWord(new GreaterThanWord());
-        RegisterWord(new LessThanWord());
-        RegisterWord(new LessThanZeroWord());
-
-        RegisterWord(new PrintStringLitWord());
-        RegisterWord(new PrintStringWord());
-        RegisterWord(new StringLitWord());
-
-        RegisterWord(new IfWord());
-        RegisterWord(new ThenWord());
-        RegisterWord(new ElseWord());
-
-        RegisterWord(new DoWord());
-        RegisterWord(new LoopWord());
-        
-        RegisterWord(new AbortWord());
-        RegisterWord(new AbortWithMessageWord());
-        RegisterWord(new CatchWord());
-        RegisterWord(new ThrowWord());
-        
-        RegisterWord(new GetExecutionTokenWord());
     }
 
     #endregion

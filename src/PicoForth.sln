@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForth", "PicoForth\Pico
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForthApp", "PicoForthApp\PicoForthApp.csproj", "{F9E1688E-B725-4414-A552-59659DBF3397}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForth.Libs.Core", "PicoForth.Libs.Core\PicoForth.Libs.Core.csproj", "{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{F9E1688E-B725-4414-A552-59659DBF3397}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9E1688E-B725-4414-A552-59659DBF3397}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9E1688E-B725-4414-A552-59659DBF3397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
