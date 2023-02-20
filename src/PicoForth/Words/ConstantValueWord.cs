@@ -34,6 +34,12 @@ internal class ConstantValueWord : IWord
         : this(new StringValue(value))
     {
     }
+    
+    
+    public ConstantValueWord(IWord word)
+        : this(new WordReferenceValue(word))
+    {
+    }
 
 
     public int Execute(IInterpreter interpreter)

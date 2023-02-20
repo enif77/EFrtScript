@@ -63,12 +63,12 @@ internal class NonPrimitiveWord : INonPrimitiveWord
         var index = 0;
         while (index < _words.Count)
         {
-            // if (Interpreter.IsExecutionTerminated)
-            // {
-            //     break;
-            // }
+            if (interpreter.IsExecutionTerminated)
+            {
+                break;
+            }
 
-            index += _words[index].Execute(interpreter);
+            index += interpreter.ExecuteWord(_words[index]);
 
             // Used by the DoesWord.
             if (_executionBreaked)

@@ -1,0 +1,15 @@
+." --- TRY - CATCH ---" CR
+
+: th
+  S" Thrown" TYPE CR THROW ;
+
+: ca
+  S" pre-t" S. CR
+  ['] th
+  CATCH
+  S" post-t" S. CR ;
+
+0 ca   \ No exception thrown.
+-1 ca  \ Like ABORT.
+-2 ca  \ Like ABORT" mesg".
+1 ca   \ User exception.

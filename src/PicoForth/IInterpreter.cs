@@ -29,6 +29,7 @@ public interface IInterpreter
     INonPrimitiveWord? WordBeingDefined { get; }
 
     bool IsWordRegistered(string wordName);
+    IWord GetRegisteredWord(string wordName);
     void RegisterWord(IWord word);
 
     void BeginNewWordCompilation(string wordName);
@@ -49,6 +50,14 @@ public interface IInterpreter
     /// </summary>
     bool IsExecutionTerminated { get; }
     
+    
+    /// <summary>
+    /// Executes a word. 
+    /// Call this for a each word execution.
+    /// </summary>
+    /// <param name="word">A word to be executed.</param>
+    /// <returns>A next word index.</returns>
+    int ExecuteWord(IWord word);
     
     /// <summary>
     /// Cleans up the internal interpreters state.

@@ -82,7 +82,7 @@ public class Interpreter : IInterpreter
                 
                 try
                 {
-                    _currentWord.Execute(this);
+                    ExecuteWord(_currentWord);
                 }
                 catch (InterpreterException ex)
                 {
@@ -128,7 +128,7 @@ public class Interpreter : IInterpreter
 
             try
             {
-                _currentWord.Execute(this);
+                ExecuteWord(_currentWord);
             }
             catch (InterpreterException ex)
             {
@@ -211,7 +211,18 @@ public class Interpreter : IInterpreter
     public bool IsWordRegistered(string wordName)
         => string.IsNullOrWhiteSpace(wordName) == false && _words.ContainsKey(wordName);
 
+    
+    public IWord GetRegisteredWord(string wordName)
+    {
+        if (IsWordRegistered(wordName) == false)
+        {
+            Throw(-13, $"The '{wordName}' word is undefined.");
+        }
 
+        return _words[wordName];
+    }
+
+    
     public void RegisterWord(IWord word)
         => _words.Add(word.Name.ToUpperInvariant(), word);
 
@@ -245,6 +256,7 @@ public class Interpreter : IInterpreter
     private void RegisterBuildInWords()
     {
         RegisterWord(new CommentWord());
+        RegisterWord(new LineCommentWord());
 
         RegisterWord(new BeginNewWordCompilationWord());
         RegisterWord(new EndNewWordCompilationWord());
@@ -291,6 +303,13 @@ public class Interpreter : IInterpreter
 
         RegisterWord(new DoWord());
         RegisterWord(new LoopWord());
+        
+        RegisterWord(new AbortWord());
+        RegisterWord(new AbortWithMessageWord());
+        RegisterWord(new CatchWord());
+        RegisterWord(new ThrowWord());
+        
+        RegisterWord(new GetExecutionTokenWord());
     }
 
     #endregion
@@ -307,8 +326,25 @@ public class Interpreter : IInterpreter
     /// The currently running word.
     /// </summary>
     private IWord? _currentWord;
+
+
+    public int ExecuteWord(IWord word)
+    {
+        if (word == null) throw new ArgumentNullException(nameof(word));
+
+        //ExecutingWord?.Invoke(this, new InterpreterEventArgs() { Word = word });
+
+        // try
+        // {
+            return word.Execute(this);
+        // }
+        // finally
+        // {
+        //     WordExecuted?.Invoke(this, new InterpreterEventArgs() { Word = word });
+        // }
+    }
     
-    
+
     public void Reset()
     {
         State.Reset();

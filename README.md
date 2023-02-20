@@ -1,6 +1,6 @@
 # Pico Forth 
 
-A miniature, toy grade, Forth language implementation.
+A miniature Forth language implementation.
 
 
 ## Forth differences
@@ -11,6 +11,15 @@ A miniature, toy grade, Forth language implementation.
 - No "direct" memory access.
 - No low level stuff.
 
+## Stacks
+
+- Data stack: Main stack for user data. Holds all values.
+- Return stack: Stack for (mostly) interpreter internal use. Holds values. Mostly integers.
+- Exception stack: Not accessible for users. Its used internally by THROW and CATCH words.
+- Input source stack: Stack for keeping the inputs. Used by the EVALUATE word. (NOT YET IMPLEMENTED!)
+
+
+## Words
 
 Words definition table columns:
 
@@ -27,9 +36,9 @@ Common words for all base operations.
 
 ### Words
 
-| Name     | Imm. | Mode | Description                                                                                                                                                              |
-|----------|------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| !        | no   | IC   | **Store**<br>(x a-addr -- )<br>Store `x` at `addr` (a heap array index).  |
+| Name     | Imm. | Mode | Description |
+|----------|------|------|---|
+| !        | no   | IC   | **Store**<br>(x a-addr -- )<br>Store `x` at `addr` (a heap array index). |
 | (        | yes  | IC   | **Comment**<br>Skips all source characters till the closing `)` character. |
 | *        | no   | IC   | **n3 = n1 * n2**<br>(n1 n2 -- n3)<br>Multiplies n1 and n2 and leaves the product on the stack. |
 | +        | no   | IC   | **n3 = n1 + n2**<br>(n1 n2 -- n3)<br>Adds n1 and n2 and leaves the sum on the stack. |
@@ -46,6 +55,8 @@ Common words for all base operations.
 | ?DUP     | no   | IC   | **Conditional duplicate**<br>(n -- 0 / n n)<br>If top of stack is nonzero, duplicate it. Otherwise leave zero on top of stack. |
 | @        | no   | IC   | **Fetch**<br>(addr -- n)<br>Loads the value at addr (a variables stack index) and leaves it at the top of the stack. |
 | @R       | no   | IC   | **Fetch return stack**<br>( -- n) [n - n]<br>The top value on the return stack is pushed onto the stack. The value is not removed from the return stack. |
+| ABORT    | no   | IC   | **Abort**<br>Clears the stack and the object stack and performs a QUIT. |
+| ABORT" str | yes  | C    | **Abort with message**<br>(flag -- )<br>Prints the string literal that follows in line, then aborts, clearing all execution state to return to the interpreter. |
 | CR       | no   | IC   | **Carriage return**<br>( -- )<br>The following output will start at the new line. |
 | DEPTH    | no   | IC   | **Stack depth**<br>( -- n)<br>Returns the number of items on the stack before DEPTH was executed. |
 | DO       | yes  | C    | **Definite loop**<br>(limit index -- ) [ - limit index ]<br>Executes the loop from the following word to the matching LOOP or +LOOP until n increments past the boundary between limit − 1 and limit. Note that the loop is always executed at least once (see ?DO for an alternative to this). |
@@ -56,20 +67,44 @@ Common words for all base operations.
 | LOOP     | yes  | C    | **Increment loop index**<br>Adds one to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
 | OVER     | no   | IC   | **Duplicate second item**<br>(n1 n2 -- n1 n2 n1)<br>The second item on the stack is copied to the top. |
 | R>       | no   | IC   | **From return stack**<br>( -- n) [n - ]<br>The top value is removed from the return stack and pushed onto the stack. |
-| ROT      | no   | IC   | **Rotate 3 items**<br>(n1 n2 n3 -- n2 n3 n1)<br>The third item on the stack is placed on the top of the stack and the second and first items are moved down.  |
+| ROT      | no   | IC   | **Rotate 3 items**<br>(n1 n2 n3 -- n2 n3 n1)<br>The third item on the stack is placed on the top of the stack and the second and first items are moved down. |
 | S" str   | yes  | IC   | **String literal**<br>( -- s)<br>Consume all source characters till the closing `"` character, creating a string from them and storing the result on the top of the stack. |
 | SPACE    | no   | IC   | **Print SPACE**<br>Prints out the SPACE character. |
 | SPACES   | no   | IC   | **Print spaces**<br>(n -- )<br>Prints out N characters of SPACE, where N is a number on the top of the stack. |
 | SWAP     | no   | IC   | **Swap top two items**<br>(n1 n2 -- n2 n1)<br>The top two stack items are interchanged. |
 | THEN     | yes  | C    | **End if**<br>( -- flag)<br>Used in an IF—ELSE—THEN sequence, marks the end of the conditional statement. |
 | TYPE     | no   | IC   | **Print string**<br>(s -- )<br>Prints out a value on the top of the stack as a string. |
+| [']      | yes  | C    | **Obtain execution token**<br>Places the execution token of the following word to the currently compiled word as a literal. |
+
+### Words (EXT)
+
+| \        | yes  | IC   | **Line comment**<br>Skips all source characters till the closing EOLN character. |
 
 
-# STRING library
+## EXCEPTION library
+
+Exceptions handling words.
+
+### Words
+
+| Name     | Imm. | Mode | Description |
+| ---      | ---  | ---  | --- |
+| CATCH    | yes  | C    | **Catch an exception**<br>(xt -- n)<br>Pushes the current execution state to the exception stack, executes xt, and returns 0 for no-error execution (dropping the exception frame) and non-zero, if a THROW was executed. |
+| THROW    | no   | C    | **Throw an exception**<br>(n -- )<br>If n is zero, does nothing. Otherwise throws an error, terminating the current execution, returning to the CATCH, if a exception frame was found on the exception stack. |
+
+### Words (EXT)
+
+| Name       | Imm. | Mode | Description |
+| ---        | ---  | ---  | --- |
+| ABORT      | no   | IC   | **Abort**<br>Clears the stack and the object stack and performs a QUIT. Extended versions. |
+| ABORT" str | yes  | C    | **Abort with message**<br>(flag -- )<br>Prints the string literal that follows in line, then aborts, clearing all execution state to return to the interpreter. Extended version. |
+
+
+## STRING library
 
 String manipulation words.
 
-## Words
+### Words
 
 | Name | Imm. | Mode | Description                                                                 |
 |------|------|------|-----------------------------------------------------------------------------|
