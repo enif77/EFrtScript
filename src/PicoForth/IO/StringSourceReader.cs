@@ -1,6 +1,6 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace PicoForth;
+namespace PicoForth.IO;
 
 
 internal class StringSourceReader : ISourceReader

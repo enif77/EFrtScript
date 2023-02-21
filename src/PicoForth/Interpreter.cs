@@ -4,6 +4,7 @@ namespace PicoForth;
 
 using System.Text;
 
+using PicoForth.IO;
 using PicoForth.Values;
 using PicoForth.Words;
 

@@ -7,6 +7,7 @@ namespace PicoForthApp;
 using System.IO;
 
 using PicoForth;
+using PicoForth.IO;
 using PicoForth.Extensions;
 
 
