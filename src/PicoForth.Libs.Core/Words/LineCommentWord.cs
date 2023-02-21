@@ -16,8 +16,6 @@ internal class LineCommentWord : IWord
         {
             if (interpreter.CurrentChar == '\n')
             {
-                interpreter.NextChar();
-
                 break;
             }
 
