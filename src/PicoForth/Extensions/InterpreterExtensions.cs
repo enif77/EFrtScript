@@ -51,6 +51,38 @@ public static class InterpreterExtensions
     public static IValue StackPop(this IInterpreter interpreter)
         => interpreter.State.Stack.Pop() ?? throw NullValueNotAllowedInStackException();
     
+    /// <summary>
+    /// Expects N items on the stack.
+    /// Wont return (throws an InterpreterException), if not enough items are on the stack.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="expectedItemsCount">The number of stack items expected on the stack.</param>
+    public static void StackExpect(this IInterpreter interpreter, int expectedItemsCount)
+    {
+        if (expectedItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedItemsCount));
+
+        if (interpreter.State.Stack.Count < expectedItemsCount)
+        {
+            interpreter.Throw(-4, "stack underflow");
+        }
+    }
+
+    /// <summary>
+    /// Expects N free items on the stack, so N items can be pushed to the stack.
+    /// Wont return (throws an InterpreterException), if there is not enough free items on the stack.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="expectedFreeItemsCount">The number of free stack items expected.</param>
+    public static void StackFree(this IInterpreter interpreter, int expectedFreeItemsCount)
+    {
+        if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
+
+        if ((interpreter.State.Stack.Count + expectedFreeItemsCount) >= interpreter.State.Stack.Items.Length)
+        {
+            interpreter.Throw(-3, "stack overflow");
+        }
+    }
+
     
     private static Exception NullValueNotAllowedInStackException()
         => new NullReferenceException("Null as value should not be stored in the stack.");
@@ -94,6 +126,39 @@ public static class InterpreterExtensions
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();
     
     
+    /// <summary>
+    /// Expects N items on the return stack.
+    /// Wont return (throws an InterpreterException), if not enough items are on the return stack.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="expectedItemsCount">The number of stack items expected on the return stack.</param>
+    public static void ReturnStackExpect(this IInterpreter interpreter, int expectedItemsCount)
+    {
+        if (expectedItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedItemsCount));
+
+        if (interpreter.State.ReturnStack.Count < expectedItemsCount)
+        {
+            interpreter.Throw(-4, "return stack underflow");
+        }
+    }
+
+    /// <summary>
+    /// Expects N free items on the return stack, so N items can be pushed to the return stack.
+    /// Wont return (throws an InterpreterException), if there is not enough free items on the return stack.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="expectedFreeItemsCount">The number of free return stack items expected.</param>
+    public static void ReturnStackFree(this IInterpreter interpreter, int expectedFreeItemsCount)
+    {
+        if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
+
+        if ((interpreter.State.ReturnStack.Count + expectedFreeItemsCount) >= interpreter.State.ReturnStack.Items.Length)
+        {
+            interpreter.Throw(-3, "return stack overflow");
+        }
+    }
+
+
     private static Exception NullValueNotAllowedInReturnStackException()
         => new NullReferenceException("Null as value should not be stored in the return stack.");
 
