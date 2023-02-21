@@ -1,15 +1,25 @@
-." --- TRY - CATCH ---" CR
+S" --- TRY - CATCH ---" S. CR
 
-: th
-  S" Thrown" TYPE CR THROW ;
+: could-fail ( -- n )
+  DUP 1 = IF 1 THROW THEN ;
+   
+: do-it ( a b -- c)
+  DROP DROP could-fail ;
 
-: ca
-  S" pre-t" S. CR
-  ['] th
-  CATCH
-  S" post-t" S. CR ;
+: try-it ( --)
+   1 2 ['] do-it CATCH IF
+   ( x1 x2 ) DROP DROP ." There was an exception" CR
+   ELSE ." The number was " . CR
+   THEN
+;
 
-0 ca   \ No exception thrown.
--1 ca  \ Like ABORT.
--2 ca  \ Like ABORT" mesg".
-1 ca   \ User exception.
+2 try-it
+3 try-it
+1 try-it
+
+\ ; retry-it ( -- )
+\    BEGIN 1 2 ['] do-it CATCH WHILE
+\    ( x1 x2) DROP DROP ." Exception, keep trying" CR
+\    REPEAT ( char )
+\    ." The number was " . CR
+\ ;

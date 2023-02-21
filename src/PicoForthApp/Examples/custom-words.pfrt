@@ -1,4 +1,4 @@
-." --- Custom words 1 ---" CR
+S" --- Custom words 1 ---" S. CR
 
 : print-ln . CR ;
 
@@ -7,7 +7,7 @@
 
 print-one ( One: 1 )
 
-." --- Custom words 2 ---" CR
+S" --- Custom words 2 ---" S. CR
 
 ( n1 n2 -- a s )
 : add-sub

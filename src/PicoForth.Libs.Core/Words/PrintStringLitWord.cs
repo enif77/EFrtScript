@@ -2,6 +2,8 @@
 
 namespace PicoForth.Libs.Core.Words;
 
+using PicoForth.Words;
+
 
 internal class PrintStringLitWord : IWord
 {
@@ -11,7 +13,14 @@ internal class PrintStringLitWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.Output.Write(interpreter.ReadStringFromSource());
+        if (interpreter.IsCompiling == false)
+        {
+            throw new Exception(".\" outside a new word definition.");
+        }
+
+        // ." -> S" abc" S.
+        interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(interpreter.ReadStringFromSource()));
+        interpreter.WordBeingDefined!.AddWord(new PrintStringWord());
 
         return 1;
     }

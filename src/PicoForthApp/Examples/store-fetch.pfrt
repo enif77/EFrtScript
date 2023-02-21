@@ -1,4 +1,4 @@
-." --- STORE FETCH ---" CR
+S" --- STORE FETCH ---" S. CR
 
 11 20 !
 20 @ . CR  ( 11 )

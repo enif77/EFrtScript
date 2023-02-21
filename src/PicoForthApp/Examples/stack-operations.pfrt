@@ -1,4 +1,4 @@
-." --- Stack operations ---" CR
+S" --- Stack operations ---" S. CR
 
 ( ?DUP - true )
 1 ?DUP . CR         ( 1)

@@ -1,4 +1,4 @@
-." --- Not case sensitive ---" CR
+S" --- Not case sensitive ---" S. CR
 
 ( DUP and dup are recognized )
 1 DUP dup . SPACE . SPACE . CR         ( 1 1 1)

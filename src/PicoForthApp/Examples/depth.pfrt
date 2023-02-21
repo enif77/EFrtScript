@@ -1,3 +1,3 @@
-." --- DEPTH ---" CR
+S" --- DEPTH ---" S. CR
 
 1 2 3 DEPTH . SPACE . SPACE . SPACE . CR  ( 3 3 2 1 )

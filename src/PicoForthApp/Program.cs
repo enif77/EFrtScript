@@ -36,13 +36,13 @@ internal static class Program
         ev.StackClear();
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
 
-        ev.Interpret(".\" --- Mics ---\" CR");
+        ev.Interpret("S\" --- Mics ---\" S. CR");
 
         ev.Interpret("30 3 * 1 + 2 / . CR");
         ev.Interpret("30 3 !  3 @ . CR");
         ev.Interpret("( 30) 40 ( )3 !  3 @ . CR ( comment... )");
 
-        ev.Interpret(".\" aaa \" 3 . CR");
+        ev.Interpret("S\" aaa \" S. 3 . CR");
         ev.Interpret(": StrBbb S\" bbb\" ; StrBbb S. CR");
     }
 }

@@ -1,2 +1,2 @@
 ( Hello world in Pico Forth! )
-." Hello, World!" CR
+S" Hello, World!" S. CR
