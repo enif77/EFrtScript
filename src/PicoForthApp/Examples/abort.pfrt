@@ -1,0 +1,7 @@
+S" --- ABORT ---" S. CR
+
+S" Before ABORT... " S. CR
+
+ABORT
+
+S" After ABORT! " S. CR  ( Wont be executed. )

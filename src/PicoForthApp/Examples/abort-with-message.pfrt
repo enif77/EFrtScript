@@ -1,0 +1,11 @@
+S" --- ABORT with message ---" S. CR
+
+: abort-if-1   ( n -- )
+  DUP 1 =      ( n -- n f )
+  ABORT" ABORTED!"  ( ABORT" cleans up the stack, no need to do it here! )
+  ." The number was: " . ;
+
+5 abort-if-1 CR
+1 abort-if-1 CR  ( This will abort the execution. )
+
+S" Wont be executed..." CR

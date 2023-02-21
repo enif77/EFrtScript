@@ -32,6 +32,8 @@ internal static class Program
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/do-loop.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/store-fetch.pfrt"));
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/try-catch.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/abort.pfrt"));
+        ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/abort-with-message.pfrt"));
         
         ev.StackClear();
         ev.Interpret(File.ReadAllText("./PicoForthApp/Examples/depth.pfrt"));
