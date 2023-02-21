@@ -3,6 +3,7 @@
 namespace PicoForth.Libs.Core.Words;
 
 
+
 internal class AbortWord : IWord
 {
     public string Name => "ABORT";
@@ -16,3 +17,13 @@ internal class AbortWord : IWord
         return 1;
     }
 }
+
+/*
+
+ABORT
+
+Empty the data stack and perform the function of QUIT, which includes emptying the return stack, without displaying a message.
+
+https://forth-standard.org/standard/core/ABORT
+
+*/
