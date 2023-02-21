@@ -13,6 +13,8 @@ internal class FetchWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         interpreter.StackPush(interpreter.HeapFetch(interpreter.StackPop().Integer));
 
         return 1;

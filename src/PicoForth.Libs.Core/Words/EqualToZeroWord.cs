@@ -13,6 +13,8 @@ internal class EqualToZeroWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         interpreter.StackPush(interpreter.StackPop().Integer == 0 ? -1 : 0);
 
         return 1;

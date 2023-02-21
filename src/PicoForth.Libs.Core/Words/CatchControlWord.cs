@@ -34,7 +34,7 @@ internal class CatchControlWord : IWord
             throw new InterpreterException(-3, "Exception stack overflow.");
         }
 
-        //Interpreter.StackExpect(1);
+        interpreter.StackExpect(1);
 
         var exceptionFrame = new ExceptionFrame()
         {

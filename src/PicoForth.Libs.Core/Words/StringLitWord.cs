@@ -22,6 +22,7 @@ internal class StringLitWord : IWord
         }
         else
         {
+            interpreter.StackFree(1);
             interpreter.StackPush(stringLiteral);
         }
 

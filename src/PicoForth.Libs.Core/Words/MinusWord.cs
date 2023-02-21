@@ -13,6 +13,8 @@ internal class MinusWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+
         var b = interpreter.StackPop().Integer;
         interpreter.StackPush(interpreter.StackPop().Integer - b);
 

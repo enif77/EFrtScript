@@ -13,6 +13,8 @@ internal class DropWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         interpreter.StackPop();
 
         return 1;

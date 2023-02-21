@@ -13,6 +13,8 @@ internal class TypeWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         interpreter.Output.Write(interpreter.StackPop().String);
 
         return 1;

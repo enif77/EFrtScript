@@ -13,6 +13,8 @@ internal class SpacesWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         var count = interpreter.StackPop().Integer;
         for (var i = 0; i < count; i++)
         {

@@ -13,6 +13,9 @@ internal class OverWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+        interpreter.StackFree(1);
+
         var n2 = interpreter.StackPop();
         var n1 = interpreter.StackPeek();
 

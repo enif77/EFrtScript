@@ -13,6 +13,8 @@ internal class StoreWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+
         var addr = interpreter.StackPop().Integer;
         interpreter.HeapStore(addr, interpreter.StackPop());
 

@@ -13,6 +13,8 @@ internal class SwapWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+
         var n2 = interpreter.StackPop();
         var n1 = interpreter.StackPop();
 

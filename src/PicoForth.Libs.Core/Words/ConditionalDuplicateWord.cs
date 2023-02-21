@@ -13,9 +13,12 @@ internal class ConditionalDuplicateWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         var v = interpreter.StackPeek();
         if (v.Boolean)
         {
+            interpreter.StackFree(1);
             interpreter.StackPush(v);
         }
         else

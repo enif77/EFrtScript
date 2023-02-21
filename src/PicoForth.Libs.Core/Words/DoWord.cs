@@ -18,6 +18,8 @@ internal class DoWord : IWord
             throw new Exception("DO outside a new word definition.");
         }
 
+        interpreter.ReturnStackFree(1);
+
         interpreter.ReturnStackPush(
             interpreter.WordBeingDefined!.AddWord(
                 new DoControlWord()));

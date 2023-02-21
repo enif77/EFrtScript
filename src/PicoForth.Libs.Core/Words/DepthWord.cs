@@ -13,6 +13,8 @@ internal class DepthWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackFree(1);
+
         interpreter.StackPush(interpreter.GetStackDepth());
 
         return 1;

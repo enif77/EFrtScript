@@ -18,6 +18,8 @@ internal class ElseWord : IWord
             throw new Exception("ELSE outside a new word definition.");
         }
 
+        interpreter.ReturnStackExpect(1);
+
         var ifControlWord = interpreter.WordBeingDefined!.GetWord(interpreter.ReturnStackPeek().Integer);
         if (ifControlWord is IfControlWord)
         {
@@ -26,6 +28,7 @@ internal class ElseWord : IWord
 
             // Instantiate the ELSE runtime code passing the index following ELSE.
             // Push execute address of ELSE word onto control flow stack.
+            interpreter.ReturnStackFree(1);
             interpreter.ReturnStackPush(
                 interpreter.WordBeingDefined!.AddWord(
                     new ElseControlWord(indexFollowingElse)));

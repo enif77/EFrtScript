@@ -44,6 +44,8 @@ public class ConstantValueWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackFree(1);
+
         interpreter.StackPush(_value);
 
         return 1;

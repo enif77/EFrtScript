@@ -18,6 +18,8 @@ internal class IfWord : IWord
             throw new Exception("IF outside a new word definition.");
         }
 
+        interpreter.ReturnStackFree(1);
+
         interpreter.ReturnStackPush(
             interpreter.WordBeingDefined!.AddWord(
                 new IfControlWord(interpreter.WordBeingDefined.NextWordIndex)));

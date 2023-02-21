@@ -26,6 +26,8 @@ internal class LoopControlWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.ReturnStackExpect(2);
+
         var index = interpreter.ReturnStackPop().Integer;
         var limit = interpreter.ReturnStackPeek().Integer;
 

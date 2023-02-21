@@ -13,7 +13,7 @@ internal class ThrowWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        //interpreter.StackExpect(1);
+        interpreter.StackExpect(1);
 
         // Wont return (throws an exception) when n is not zero and the CATCH word was executed.
         interpreter.Throw(interpreter.StackPop().Integer);

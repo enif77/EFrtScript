@@ -13,6 +13,8 @@ internal class DotWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         interpreter.Output.Write($"{interpreter.StackPop().Integer}");
 
         return 1;

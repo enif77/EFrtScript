@@ -18,6 +18,8 @@ internal class LoopWord : IWord
             throw new Exception("LOOP outside a new word definition.");
         }
 
+        interpreter.ReturnStackExpect(1);
+
         var doWordIndex = interpreter.ReturnStackPop().Integer;
         var loopIndex = interpreter.WordBeingDefined!.AddWord(
             new LoopControlWord(

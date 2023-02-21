@@ -13,6 +13,9 @@ internal class DupWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+        interpreter.StackFree(1);
+
         interpreter.StackPush(interpreter.StackPeek());
 
         return 1;

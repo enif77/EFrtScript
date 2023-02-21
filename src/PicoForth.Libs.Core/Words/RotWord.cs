@@ -13,6 +13,8 @@ internal class RotWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(3);
+
         var n3 = interpreter.StackPop();
         var n2 = interpreter.StackPop();
         var n1 = interpreter.StackPop();

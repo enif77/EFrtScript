@@ -13,6 +13,8 @@ internal class PlusWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+
         interpreter.StackPush(interpreter.StackPop().Integer + interpreter.StackPop().Integer);
 
         return 1;

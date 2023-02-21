@@ -13,6 +13,9 @@ internal class FromReturnStackWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.ReturnStackExpect(1);
+        interpreter.StackFree(1);
+
         interpreter.StackPush(interpreter.ReturnStackPop());
 
         return 1;

@@ -13,6 +13,8 @@ internal class EqualWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(2);
+
         var b = interpreter.StackPop();
         interpreter.StackPush(interpreter.StackPop().Integer == b.Integer ? -1 : 0);
 

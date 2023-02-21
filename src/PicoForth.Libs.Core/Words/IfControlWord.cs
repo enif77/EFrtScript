@@ -47,6 +47,8 @@ internal class IfControlWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        interpreter.StackExpect(1);
+
         if (interpreter.StackPop().Boolean)
         {
             // The flag is true, advance instruction index by one to true portion of IF.

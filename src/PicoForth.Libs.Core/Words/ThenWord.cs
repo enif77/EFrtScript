@@ -21,6 +21,8 @@ internal class ThenWord : IWord
         // Get the index of the next free slot in the non-primitive word being defined.
         var thenIndex = interpreter.WordBeingDefined!.NextWordIndex;
 
+        interpreter.ReturnStackExpect(1);
+
         var controlWord = interpreter.WordBeingDefined!.GetWord(interpreter.ReturnStackPop().Integer);
         if (controlWord is ElseControlWord)
         {
@@ -28,6 +30,7 @@ internal class ThenWord : IWord
             ((ElseControlWord)controlWord).SetThenIndexIncrement(thenIndex);
 
             // Pop control stack again to find IF.
+            interpreter.ReturnStackExpect(1);
             controlWord = interpreter.WordBeingDefined!.GetWord(interpreter.ReturnStackPop().Integer);
         }
 

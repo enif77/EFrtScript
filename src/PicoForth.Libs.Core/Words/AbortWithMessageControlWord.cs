@@ -26,7 +26,7 @@ internal class AbortWithMessageControlWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        //interpreter.StackExpect(1);
+        interpreter.StackExpect(1);
 
         if (interpreter.StackPop().Integer != 0)
         {
