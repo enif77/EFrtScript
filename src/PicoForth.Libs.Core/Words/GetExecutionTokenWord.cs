@@ -25,8 +25,7 @@ internal class GetExecutionTokenWord : IWord
         }
 
         interpreter.WordBeingDefined!
-            .AddWord(new ConstantValueWord(
-                interpreter.GetRegisteredWord(word.ToUpperInvariant())));
+            .AddWord(new ConstantValueWord(word.ToUpperInvariant()));
         
         return 1;
     }
