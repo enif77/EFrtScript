@@ -3,7 +3,7 @@
 namespace PicoForth.IO;
 
 
-internal class StringSourceReader : ISourceReader
+public class StringSourceReader : ISourceReader
 {
     public int CurrentChar =>
         (_srcPos < 0 || _srcPos >= _src.Length)
