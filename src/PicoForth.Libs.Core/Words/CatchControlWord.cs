@@ -3,6 +3,7 @@
 namespace PicoForth.Libs.Core.Words;
 
 using PicoForth.Extensions;
+using PicoForth.Libs.Core.Values;
 
 
 /// <summary>
@@ -28,13 +29,14 @@ internal class CatchControlWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
+        // A word name to execute expected.
+        interpreter.StackExpect(1);
+
         // Exception stack free.
         if ((interpreter.State.ExceptionStack.Count + 1) >= interpreter.State.ExceptionStack.Items.Length)
         {
-            throw new InterpreterException(-3, "Exception stack overflow.");
+            interpreter.Throw(-3, "Exception stack overflow.");
         }
-
-        interpreter.StackExpect(1);
 
         var exceptionFrame = new ExceptionFrame()
         {
@@ -62,21 +64,33 @@ internal class CatchControlWord : IWord
 
             return index;
         }
-        catch (Exception)
+        catch (InterpreterException ex)
         {
-            // Clean up the mess, if needed.
-            if (interpreter.State.ExceptionStack.IsEmpty == false && interpreter.State.ExceptionStack.Peek() == exceptionFrame)
-            {
-                interpreter.State.ExceptionStack.Pop();
-            }
+            CleanExceptionStack(interpreter, exceptionFrame);
 
-            // TODO: What to do with the exception?
-
-            // Go to the word behind us.
-            return 1;
+            interpreter.StackPush(new ExceptionValue(ex));
         }
+        catch (Exception ex)
+        {
+            CleanExceptionStack(interpreter, exceptionFrame);
+
+            interpreter.StackPush(new ExceptionValue(-100, ex.Message, ex));
+        }
+
+        // Go to the word behind us.
+        return 1;
     }
     
     private readonly IWord _parentWord;
     private readonly int _nextWordIndex;
+
+
+    private void CleanExceptionStack(IInterpreter interpreter, ExceptionFrame exceptionFrame)
+    {
+        // Clean up the mess, if needed.
+        if (interpreter.State.ExceptionStack.IsEmpty == false && interpreter.State.ExceptionStack.Peek() == exceptionFrame)
+        {
+            interpreter.State.ExceptionStack.Pop();
+        }
+    }
 }

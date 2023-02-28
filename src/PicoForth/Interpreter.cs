@@ -341,8 +341,6 @@ public class Interpreter : IInterpreter
         //State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
         _currentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
 
-        State.Stack.Push(new IntValue(exceptionCode));
-
         // Will be caught by the CATCH word.
         throw new InterpreterException(exceptionCode, message);
     }
