@@ -35,7 +35,7 @@ internal class CatchControlWord : IWord
         // Exception stack free.
         if ((interpreter.State.ExceptionStack.Count + 1) >= interpreter.State.ExceptionStack.Items.Length)
         {
-            interpreter.Throw(-3, "Exception stack overflow.");
+            interpreter.Throw(-53, "exception stack overflow");
         }
 
         var exceptionFrame = new ExceptionFrame()
