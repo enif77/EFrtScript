@@ -18,7 +18,7 @@ internal class GetExecutionTokenWord : IWord
             throw new Exception("['] outside a new word definition.");
         }
 
-        var word = interpreter.ReadWordFromSource();
+        var word = interpreter.CurrentInputSource!.ReadWordFromSource();
         if (string.IsNullOrEmpty(word))
         {
             throw new InterpreterException("A word name expected.");

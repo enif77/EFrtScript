@@ -11,7 +11,9 @@ internal class CommentWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        var c = interpreter.CurrentChar;
+        var currentInputSource = interpreter.CurrentInputSource!;
+        
+        var c = currentInputSource.CurrentChar;
         while (c >= 0)
         {
             if (c == ')')
@@ -19,7 +21,7 @@ internal class CommentWord : IWord
                 break;
             }
 
-            c = interpreter.NextChar();
+            c = currentInputSource.NextChar();
         }
 
         if (c < 0)

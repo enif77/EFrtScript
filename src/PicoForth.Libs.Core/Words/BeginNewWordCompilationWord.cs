@@ -12,7 +12,7 @@ internal class BeginNewWordCompilationWord : IWord
     public int Execute(IInterpreter interpreter)
     {
         interpreter.BeginNewWordCompilation(
-            interpreter.ReadWordFromSource() ?? throw new Exception("A new word name expected."));
+            interpreter.CurrentInputSource!.ReadWordFromSource() ?? throw new Exception("A new word name expected."));
 
         return 1;
     }

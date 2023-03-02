@@ -17,7 +17,7 @@ internal class AbortWithMessageWord : IWord
         }
 
         interpreter.WordBeingDefined!
-            .AddWord(new AbortWithMessageControlWord(interpreter.ReadStringFromSource()));
+            .AddWord(new AbortWithMessageControlWord(interpreter.CurrentInputSource!.ReadStringFromSource()));
         
         return 1;
     }

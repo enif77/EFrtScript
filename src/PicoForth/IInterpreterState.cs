@@ -24,7 +24,12 @@ public interface IInterpreterState
     /// Exception stack.
     /// </summary>
     ExceptionStack ExceptionStack { get; }
-    
+
+    /// <summary>
+    /// Input sources stack.
+    /// </summary>
+    InputSourceStack InputSourceStack { get; }
+
     /// <summary>
     /// Heap.
     /// </summary>

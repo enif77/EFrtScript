@@ -1,0 +1,4 @@
+S" --- EVALUATE ---" S. CR
+
+S" 1 2 + " EVALUATE . CR  ( 3 )
+S" : T 123 . ;" EVALUATE T CR  ( 123 )

@@ -12,6 +12,8 @@ public class Library : IWordsLibrary
     
     public void Initialize(IInterpreter interpreter)
     {
+        interpreter.RegisterWord(new EvaluateWord());
+        
         interpreter.RegisterWord(new CommentWord());
         interpreter.RegisterWord(new LineCommentWord());
 

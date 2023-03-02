@@ -2,8 +2,6 @@
 
 namespace PicoForth;
 
-using System.Text;
-
 using PicoForth.IO;
 using PicoForth.Values;
 using PicoForth.Words;
@@ -13,27 +11,30 @@ public class Interpreter : IInterpreter
 {
     public IInterpreterState State { get; }
     public IOutputWriter Output { get; }
+    public IInputSource? CurrentInputSource =>
+        (State.InputSourceStack.Count > 0) 
+            ? State.InputSourceStack.Peek() 
+            : null;
 
-    
+
     public Interpreter(IOutputWriter outputWriter)
     {
         State = new InterpreterState();
         Output = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
-
-        _source = new StringSourceReader(string.Empty);
-        _tokenizer = new Tokenizer(_source);
+        
         _words = new Dictionary<string, IWord>();
     }
 
 
     public void Interpret(string src)
     {
-        _source = new StringSourceReader(src);
-        _tokenizer = new Tokenizer(_source);
+        State.InputSourceStack.Push(
+            new InputSource(
+                new StringSourceReader(src)));
         
         while (true)
         {
-            var word = _tokenizer.NextWord();
+            var word = CurrentInputSource!.ReadWordFromSource();
             if (word == null)
             {
                 break;
@@ -63,10 +64,11 @@ public class Interpreter : IInterpreter
             //State.SetStateValue(false);
         }
             
-        // // Restore the previous input source, if any.
-        // InputSource = (State.InputSourceStack.Count > 0) 
-        //     ? State.InputSourceStack.Pop() 
-        //     : null;
+        // Restore the previous input source, if any.
+        if (State.InputSourceStack.Count > 0)
+        {
+            State.InputSourceStack.Pop();
+        }
     }
 
 
@@ -150,55 +152,7 @@ public class Interpreter : IInterpreter
 
         Throw(-13, $"The '{wordName}' word is undefined.");
     }
-
-
-    #region source
-
-    private ISourceReader _source;
-    private Tokenizer _tokenizer;
-
-
-    public int CurrentChar => _source.CurrentChar;
-
-
-    public int NextChar()
-    {
-        return _source.NextChar();
-    }
-
-
-    public string? ReadWordFromSource()
-    {
-        return _tokenizer.NextWord();
-    }
-
-
-    public string ReadStringFromSource()
-    {
-        var sb = new StringBuilder();
-        var c = NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).
-        while (c >= 0)
-        {
-            if (c == '"')
-            {
-                break;
-            }
-
-            sb.Append((char)c);
-
-            c = NextChar();
-        }
-
-        if (c < 0)
-        {
-            throw new Exception("A string literal end expected");
-        }
-
-        return sb.ToString();
-    }
-
-    #endregion
-
+    
 
     #region words
 

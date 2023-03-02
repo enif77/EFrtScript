@@ -7,20 +7,18 @@ public interface IInterpreter
 {
     IInterpreterState State { get; }
     IOutputWriter Output { get; }
+    IInputSource? CurrentInputSource { get; }
     
-
-    void Interpret(string src);
-
-
-    #region source
-
-    int CurrentChar { get; }
-
-    int NextChar();
-    string? ReadWordFromSource();
-    string ReadStringFromSource();
-
-    #endregion
+    
+    // #region source
+    //
+    // int CurrentChar { get; }
+    //
+    // int NextChar();
+    // string? ReadWordFromSource();
+    // string ReadStringFromSource();
+    //
+    // #endregion
 
 
     #region words
@@ -50,6 +48,12 @@ public interface IInterpreter
     /// </summary>
     bool IsExecutionTerminated { get; }
     
+    
+    /// <summary>
+    /// Interprets a string.
+    /// </summary>
+    /// <param name="src">A string representing a Forth program.</param>
+    void Interpret(string src);
     
     /// <summary>
     /// Executes a word. 

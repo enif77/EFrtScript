@@ -11,15 +11,17 @@ internal class LineCommentWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.NextChar();
-        while (interpreter.CurrentChar >= 0)
+        var currentInputSource = interpreter.CurrentInputSource!;
+        
+        currentInputSource.NextChar();
+        while (currentInputSource.CurrentChar >= 0)
         {
-            if (interpreter.CurrentChar == '\n')
+            if (currentInputSource.CurrentChar == '\n')
             {
                 break;
             }
 
-            interpreter.NextChar();
+            currentInputSource.NextChar();
         }
 
         return 1;
