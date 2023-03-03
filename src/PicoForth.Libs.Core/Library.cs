@@ -1,8 +1,17 @@
 ﻿/* Copyright (C) Premysl Fara and Contributors */
 
-using PicoForth.Libs.Core.Words;
+#region unit-tests
+
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("PicoForth.Libs.Core.Tests")]
+
+#endregion
+
 
 namespace PicoForth.Libs.Core;
+
+using PicoForth.Libs.Core.Words;
 
 
 public class Library : IWordsLibrary
