@@ -8,17 +8,6 @@ public interface IInterpreter
     IInterpreterState State { get; }
     IOutputWriter Output { get; }
     IInputSource? CurrentInputSource { get; }
-    
-    
-    // #region source
-    //
-    // int CurrentChar { get; }
-    //
-    // int NextChar();
-    // string? ReadWordFromSource();
-    // string ReadStringFromSource();
-    //
-    // #endregion
 
 
     #region words
