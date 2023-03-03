@@ -1,13 +1,12 @@
 ﻿/* Copyright (C) Premysl Fara and Contributors */
 
-#region unit-tests
-
-using System.Runtime.CompilerServices;
-
-[assembly:InternalsVisibleTo("PicoForth.Libs.Core.Tests")]
-
-#endregion
-
+// #region unit-tests
+//
+// using System.Runtime.CompilerServices;
+//
+// [assembly:InternalsVisibleTo("PicoForth.Libs.Core.Tests")]
+//
+// #endregion
 
 namespace PicoForth.Libs.Core;
 
