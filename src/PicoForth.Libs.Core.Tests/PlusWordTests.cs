@@ -5,7 +5,6 @@ namespace PicoForth.Libs.Core.Tests;
 using Xunit;
 
 using PicoForth.Extensions;
-using PicoForth.IO;
 
 
 public class PlusWordTests
@@ -22,9 +21,7 @@ public class PlusWordTests
     [InlineData(-1,  1,  0)]
     public void CalculationResultsMatchExpectedMathResults(int a, int b, int expected)
     {
-        var interpreter = new Interpreter(new NullOutputWriter());
-        var coreLib = new Library();
-        coreLib.Initialize(interpreter);
+        var interpreter = TestsHelper.CreateInterpreter();
         
         interpreter.StackPush(a);
         interpreter.StackPush(b);
