@@ -5,10 +5,37 @@ namespace PicoForth.Libs.Core.Tests;
 using Xunit;
 
 using PicoForth.Extensions;
+using PicoForth.IO;
+using PicoForth.Libs.Core.Words;
 
 
 public class MinusWordTests
 {
+    [Fact]
+    public void HasExpectedName()
+    {
+        Assert.Equal("-", new MinusWord().Name);
+    }
+    
+    
+    [Fact]
+    public void IsNotImmediate()
+    {
+        Assert.False(new MinusWord().IsImmediate);
+    }
+    
+    
+    [Fact]
+    public void GoesToTheNextWord()
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(1);
+        interpreter.StackPush(2);
+
+        Assert.Equal(1, new MinusWord().Execute(interpreter));
+    }
+    
     [Theory]
     [InlineData( 0,  5, -5)]
     [InlineData( 5,  0,  5)]
@@ -21,14 +48,12 @@ public class MinusWordTests
     [InlineData( 0,  1, -1)]
     public void CalculationResultsMatchExpectedMathResults(int a, int b, int expected)
     {
-        var interpreter = TestsHelper.CreateInterpreter();
+        var interpreter = new Interpreter(new NullOutputWriter());
         
         interpreter.StackPush(a);
         interpreter.StackPush(b);
-
-        var w = interpreter.GetRegisteredWord("-");
-
-        w.Execute(interpreter);
+        
+        new MinusWord().Execute(interpreter);
         
         Assert.Equal(expected, interpreter.StackPop().Integer);
     }
