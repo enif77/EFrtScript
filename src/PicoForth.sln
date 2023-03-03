@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForth.Libs.Core", "Pico
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForth.Tests", "PicoForth.Tests\PicoForth.Tests.csproj", "{22121B08-BA76-40F2-9692-5B8E11C06B9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3E3646E9-EA67-4111-AFF5-5BB465EF7656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoForth.Libs.Core.Tests", "PicoForth.Libs.Core.Tests\PicoForth.Libs.Core.Tests.csproj", "{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
 	EndGlobalSection
 EndGlobal
