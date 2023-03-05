@@ -1,0 +1,4 @@
+S" --- NEGATE ---" S. CR
+
+10 NEGATE . CR  ( -10 )
+-5 NEGATE . CR  ( 5 )
