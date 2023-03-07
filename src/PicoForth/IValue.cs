@@ -17,7 +17,12 @@ public interface IValue
     /// An integer value.
     /// </summary>
     int Integer { get; }
-    
+
+    /// <summary>
+    /// A real (floating point) value.
+    /// </summary>
+    double Real { get; }
+
     /// <summary>
     /// A string value.
     /// </summary>

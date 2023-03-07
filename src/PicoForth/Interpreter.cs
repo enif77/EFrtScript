@@ -145,7 +145,7 @@ public class Interpreter : IInterpreter
 
         if (int.TryParse(wordName, out var val))
         {
-            State.Stack.Push(new IntValue(val));
+            State.Stack.Push(new IntegerValue(val));
 
             return;
         }

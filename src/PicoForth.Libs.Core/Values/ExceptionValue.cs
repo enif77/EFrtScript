@@ -10,6 +10,7 @@ internal class ExceptionValue : IValue
 {
     public bool Boolean => Integer != 0;
     public int Integer => _exception.ExceptionCode;
+    public double Real => Integer;
     public string String => _exception.Message;
     public Exception Exception => _exception;
 
@@ -32,5 +33,5 @@ internal class ExceptionValue : IValue
     }
 
 
-    private InterpreterException _exception;
+    private readonly InterpreterException _exception;
 }

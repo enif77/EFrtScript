@@ -5,6 +5,9 @@ namespace PicoForth.Values;
 using System.Globalization;
 
 
+/// <summary>
+/// A string value.
+/// </summary>
 internal class StringValue : IValue
 {
     public bool Boolean => string.IsNullOrEmpty(String) == false;
@@ -18,7 +21,20 @@ internal class StringValue : IValue
                 return i;
             }
 
-            throw new Exception($"'{String}' cannot be converted to an Int");
+            throw new Exception($"'{String}' cannot be converted to an Integer");
+        }
+    }
+    
+    public double Real
+    {
+        get
+        {
+            if (double.TryParse(String, NumberStyles.Float, CultureInfo.InvariantCulture, out var i))
+            {
+                return i;
+            }
+
+            throw new Exception($"'{String}' cannot be converted to an Real");
         }
     }
     

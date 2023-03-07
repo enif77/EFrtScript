@@ -5,14 +5,18 @@ namespace PicoForth.Values;
 using System.Globalization;
 
 
-internal class IntValue : IValue
+/// <summary>
+/// An integer value.
+/// </summary>
+internal class IntegerValue : IValue
 {
     public bool Boolean => Integer != 0;
     public int Integer { get; }
+    public double Real => Integer;
     public string String => Integer.ToString(CultureInfo.InvariantCulture);
 
 
-    public IntValue(int value)
+    public IntegerValue(int value)
     {
         Integer = value;
     }
