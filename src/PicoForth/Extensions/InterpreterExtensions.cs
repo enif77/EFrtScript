@@ -38,7 +38,7 @@ public static class InterpreterExtensions
     
     public static void StackPush(this IInterpreter interpreter, int v)
     {
-        StackPush(interpreter, new IntValue(v));
+        StackPush(interpreter, new IntegerValue(v));
     }
     
     
@@ -118,7 +118,7 @@ public static class InterpreterExtensions
     
     public static void ReturnStackPush(this IInterpreter interpreter, int v)
     {
-        ReturnStackPush(interpreter, new IntValue(v));
+        ReturnStackPush(interpreter, new IntegerValue(v));
     }
     
     

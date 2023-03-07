@@ -25,7 +25,7 @@ public class ConstantValueWord : IWord
     
     
     public ConstantValueWord(int value)
-        : this(new IntValue(value))
+        : this(new IntegerValue(value))
     {
     }
     
