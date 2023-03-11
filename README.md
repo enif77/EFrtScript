@@ -80,6 +80,8 @@ Common words for all base operations.
 
 ### Words (EXT)
 
+| Name     | Imm. | Mode | Description |
+|----------|------|------|---|
 | \        | yes  | IC   | **Line comment**<br>Skips all source characters till the closing EOLN character. |
 
 
