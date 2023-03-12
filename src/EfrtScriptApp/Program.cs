@@ -19,25 +19,25 @@ internal static class Program
         var coreLib = new Library();
         coreLib.Initialize(ev);
 
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/hello-world.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/print-2-swapped.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/stack-operations.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/not-case-sensitive.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/comparisons.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/type.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/spaces.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/custom-words.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/if-then-else.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/do-loop.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/store-fetch.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/try-catch.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/abort.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/abort-with-message.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/evaluate.efrts"));
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/negate.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/hello-world.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/print-2-swapped.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/stack-operations.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/not-case-sensitive.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/comparisons.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/type.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/spaces.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/custom-words.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/if-then-else.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/do-loop.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/store-fetch.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/try-catch.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/abort.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/abort-with-message.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/evaluate.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/negate.efrts"));
         
         ev.StackClear();
-        ev.Interpret(File.ReadAllText("./EFrtScriptApp/Examples/depth.efrts"));
+        ev.Interpret(File.ReadAllText("./Examples/depth.efrts"));
 
         ev.Interpret("S\" --- Mics ---\" S. CR");
 
