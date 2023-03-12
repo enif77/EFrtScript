@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript", "EFrtScript\EFrtScript.csproj", "{07191F5B-E48E-4F6A-808F-4C5E001B226C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScriptApp", "EFrtScriptApp\EFrtScriptApp.csproj", "{F9E1688E-B725-4414-A552-59659DBF3397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.Core", "EFrtScript.Libs.Core\EFrtScript.Libs.Core.csproj", "{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Tests", "EFrtScript.Tests\EFrtScript.Tests.csproj", "{22121B08-BA76-40F2-9692-5B8E11C06B9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3E3646E9-EA67-4111-AFF5-5BB465EF7656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.Core.Tests", "EFrtScript.Libs.Core.Tests\EFrtScript.Libs.Core.Tests.csproj", "{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07191F5B-E48E-4F6A-808F-4C5E001B226C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07191F5B-E48E-4F6A-808F-4C5E001B226C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07191F5B-E48E-4F6A-808F-4C5E001B226C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07191F5B-E48E-4F6A-808F-4C5E001B226C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E1688E-B725-4414-A552-59659DBF3397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E1688E-B725-4414-A552-59659DBF3397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E1688E-B725-4414-A552-59659DBF3397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E1688E-B725-4414-A552-59659DBF3397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C382ADCB-6ED9-40F2-AB38-2D5DCF4094C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22121B08-BA76-40F2-9692-5B8E11C06B9D} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
+		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
+	EndGlobalSection
+EndGlobal

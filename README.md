@@ -1,4 +1,4 @@
-# Efrt Script 
+# EFrt Script 
 
 A miniature Forth language implementation.
 
