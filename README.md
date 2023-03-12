@@ -1,4 +1,4 @@
-# Pico Forth 
+# Efrt Script 
 
 A miniature Forth language implementation.
 
@@ -97,6 +97,8 @@ Exceptions handling words.
 | THROW    | no   | C    | **Throw an exception**<br>(n -- )<br>If n is zero, does nothing. Otherwise throws an error, terminating the current execution, returning to the CATCH, if a exception frame was found on the exception stack. |
 
 ### Words (EXT)
+
+NOTE: Not yet implemented. :-)
 
 | Name       | Imm. | Mode | Description |
 | ---        | ---  | ---  | --- |
