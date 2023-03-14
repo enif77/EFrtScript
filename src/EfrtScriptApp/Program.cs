@@ -23,6 +23,18 @@ internal static class Program
 
         interpreter.RegisterWord(new ReadAllTextWord());
 
+        interpreter.AddPrimitiveWord("TRACE", (IInterpreter i) => 
+        {
+            i.StackExpect(1);
+
+            _tracing = i.StackPop().Boolean;
+
+            return 1;
+        });
+
+        interpreter.ExecutingWord += Interpreter_ExecutingWord;
+        
+
         var interactiveModeRequested = true;
 
         if (args.Length > 0)
@@ -118,6 +130,18 @@ internal static class Program
 
         // ev.Interpret("S\" aaa \" S. 3 . CR");
         // ev.Interpret(": StrBbb S\" bbb\" ; StrBbb S. CR");
+    }
+
+
+    private static bool _tracing = false;
+
+
+    private static void Interpreter_ExecutingWord(object sender, InterpreterEventArgs e)
+    {
+        if (_tracing)
+        {
+            Console.WriteLine("Trace: {0} ", e.Word.Name);
+        }
     }
 }
 
