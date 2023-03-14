@@ -17,6 +17,7 @@ public class LibraryTests
     
     
     [Theory]
+    [InlineData("BYE")]
     [InlineData("DUP")]
     [InlineData("-")]
     [InlineData("NEGATE")]

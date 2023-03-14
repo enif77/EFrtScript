@@ -115,3 +115,25 @@ String manipulation words.
 | Name | Imm. | Mode | Description                                                                 |
 |------|------|------|-----------------------------------------------------------------------------|
 | S.   | no   | IC   | **Print string**<br>(s -- )<br>A string on the top of the stack is printed. |
+
+
+## TOOLS library
+
+Various helper words.
+
+### Words
+
+| Name | Imm. | Mode | Description                                                                 |
+|------|------|------|-----------------------------------------------------------------------------|
+| BYE  | no   | IC   | **Terminate execution**<br>( -- )<br>Return control to the host operating system, if any. |
+
+
+## EXTRA
+
+Various helper words defined by the EFrt Script app.
+
+### Words
+
+| Name | Imm. | Mode | Description                                                                 |
+|------|------|------|-----------------------------------------------------------------------------|
+| READ-ALL-TEXT  | no   | IC   | **Read all text**<br>(s -- s)<br>Reads contents of a text file into a string on the stack. |
