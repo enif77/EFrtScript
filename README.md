@@ -137,3 +137,4 @@ Various helper words defined by the EFrt Script app.
 | Name | Imm. | Mode | Description                                                                 |
 |------|------|------|-----------------------------------------------------------------------------|
 | READ-ALL-TEXT  | no   | IC   | **Read all text**<br>(s -- s)<br>Reads contents of a text file into a string on the stack. |
+| TRACE  | no   | IC   | **Tracing mode**<br>(n -- )<br>Turns tracing mode on or off. Tracing lists all words, that will be executed. |
