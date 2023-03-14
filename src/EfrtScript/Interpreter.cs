@@ -218,6 +218,9 @@ public class Interpreter : IInterpreter
     public bool IsCompiling => InterpreterState == InterpreterStateCode.Compiling;
     public bool IsExecutionTerminated => InterpreterState == InterpreterStateCode.Breaking || InterpreterState == InterpreterStateCode.Terminating;
 
+    public event EventHandler<InterpreterEventArgs>? ExecutingWord;
+    public event EventHandler<InterpreterEventArgs>? WordExecuted;
+
 
     /// <summary>
     /// The currently running word.
@@ -229,16 +232,16 @@ public class Interpreter : IInterpreter
     {
         if (word == null) throw new ArgumentNullException(nameof(word));
 
-        //ExecutingWord?.Invoke(this, new InterpreterEventArgs() { Word = word });
+        ExecutingWord?.Invoke(this, new InterpreterEventArgs(word));
 
-        // try
-        // {
+        try
+        {
             return word.Execute(this);
-        // }
-        // finally
-        // {
-        //     WordExecuted?.Invoke(this, new InterpreterEventArgs() { Word = word });
-        // }
+        }
+        finally
+        {
+            WordExecuted?.Invoke(this, new InterpreterEventArgs(word));
+        }
     }
     
 

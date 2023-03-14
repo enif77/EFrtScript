@@ -37,6 +37,16 @@ public interface IInterpreter
     /// </summary>
     bool IsExecutionTerminated { get; }
     
+    /// <summary>
+    /// An event fired, when a word is being executed.
+    /// </summary>
+    event EventHandler<InterpreterEventArgs>? ExecutingWord;
+
+    /// <summary>
+    /// An event fired, when a word was executed.
+    /// </summary>
+    event EventHandler<InterpreterEventArgs>? WordExecuted;
+
     
     /// <summary>
     /// Interprets a string.
