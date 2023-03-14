@@ -136,7 +136,7 @@ internal static class Program
     private static bool _tracing = false;
 
 
-    private static void Interpreter_ExecutingWord(object sender, InterpreterEventArgs e)
+    private static void Interpreter_ExecutingWord(object? sender, InterpreterEventArgs e)
     {
         if (_tracing)
         {
