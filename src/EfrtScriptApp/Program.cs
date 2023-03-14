@@ -102,26 +102,6 @@ internal static class Program
             }
         }
 
-        // ev.Interpret(File.ReadAllText("./Examples/hello-world.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/print-2-swapped.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/stack-operations.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/not-case-sensitive.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/comparisons.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/type.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/spaces.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/custom-words.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/if-then-else.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/do-loop.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/store-fetch.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/try-catch.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/abort.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/abort-with-message.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/evaluate.efrts"));
-        // ev.Interpret(File.ReadAllText("./Examples/negate.efrts"));
-        
-        // ev.StackClear();
-        // ev.Interpret(File.ReadAllText("./Examples/depth.efrts"));
-
         // ev.Interpret("S\" --- Mics ---\" S. CR");
 
         // ev.Interpret("30 3 * 1 + 2 / . CR");
@@ -151,6 +131,9 @@ internal static class Program
 ~/.../EFrtScript/src$ dotnet run --project EfrtScriptApp/EfrtScriptApp.csproj ./EfrtScriptApp/Examples/hello-world.efrts
 
 S" ./EfrtScriptApp/Examples/hello-world.efrts" READ-ALL-TEXT EVALUATE
+
+pwsh run-examples.ps1
+
 
 https://github.com/enif77/EFrt
 
