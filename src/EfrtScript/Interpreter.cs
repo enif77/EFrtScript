@@ -149,7 +149,8 @@ public class Interpreter : IInterpreter
 
         if (int.TryParse(wordName, out var val))
         {
-            State.Stack.Push(new IntegerValue(val));
+            // This will show the value in the output of the TRACE word.
+            ExecuteWord(new ConstantValueWord(val));
 
             return;
         }
