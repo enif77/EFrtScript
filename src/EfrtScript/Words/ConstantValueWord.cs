@@ -8,7 +8,7 @@ using EFrtScript.Values;
 
 public class ConstantValueWord : IWord
 {
-    public string Name => "LITERAL";
+    public string Name => $"LITERAL({_value.String})";
     public bool IsImmediate => false;
 
 
@@ -28,6 +28,12 @@ public class ConstantValueWord : IWord
         : this(new IntegerValue(value))
     {
     }
+
+
+    public ConstantValueWord(double value)
+        : this(new RealValue(value))
+    {
+    }
     
     
     public ConstantValueWord(string value)
@@ -44,7 +50,6 @@ public class ConstantValueWord : IWord
 
         return 1;
     }
-
 
     private readonly IValue _value; 
 }
