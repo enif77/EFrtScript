@@ -9,7 +9,7 @@ using System;
 /// An exception thrown by the Interpreter.Throw() method.
 /// This stops further word execution.
 /// </summary>
-public class ExecutionException : Exception
+internal class ExecutionException : Exception
 {
 }
  
