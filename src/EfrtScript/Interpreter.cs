@@ -256,7 +256,7 @@ public class Interpreter : IInterpreter
     public void Abort()
     {
         State.Stack.Clear();
-        //State.InputSourceStack.Clear();
+        State.InputSourceStack.Clear();
 
         // TODO: Clear the heap?
         // TODO: Clear the exception stack?
