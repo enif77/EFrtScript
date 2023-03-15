@@ -139,6 +139,10 @@ public class Interpreter : IInterpreter
             {
                 Throw(ex.ExceptionCode, ex.Message);
             }
+            catch (ExecutionException)
+            {
+                ; // Here we can do nothing, because all exceptions were already handled.
+            }
             catch (Exception ex)
             {
                 Throw(-100, ex.Message);
@@ -292,7 +296,8 @@ public class Interpreter : IInterpreter
 
             Abort();
 
-            return;
+            // Throw an exception here, so we never return to the caller!
+            throw new ExecutionException();
         }
 
         // Restore the previous execution state.
