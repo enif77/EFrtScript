@@ -83,11 +83,11 @@ public class Interpreter : IInterpreter
             var word = _words[wordName];
             if (word.IsImmediate)
             {
-                _currentWord = _words[wordName];
+                State.CurrentWord = _words[wordName];
                 
                 try
                 {
-                    ExecuteWord(_currentWord);
+                    ExecuteWord(State.CurrentWord);
                 }
                 catch (InterpreterException ex)
                 {
@@ -129,11 +129,11 @@ public class Interpreter : IInterpreter
     {
         if (IsWordRegistered(wordName))
         {
-            _currentWord = _words[wordName];
+            State.CurrentWord = _words[wordName];
 
             try
             {
-                ExecuteWord(_currentWord);
+                ExecuteWord(State.CurrentWord);
             }
             catch (InterpreterException ex)
             {
@@ -154,7 +154,8 @@ public class Interpreter : IInterpreter
         if (int.TryParse(wordName, out var val))
         {
             // This will show the value in the output of the TRACE word.
-            ExecuteWord(new ConstantValueWord(val));
+            State.CurrentWord = new ConstantValueWord(val);
+            ExecuteWord(State.CurrentWord);
 
             return;
         }
@@ -225,12 +226,6 @@ public class Interpreter : IInterpreter
 
     public event EventHandler<InterpreterEventArgs>? ExecutingWord;
     public event EventHandler<InterpreterEventArgs>? WordExecuted;
-
-
-    /// <summary>
-    /// The currently running word.
-    /// </summary>
-    private IWord? _currentWord;
 
 
     public int ExecuteWord(IWord word)
@@ -306,7 +301,7 @@ public class Interpreter : IInterpreter
         State.Stack.Top = exceptionFrame!.StackTop;
         State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
         State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
-        _currentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
+        State.CurrentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
 
         // Will be caught by the CATCH word.
         throw new InterpreterException(exceptionCode, message);

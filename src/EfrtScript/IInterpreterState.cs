@@ -1,7 +1,5 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using EFrtScript.Stacks;
-
 namespace EFrtScript;
 
 using EFrtScript.Stacks;
@@ -12,6 +10,11 @@ using EFrtScript.Stacks;
 /// </summary>
 public interface IInterpreterState
 {
+    /// <summary>
+    /// The currently running word.
+    /// </summary>
+    IWord? CurrentWord { get; set; }
+
     /// <summary>
     /// The main data stack.
     /// </summary>

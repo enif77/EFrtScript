@@ -1,7 +1,5 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using EFrtScript.Stacks;
-
 namespace EFrtScript;
 
 using EFrtScript.Stacks;
@@ -12,6 +10,7 @@ using EFrtScript.Stacks;
 /// </summary>
 public class InterpreterState : IInterpreterState
 {
+    public IWord? CurrentWord { get; set; }
     public ValueStack Stack { get; }
     public ValueStack ReturnStack { get; }
     public ExceptionStack ExceptionStack { get; }
@@ -31,6 +30,7 @@ public class InterpreterState : IInterpreterState
 
     public void Reset()
     {
+        CurrentWord = null;
         Stack.Clear();
         ReturnStack.Clear();
         ExceptionStack.Clear();
