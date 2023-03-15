@@ -93,6 +93,10 @@ public class Interpreter : IInterpreter
                 {
                     Throw(ex.ExceptionCode, ex.Message);
                 }
+                catch (ExecutionException)
+                {
+                    ; // Here we can do nothing, because all exceptions were already handled.
+                }
                 catch (Exception ex)
                 {
                     Throw(-100, ex.Message);
