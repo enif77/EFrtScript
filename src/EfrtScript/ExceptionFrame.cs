@@ -17,10 +17,10 @@ public class ExceptionFrame
     /// </summary>
     public int ReturnStackTop { get; set; }
 
-    // /// <summary>
-    // /// An input stack Top value.
-    // /// </summary>
-    // public int InputSourceStackTop { get; set; }
+    /// <summary>
+    /// An input stack Top value.
+    /// </summary>
+    public int InputSourceStackTop { get; set; }
         
     /// <summary>
     /// The word, that is currently running and executing the CATCH word.

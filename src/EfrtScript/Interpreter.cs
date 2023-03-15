@@ -300,7 +300,7 @@ public class Interpreter : IInterpreter
 
         State.Stack.Top = exceptionFrame!.StackTop;
         State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
-        //State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
+        State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
         _currentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
 
         // Will be caught by the CATCH word.

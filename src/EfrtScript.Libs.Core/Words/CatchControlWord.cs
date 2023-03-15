@@ -44,7 +44,7 @@ internal class CatchControlWord : IWord
         {
             StackTop = interpreter.State.Stack.Top,
             ReturnStackTop = interpreter.State.ReturnStack.Top,
-            //InputSourceStackTop = Interpreter.State.InputSourceStack.Top,
+            InputSourceStackTop = interpreter.State.InputSourceStack.Top,
             ExecutingWord = _parentWord,
             NextWordIndex = _nextWordIndex
         };
