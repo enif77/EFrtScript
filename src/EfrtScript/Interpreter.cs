@@ -172,38 +172,7 @@ public class Interpreter : IInterpreter
     
     public void Throw(int exceptionCode, string? message = null)
     {
-        if (exceptionCode == 0)
-        {
-            return;
-        }
-
-        if (State.ExceptionStack.IsEmpty)
-        {
-            switch (exceptionCode)
-            {
-                case -1: break;
-                case -2: Output.WriteLine(message ?? "Execution aborted!"); break;
-                default:
-                    Output.WriteLine($"Execution aborted: [{exceptionCode}] {message ?? string.Empty}");
-                    break;
-            }
-
-            Abort();
-
-            // Throw an exception here, so we never return to the caller!
-            throw new ExecutionException();
-        }
-
-        // Restore the previous execution state.
-        var exceptionFrame = State.ExceptionStack.Pop();
-
-        State.Stack.Top = exceptionFrame!.StackTop;
-        State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
-        State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
-        State.CurrentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
-
-        // Will be caught by the CATCH word.
-        throw new InterpreterException(exceptionCode, message);
+        ThrowInternal(exceptionCode, message);
     }
     
     
@@ -245,8 +214,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        // TODO: This exception is not captured like by the ExecuteWordInternal().
-        Throw(-13, $"The '{wordName}' word is undefined.");
+        ThrowInternal(-13, $"The '{wordName}' word is undefined.", true);
     }
 
 
@@ -268,8 +236,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        // TODO: This exception is not captured like by the ExecuteWordInternal().
-        Throw(-13, $"The '{wordName}' word is undefined.");
+        ThrowInternal(-13, $"The '{wordName}' word is undefined.", true);
     }
 
 
@@ -301,6 +268,49 @@ public class Interpreter : IInterpreter
         }
 
         return 1;
+    }
+
+
+    public void ThrowInternal(int exceptionCode, string? message = null, bool doNotThrowAfterAbort = false)
+    {
+        if (exceptionCode == 0)
+        {
+            return;
+        }
+
+        if (State.ExceptionStack.IsEmpty)
+        {
+            switch (exceptionCode)
+            {
+                case -1: break;
+                case -2: Output.WriteLine(message ?? "Execution aborted!"); break;
+                default:
+                    Output.WriteLine($"Execution aborted: [{exceptionCode}] {message ?? string.Empty}");
+                    break;
+            }
+
+            Abort();
+
+            // Used when an unknown word is executed.
+            if (doNotThrowAfterAbort)
+            {
+                return;
+            }
+
+            // Throw an exception here, so we never return to the caller!
+            throw new ExecutionException();
+        }
+
+        // Restore the previous execution state.
+        var exceptionFrame = State.ExceptionStack.Pop();
+
+        State.Stack.Top = exceptionFrame!.StackTop;
+        State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
+        State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
+        State.CurrentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
+
+        // Will be caught by the CATCH word.
+        throw new InterpreterException(exceptionCode, message);
     }
 
     #endregion
