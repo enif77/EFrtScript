@@ -76,7 +76,7 @@ internal class CatchControlWord : IWord
         {
             CleanExceptionStack(interpreter, exceptionFrame);
 
-            interpreter.StackPush(new ExceptionValue(-100, ex.Message, ex));
+            interpreter.StackPush(new ExceptionValue(ex));
         }
 
         // Go to the word behind us.
