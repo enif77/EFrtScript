@@ -4,6 +4,7 @@ namespace EFrtScript.Libs.Core.Values;
 
 using System;
 
+
 /// <summary>
 /// Holds an exception info on the stack.
 /// </summary>
