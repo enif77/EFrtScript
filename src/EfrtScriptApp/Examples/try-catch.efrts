@@ -1,7 +1,7 @@
 S" --- TRY - CATCH ---" S. CR
 
 : could-fail ( -- n )
-  DUP 1 = IF 1 THROW THEN ;
+  DUP 1 = IF 123 THROW THEN ;
    
 : do-it ( a b -- c)
   DROP DROP could-fail ;
