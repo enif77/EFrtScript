@@ -1,9 +1,5 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using EFrtScript.IO;
-using EFrtScript.Values;
-using EFrtScript.Words;
-
 namespace EFrtScript;
 
 using EFrtScript.IO;
@@ -29,144 +25,6 @@ public class Interpreter : IInterpreter
         _words = new Dictionary<string, IWord>();
     }
 
-
-    public void Interpret(string src)
-    {
-        State.InputSourceStack.Push(
-            new InputSource(
-                new StringSourceReader(src)));
-        
-        while (true)
-        {
-            var word = CurrentInputSource!.ReadWordFromSource();
-            if (word == null)
-            {
-                break;
-            }
-
-            var wordName = word.ToUpperInvariant();
-
-            if (IsCompiling)
-            {
-                CompileWord(wordName);
-            }
-            else
-            {
-                ExecuteWord(wordName);
-            }
-            
-            if (IsExecutionTerminated)
-            {
-                break;
-            }
-        }
-        
-        // Execution broken. Return to interpreting mode.
-        if (InterpreterState == InterpreterStateCode.Breaking)
-        {
-            InterpreterState = InterpreterStateCode.Interpreting;
-            //State.SetStateValue(false);
-        }
-            
-        // Restore the previous input source, if any.
-        if (State.InputSourceStack.Count > 0)
-        {
-            State.InputSourceStack.Pop();
-        }
-    }
-
-
-    private void CompileWord(string wordName)
-    {
-        if (IsWordRegistered(wordName))
-        {
-            var word = _words[wordName];
-            if (word.IsImmediate)
-            {
-                State.CurrentWord = _words[wordName];
-                
-                try
-                {
-                    ExecuteWord(State.CurrentWord);
-                }
-                catch (InterpreterException ex)
-                {
-                    Throw(ex.ExceptionCode, ex.Message);
-                }
-                catch (ExecutionException)
-                {
-                    ; // Here we can do nothing, because all exceptions were already handled.
-                }
-                catch (Exception ex)
-                {
-                    Throw(-100, ex.Message);
-                }
-            }
-            else
-            {
-                WordBeingDefined!.AddWord(word);
-            }
-
-            return;
-        }
-        
-        if (wordName == WordBeingDefined?.Name)
-        {
-            // Recursive call of the currently defined word.
-            WordBeingDefined.AddWord(WordBeingDefined);
-            
-            return;
-        }
-        
-        if (int.TryParse(wordName, out var val))
-        {
-            WordBeingDefined!.AddWord(new ConstantValueWord(val));
-
-            return;
-        }
-
-        Throw(-13, $"The '{wordName}' word is undefined.");
-    }
-
-
-    private void ExecuteWord(string wordName)
-    {
-        if (IsWordRegistered(wordName))
-        {
-            State.CurrentWord = _words[wordName];
-
-            try
-            {
-                ExecuteWord(State.CurrentWord);
-            }
-            catch (InterpreterException ex)
-            {
-                Throw(ex.ExceptionCode, ex.Message);
-            }
-            catch (ExecutionException)
-            {
-                ; // Here we can do nothing, because all exceptions were already handled.
-            }
-            catch (Exception ex)
-            {
-                Throw(-100, ex.Message);
-            }
-            
-            return;
-        }
-
-        if (int.TryParse(wordName, out var val))
-        {
-            // This will show the value in the output of the TRACE word.
-            State.CurrentWord = new ConstantValueWord(val);
-            ExecuteWord(State.CurrentWord);
-
-            return;
-        }
-
-        Throw(-13, $"The '{wordName}' word is undefined.");
-    }
-    
 
     #region words
 
@@ -232,20 +90,57 @@ public class Interpreter : IInterpreter
     public event EventHandler<InterpreterEventArgs>? WordExecuted;
 
 
+    public void Interpret(string src)
+    {
+        State.InputSourceStack.Push(
+            new InputSource(
+                new StringSourceReader(src)));
+        
+        while (true)
+        {
+            var word = CurrentInputSource!.ReadWordFromSource();
+            if (word == null)
+            {
+                break;
+            }
+
+            var wordName = word.ToUpperInvariant();
+
+            if (IsCompiling)
+            {
+                CompileWord(wordName);
+            }
+            else
+            {
+                ExecuteWord(wordName);
+            }
+            
+            if (IsExecutionTerminated)
+            {
+                break;
+            }
+        }
+        
+        // Execution broken. Return to interpreting mode.
+        if (InterpreterState == InterpreterStateCode.Breaking)
+        {
+            InterpreterState = InterpreterStateCode.Interpreting;
+            //State.SetStateValue(false);
+        }
+            
+        // Restore the previous input source, if any.
+        if (State.InputSourceStack.Count > 0)
+        {
+            State.InputSourceStack.Pop();
+        }
+    }
+
+
     public int ExecuteWord(IWord word)
     {
         if (word == null) throw new ArgumentNullException(nameof(word));
 
-        ExecutingWord?.Invoke(this, new InterpreterEventArgs(word));
-
-        try
-        {
-            return word.Execute(this);
-        }
-        finally
-        {
-            WordExecuted?.Invoke(this, new InterpreterEventArgs(word));
-        }
+        return ExecuteWordInternal(word);
     }
     
 
@@ -315,6 +210,97 @@ public class Interpreter : IInterpreter
     public void TerminateExecution()
     {
         InterpreterState = InterpreterStateCode.Terminating;
+    }
+
+
+    private void CompileWord(string wordName)
+    {
+        if (IsWordRegistered(wordName))
+        {
+            var word = _words[wordName];
+            if (word.IsImmediate)
+            {
+                ExecuteWordInternal(_words[wordName]);
+            }
+            else
+            {
+                WordBeingDefined!.AddWord(word);
+            }
+
+            return;
+        }
+        
+        if (wordName == WordBeingDefined?.Name)
+        {
+            // Recursive call of the currently defined word.
+            WordBeingDefined.AddWord(WordBeingDefined);
+            
+            return;
+        }
+        
+        if (int.TryParse(wordName, out var val))
+        {
+            WordBeingDefined!.AddWord(new ConstantValueWord(val));
+
+            return;
+        }
+
+        // TODO: This exception is not captured like by the ExecuteWordInternal().
+        Throw(-13, $"The '{wordName}' word is undefined.");
+    }
+
+
+    private void ExecuteWord(string wordName)
+    {
+        if (IsWordRegistered(wordName))
+        {
+            ExecuteWordInternal(_words[wordName]);
+            
+            return;
+        }
+
+        if (int.TryParse(wordName, out var val))
+        {
+            // This will show the value in the output of the TRACE word.
+            State.CurrentWord = new ConstantValueWord(val);
+            ExecuteWord(State.CurrentWord);
+
+            return;
+        }
+
+        // TODO: This exception is not captured like by the ExecuteWordInternal().
+        Throw(-13, $"The '{wordName}' word is undefined.");
+    }
+
+
+    private int ExecuteWordInternal(IWord word)
+    {
+        State.CurrentWord = word;
+
+        try
+        {
+            ExecutingWord?.Invoke(this, new InterpreterEventArgs(word));
+
+            return State.CurrentWord.Execute(this);
+        }
+        catch (InterpreterException ex)
+        {
+            Throw(ex.ExceptionCode, ex.Message);
+        }
+        catch (ExecutionException)
+        {
+            ; // Here we can do nothing, because all exceptions were already handled.
+        }
+        catch (Exception ex)
+        {
+            Throw(-100, ex.Message);
+        }
+        finally
+        {
+            WordExecuted?.Invoke(this, new InterpreterEventArgs(word));
+        }
+
+        return 1;
     }
 
     #endregion
