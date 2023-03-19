@@ -3,7 +3,6 @@
 namespace EFrtScript;
 
 using EFrtScript.IO;
-using EFrtScript.Values;
 using EFrtScript.Words;
 
 
@@ -271,7 +270,7 @@ public class Interpreter : IInterpreter
     }
 
 
-    public void ThrowInternal(int exceptionCode, string? message = null, bool doNotThrowAfterAbort = false)
+    private void ThrowInternal(int exceptionCode, string? message = null, bool doNotThrowAfterAbort = false)
     {
         if (exceptionCode == 0)
         {
