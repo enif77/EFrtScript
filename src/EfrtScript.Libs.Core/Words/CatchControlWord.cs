@@ -21,7 +21,7 @@ internal class CatchControlWord : IWord
     /// Constructor.
     /// </summary>
     /// <param name="parentWord">A word, that is executing this CATCH word.</param>
-    /// <param name="nextWordIndex">An index of a word following this CATCH word..</param>
+    /// <param name="nextWordIndex">An index of a word following this CATCH word.</param>
     public CatchControlWord(IWord parentWord, int nextWordIndex)
     {
         _parentWord = parentWord;
@@ -34,11 +34,8 @@ internal class CatchControlWord : IWord
         // A word name to execute expected.
         interpreter.StackExpect(1);
 
-        // Exception stack free.
-        if ((interpreter.State.ExceptionStack.Count + 1) >= interpreter.State.ExceptionStack.Items.Length)
-        {
-            interpreter.Throw(-53, "exception stack overflow");
-        }
+        // A place for a new exception frame must be available.
+        interpreter.ExceptionStackFree(1);
 
         var exceptionFrame = new ExceptionFrame()
         {
@@ -49,7 +46,7 @@ internal class CatchControlWord : IWord
             NextWordIndex = _nextWordIndex
         };
 
-        interpreter.State.ExceptionStack.Push(exceptionFrame);
+        interpreter.ExceptionStackPush(exceptionFrame);
 
         try
         {
@@ -59,7 +56,7 @@ internal class CatchControlWord : IWord
                     interpreter.StackPop().String.ToUpperInvariant()));
 
             // Remove the unused exception frame (nothing failed here).
-            interpreter.State.ExceptionStack.Pop();
+            _ = interpreter.ExceptionStackPop();
 
             // Return the OK status.
             interpreter.StackPush(0);
@@ -89,10 +86,9 @@ internal class CatchControlWord : IWord
 
     private void CleanExceptionStack(IInterpreter interpreter, ExceptionFrame exceptionFrame)
     {
-        // Clean up the mess, if needed.
-        if (interpreter.State.ExceptionStack.IsEmpty == false && interpreter.State.ExceptionStack.Peek() == exceptionFrame)
+        if (interpreter.ExceptionStackIsEmpty() == false && interpreter.ExceptionStackPeek() == exceptionFrame)
         {
-            interpreter.State.ExceptionStack.Pop();
+            _ = interpreter.ExceptionStackPop();
         }
     }
 }
