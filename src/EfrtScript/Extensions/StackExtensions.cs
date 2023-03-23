@@ -40,6 +40,12 @@ public static class StackExtensions
     {
         StackPush(interpreter, new IntegerValue(v));
     }
+
+
+    public static void StackPush(this IInterpreter interpreter, double v)
+    {
+        StackPush(interpreter, new RealValue(v));
+    }
     
     
     public static void StackPush(this IInterpreter interpreter, string v)
