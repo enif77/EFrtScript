@@ -56,7 +56,10 @@ public class PlusWordTests
         
         new PlusWord().Execute(interpreter);
         
-        Assert.Equal(expected, interpreter.StackPop().Integer);
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsIntegerValue());
+        Assert.Equal(expected, result.Integer);
     }
 
 
@@ -79,7 +82,10 @@ public class PlusWordTests
         
         new PlusWord().Execute(interpreter);
         
-        Assert.Equal(expected, interpreter.StackPop().Integer);
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsRealValue());
+        Assert.Equal(expected, result.Real);
     }
 
 
@@ -115,5 +121,4 @@ public class PlusWordTests
         Assert.True(result.IsRealValue());
         Assert.Equal(2.0, result.Real);
     }
-
 }
