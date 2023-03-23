@@ -175,8 +175,7 @@ THROW code assignments
 -18 parsed string overflow
 -19 definition name too long
 -20 write to a read-only location
--21 unsupported operation
-(e.g., AT-XY on a too-dumb terminal)
+-21 unsupported operation (e.g., AT-XY on a too-dumb terminal)
 -22 control structure mismatch
 -23 address alignment exception
 -24 invalid numeric argument
