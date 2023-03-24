@@ -49,6 +49,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new SpacesWord());
         interpreter.RegisterWord(new TypeWord());
 
+        interpreter.RegisterWord(new AbsWord());
         interpreter.RegisterWord(new NegateWord());
         interpreter.RegisterWord(new PlusWord());
         interpreter.RegisterWord(new MinusWord());
