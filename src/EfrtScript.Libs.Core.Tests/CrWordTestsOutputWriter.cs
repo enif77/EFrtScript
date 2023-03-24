@@ -3,7 +3,7 @@
 namespace EFrtScript.Libs.Core.Tests;
 
 
-public class CrTestsOutputWriter : IOutputWriter
+public class CrWordTestsOutputWriter : IOutputWriter
 {
     public bool WriteLineCalled { get; private set; }
 
