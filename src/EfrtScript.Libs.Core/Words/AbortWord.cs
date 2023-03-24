@@ -20,10 +20,10 @@ internal class AbortWord : IWord
 
 /*
 
+https://forth-standard.org/standard/core/ABORT
+
 ABORT
 
 Empty the data stack and perform the function of QUIT, which includes emptying the return stack, without displaying a message.
-
-https://forth-standard.org/standard/core/ABORT
 
 */
