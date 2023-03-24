@@ -10,7 +10,7 @@ public class CrTestsOutputWriter : IOutputWriter
     
     public void Write(string format, params object[] arg)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
 
@@ -22,6 +22,6 @@ public class CrTestsOutputWriter : IOutputWriter
 
     public void WriteLine(string format, params object[] arg)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 }
