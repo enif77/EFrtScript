@@ -134,8 +134,17 @@ S" ./EfrtScriptApp/Examples/hello-world.efrts" READ-ALL-TEXT EVALUATE
 
 pwsh run-examples.ps1
 
-
 https://github.com/enif77/EFrt
+
+
+INT -> converts a value on the stack to integer.
+?INT -> returns true, if a value on the stack is integer.
+
+FLOAT -> converts a value on the stack to floating point.
+?FLOAT -> returns true, if a value on the stack is floating point. 
+
+STRING -> converts a value on the stack to string.
+?STRING -> returns true, if a value on the stack is string.
 
 BEGIN ?DO +LOOP I J LEAVE REPEAT UNLOOP UNTIL WHILE AGAIN 
 
