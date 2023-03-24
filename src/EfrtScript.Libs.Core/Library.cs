@@ -22,7 +22,7 @@ public class Library : IWordsLibrary
     {
         interpreter.RegisterWord(new EvaluateWord());
         
-        interpreter.RegisterWord(new CommentWord());
+        interpreter.RegisterWord(new ParenWord());
         interpreter.RegisterWord(new LineCommentWord());
 
         interpreter.RegisterWord(new BeginNewWordCompilationWord());

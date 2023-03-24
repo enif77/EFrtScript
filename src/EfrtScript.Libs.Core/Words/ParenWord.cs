@@ -2,10 +2,8 @@
 
 namespace EFrtScript.Libs.Core.Words;
 
-using System;
 
-
-internal class CommentWord : IWord
+internal class ParenWord : IWord
 {
     public string Name => "(";
     public bool IsImmediate => true;
@@ -28,9 +26,35 @@ internal class CommentWord : IWord
 
         if (c < 0)
         {
-            throw new Exception("A comment end expected");
+            interpreter.Throw(-39, "unexpected end of file, ) expected");
         }
 
         return 1;
     }
 }
+
+/*
+ 
+https://forth-standard.org/standard/core/p 
+ 
+(
+
+Compilation:
+
+Perform the execution semantics given below.
+
+Execution:
+
+( "ccc<paren>" -- )
+Parse ccc delimited by ) (right parenthesis). ( is an immediate word.
+
+The number of characters in ccc may be zero to the number of characters in the parse area.
+
+Testing:
+
+\ There is no space either side of the ).
+
+T{ ( A comment)1234 -> 1234 }T
+T{ : pc1 ( A comment)1234 ; pc1 -> 1234 }T 
+  
+ */
