@@ -36,6 +36,7 @@ public class MinusWordTests
         Assert.Equal(1, new MinusWord().Execute(interpreter));
     }
     
+    
     [Theory]
     [InlineData( 0,  5, -5)]
     [InlineData( 5,  0,  5)]
@@ -46,7 +47,7 @@ public class MinusWordTests
     [InlineData(-1,  2, -3)]
     [InlineData(-1, -2,  1)]
     [InlineData( 0,  1, -1)]
-    public void CalculationResultsMatchExpectedMathResults(int a, int b, int expected)
+    public void CalculationResultsMatchExpectedIntegerMathResults(int a, int b, int expected)
     {
         var interpreter = new Interpreter(new NullOutputWriter());
         
@@ -55,25 +56,69 @@ public class MinusWordTests
         
         new MinusWord().Execute(interpreter);
         
-        Assert.Equal(expected, interpreter.StackPop().Integer);
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsIntegerValue());
+        Assert.Equal(expected, result.Integer);
+    }
+    
+    
+    [Theory]
+    [InlineData( 0.0,  5.0, -5.0)]
+    [InlineData( 5.0,  0.0,  5.0)]
+    [InlineData( 0.0, -5.0,  5.0)]
+    [InlineData(-5.0,  0.0, -5.0)]
+    [InlineData( 1.0,  2.0, -1.0)]
+    [InlineData( 1.0, -2.0,  3.0)]
+    [InlineData(-1.0,  2.0, -3.0)]
+    [InlineData(-1.0, -2.0,  1.0)]
+    [InlineData( 0.0,  1.0, -1.0)]
+    public void CalculationResultsMatchExpectedFloatingPointMathResults(double a, double b, double expected)
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(a);
+        interpreter.StackPush(b);
+        
+        new MinusWord().Execute(interpreter);
+        
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsRealValue());
+        Assert.Equal(expected, result.Real);
+    }
+    
+    
+    [Fact]
+    public void FirstIntIsConvertedToFloatingPointNumber()
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(3);
+        interpreter.StackPush(1.0);
+        
+        new MinusWord().Execute(interpreter);
+        
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsRealValue());
+        Assert.Equal(2.0, result.Real);
+    }
+
+
+    [Fact]
+    public void SecondIntIsConvertedToFloatingPointNumber()
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(3.0);
+        interpreter.StackPush(1);
+        
+        new MinusWord().Execute(interpreter);
+        
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsRealValue());
+        Assert.Equal(2.0, result.Real);
     }
 }
-
-/*
-
-https://forth-standard.org/standard/core/Minus
-
-Testing:
-
-T{          0  5 - ->       -5 }T
-T{          5  0 - ->        5 }T
-T{          0 -5 - ->        5 }T
-T{         -5  0 - ->       -5 }T
-T{          1  2 - ->       -1 }T
-T{          1 -2 - ->        3 }T
-T{         -1  2 - ->       -3 }T
-T{         -1 -2 - ->        1 }T
-T{          0  1 - ->       -1 }T
-T{ MID-UINT+1  1 - -> MID-UINT }T
-
- */
