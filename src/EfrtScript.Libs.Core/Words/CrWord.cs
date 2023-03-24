@@ -16,3 +16,14 @@ internal class CrWord : IWord
         return 1;
     }
 }
+
+/*
+
+https://forth-standard.org/standard/core/CR
+
+CR
+
+( -- )
+Cause subsequent output to appear at the beginning of the next line.
+ 
+ */

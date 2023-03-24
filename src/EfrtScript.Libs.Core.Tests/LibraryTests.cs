@@ -20,6 +20,7 @@ public class LibraryTests
     [InlineData("ABS")]
     [InlineData("BYE")]
     [InlineData("CATCH")]
+    [InlineData("CR")]
     [InlineData("DUP")]
     [InlineData("-")]
     [InlineData("NEGATE")]
