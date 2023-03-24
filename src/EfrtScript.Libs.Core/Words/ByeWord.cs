@@ -19,10 +19,10 @@ internal class ByeWord : IWord
 
 /*
 
+https://forth-standard.org/standard/tools/BYE
+
 BYE
 
 Return control to the host operating system, if any.
-
-https://forth-standard.org/standard/tools/BYE
 
 */
