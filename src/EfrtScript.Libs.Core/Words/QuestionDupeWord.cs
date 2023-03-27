@@ -5,7 +5,7 @@ namespace EFrtScript.Libs.Core.Words;
 using EFrtScript.Extensions;
 
 
-internal class ConditionalDuplicateWord : IWord
+internal class QuestionDupeWord : IWord
 {
     public string Name => "?DUP";
     public bool IsImmediate => false;
@@ -30,3 +30,21 @@ internal class ConditionalDuplicateWord : IWord
         return 1;
     }
 }
+
+/*
+ 
+https://forth-standard.org/standard/core/qDUP
+
+?DUP
+
+( x -- 0 | x x )
+
+Duplicate x if it is non-zero.
+
+Testing:
+
+T{ -1 ?DUP -> -1 -1 }T
+T{  0 ?DUP ->  0    }T
+T{  1 ?DUP ->  1  1 }T 
+ 
+ */

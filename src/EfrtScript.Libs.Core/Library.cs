@@ -35,7 +35,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new FromReturnStackWord());
         interpreter.RegisterWord(new FetchReturnStackWord());
 
-        interpreter.RegisterWord(new ConditionalDuplicateWord());
+        interpreter.RegisterWord(new QuestionDupeWord());
         interpreter.RegisterWord(new DropWord());
         interpreter.RegisterWord(new DupeWord());
         interpreter.RegisterWord(new SwapWord());
