@@ -18,7 +18,7 @@ internal class AbsWord : IWord
         var a = interpreter.StackPop();
         if (a.IsRealValue())
         {
-            interpreter.StackPush(Math.Abs(a.Real));
+            interpreter.StackPush(Math.Abs(a.Float));
         }
         else
         {

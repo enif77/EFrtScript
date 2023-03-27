@@ -21,7 +21,7 @@ public interface IValue
     /// <summary>
     /// A real (floating point) value.
     /// </summary>
-    double Real { get; }
+    double Float { get; }
 
     /// <summary>
     /// A string value.

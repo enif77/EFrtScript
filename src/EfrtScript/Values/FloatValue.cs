@@ -11,13 +11,13 @@ using System.Globalization;
 internal class FloatValue : IValue
 {
     public bool Boolean => Integer != 0;
-    public int Integer => (int) Real;
-    public double Real { get; }
-    public string String => Real.ToString(CultureInfo.InvariantCulture);
+    public int Integer => (int) Float;
+    public double Float { get; }
+    public string String => Float.ToString(CultureInfo.InvariantCulture);
 
 
     public FloatValue(double value)
     {
-        Real = value;
+        Float = value;
     }
 }

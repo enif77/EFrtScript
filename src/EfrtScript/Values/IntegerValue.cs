@@ -12,7 +12,7 @@ internal class IntegerValue : IValue
 {
     public bool Boolean => Integer != 0;
     public int Integer { get; }
-    public double Real => Integer;
+    public double Float => Integer;
     public string String => Integer.ToString(CultureInfo.InvariantCulture);
 
 

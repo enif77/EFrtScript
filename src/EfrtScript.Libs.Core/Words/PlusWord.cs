@@ -24,7 +24,7 @@ internal class PlusWord : IWord
         }
         else if (a.IsRealValue() || b.IsRealValue())
         {
-            interpreter.StackPush(a.Real + b.Real);
+            interpreter.StackPush(a.Float + b.Float);
         }
         else
         {
@@ -37,7 +37,7 @@ internal class PlusWord : IWord
             }
             catch (OverflowException)
             {
-                interpreter.StackPush(a.Real + b.Real);
+                interpreter.StackPush(a.Float + b.Float);
             }
         }
 

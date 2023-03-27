@@ -25,7 +25,7 @@ internal class StringValue : IValue
         }
     }
     
-    public double Real
+    public double Float
     {
         get
         {

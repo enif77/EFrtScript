@@ -47,7 +47,7 @@ public sealed class ValuesTests
     {
         var v = new IntegerValue(i);
         
-        Assert.Equal(expected, v.Real);
+        Assert.Equal(expected, v.Float);
     }
     
     [Theory]

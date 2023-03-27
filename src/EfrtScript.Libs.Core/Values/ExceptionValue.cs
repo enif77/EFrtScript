@@ -12,7 +12,7 @@ internal class ExceptionValue : IValue
 {
     public bool Boolean => Integer != 0;
     public int Integer => _exception.ExceptionCode;
-    public double Real => Integer;
+    public double Float => Integer;
     public string String => _exception.Message;
     public Exception Exception => _exception;
 

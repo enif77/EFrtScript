@@ -20,7 +20,7 @@ internal class MinusWord : IWord
         
         if (a.IsRealValue() || b.IsRealValue())
         {
-            interpreter.StackPush(a.Real - b.Real);
+            interpreter.StackPush(a.Float - b.Float);
         }
         else
         {
@@ -33,7 +33,7 @@ internal class MinusWord : IWord
             }
             catch (OverflowException)
             {
-                interpreter.StackPush(a.Real - b.Real);
+                interpreter.StackPush(a.Float - b.Float);
             }
         }
 

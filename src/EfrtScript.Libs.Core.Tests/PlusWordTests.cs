@@ -85,7 +85,7 @@ public class PlusWordTests
         var result = interpreter.StackPop();
 
         Assert.True(result.IsRealValue());
-        Assert.Equal(expected, result.Real);
+        Assert.Equal(expected, result.Float);
     }
 
 
@@ -102,7 +102,7 @@ public class PlusWordTests
         var result = interpreter.StackPop();
 
         Assert.True(result.IsRealValue());
-        Assert.Equal(2.0, result.Real);
+        Assert.Equal(2.0, result.Float);
     }
 
 
@@ -119,6 +119,6 @@ public class PlusWordTests
         var result = interpreter.StackPop();
 
         Assert.True(result.IsRealValue());
-        Assert.Equal(2.0, result.Real);
+        Assert.Equal(2.0, result.Float);
     }
 }

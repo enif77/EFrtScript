@@ -70,6 +70,6 @@ public class AbsWordTests
         var result = interpreter.StackPop();
 
         Assert.True(result.IsRealValue());
-        Assert.Equal(expected, result.Real);
+        Assert.Equal(expected, result.Float);
     }
 }
