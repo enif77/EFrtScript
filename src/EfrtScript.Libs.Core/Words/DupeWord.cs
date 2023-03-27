@@ -21,3 +21,19 @@ internal class DupeWord : IWord
         return 1;
     }
 }
+
+/*
+
+https://forth-standard.org/standard/core/DUP
+
+DUP
+
+( x -- x x )
+Duplicate x.
+
+Testing:
+
+T{ 1 DUP -> 1 1 }T
+
+ */
+ 

@@ -35,6 +35,7 @@ public class DupeWordTests
         Assert.Equal(1, new DupeWord().Execute(interpreter));
     }
     
+    
     [Fact]
     public void TopStackValueIsDuplicated()
     {
@@ -48,13 +49,3 @@ public class DupeWordTests
         Assert.Equal(1, interpreter.StackPop().Integer);
     }
 }
-
-/*
-
-https://forth-standard.org/standard/core/DUP
-
-Testing:
-
-T{ 1 DUP -> 1 1 }T
-
- */
