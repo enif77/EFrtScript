@@ -5,7 +5,7 @@ namespace EFrtScript.Libs.Core.Words;
 using EFrtScript.Extensions;
 
 
-internal class DupWord : IWord
+internal class DupeWord : IWord
 {
     public string Name => "DUP";
     public bool IsImmediate => false;
