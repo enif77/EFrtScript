@@ -44,7 +44,7 @@ public static class StackExtensions
 
     public static void StackPush(this IInterpreter interpreter, double v)
     {
-        StackPush(interpreter, new RealValue(v));
+        StackPush(interpreter, new FloatValue(v));
     }
     
     

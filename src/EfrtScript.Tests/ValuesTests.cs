@@ -19,7 +19,7 @@ public sealed class ValuesTests
     [Fact]
     public void IsIntegerValueReturnsFalseForNonIntegerValue()
     {
-        Assert.False(new RealValue(1).IsIntegerValue());
+        Assert.False(new FloatValue(1).IsIntegerValue());
     }
     
     [Fact]
@@ -65,7 +65,7 @@ public sealed class ValuesTests
     [Fact]
     public void IsRealValueReturnsTrueForIntegerValue()
     {
-        Assert.True(new RealValue(1).IsRealValue());
+        Assert.True(new FloatValue(1).IsRealValue());
     }
     
     [Fact]
@@ -80,7 +80,7 @@ public sealed class ValuesTests
     [InlineData(-100.0, true)]
     public void RealValueConvertsValuesToBooleanCorrectly(double r, bool expected)
     {
-        var v = new RealValue(r);
+        var v = new FloatValue(r);
         
         Assert.Equal(expected, v.Boolean);
     }
@@ -93,7 +93,7 @@ public sealed class ValuesTests
     [InlineData(-100.0, -100)]
     public void RealValueConvertsValuesToIntegerCorrectly(double r, int expected)
     {
-        var v = new RealValue(r);
+        var v = new FloatValue(r);
         
         Assert.Equal(expected, v.Integer);
     }
@@ -104,7 +104,7 @@ public sealed class ValuesTests
     [InlineData(-100.5, "-100.5")]
     public void RealValueConvertsValuesToStringCorrectly(double r, string expected)
     {
-        var v = new RealValue(r);
+        var v = new FloatValue(r);
         
         Assert.Equal(expected, v.String);
     }

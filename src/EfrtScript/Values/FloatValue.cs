@@ -8,7 +8,7 @@ using System.Globalization;
 /// <summary>
 /// A real (floating point) value.
 /// </summary>
-internal class RealValue : IValue
+internal class FloatValue : IValue
 {
     public bool Boolean => Integer != 0;
     public int Integer => (int) Real;
@@ -16,7 +16,7 @@ internal class RealValue : IValue
     public string String => Real.ToString(CultureInfo.InvariantCulture);
 
 
-    public RealValue(double value)
+    public FloatValue(double value)
     {
         Real = value;
     }

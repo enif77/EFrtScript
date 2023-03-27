@@ -31,7 +31,7 @@ public class ConstantValueWord : IWord
 
 
     public ConstantValueWord(double value)
-        : this(new RealValue(value))
+        : this(new FloatValue(value))
     {
     }
     
