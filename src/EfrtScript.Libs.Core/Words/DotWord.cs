@@ -20,3 +20,12 @@ internal class DotWord : IWord
         return 1;
     }
 }
+
+/*
+
+.
+
+( n -- )
+Display n in free field format.
+
+*/
