@@ -2,7 +2,7 @@
 
 namespace EFrtScript.Libs.Core.Words;
 
-using System;
+using EFrtScript.Extensions;
 
 
 internal class AbortWithMessageWord : IWord
@@ -13,10 +13,7 @@ internal class AbortWithMessageWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("ABORT\" outside a new word definition.");
-        }
+        interpreter.CheckIsCompiling(this);
 
         interpreter.WordBeingDefined!
             .AddWord(new AbortWithMessageControlWord(interpreter.CurrentInputSource!.ReadStringFromSource()));

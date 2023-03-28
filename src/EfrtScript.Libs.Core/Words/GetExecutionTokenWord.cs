@@ -2,8 +2,7 @@
 
 namespace EFrtScript.Libs.Core.Words;
 
-using System;
-
+using EFrtScript.Extensions;
 using EFrtScript.Words;
 
 
@@ -15,10 +14,7 @@ internal class GetExecutionTokenWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("['] outside a new word definition.");
-        }
+        interpreter.CheckIsCompiling(this);
 
         var word = interpreter.CurrentInputSource!.ReadWordFromSource();
         if (string.IsNullOrEmpty(word))

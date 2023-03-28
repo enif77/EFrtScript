@@ -15,11 +15,7 @@ internal class ElseWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("ELSE outside a new word definition.");
-        }
-
+        interpreter.CheckIsCompiling(this);
         interpreter.ReturnStackExpect(1);
 
         var ifControlWord = interpreter.WordBeingDefined!.GetWord(interpreter.ReturnStackPeek().Integer);

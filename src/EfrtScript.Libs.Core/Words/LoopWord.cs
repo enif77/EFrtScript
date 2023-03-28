@@ -15,11 +15,7 @@ internal class LoopWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("LOOP outside a new word definition.");
-        }
-
+        interpreter.CheckIsCompiling(this);
         interpreter.ReturnStackExpect(1);
 
         var doWordIndex = interpreter.ReturnStackPop().Integer;

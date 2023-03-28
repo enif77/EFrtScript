@@ -13,7 +13,7 @@ internal class CatchWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.CheckIsCompiling();
+        interpreter.CheckIsCompiling(this);
 
         interpreter.WordBeingDefined!
             .AddWord(new CatchControlWord(

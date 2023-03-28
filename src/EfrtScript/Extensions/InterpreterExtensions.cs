@@ -28,14 +28,15 @@ public static class InterpreterExtensions
 
     /// <summary>
     /// Check, if the interpreter is currently in a new word compilation.
-    /// Throws -14, interpreting a compile-only word, if the interpreter is not in the compilation mode.
+    /// Throws "-14, interpreting a compile-only word", if the interpreter is not in the compilation mode.
     /// </summary>
     /// <param name="interpreter">An IInterpreter instance.</param>
-    public static void CheckIsCompiling(this IInterpreter interpreter)
+    /// <param name="word">An optional word, that was executing.</param>
+    public static void CheckIsCompiling(this IInterpreter interpreter, IWord word)
     {
         if (interpreter.IsCompiling == false)
         {
-            interpreter.Throw(-14, "interpreting a compile-only word");
+            interpreter.Throw(-14, $"interpreting a compile-only word {word.Name}");
         }
     }
 }

@@ -2,8 +2,6 @@
 
 namespace EFrtScript.Libs.Core.Words;
 
-using System;
-
 using EFrtScript.Extensions;
 
 
@@ -15,11 +13,7 @@ internal class DoWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("DO outside a new word definition.");
-        }
-
+        interpreter.CheckIsCompiling(this);
         interpreter.ReturnStackFree(1);
 
         interpreter.ReturnStackPush(

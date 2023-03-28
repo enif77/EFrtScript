@@ -2,8 +2,7 @@
 
 namespace EFrtScript.Libs.Core.Words;
 
-using System;
-
+using EFrtScript.Extensions;
 using EFrtScript.Words;
 
 
@@ -15,10 +14,7 @@ internal class PrintStringLitWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception(".\" outside a new word definition.");
-        }
+        interpreter.CheckIsCompiling(this);
 
         // ." -> S" abc" S.
         interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(interpreter.CurrentInputSource!.ReadStringFromSource()));

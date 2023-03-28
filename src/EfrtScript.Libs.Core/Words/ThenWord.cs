@@ -15,10 +15,7 @@ internal class ThenWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        if (interpreter.IsCompiling == false)
-        {
-            throw new Exception("THEN outside a new word definition.");
-        }
+        interpreter.CheckIsCompiling(this);
         
         // Get the index of the next free slot in the non-primitive word being defined.
         var thenIndex = interpreter.WordBeingDefined!.NextWordIndex;
