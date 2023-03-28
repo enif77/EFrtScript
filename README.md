@@ -1,7 +1,6 @@
-# EFrt Script 
+# EFrt Script
 
-A miniature Forth language implementation.
-
+A Forth language implementation with scripting languages twist.
 
 ## Forth differences
 
@@ -18,7 +17,6 @@ A miniature Forth language implementation.
 - Exception stack: Not accessible for users. Its used internally by THROW and CATCH words.
 - Input source stack: Stack for keeping the inputs. Used by the EVALUATE word.
 
-
 ## Words
 
 Words definition table columns:
@@ -28,7 +26,6 @@ Words definition table columns:
 - Mode: I = interpretation mode only (not available during compilation), C = compilation mode only
   (not available during interpretation), IC = available in both modes, S = suspended compilation only (not available in I, C or IC).
 - Description: A word name, followed by the stack diagram - () = data stack, [] = return stack - and description of the word itself.
-
 
 ## CORE library
 
@@ -57,6 +54,7 @@ Common words for all base operations.
 | @R       | no   | IC   | **Fetch return stack**<br>( -- n) [n - n]<br>The top value on the return stack is pushed onto the stack. The value is not removed from the return stack. |
 | ABORT    | no   | IC   | **Abort**<br>Clears the stack and the object stack and performs a QUIT. |
 | ABORT" str | yes  | C    | **Abort with message**<br>(flag -- )<br>Prints the string literal that follows in line, then aborts, clearing all execution state to return to the interpreter. |
+| ABS      | no   | IC   | **n2 = Abs(n1)**<br>(n1 -- n2)<br>Replaces the top of stack with its absolute value. |
 | CR       | no   | IC   | **Carriage return**<br>( -- )<br>The following output will start at the new line. |
 | DEPTH    | no   | IC   | **Stack depth**<br>( -- n)<br>Returns the number of items on the stack before DEPTH was executed. |
 | DO       | yes  | C    | **Definite loop**<br>(limit index -- ) [ - limit index ]<br>Executes the loop from the following word to the matching LOOP or +LOOP until n increments past the boundary between limit − 1 and limit. Note that the loop is always executed at least once (see ?DO for an alternative to this). |
