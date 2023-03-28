@@ -3,7 +3,6 @@
 namespace EFrtScript.Extensions;
 
 using EFrtScript;
-using EFrtScript.Values;
 using EFrtScript.Words;
 
 
