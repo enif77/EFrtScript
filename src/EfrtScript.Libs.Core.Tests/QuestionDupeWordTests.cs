@@ -45,7 +45,7 @@ public class QuestionDupeWordTests
         
         new QuestionDupeWord().Execute(interpreter);
         
-        Assert.Equal(2, interpreter.State.Stack.Count);
+        Assert.Equal(2, interpreter.GetStackDepth());
         Assert.Equal(1, interpreter.StackPop().Integer);
         Assert.Equal(1, interpreter.StackPop().Integer);
     }
@@ -61,7 +61,7 @@ public class QuestionDupeWordTests
         
         new QuestionDupeWord().Execute(interpreter);
         
-        Assert.Equal(1, interpreter.State.Stack.Count);
+        Assert.Equal(1, interpreter.GetStackDepth());
 
         var result = interpreter.StackPop();
         
