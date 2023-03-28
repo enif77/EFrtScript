@@ -20,3 +20,20 @@ internal class DepthWord : IWord
         return 1;
     }
 }
+
+/*
+
+https://forth-standard.org/standard/core/DEPTH
+
+DEPTH
+
+( -- +n )
++n is the number of values contained in the data stack before +n was placed on the stack.
+
+Testing:
+
+T{ 0 1 DEPTH -> 0 1 2 }T
+T{   0 DEPTH -> 0 1   }T
+T{     DEPTH -> 0     }T
+
+*/
