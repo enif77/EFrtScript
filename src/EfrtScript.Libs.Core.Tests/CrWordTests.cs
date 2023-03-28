@@ -35,7 +35,7 @@ public class CrWordTests
     [Fact]
     public void NewLineToOutputAdded()
     {
-        var output = new CrWordTestsOutputWriter();
+        var output = new TestsOutputWriter();
         var interpreter = new Interpreter(output);
         
         new CrWord().Execute(interpreter);
