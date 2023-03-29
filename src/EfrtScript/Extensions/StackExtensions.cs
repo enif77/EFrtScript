@@ -56,6 +56,10 @@ public static class StackExtensions
     
     public static IValue StackPop(this IInterpreter interpreter)
         => interpreter.State.Stack.Pop() ?? throw NullValueNotAllowedInStackException();
+
+
+    public static void StackDrop(this IInterpreter interpreter)
+        => interpreter.State.Stack.Drop();
     
     /// <summary>
     /// Expects N items on the stack.

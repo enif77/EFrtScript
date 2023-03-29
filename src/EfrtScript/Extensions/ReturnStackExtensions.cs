@@ -45,6 +45,10 @@ public static class ReturnStackExtensions
     public static IValue ReturnStackPop(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();
     
+
+    public static void ReturnStackDrop(this IInterpreter interpreter)
+        => interpreter.State.ReturnStack.Drop();
+
     
     /// <summary>
     /// Expects N items on the return stack.
