@@ -15,8 +15,24 @@ internal class DropWord : IWord
     {
         interpreter.StackExpect(1);
 
-        interpreter.StackPop();
+        interpreter.StackDrop();
 
         return 1;
     }
 }
+
+/*
+
+https://forth-standard.org/standard/core/DROP
+
+DROP
+
+( x -- )
+Remove x from the stack.
+
+Testing:
+
+T{ 1 2 DROP -> 1 }T
+T{ 0   DROP ->   }T
+
+*/
