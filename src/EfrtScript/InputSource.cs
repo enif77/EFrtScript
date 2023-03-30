@@ -8,7 +8,7 @@ using System.Text;
 internal class InputSource : IInputSource
 {
     private readonly ISourceReader _source;
-    private readonly Tokenizer _tokenizer;
+    private readonly Parser _parser;
 
     public int CurrentChar => _source.CurrentChar;
     
@@ -16,7 +16,7 @@ internal class InputSource : IInputSource
     public InputSource(ISourceReader source)
     {
         _source = source;
-        _tokenizer = new Tokenizer(source);
+        _parser = new Parser(source);
     }
 
     
@@ -28,7 +28,7 @@ internal class InputSource : IInputSource
 
     public string? ReadWordFromSource()
     {
-        return _tokenizer.NextWord();
+        return _parser.NextWord();
     }
 
 

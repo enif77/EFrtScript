@@ -5,12 +5,12 @@ namespace EFrtScript;
 using System.Text;
 
 
-internal class Tokenizer
+internal class Parser
 {
     private readonly ISourceReader _src;
     
 
-    public Tokenizer(ISourceReader src)
+    public Parser(ISourceReader src)
     {
         _src = src ?? throw new ArgumentNullException(nameof(src));
     }
