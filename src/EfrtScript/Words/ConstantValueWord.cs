@@ -12,7 +12,7 @@ public class ConstantValueWord : IWord
     public bool IsImmediate => false;
 
 
-    private ConstantValueWord(IValue value)
+    public ConstantValueWord(IValue value)
     {
         _value = value ?? throw new ArgumentNullException(nameof(value));
     }

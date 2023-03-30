@@ -206,7 +206,7 @@ public class Interpreter : IInterpreter
             return;
         }
         
-        if (int.TryParse(wordName, out var val))
+        if (CurrentInputSource!.TryParseNumber(wordName, out var val))
         {
             WordBeingDefined!.AddWord(new ConstantValueWord(val));
 
@@ -226,7 +226,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        if (int.TryParse(wordName, out var val))
+        if (CurrentInputSource!.TryParseNumber(wordName, out var val))
         {
             // This will show the value in the output of the TRACE word.
             State.CurrentWord = new ConstantValueWord(val);

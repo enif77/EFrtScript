@@ -16,6 +16,7 @@ internal class StringValue : IValue
     {
         get
         {
+            // TODO: Numbers parsing should be handled at a single point.
             if (int.TryParse(String, NumberStyles.Integer, CultureInfo.InvariantCulture, out var i))
             {
                 return i;
