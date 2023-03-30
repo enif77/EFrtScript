@@ -149,7 +149,6 @@ STRING -> converts a value on the stack to string.
 BEGIN ?DO +LOOP I J LEAVE REPEAT UNLOOP UNTIL WHILE AGAIN 
 
 COUNT
-EVALUATE
 
 >NUMBER S>D
 ,
