@@ -8,7 +8,7 @@ using System;
 internal class BeginNewWordCompilationWord : IWord
 {
     public string Name => ":";
-    public bool IsImmediate => false;
+    public bool IsImmediate => true;
 
 
     public int Execute(IInterpreter interpreter)
