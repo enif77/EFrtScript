@@ -55,7 +55,7 @@ public class Interpreter : IInterpreter
     {
         if (IsCompiling)
         {
-            throw new Exception("A word compilation is already running.");
+            Throw(-29, "compiler nesting");
         }
 
         WordBeingDefined = new NonPrimitiveWord(wordName);
@@ -67,7 +67,7 @@ public class Interpreter : IInterpreter
     {
         if (IsCompiling == false)
         {
-            throw new Exception("Not in a new word compilation.");
+            Throw(-14, "not in a new word compilation");
         }
 
         RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
