@@ -12,9 +12,7 @@ public class InterpreterEventArgs : EventArgs
 {
     public InterpreterEventArgs(IWord word)
     {
-        if (word == null) throw new ArgumentNullException(nameof(word));
-
-        Word = word;
+        Word = word ?? throw new ArgumentNullException(nameof(word));
     }
 
     /// <summary>
