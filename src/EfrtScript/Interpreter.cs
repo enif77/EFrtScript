@@ -2,6 +2,7 @@
 
 namespace EFrtScript;
 
+using EFrtScript.Extensions;
 using EFrtScript.IO;
 using EFrtScript.Words;
 
@@ -206,7 +207,7 @@ public class Interpreter : IInterpreter
             return;
         }
         
-        if (CurrentInputSource!.TryParseNumber(wordName, out var val))
+        if (this.TryParseNumber(wordName, out var val))
         {
             WordBeingDefined!.AddWord(new ConstantValueWord(val));
 
@@ -226,7 +227,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        if (CurrentInputSource!.TryParseNumber(wordName, out var val))
+        if (this.TryParseNumber(wordName, out var val))
         {
             // This will show the value in the output of the TRACE word.
             State.CurrentWord = new ConstantValueWord(val);
@@ -255,7 +256,7 @@ public class Interpreter : IInterpreter
         }
         catch (ExecutionException)
         {
-            ; // Here we can do nothing, because all exceptions were already handled.
+            // Here we can do nothing, because all exceptions were already handled.
         }
         catch (Exception ex)
         {

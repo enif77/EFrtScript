@@ -4,8 +4,6 @@ namespace EFrtScript;
 
 using System.Text;
 
-using EFrtScript.Values;
-
 
 internal class InputSource : IInputSource
 {
@@ -56,20 +54,5 @@ internal class InputSource : IInputSource
         }
 
         return sb.ToString();
-    }
-
-
-    public bool TryParseNumber(string? s, out IValue numericValue)
-    {
-        if (int.TryParse(s, out var val))
-        {
-            numericValue = new IntegerValue(val);
-
-            return true;
-        }
-
-        numericValue = new IntegerValue(0);
-
-        return false;
     }
 }

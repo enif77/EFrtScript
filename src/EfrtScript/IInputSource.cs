@@ -10,5 +10,4 @@ public interface IInputSource
     int NextChar();
     string? ReadWordFromSource();
     string ReadStringFromSource();
-    bool TryParseNumber(string? s, out IValue numericValue);
 }
