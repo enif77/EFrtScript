@@ -16,13 +16,13 @@ internal class StringValue : IValue
     {
         get
         {
-            // TODO: Numbers parsing should be handled at a single point.
-            if (int.TryParse(String, NumberStyles.Integer, CultureInfo.InvariantCulture, out var i))
+            if (Parser.TryParseNumber(String, out var result))
             {
-                return i;
+                return result.Integer;
             }
 
-            throw new Exception($"'{String}' cannot be converted to an Integer");
+            // TODO: Throw a forth exception.
+            throw new Exception($"'{String}' cannot be converted to an integer number.");
         }
     }
     
@@ -30,12 +30,13 @@ internal class StringValue : IValue
     {
         get
         {
-            if (double.TryParse(String, NumberStyles.Float, CultureInfo.InvariantCulture, out var i))
+            if (Parser.TryParseNumber(String, out var result))
             {
-                return i;
+                return result.Float;
             }
 
-            throw new Exception($"'{String}' cannot be converted to an Real");
+            // TODO: Throw a forth exception.
+            throw new Exception($"'{String}' cannot be converted to a floating point number.");
         }
     }
     

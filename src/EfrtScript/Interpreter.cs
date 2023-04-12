@@ -207,9 +207,9 @@ public class Interpreter : IInterpreter
             return;
         }
         
-        if (this.TryParseNumber(wordName, out var val))
+        if (Parser.TryParseNumber(wordName, out var result))
         {
-            WordBeingDefined!.AddWord(new ConstantValueWord(val));
+            WordBeingDefined!.AddWord(new ConstantValueWord(result));
 
             return;
         }
@@ -227,10 +227,10 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        if (this.TryParseNumber(wordName, out var val))
+        if (Parser.TryParseNumber(wordName, out var result))
         {
             // This will show the value in the output of the TRACE word.
-            State.CurrentWord = new ConstantValueWord(val);
+            State.CurrentWord = new ConstantValueWord(result);
             ExecuteWord(State.CurrentWord);
 
             return;
