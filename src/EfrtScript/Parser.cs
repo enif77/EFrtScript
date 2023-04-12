@@ -18,7 +18,7 @@ internal class Parser
     }
 
 
-    public string? NextWord()
+    public string? ParseWord()
     {
         StringBuilder? wordBuff = null;
 
@@ -47,7 +47,7 @@ internal class Parser
     }
 
 
-    public string ReadString()
+    public string ParseString()
     {
         var stringBuff = new StringBuilder();
         var c = _source.NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).

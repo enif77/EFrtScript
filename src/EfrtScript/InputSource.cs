@@ -28,12 +28,12 @@ internal class InputSource : IInputSource
 
     public string? ReadWordFromSource()
     {
-        return _parser.NextWord();
+        return _parser.ParseWord();
     }
 
 
     public string ReadStringFromSource()
     {
-        return _parser.ReadString();
+        return _parser.ParseString();
     }
 }
