@@ -13,7 +13,7 @@ internal class LineCommentWord : IWord
     {
         var currentInputSource = interpreter.CurrentInputSource!;
         
-        currentInputSource.NextChar();
+        currentInputSource.ReadChar();
         while (currentInputSource.CurrentChar >= 0)
         {
             if (currentInputSource.CurrentChar == '\n')
@@ -21,7 +21,7 @@ internal class LineCommentWord : IWord
                 break;
             }
 
-            currentInputSource.NextChar();
+            currentInputSource.ReadChar();
         }
 
         return 1;

@@ -98,7 +98,7 @@ public class Interpreter : IInterpreter
         
         while (true)
         {
-            var word = CurrentInputSource!.ReadWordFromSource();
+            var word = CurrentInputSource!.ReadWord();
             if (word == null)
             {
                 break;

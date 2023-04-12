@@ -21,7 +21,7 @@ internal class ParenWord : IWord
                 break;
             }
 
-            c = currentInputSource.NextChar();
+            c = currentInputSource.ReadChar();
         }
 
         if (c < 0)

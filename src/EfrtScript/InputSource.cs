@@ -20,19 +20,19 @@ internal class InputSource : IInputSource
     }
 
     
-    public int NextChar()
+    public int ReadChar()
     {
         return _source.NextChar();
     }
 
 
-    public string? ReadWordFromSource()
+    public string? ReadWord()
     {
         return _parser.ParseWord();
     }
 
 
-    public string ReadStringFromSource()
+    public string ReadString()
     {
         return _parser.ParseString();
     }

@@ -16,7 +16,7 @@ internal class StringLitWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        var stringLiteral = interpreter.CurrentInputSource!.ReadStringFromSource();
+        var stringLiteral = interpreter.CurrentInputSource!.ReadString();
 
         if (interpreter.IsCompiling)
         {

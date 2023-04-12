@@ -16,7 +16,7 @@ internal class GetExecutionTokenWord : IWord
     {
         interpreter.CheckIsCompiling(this);
 
-        var word = interpreter.CurrentInputSource!.ReadWordFromSource();
+        var word = interpreter.CurrentInputSource!.ReadWord();
         if (string.IsNullOrEmpty(word))
         {
             throw new InterpreterException("A word name expected.");
