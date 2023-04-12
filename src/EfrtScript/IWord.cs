@@ -4,7 +4,7 @@ namespace EFrtScript;
 
 
 /// <summary>
-/// A word definition.
+/// Definnes a word.
 /// </summary>
 public interface IWord
 {
