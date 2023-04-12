@@ -2,6 +2,7 @@
 
 namespace EFrtScript;
 
+
 /// <summary>
 /// Exception frame describes the current execution state before a word is executed.
 /// </summary>

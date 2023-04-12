@@ -3,6 +3,9 @@
 namespace EFrtScript;
 
 
+/// <summary>
+/// Defines a branching/jumping to word.
+/// </summary>
 public interface IBranchingWord
 {
     /// <summary>
