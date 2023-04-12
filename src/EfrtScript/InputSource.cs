@@ -34,25 +34,6 @@ internal class InputSource : IInputSource
 
     public string ReadStringFromSource()
     {
-        var sb = new StringBuilder();
-        var c = NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).
-        while (c >= 0)
-        {
-            if (c == '"')
-            {
-                break;
-            }
-
-            sb.Append((char)c);
-
-            c = NextChar();
-        }
-
-        if (c < 0)
-        {
-            throw new Exception("A string literal end expected");
-        }
-
-        return sb.ToString();
+        return _parser.ReadString();
     }
 }
