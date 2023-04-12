@@ -28,7 +28,7 @@ public class ExceptionFrame
     public IWord? ExecutingWord { get; set; }
 
     /// <summary>
-    /// In index of a word following the word CATCH.
+    /// An index of a word following the word CATCH.
     /// </summary>
     public int NextWordIndex { get; set; }
 }
