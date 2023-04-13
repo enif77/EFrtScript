@@ -21,12 +21,14 @@ public class StringSourceReader : ISourceReader
     public int NextChar()
     {
         var srcPos = _srcPos + 1;
-        if (srcPos >= _src.Length)
+        if (srcPos < _src.Length)
         {
-            return -1;
+            return _src[_srcPos = srcPos];
         }
-         
-        return _src[_srcPos = srcPos];
+        
+        _srcPos = _src.Length;
+            
+        return -1;
     }
 
 
