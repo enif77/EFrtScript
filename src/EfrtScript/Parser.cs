@@ -78,44 +78,27 @@ internal class Parser
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
     /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
-    /// <returns>tReturns rue if s was converted successfully; otherwise, false.</returns>
+    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
     public static bool TryParseNumber(string? s, out IValue result)
     {
-        /*
-         
-            result – When this method returns, contains the 32-bit signed integer value equivalent of the number
-            contained in s, if the conversion succeeded, or zero if the conversion failed. The conversion fails
-            if the s parameter is null or Empty, is not of the correct format, or represents a number less than
-            Int32.MinValue or greater than Int32.MaxValue. This parameter is passed uninitialized; any value
-            originally supplied in result will be overwritten.
-          
-         */
-        
-        if (int.TryParse(s, out var val))
-        {
-            result = new IntegerValue(val);
-
-            return true;
-        }
-
-        result = new IntegerValue(0);
-
-        return false;
+        return TryParseNumberEx(s, out result);
     }
 
     /// <summary>
-    /// Parses a single or double cell integer or a floating point number.
+    /// Parses a integer or a floating point number.
     /// It is called by the interpreter directly, because a word must be checked, if it is defined/known, 
     /// before it is parsed as a number.
-    /// unsigned-single-cell-integer :: digit-sequence .
-    /// unsigned-double-cell-integer :: digit-sequence ( 'L' | 'l' ) .
-    /// unsigned-floating-point-number :: digit-sequence ( 'D' | 'd' ) .
-    /// unsigned-number :: unsigned-single-cell-integer | unsigned-double-cell-integer | unsigned-floating-point-number .
+    /// number :: [ sign ] ( unsigned-integer-number | unsigned-floating-point-number-with-marker | unsigned-floating-point-number ) .
+    /// unsigned-integer-number :: digit-sequence .
+    /// unsigned-floating-point-number-with-marker :: digit-sequence ( 'D' | 'd' ) .
     /// unsigned-floating-point-number :: ( digit-sequence '.' fractional-part [ 'e' scale-factor ] ) | ( digit-sequence 'e' scale-factor ) .
     /// scale-factor :: [ sign ] digit-sequence .
     /// fractional-part :: digit-sequence .
     /// sign :: '+' | '-' .
     /// </summary>
+    /// <param name="s">A string containing a number to convert.</param>
+    /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
+    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
     public static bool TryParseNumberEx(string? s, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
     {
         if (string.IsNullOrWhiteSpace(s))
@@ -125,15 +108,14 @@ internal class Parser
             return false;
         }
 
+        var isFloatingPoint = false;
+        var integerValue = 0;
+        var floatingPointValue = 0.0;
+
         var sourceReader = new StringSourceReader(s);
 
-        // Read the first char of the word.
+        // Read the first char.
         sourceReader.NextChar();
-
-        var isFloatingPoint = false;
-        //var isDoubleCellInteger = false;
-        var integerValue = 0L;
-        var floatingPointValue = 0.0;
 
         // Skip leading white chars.
         while (allowLeadingWhite && IsWhiteSpace(sourceReader.CurrentChar))
@@ -141,6 +123,7 @@ internal class Parser
             sourceReader.NextChar();
         }
 
+        // Parse sign, if provided.
         var sign = 1;
         if (sourceReader.CurrentChar == '-')
         {
@@ -152,64 +135,73 @@ internal class Parser
             sourceReader.NextChar();
         }
 
-        var haveDigit = false;
-        while (IsDigit(sourceReader.CurrentChar))
-        {
-            haveDigit = true;
-            integerValue = (integerValue * 10) + (sourceReader.CurrentChar - '0');
-
-            // An integer number (long) overflow.
-            if (integerValue < 0)
-            {
-                //throw new Exception("An integer constant overflow: " + word);
-                result = new IntegerValue(0);
-
-                return false;
-            }
-
-            sourceReader.NextChar();
-        }
-
         // Check, that we have at least one digit here.
-        if (haveDigit == false)
+        if (IsDigit(sourceReader.CurrentChar) == false)
         {
             // No digit yet = badly formatted number.
-            //return Token.CreateWordToken(word);
             result = new IntegerValue(0);
 
             return false;
         }
 
-        // A double cell integer?
-        if (sourceReader.CurrentChar == 'L' || sourceReader.CurrentChar == 'l')
+        // Parse the first digit sequence.
+        while (IsDigit(sourceReader.CurrentChar))
         {
-            //isDoubleCellInteger = true;
+            if (isFloatingPoint)
+            {
+                floatingPointValue = (floatingPointValue * 10.0) + (sourceReader.CurrentChar - '0');
+            }
+            else
+            {
+                var newIntegerValue = (integerValue * 10) + (sourceReader.CurrentChar - '0');
+                
+                if (newIntegerValue < 0)
+                {
+                    // An integer number overflow converts it to a floating point value.
+                    floatingPointValue = (integerValue * 10.0) + (sourceReader.CurrentChar - '0');
+                    isFloatingPoint = true;
+                }
+                else
+                {
+                    integerValue = newIntegerValue;
+                }
+            }
+
             sourceReader.NextChar();
         }
 
+
+        result = new IntegerValue(666);
+        return true;
+        
+
         // A floating point number?
+        var hasFloatingPointMarker = false;
         if (sourceReader.CurrentChar == 'D' || sourceReader.CurrentChar == 'd')
         {
-            // if (isDoubleCellInteger)
-            // {
-            //     // LD = bad number suffix.
-            //     return Token.CreateWordToken(word);
-            // }
+            // D is ignored, if we are already in floating point mode.
+            if (isFloatingPoint == false)
+            {
+                floatingPointValue = integerValue;
+                isFloatingPoint = true;
+            }
 
-            floatingPointValue = integerValue;
-            isFloatingPoint = true;
+            // Eat 'd' or 'D'.
             sourceReader.NextChar();
+
+            hasFloatingPointMarker = true;
         }
 
         // digit-sequence '.' fractional-part
         if (sourceReader.CurrentChar == '.')
         {
-            // // 123L. is not allowed.
-            // if (isDoubleCellInteger)
-            // {
-            //     //throw new Exception("Unexpected character in double cell constant: " + word);
-            //     return Token.CreateWordToken(word);
-            // }
+            // 123D. is not allowed.
+            if (hasFloatingPointMarker)
+            {
+                result = new IntegerValue(0);
+
+                return false;
+            }
 
             if (isFloatingPoint == false)
             {
@@ -223,7 +215,6 @@ internal class Parser
             if (IsDigit(sourceReader.CurrentChar) == false)
             {
                 //throw new Exception("A fractional part of a real number expected.");
-                //return Token.CreateWordToken(word);
                 result = new IntegerValue(0);
 
                 return false;
@@ -245,12 +236,13 @@ internal class Parser
         // digit-sequence [ '.' fractional-part ] 'e' scale-factor
         if (sourceReader.CurrentChar == 'e' || sourceReader.CurrentChar == 'E')
         {
-            // // 123Le is not allowed.
-            // if (isDoubleCellInteger)
-            // {
-            //     //throw new Exception("Unexpected character in double cell constant: " + word);
-            //     return Token.CreateWordToken(word);
-            // }
+            // 123De is not allowed.
+            if (hasFloatingPointMarker)
+            {
+                result = new IntegerValue(0);
+
+                return false;
+            }
 
             if (isFloatingPoint == false)
             {
@@ -258,7 +250,7 @@ internal class Parser
                 isFloatingPoint = true;
             }
 
-            // Eat 'e'.
+            // Eat 'e' or 'E'.
             sourceReader.NextChar();
 
             // scale-factor :: [ sign ] digit-sequence .
@@ -276,7 +268,6 @@ internal class Parser
             if (IsDigit(sourceReader.CurrentChar) == false)
             {
                 //throw new Exception("A scale factor of a real number expected.");
-                //return Token.CreateWordToken(word);
                 result = new IntegerValue(0);
 
                 return false;
@@ -302,56 +293,18 @@ internal class Parser
         // We expect to eat all chars from a word while parsing a number.
         if (sourceReader.CurrentChar >= 0 && allowTrailingChars == false)
         {
-            //return Token.CreateWordToken(word);
             result = new IntegerValue(0);
 
             return false;
         }
 
         // We eat all chars, its a number.
-        if (isFloatingPoint)
-        {
-            //return Token.CreateFloatingPointToken((float)(floatingPointValue * sign));
-            result = new FloatValue(floatingPointValue * sign);
+        result = isFloatingPoint
+            ? new FloatValue(floatingPointValue * sign)
+            : new IntegerValue(integerValue * sign);
 
-            return true;
-        }
-        // else if (isDoubleCellInteger)
-        // {
-        //     return Token.CreateDoubleCellIntegerToken(integerValue * sign);
-        // }
-        else
-        {
-            integerValue *= sign;
-
-            if (integerValue < int.MinValue || integerValue > int.MaxValue)
-            {
-                // A double cell integer must be marked as such type with the L suffix.
-                //return Token.CreateWordToken(word);
-                result = new FloatValue(integerValue);
-
-                return true;
-            }
-
-            // A single cell integer found.
-            //return Token.CreateSingleCellIntegerToken((int)integerValue);
-            result = new IntegerValue((int)integerValue);
-
-            return true;
-        }
+        return true;
     }
-
-
-    // /// <summary>
-    // /// Skips all white characters in the input stream.
-    // /// </summary>
-    // public void SkipWhite()
-    // {
-    //     while (IsWhiteSpace(CurrentChar))
-    //     {
-    //         NextChar();
-    //     }
-    // }
 
     /// <summary>
     /// Checks, if a character is a white character.
