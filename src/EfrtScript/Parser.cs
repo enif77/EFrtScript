@@ -169,12 +169,7 @@ internal class Parser
 
             sourceReader.NextChar();
         }
-
-
-        result = new IntegerValue(666);
-        return true;
         
-
         // A floating point number?
         var hasFloatingPointMarker = false;
         if (sourceReader.CurrentChar == 'D' || sourceReader.CurrentChar == 'd')
