@@ -147,23 +147,25 @@ internal class Parser
         // Parse the first digit sequence.
         while (IsDigit(sourceReader.CurrentChar))
         {
+            var digit = sourceReader.CurrentChar - '0';
             if (isFloatingPoint)
             {
-                floatingPointValue = (floatingPointValue * 10.0) + (sourceReader.CurrentChar - '0');
+                floatingPointValue = floatingPointValue * 10.0 + digit;
             }
             else
             {
-                var newIntegerValue = (integerValue * 10) + (sourceReader.CurrentChar - '0');
-                
-                if (newIntegerValue < 0)
+                try
+                {
+                    checked
+                    {
+                        integerValue = (integerValue * 10) + digit;
+                    }
+                }
+                catch (OverflowException)
                 {
                     // An integer number overflow converts it to a floating point value.
-                    floatingPointValue = (integerValue * 10.0) + (sourceReader.CurrentChar - '0');
+                    floatingPointValue = integerValue * 10.0 + digit;
                     isFloatingPoint = true;
-                }
-                else
-                {
-                    integerValue = newIntegerValue;
                 }
             }
 
@@ -172,7 +174,7 @@ internal class Parser
         
         // A floating point number?
         var hasFloatingPointMarker = false;
-        if (sourceReader.CurrentChar == 'D' || sourceReader.CurrentChar == 'd')
+        if (sourceReader.CurrentChar is 'D' or 'd')
         {
             // D is ignored, if we are already in floating point mode.
             if (isFloatingPoint == false)
@@ -229,7 +231,7 @@ internal class Parser
         }
 
         // digit-sequence [ '.' fractional-part ] 'e' scale-factor
-        if (sourceReader.CurrentChar == 'e' || sourceReader.CurrentChar == 'E')
+        if (sourceReader.CurrentChar is 'e' or 'E')
         {
             // 123De is not allowed.
             if (hasFloatingPointMarker)
