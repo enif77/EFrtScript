@@ -2,8 +2,6 @@
 
 namespace EFrtScript;
 
-using System.Text;
-
 
 internal class InputSource : IInputSource
 {
