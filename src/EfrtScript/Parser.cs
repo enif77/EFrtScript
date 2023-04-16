@@ -72,18 +72,6 @@ internal class Parser
         return stringBuff.ToString();
     }
 
-
-    /// <summary>
-    /// Converts the string representation of a number to its signed integer or floating point equivalent. A return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
-    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
-    public static bool TryParseNumber(string? s, out IValue result)
-    {
-        return TryParseNumberEx(s, out result);
-    }
-
     /// <summary>
     /// Parses a integer or a floating point number.
     /// It is called by the interpreter directly, because a word must be checked, if it is defined/known, 
@@ -98,8 +86,11 @@ internal class Parser
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
     /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
+    /// <param name="allowLeadingWhite">Allows leading white-space characters. Ex. "   123.4" is returned as 123.4.</param>
+    /// <param name="allowTrailingWhite">Allows trailing white-space characters. Ex. "123.4   " is returned as 123.4.</param>
+    /// <param name="allowTrailingChars">Allows non numeric characters behind the parsed number. Ex. "123.4aaa" is returned as 132.4.</param>
     /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
-    public static bool TryParseNumberEx(string? s, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
+    public static bool TryParseNumber(string? s, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
     {
         if (string.IsNullOrWhiteSpace(s))
         {
