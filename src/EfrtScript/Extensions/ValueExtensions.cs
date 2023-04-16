@@ -23,7 +23,7 @@ public static class ValueExtensions
     /// </summary>
     /// <param name="value">An IValue instance.</param>
     /// <returns>True, if a value is a real value.</returns>
-    public static bool IsRealValue(this IValue value)
+    public static bool IsFloatingPointValue(this IValue value)
         => value is FloatValue;
     
     /// <summary>

@@ -18,7 +18,7 @@ internal class MinusWord : IWord
         var b = interpreter.StackPop();
         var a = interpreter.StackPop();
         
-        if (a.IsRealValue() || b.IsRealValue())
+        if (a.IsFloatingPointValue() || b.IsFloatingPointValue())
         {
             interpreter.StackPush(a.Float - b.Float);
         }

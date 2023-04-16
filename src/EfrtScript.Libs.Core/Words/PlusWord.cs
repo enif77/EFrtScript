@@ -22,7 +22,7 @@ internal class PlusWord : IWord
         {
             interpreter.StackPush(a.String + b.String);
         }
-        else if (a.IsRealValue() || b.IsRealValue())
+        else if (a.IsFloatingPointValue() || b.IsFloatingPointValue())
         {
             interpreter.StackPush(a.Float + b.Float);
         }

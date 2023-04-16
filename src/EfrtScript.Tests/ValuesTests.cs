@@ -65,13 +65,13 @@ public sealed class ValuesTests
     [Fact]
     public void IsRealValueReturnsTrueForIntegerValue()
     {
-        Assert.True(new FloatValue(1).IsRealValue());
+        Assert.True(new FloatValue(1).IsFloatingPointValue());
     }
     
     [Fact]
     public void IsRealValueReturnsFalseForNonIntegerValue()
     {
-        Assert.False(new IntegerValue(1).IsRealValue());
+        Assert.False(new IntegerValue(1).IsFloatingPointValue());
     }
     
     [Theory]

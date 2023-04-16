@@ -92,7 +92,7 @@ public sealed class ParserTests
         var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
         
         Assert.True(result);
-        Assert.True(value.IsRealValue());
+        Assert.True(value.IsFloatingPointValue());
         Assert.Equal(expected, value.Float);
     }
 }

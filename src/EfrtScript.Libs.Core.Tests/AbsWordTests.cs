@@ -69,7 +69,7 @@ public class AbsWordTests
         
         var result = interpreter.StackPop();
 
-        Assert.True(result.IsRealValue());
+        Assert.True(result.IsFloatingPointValue());
         Assert.Equal(expected, result.Float);
     }
 }
