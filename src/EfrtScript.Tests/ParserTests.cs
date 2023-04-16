@@ -1,5 +1,7 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
+using EFrtScript.Extensions;
+
 namespace EFrtScript.Tests;
 
 using Xunit;
@@ -44,27 +46,39 @@ public sealed class ParserTests
     }
     
     [Theory]
-    [InlineData("")]
-    [InlineData(" string")]
-    [InlineData(" string ")]
+    [InlineData(".S")]
+    [InlineData(".S ")]
+    [InlineData(".S   ")]
+    [InlineData(".S string")]
+    [InlineData(".S string ")]
     public void ParseStringThrowsExceptionWhenStringIsNotTerminated(string src)
     {
         var p = new Parser(new StringSourceReader(src));
+        _ = p.ParseWord();
         
         Assert.Throws<Exception>(() => p.ParseString());
     }
     
-    // [Theory]
-    // [InlineData("1", '1')]
-    // [InlineData("abcd", 'a')]
-    // public void CurrentChar_is_the_first_source_char_when_NextChar_is_first_called(string src, char expectedChar)
-    // {
-    //     var r = new StringSourceReader(src);
-    //     r.NextChar();
-    //     
-    //     Assert.Equal(expectedChar, (char)r.CurrentChar);
-    // }
-    //
+    [Theory]
+    [InlineData("0", 0)]
+    [InlineData("1", 1)]
+    [InlineData("-1", -1)]
+    [InlineData("+1", 1)]
+    [InlineData("123", 123)]
+    [InlineData(" 0 ", 0)]
+    [InlineData(" 1 ", 1)]
+    [InlineData(" -1 ", -1)]
+    [InlineData(" +1 ", 1)]
+    [InlineData(" 123 ", 123)]
+    public void TryParseNumberParsesIntegers(string src, int expected)
+    {
+        var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
+        
+        Assert.True(result);
+        Assert.True(value.IsIntegerValue());
+        Assert.Equal(expected, value.Integer);
+    }
+    
     // [Theory]
     // [InlineData("1", '1')]
     // [InlineData("abcd", 'a')]
