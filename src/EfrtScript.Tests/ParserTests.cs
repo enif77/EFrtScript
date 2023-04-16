@@ -1,12 +1,11 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using EFrtScript.Extensions;
-
 namespace EFrtScript.Tests;
 
 using Xunit;
 
 using EFrtScript;
+using EFrtScript.Extensions;
 using EFrtScript.IO;
 
 
@@ -70,7 +69,7 @@ public sealed class ParserTests
     [InlineData(" -1 ", -1)]
     [InlineData(" +1 ", 1)]
     [InlineData(" 123 ", 123)]
-    public void TryParseNumberParsesIntegers(string src, int expected)
+    public void TryParseNumberReturnsExpectedInteger(string src, int expected)
     {
         var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
         
@@ -78,27 +77,22 @@ public sealed class ParserTests
         Assert.True(value.IsIntegerValue());
         Assert.Equal(expected, value.Integer);
     }
-    
-    // [Theory]
-    // [InlineData("1", '1')]
-    // [InlineData("abcd", 'a')]
-    // public void NextChar_returns_the_first_source_char_when_NextChar_is_first_called(string src, char expectedChar)
-    // {
-    //     var r = new StringSourceReader(src);
-    //     
-    //     Assert.Equal(expectedChar, (char)r.NextChar());
-    // }
-    //
-    // [Theory]
-    // [InlineData("")]
-    // [InlineData("1")]
-    // [InlineData("abcd")]
-    // public void NextChar_sets_CurrentChar_when_NextChar_is_called(string src)
-    // {
-    //     var r = new StringSourceReader(src);
-    //
-    //     var c = r.NextChar();
-    //     
-    //     Assert.Equal(c, r.CurrentChar);
-    // }
+
+    [Theory]
+    [InlineData("0.0", 0.0)]
+    [InlineData("0d", 0.0)]
+    [InlineData("1.0", 1.0)]
+    [InlineData("1D", 1.0)]
+    [InlineData("1e2", 100)]
+    [InlineData("1.5", 1.5)]
+    [InlineData("100e-2", 1.0)]
+    [InlineData("100.465e+2", 10046.5)]
+    public void TryParseNumberReturnsExpectedFloatingPoint(string src, double expected)
+    {
+        var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
+        
+        Assert.True(result);
+        Assert.True(value.IsRealValue());
+        Assert.Equal(expected, value.Float);
+    }
 }
