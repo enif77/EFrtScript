@@ -2,8 +2,6 @@
 
 namespace EFrtScript.Values;
 
-using System.Globalization;
-
 
 /// <summary>
 /// A string value.
@@ -21,7 +19,7 @@ internal class StringValue : IValue
                 return result.Integer;
             }
 
-            // TODO: Throw a forth exception.
+            // TODO: Throw a forth exception? (-24 invalid numeric argument)
             throw new Exception($"'{String}' cannot be converted to an integer number.");
         }
     }
@@ -35,7 +33,7 @@ internal class StringValue : IValue
                 return result.Float;
             }
 
-            // TODO: Throw a forth exception.
+            // TODO: Throw a forth exception?
             throw new Exception($"'{String}' cannot be converted to a floating point number.");
         }
     }
@@ -45,6 +43,6 @@ internal class StringValue : IValue
 
     public StringValue(string value)
     {
-        String = value ?? string.Empty;
+        String = value;
     }
 }
