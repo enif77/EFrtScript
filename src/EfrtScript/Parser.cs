@@ -332,4 +332,76 @@ internal class Parser
     {
         return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
     }
+
+
+    public static int ParseInteger(string s, int radix)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            throw new Exception("A nonempty string with a number expected.");
+        }
+
+        if (radix is < 2 or > 36)
+        {
+            throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
+        }
+
+        var n = 0;
+
+        
+        
+        return n;
+    }
+
+
+    public static int CharToDigit(char c, int radix)
+    {
+        if (c < '0')
+        {
+            throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+        }
+        
+        if (radix <= 10)
+        {
+            if (c > radix - 1 + '0')
+            {
+                throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+            }
+
+            // O .. (radix - 1)
+            return c - '0';
+        }
+        
+        if (c <= '9')
+        {
+            // O .. 9
+            return c - '0';
+        }
+        
+        if (c < 'A')
+        {
+            // Above digits, but below capitals.
+            throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+        }
+
+        if (c <= radix - 11 + 'A')
+        {
+            // A .. (radix - 10 - 1)
+            return c - 'A';
+        }
+        
+        if (c < 'a')
+        {
+            // Above capitals, but below letters.
+            throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+        }
+        
+        if (c <= radix - 11 + 'a')
+        {
+            // a .. (radix - 10 - 1)
+            return c - 'a';
+        }
+        
+        throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+    }
 }
