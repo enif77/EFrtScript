@@ -2,7 +2,6 @@
 
 namespace EFrtScript;
 
-using EFrtScript.Extensions;
 using EFrtScript.IO;
 using EFrtScript.Words;
 
@@ -60,7 +59,7 @@ public class Interpreter : IInterpreter
         }
 
         WordBeingDefined = new NonPrimitiveWord(wordName);
-        InterpreterState = InterpreterStateCode.Compiling;
+        _interpreterState = InterpreterStateCode.Compiling;
     }
 
 
@@ -74,7 +73,7 @@ public class Interpreter : IInterpreter
         RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
 
         WordBeingDefined = null;
-        InterpreterState = InterpreterStateCode.Interpreting;
+        _interpreterState = InterpreterStateCode.Interpreting;
     }
 
     #endregion
@@ -82,9 +81,9 @@ public class Interpreter : IInterpreter
 
     #region execution
 
-    public InterpreterStateCode InterpreterState { get; private set; }
-    public bool IsCompiling => InterpreterState == InterpreterStateCode.Compiling;
-    public bool IsExecutionTerminated => InterpreterState == InterpreterStateCode.Breaking || InterpreterState == InterpreterStateCode.Terminating;
+    private InterpreterStateCode _interpreterState;
+    public bool IsCompiling => _interpreterState == InterpreterStateCode.Compiling;
+    public bool IsExecutionTerminated => _interpreterState == InterpreterStateCode.Breaking || _interpreterState == InterpreterStateCode.Terminating;
 
     public event EventHandler<InterpreterEventArgs>? ExecutingWord;
     public event EventHandler<InterpreterEventArgs>? WordExecuted;
@@ -122,9 +121,9 @@ public class Interpreter : IInterpreter
         }
         
         // Execution broken. Return to interpreting mode.
-        if (InterpreterState == InterpreterStateCode.Breaking)
+        if (_interpreterState == InterpreterStateCode.Breaking)
         {
-            InterpreterState = InterpreterStateCode.Interpreting;
+            _interpreterState = InterpreterStateCode.Interpreting;
             //State.SetStateValue(false);
         }
             
@@ -147,7 +146,7 @@ public class Interpreter : IInterpreter
     public void Reset()
     {
         State.Reset();
-        InterpreterState = InterpreterStateCode.Interpreting;
+        _interpreterState = InterpreterStateCode.Interpreting;
     }
     
     
@@ -166,7 +165,7 @@ public class Interpreter : IInterpreter
     public void Quit()
     {
         State.ReturnStack.Clear();
-        InterpreterState = InterpreterStateCode.Breaking;
+        _interpreterState = InterpreterStateCode.Breaking;
     }
     
     
@@ -178,7 +177,7 @@ public class Interpreter : IInterpreter
     
     public void TerminateExecution()
     {
-        InterpreterState = InterpreterStateCode.Terminating;
+        _interpreterState = InterpreterStateCode.Terminating;
     }
 
 

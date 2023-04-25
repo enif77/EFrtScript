@@ -62,7 +62,7 @@ internal static class Program
                     continue;
                 }
 
-                if (interpreter.InterpreterState == InterpreterStateCode.Terminating)
+                if (interpreter.IsExecutionTerminated)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Bye!");
@@ -93,7 +93,7 @@ internal static class Program
                 Console.WriteLine(ex.Message);
             }
 
-            if (interpreter.InterpreterState == InterpreterStateCode.Terminating)
+            if (interpreter.IsExecutionTerminated)
             {
                 Console.WriteLine();
                 Console.WriteLine("Bye!");

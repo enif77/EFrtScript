@@ -38,10 +38,10 @@ public class ByeWordTests
     {
         var interpreter = new Interpreter(new NullOutputWriter());
         
-        Assert.NotEqual(InterpreterStateCode.Terminating, interpreter.InterpreterState);
+        Assert.False(interpreter.IsExecutionTerminated);
         
         new ByeWord().Execute(interpreter);
         
-        Assert.Equal(InterpreterStateCode.Terminating, interpreter.InterpreterState);
+        Assert.True(interpreter.IsExecutionTerminated);
     }
 }

@@ -16,7 +16,7 @@ public interface IInterpreter
     #region words
 
     /// <summary>
-    /// True, if is this interpreter is compilling a new word.
+    /// True, if is this interpreter is compiling a new word.
     /// </summary>
     bool IsCompiling { get; }
 
@@ -60,11 +60,6 @@ public interface IInterpreter
 
     #region execution
 
-    /// <summary>
-    /// The state, in which is this interpreter.
-    /// </summary>
-    InterpreterStateCode InterpreterState { get; }
-    
     /// <summary>
     /// True, if this program execution is currently terminated.
     /// </summary>
