@@ -136,6 +136,37 @@ pwsh run-examples.ps1
 
 https://github.com/enif77/EFrt
 
+---
+
+Integer number parsing 
+
+https://forth-standard.org/standard/usage#usage:digits
+
+https://forth-standard.org/standard/core/toNUMBER
+https://forth-standard.org/standard/core/BASE
+https://forth-standard.org/standard/core/DECIMAL
+https://forth-standard.org/standard/core/HEX
+ 
+radix: 2 .. 36
+ 
+  2: 0 .. 1
+  3: 0 .. 2
+  4: 0 .. 3 
+  5: 0 .. 4
+  6: 0 .. 5
+  7: 0 .. 6
+  8: 0 .. 7
+  9: 0 .. 8
+ 10: 0 .. 9
+ 11: 0 .. 9, A
+ 12: 0 .. 9, A .. B
+ ...
+ 16: 0 .. 9, A .. F
+ ...
+ 36: 0 .. 9, A .. Z
+
+---
+
 
 INT -> converts a value on the stack to integer.
 ?INT -> returns true, if a value on the stack is integer.
