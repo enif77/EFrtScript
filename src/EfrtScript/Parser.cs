@@ -354,6 +354,34 @@ internal class Parser
     }
 
 
+    public static bool IsDigit(char c, int radix)
+    {
+        if (c < '0')
+        {
+            return false;
+        }
+        
+        if (radix <= 10)
+        {
+            return c <= radix - 1 + '0';
+        }
+        
+        if (c <= '9')
+        {
+            // O .. 9
+            return true;
+        }
+        
+        if (c >= 'a')
+        {
+            // a .. (radix - 10 - 1)
+            return c <= radix - 11 + 'a';    
+        }
+
+        return c >= 'A' && c <= radix - 11 + 'A';
+    }
+
+
     public static int CharToDigit(char c, int radix)
     {
         if (c < '0')
@@ -363,13 +391,13 @@ internal class Parser
         
         if (radix <= 10)
         {
-            if (c > radix - 1 + '0')
+            if (c <= radix - 1 + '0')
             {
-                throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+                // O .. (radix - 1)
+                return c - '0';
             }
 
-            // O .. (radix - 1)
-            return c - '0';
+            throw new Exception($"Unsupported char '{c}' for radix {radix}.");
         }
         
         if (c <= '9')
@@ -378,28 +406,22 @@ internal class Parser
             return c - '0';
         }
         
-        if (c < 'A')
+        if (c >= 'a')
         {
-            // Above digits, but below capitals.
+            // a .. (radix - 10 - 1)
+            if (c <= radix - 11 + 'a')
+            {
+                return c - 'a';
+            }
+
+            // Above letters.
             throw new Exception($"Unsupported char '{c}' for radix {radix}.");
         }
 
-        if (c <= radix - 11 + 'A')
+        if (c >= 'A' && c <= radix - 11 + 'A')
         {
             // A .. (radix - 10 - 1)
             return c - 'A';
-        }
-        
-        if (c < 'a')
-        {
-            // Above capitals, but below letters.
-            throw new Exception($"Unsupported char '{c}' for radix {radix}.");
-        }
-        
-        if (c <= radix - 11 + 'a')
-        {
-            // a .. (radix - 10 - 1)
-            return c - 'a';
         }
         
         throw new Exception($"Unsupported char '{c}' for radix {radix}.");
