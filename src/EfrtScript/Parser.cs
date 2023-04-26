@@ -368,7 +368,7 @@ internal class Parser
         
         if (c <= '9')
         {
-            // O .. 9
+            // 0 .. 9
             return true;
         }
         
@@ -378,6 +378,7 @@ internal class Parser
             return c <= radix - 11 + 'a';    
         }
 
+        // A .. (radix - 10 - 1)
         return c >= 'A' && c <= radix - 11 + 'A';
     }
 
@@ -393,7 +394,7 @@ internal class Parser
         {
             if (c <= radix - 1 + '0')
             {
-                // O .. (radix - 1)
+                // 0 .. (radix - 1)
                 return c - '0';
             }
 
