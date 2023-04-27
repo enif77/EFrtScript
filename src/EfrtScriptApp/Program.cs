@@ -138,6 +138,12 @@ https://github.com/enif77/EFrt
 
 ---
 
+BigInteger
+
+https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-7.0
+
+---
+
 Integer number parsing 
 
 https://forth-standard.org/standard/usage#usage:digits
@@ -147,6 +153,8 @@ https://forth-standard.org/standard/core/BASE
 https://forth-standard.org/standard/core/DECIMAL
 https://forth-standard.org/standard/core/HEX
  
+https://stackoverflow.com/questions/65943008/c-biginteger-to-string-with-radix-specified
+
 radix: 2 .. 36
  
   2: 0 .. 1
