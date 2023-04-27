@@ -313,7 +313,7 @@ internal class Parser
     /// <returns>True, if a character is a digit.</returns>
     public static bool IsDigit(int c)
     {
-        return c >= '0' && c <= '9';
+        return IsDigit(c, 10);
     }
 
     /// <summary>
@@ -330,7 +330,7 @@ internal class Parser
     /// <returns>Returns true, if the given character is a hexadecimal-digit.</returns>
     public static bool IsHexDigit(int c)
     {
-        return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
+        return IsDigit(c, 16);
     }
 
 
@@ -354,7 +354,7 @@ internal class Parser
     }
 
 
-    public static bool IsDigit(char c, int radix)
+    public static bool IsDigit(int c, int radix)
     {
         if (c < '0')
         {
@@ -363,7 +363,7 @@ internal class Parser
         
         if (radix <= 10)
         {
-            return c <= radix - 1 + '0';
+            return c < radix + '0';
         }
         
         if (c <= '9')
@@ -375,11 +375,11 @@ internal class Parser
         if (c >= 'a')
         {
             // a .. (radix - 10 - 1)
-            return c <= radix - 11 + 'a';    
+            return c < radix - 10 + 'a';    
         }
 
         // A .. (radix - 10 - 1)
-        return c >= 'A' && c <= radix - 11 + 'A';
+        return c >= 'A' && c < radix - 10 + 'A';
     }
 
 
@@ -392,7 +392,7 @@ internal class Parser
         
         if (radix <= 10)
         {
-            if (c <= radix - 1 + '0')
+            if (c < radix + '0')
             {
                 // 0 .. (radix - 1)
                 return c - '0';
@@ -410,7 +410,7 @@ internal class Parser
         if (c >= 'a')
         {
             // a .. (radix - 10 - 1)
-            if (c <= radix - 11 + 'a')
+            if (c < radix - 10 + 'a')
             {
                 return c - 'a';
             }
@@ -419,7 +419,7 @@ internal class Parser
             throw new Exception($"Unsupported char '{c}' for radix {radix}.");
         }
 
-        if (c >= 'A' && c <= radix - 11 + 'A')
+        if (c >= 'A' && c < radix - 10 + 'A')
         {
             // A .. (radix - 10 - 1)
             return c - 'A';

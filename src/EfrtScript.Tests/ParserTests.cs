@@ -95,4 +95,72 @@ public sealed class ParserTests
         Assert.True(value.IsFloatingPointValue());
         Assert.Equal(expected, value.Float);
     }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData('/', false)]
+    [InlineData('0', true)]
+    [InlineData('1', true)]
+    [InlineData('2', false)]
+    [InlineData('A', false)]
+    [InlineData('a', false)]
+    [InlineData('{', false)]
+    public void IsDigitReturnsExpectedResultForBinaryDigits(char c, bool expected)
+    {
+        Assert.Equal(expected, Parser.IsDigit(c, 2));
+    }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData('/', false)]
+    [InlineData('0', true)]
+    [InlineData('3', true)]
+    [InlineData('7', true)]
+    [InlineData('8', false)]
+    [InlineData('A', false)]
+    [InlineData('a', false)]
+    [InlineData('{', false)]
+    public void IsDigitReturnsExpectedResultForOctalDigits(char c, bool expected)
+    {
+        Assert.Equal(expected, Parser.IsDigit(c, 8));
+    }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData('/', false)]
+    [InlineData('0', true)]
+    [InlineData('5', true)]
+    [InlineData('9', true)]
+    [InlineData(':', false)]
+    [InlineData('A', false)]
+    [InlineData('a', false)]
+    [InlineData('{', false)]
+    public void IsDigitReturnsExpectedResultForDecimalDigits(char c, bool expected)
+    {
+        Assert.Equal(expected, Parser.IsDigit(c, 10));
+    }
+
+    [Theory]
+    [InlineData(0, false)]
+    [InlineData('/', false)]
+    [InlineData('0', true)]
+    [InlineData('5', true)]
+    [InlineData('9', true)]
+    [InlineData(':', false)]
+    [InlineData('@', false)]
+    [InlineData('A', true)]
+    [InlineData('C', true)]
+    [InlineData('F', true)]
+    [InlineData('G', false)]
+    [InlineData('`', false)]
+    [InlineData('a', true)]
+    [InlineData('c', true)]
+    [InlineData('f', true)]
+    [InlineData('g', false)]
+    [InlineData('{', false)]
+    public void IsDigitReturnsExpectedResultForHexadecimalDigits(char c, bool expected)
+    {
+        Assert.Equal(expected, Parser.IsDigit(c, 16));
+    }
+
 }
