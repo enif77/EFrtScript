@@ -18,10 +18,13 @@ public class LibraryTests
     
     [Theory]
     [InlineData("ABS")]
+    [InlineData("BASE")]
     [InlineData("BYE")]
     [InlineData("CATCH")]
     [InlineData("CR")]
+    [InlineData("DECIMAL")]
     [InlineData("DUP")]
+    [InlineData("HEX")]
     [InlineData("-")]
     [InlineData("NEGATE")]
     [InlineData("+")]

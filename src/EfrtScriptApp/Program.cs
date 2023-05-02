@@ -149,9 +149,6 @@ Integer number parsing
 https://forth-standard.org/standard/usage#usage:digits
 
 https://forth-standard.org/standard/core/toNUMBER
-https://forth-standard.org/standard/core/BASE
-https://forth-standard.org/standard/core/DECIMAL
-https://forth-standard.org/standard/core/HEX
  
 https://stackoverflow.com/questions/65943008/c-biginteger-to-string-with-radix-specified
 

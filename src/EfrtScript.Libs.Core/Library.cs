@@ -15,6 +15,8 @@ using EFrtScript.Libs.Core.Words;
 
 public class Library : IWordsLibrary
 {
+    internal const int NumbericConversionRadixHeapIndex = 1;
+    
     public string Name => "CORE";
     
     
@@ -27,6 +29,10 @@ public class Library : IWordsLibrary
 
         interpreter.RegisterWord(new BeginNewWordCompilationWord());
         interpreter.RegisterWord(new EndNewWordCompilationWord());
+
+        interpreter.RegisterWord(new BaseWord());
+        interpreter.RegisterWord(new DecimalWord());
+        interpreter.RegisterWord(new HexWord());
 
         interpreter.RegisterWord(new StoreWord());
         interpreter.RegisterWord(new FetchWord());
