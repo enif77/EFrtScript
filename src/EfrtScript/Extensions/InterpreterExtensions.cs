@@ -2,6 +2,8 @@
 
 namespace EFrtScript.Extensions;
 
+using System.Text;
+
 using EFrtScript;
 using EFrtScript.Words;
 
@@ -37,5 +39,38 @@ public static class InterpreterExtensions
         {
             interpreter.Throw(-14, $"interpreting a compile-only word {word.Name}");
         }
+    }
+
+
+    public static string ToStringValue(this IInterpreter interpreter, int value, int radix)
+    {
+        if (radix <= 1 || radix > 36)
+        {
+            // -24 invalid numeric argument
+            throw new ArgumentOutOfRangeException(nameof(radix));
+        }
+            
+        if (value == 0)
+        {
+            return "0";
+        }
+            
+        var negative = value < 0;
+
+        if (negative) 
+        {
+            value = -value;
+        }
+            
+        var sb = new StringBuilder();
+
+        for (; value > 0; value /= radix)
+        {
+            var d = value % radix;
+
+            sb.Append((char)(d < 10 ? '0' + d : 'A' - 10 + d));
+        }
+
+        return (negative ? "-" : "") + string.Concat(sb.ToString().Reverse());
     }
 }
