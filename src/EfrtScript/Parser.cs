@@ -295,42 +295,76 @@ internal class Parser
     }
 
     /// <summary>
-    /// Checks, if a character is a white character.
-    /// white-char :: SPACE | TAB | CR | LF .
+    /// Indicates whether the specified Unicode character is categorized as white space.
     /// </summary>
     /// <param name="c">A character.</param>
-    /// <returns>True, if a character is a white character.</returns>
+    /// <returns>true, if c is a white space, otherwise false.</returns>
     public static bool IsWhiteSpace(int c)
     {
         return char.IsWhiteSpace((char)c);
     }
 
     /// <summary>
-    /// Checks, if an character is a digit.
-    /// digit :: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' .
+    /// Checks, if a character is a binary digit.
+    /// A decimal digit is one of: '0', '1'.
     /// </summary>
     /// <param name="c">A character.</param>
-    /// <returns>True, if a character is a digit.</returns>
-    public static bool IsDigit(int c)
+    /// <returns>true, if c is a binary digit, otherwise false.</returns>
+    public static bool IsBinaryDigit(int c)
     {
-        return IsDigit(c, 10);
+        return IsDigitInternal(c, 2);
     }
 
     /// <summary>
-    ///  Defines hexadecimal-digit characters recognized by the language.
-    /// 
-    /// <pre>
-    /// hexadecimal-digit ::
-    ///   digit |
-    ///   'a' | 'b' | 'c' | 'd' | 'e' | 'f' |
-    ///   'A' | 'B' | 'C' | 'D' | 'E' | 'F' .
-    /// </pre>
+    /// Checks, if a character is an octal digit.
+    /// A decimal digit is one of: '0', '1', '2', '3', '4', '5', '6', '7'.
     /// </summary>
     /// <param name="c">A character.</param>
-    /// <returns>Returns true, if the given character is a hexadecimal-digit.</returns>
+    /// <returns>true, if c is a octal digit, otherwise false.</returns>
+    public static bool IsOctalDigit(int c)
+    {
+        return IsDigitInternal(c, 8);
+    }
+
+    /// <summary>
+    /// Checks, if a character is a decimal digit.
+    /// A decimal digit is one of: '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'.
+    /// </summary>
+    /// <param name="c">A character.</param>
+    /// <returns>true, if c is a decimal digit, otherwise false.</returns>
+    public static bool IsDigit(int c)
+    {
+        return IsDigitInternal(c, 10);
+    }
+
+    /// <summary>
+    ///  Checks, if a character is a hexadecimal digit.
+    /// A decimal digit is one of: 
+    ///   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    ///   'a', 'b', 'c', 'd', 'e', 'f',
+    ///   'A', 'B', 'C', 'D', 'E', 'F'.
+    /// </summary>
+    /// <param name="c">A character.</param>
+    /// <returns>true, if c is a hexadecimal digit, otherwise false.</returns>
     public static bool IsHexDigit(int c)
     {
-        return IsDigit(c, 16);
+        return IsDigitInternal(c, 16);
+    }
+
+    /// <summary>
+    /// Checks, if a character is a digit of a certain radix.
+    /// </summary>
+    /// <param name="c">A character.</param>
+    /// <param name="radix">A numeric radix. Can be from the 2 .. 36 range.</param>
+    /// <returns>true, if c is a digit of a radix, otherwise false.</returns>
+    public static bool IsDigit(int c, int radix)
+    {
+        if (radix is < 2 or > 36)
+        {
+            throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
+        }
+        
+        return IsDigitInternal(c, radix);
     }
 
 
@@ -351,35 +385,6 @@ internal class Parser
         
         
         return n;
-    }
-
-
-    public static bool IsDigit(int c, int radix)
-    {
-        if (c < '0')
-        {
-            return false;
-        }
-        
-        if (radix <= 10)
-        {
-            return c < radix + '0';
-        }
-        
-        if (c <= '9')
-        {
-            // 0 .. 9
-            return true;
-        }
-        
-        if (c >= 'a')
-        {
-            // a .. (radix - 10 - 1)
-            return c < radix - 10 + 'a';    
-        }
-
-        // A .. (radix - 10 - 1)
-        return c >= 'A' && c < radix - 10 + 'A';
     }
 
 
@@ -426,5 +431,34 @@ internal class Parser
         }
         
         throw new Exception($"Unsupported char '{c}' for radix {radix}.");
+    }
+
+
+    private static bool IsDigitInternal(int c, int radix)
+    {
+        if (c < '0')
+        {
+            return false;
+        }
+        
+        if (radix <= 10)
+        {
+            return c < radix + '0';
+        }
+        
+        if (c <= '9')
+        {
+            // 0 .. 9
+            return true;
+        }
+        
+        if (c >= 'a')
+        {
+            // a .. (radix - 10 - 1)
+            return c < radix - 10 + 'a';    
+        }
+
+        // A .. (radix - 10 - 1)
+        return c >= 'A' && c < radix - 10 + 'A';
     }
 }
