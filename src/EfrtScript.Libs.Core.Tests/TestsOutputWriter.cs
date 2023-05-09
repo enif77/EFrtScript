@@ -1,12 +1,14 @@
-using System;
 /* Copyright (C) Premysl Fara and Contributors */
 
 namespace EFrtScript.Libs.Core.Tests;
+
+using System;
 
 
 public class TestsOutputWriter : IOutputWriter
 {
     public bool WriteCalled { get; private set; }
+    public bool WriteCharCalled { get; private set; }
     public bool WriteLineCalled { get; private set; }
     public bool WriteLineFormatCalled { get; private set; }
     
@@ -22,6 +24,13 @@ public class TestsOutputWriter : IOutputWriter
         Format = format;
         Args = args;
         Output = string.Format(format, args);
+    }
+
+
+    public void Write(char value)
+    {
+        WriteCharCalled = true;
+        Output = string.Format("{0}", value);
     }
 
 

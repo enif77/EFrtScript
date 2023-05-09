@@ -14,6 +14,12 @@ public class ConsoleOutputWriter : IOutputWriter
     }
 
 
+    public void Write(char value)
+    {
+        Console.Write(value);
+    }
+
+
     public void WriteLine()
     {
         Console.WriteLine();

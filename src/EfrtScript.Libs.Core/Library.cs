@@ -49,6 +49,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new RotWord());
         interpreter.RegisterWord(new DepthWord());
 
+        interpreter.RegisterWord(new EmitWord());
         interpreter.RegisterWord(new DotWord());
         interpreter.RegisterWord(new CrWord());
         interpreter.RegisterWord(new SpaceWord());

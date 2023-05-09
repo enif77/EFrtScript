@@ -9,11 +9,17 @@ namespace EFrtScript;
 public interface IOutputWriter
 {
     /// <summary>
-    /// Writes the text representation of the specified array of objects to an output using the specified format information.
+    /// Writes the text representation of the specified array of objects to the output using the specified format information.
     /// </summary>
     /// <param name="format">A composite format string.</param>
     /// <param name="arg">An array of objects to write using format.</param>
     void Write(string format, params object[] arg);
+
+    /// <summary>
+    /// Writes the specified Unicode character value to the output.
+    /// </summary>
+    /// <param name="value">A Unicode character.</param>
+    void Write(char value);
 
     /// <summary>
     /// Writes a line terminator to an output.

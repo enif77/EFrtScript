@@ -10,6 +10,11 @@ public class NullOutputWriter : IOutputWriter
     }
 
 
+    public void Write(char value)
+    {
+    }
+
+
     public void WriteLine()
     {
     }
