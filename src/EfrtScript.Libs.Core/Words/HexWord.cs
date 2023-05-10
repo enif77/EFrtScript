@@ -14,7 +14,7 @@ internal class HexWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.HeapStore(Library.NumbericConversionRadixHeapIndex, 16);
+        interpreter.HeapStore(Library.NumericConversionRadixHeapIndex, 16);
 
         return 1;
     }

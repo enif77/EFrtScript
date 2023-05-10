@@ -40,7 +40,7 @@ public class DecimalWordTests
         
         new DecimalWord().Execute(interpreter);
         
-        var r = interpreter.HeapFetch(Library.NumbericConversionRadixHeapIndex);
+        var r = interpreter.HeapFetch(Library.NumericConversionRadixHeapIndex);
 
         Assert.True(r.IsIntegerValue());
         Assert.Equal(10, r.Integer);

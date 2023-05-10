@@ -40,7 +40,7 @@ public class HexWordTests
         
         new HexWord().Execute(interpreter);
         
-        var r = interpreter.HeapFetch(Library.NumbericConversionRadixHeapIndex);
+        var r = interpreter.HeapFetch(Library.NumericConversionRadixHeapIndex);
 
         Assert.True(r.IsIntegerValue());
         Assert.Equal(16, r.Integer);

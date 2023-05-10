@@ -43,6 +43,6 @@ public class BaseWordTests
         var r = interpreter.StackPop();
 
         Assert.True(r.IsIntegerValue());
-        Assert.Equal(Library.NumbericConversionRadixHeapIndex, r.Integer);
+        Assert.Equal(Library.NumericConversionRadixHeapIndex, r.Integer);
     }
 }
