@@ -34,7 +34,7 @@ public class BaseWordTests
     }
     
     [Fact]
-    public void RetursExpectedHeapIndex()
+    public void ReturnsExpectedHeapIndex()
     {
         var interpreter = new Interpreter(new NullOutputWriter());
         
@@ -43,6 +43,6 @@ public class BaseWordTests
         var r = interpreter.StackPop();
 
         Assert.True(r.IsIntegerValue());
-        Assert.Equal(Library.NumericConversionRadixHeapIndex, r.Integer);
+        Assert.Equal(1, r.Integer);
     }
 }

@@ -16,15 +16,9 @@ internal class DotWord : IWord
         interpreter.StackExpect(1);
 
         var a = interpreter.StackPop();
-        if (a.IsFloatingPointValue())
-        {
-            interpreter.Output.Write($"{a.Float}");
-
-        }
-        else
-        {
-            interpreter.Output.Write($"{a.Integer}");
-        }
+        interpreter.Output.Write(a.IsFloatingPointValue()
+            ? $"{a.Float}"
+            : interpreter.ToStringValue(a.Integer, interpreter.GetNumericConversionRadix()));
 
         return 1;
     }

@@ -2,6 +2,7 @@
 
 namespace EFrtScript;
 
+using EFrtScript.Extensions;
 using EFrtScript.IO;
 using EFrtScript.Words;
 
@@ -20,6 +21,8 @@ public class Interpreter : IInterpreter
     {
         State = new InterpreterState();
         Output = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
+        
+        this.SetNumericConversionRadix(10);
         
         _words = new Dictionary<string, IWord>();
     }

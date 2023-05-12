@@ -15,7 +15,7 @@ internal class BaseWord : IWord
     {
         interpreter.StackFree(1);
 
-        interpreter.StackPush(Library.NumericConversionRadixHeapIndex);
+        interpreter.StackPush(interpreter.GetNumericConversionRadixHeapIndex());
 
         return 1;
     }

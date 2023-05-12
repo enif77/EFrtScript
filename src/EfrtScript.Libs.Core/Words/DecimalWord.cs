@@ -14,7 +14,7 @@ internal class DecimalWord : IWord
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.HeapStore(Library.NumericConversionRadixHeapIndex, 10);
+        interpreter.SetNumericConversionRadix(10);
 
         return 1;
     }
