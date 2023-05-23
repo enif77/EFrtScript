@@ -10,6 +10,7 @@
 
 namespace EFrtScript.Libs.Core;
 
+using EFrtScript.Extensions;
 using EFrtScript.Libs.Core.Words;
 
 

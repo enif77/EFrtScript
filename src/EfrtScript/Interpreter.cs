@@ -23,35 +23,12 @@ public class Interpreter : IInterpreter
         Output = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
         
         this.SetNumericConversionRadix(10);
-        
-        _words = new Dictionary<string, IWord>();
     }
 
 
-    #region words
+    #region words compilation
 
-    private readonly IDictionary<string, IWord> _words;
-    
     public INonPrimitiveWord? WordBeingDefined { get; private set; }
-
-
-    public bool IsWordRegistered(string wordName)
-        => string.IsNullOrWhiteSpace(wordName) == false && _words.ContainsKey(wordName);
-
-    
-    public IWord GetRegisteredWord(string wordName)
-    {
-        if (IsWordRegistered(wordName) == false)
-        {
-            Throw(-13, $"The '{wordName}' word is undefined.");
-        }
-
-        return _words[wordName];
-    }
-
-    
-    public void RegisterWord(IWord word)
-        => _words.Add(word.Name.ToUpperInvariant(), word);
 
 
     public void BeginNewWordCompilation(string wordName)
@@ -73,7 +50,7 @@ public class Interpreter : IInterpreter
             Throw(-14, "not in a new word compilation");
         }
 
-        RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
+        this.RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
 
         WordBeingDefined = null;
         _interpreterState = InterpreterStateCode.Interpreting;
@@ -186,12 +163,12 @@ public class Interpreter : IInterpreter
 
     private void CompileWord(string wordName)
     {
-        if (IsWordRegistered(wordName))
+        if (this.IsWordRegistered(wordName))
         {
-            var word = _words[wordName];
+            var word = State.Words[wordName];
             if (word.IsImmediate)
             {
-                ExecuteWordInternal(_words[wordName]);
+                ExecuteWordInternal(State.Words[wordName]);
             }
             else
             {
@@ -222,9 +199,9 @@ public class Interpreter : IInterpreter
 
     private void ExecuteWord(string wordName)
     {
-        if (IsWordRegistered(wordName))
+        if (this.IsWordRegistered(wordName))
         {
-            ExecuteWordInternal(_words[wordName]);
+            ExecuteWordInternal(State.Words[wordName]);
             
             return;
         }

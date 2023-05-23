@@ -16,7 +16,40 @@ public static class InterpreterExtensions
 {
     private const int NumericConversionRadixHeapIndex = 1;
     
-    
+
+    /// <summary>
+    /// Checks, if a word is already registered.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="wordName">A new word name.</param>
+    /// <returns>True, if a word is already registered.</returns>
+    public static bool IsWordRegistered(this IInterpreter interpreter, string wordName)
+        => string.IsNullOrWhiteSpace(wordName) == false && interpreter.State.Words.ContainsKey(wordName);
+
+    /// <summary>
+    /// Gets a registered word. Throws an exception if no such word is registered.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="wordName">A requested word name.</param>
+    /// <returns>A registered word instance.</returns>
+    public static IWord GetRegisteredWord(this IInterpreter interpreter, string wordName)
+    {
+        if (interpreter.IsWordRegistered(wordName) == false)
+        {
+            interpreter.Throw(-13, $"The '{wordName}' word is undefined.");
+        }
+
+        return interpreter.State.Words[wordName];
+    }
+
+    /// <summary>
+    /// Registers a new word. Throws an exception, if such word is already registered.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="word">A word to be registered.</param>
+    public static void RegisterWord(this IInterpreter interpreter, IWord word)
+        => interpreter.State.Words.Add(word.Name.ToUpperInvariant(), word);
+
     /// <summary>
     /// Adds a primitive word to the words list.
     /// </summary>

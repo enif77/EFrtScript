@@ -10,7 +10,9 @@ using EFrtScript.Stacks;
 /// </summary>
 public class InterpreterState : IInterpreterState
 {
+    public IDictionary<string, IWord> Words { get; }
     public IWord? CurrentWord { get; set; }
+
     public ValueStack Stack { get; }
     public ValueStack ReturnStack { get; }
     public ExceptionStack ExceptionStack { get; }
@@ -20,6 +22,7 @@ public class InterpreterState : IInterpreterState
 
     public InterpreterState()
     {
+        Words = new Dictionary<string, IWord>();
         Stack = new ValueStack();
         ReturnStack = new ValueStack();
         ExceptionStack = new ExceptionStack();
@@ -30,6 +33,7 @@ public class InterpreterState : IInterpreterState
 
     public void Reset()
     {
+        Words.Clear();
         CurrentWord = null;
         Stack.Clear();
         ReturnStack.Clear();

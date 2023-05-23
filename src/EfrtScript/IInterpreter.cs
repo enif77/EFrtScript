@@ -27,23 +27,6 @@ public interface IInterpreter
 
 
     /// <summary>
-    /// Checks, if a word is already registered.
-    /// </summary>
-    /// <returns>True, if a word is already registered.</returns>
-    bool IsWordRegistered(string wordName);
-    
-    /// <summary>
-    /// Gets a registered word. Throws an exception if no such word is registered.
-    /// </summary>
-    /// <returns>A registered word instance.</returns>
-    IWord GetRegisteredWord(string wordName);
-    
-    /// <summary>
-    /// Registers a new word. Throws an exception, if such word is already registered.
-    /// </summary>
-    void RegisterWord(IWord word);
-
-    /// <summary>
     /// Begins a new word compilation. Throws an exception, if a new word compilation is already happening.
     /// Sets the WordBeingDefined property to the instance of the newly compiled word.
     /// </summary>

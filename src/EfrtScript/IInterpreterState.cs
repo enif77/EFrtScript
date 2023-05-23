@@ -11,6 +11,11 @@ using EFrtScript.Stacks;
 public interface IInterpreterState
 {
     /// <summary>
+    /// The words dictionary.
+    /// </summary>
+    IDictionary<string, IWord> Words { get; }
+
+    /// <summary>
     /// The currently running word.
     /// </summary>
     IWord? CurrentWord { get; set; }

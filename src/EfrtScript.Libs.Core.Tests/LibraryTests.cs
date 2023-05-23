@@ -4,6 +4,7 @@ namespace EFrtScript.Libs.Core.Tests;
 
 using Xunit;
 
+using EFrtScript.Extensions;
 using EFrtScript.IO;
 
 
