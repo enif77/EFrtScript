@@ -72,6 +72,176 @@ internal class Parser
         return stringBuff.ToString();
     }
 
+    // ---
+
+    /// <summary>
+    /// Parses a terminated string literal.
+    /// </summary>
+    /// <param name="terminator">A character, that terminates the parsed string literal.</param>
+    /// <param name="allowSpecialChars">If special (escape) characters are supported in the parsed string literal.</param>
+    /// <param name="skipLeadingTerminators">If true, leading terminator chars are skipped.</param>
+    /// <returns>A string.</returns>
+    public string ParseTerminatedString(char terminator, bool allowSpecialChars = false, bool skipLeadingTerminators = false)
+    {
+        var sb = new StringBuilder();
+
+        var c = _source.NextChar();
+        var leadingChars = true;
+        while (_source.CurrentChar != 0)
+        {
+            if (_source.CurrentChar == terminator)
+            {
+                if (skipLeadingTerminators && leadingChars)
+                {
+                    while (_source.CurrentChar == terminator)
+                    {
+                        _source.NextChar();
+
+                        if (_source.CurrentChar == 0)
+                        {
+                            // Terminators only = an empty string.
+                            return string.Empty;
+                        }
+                    }
+
+                    // We are at char behind the last terminator.
+                }
+                else
+                {
+                    // Eat the terminator.
+                    _source.NextChar();
+
+                    break;
+                }
+            }
+
+            if (allowSpecialChars && _source.CurrentChar == '\\')
+            {
+                sb.Append(ParseStringSpecialChar());
+                c = _source.CurrentChar;  // The CurrentChar contains the character following the escaped special char.
+
+                continue;
+            }
+            else
+            {
+                sb.Append(_source.CurrentChar);
+            }
+
+            c = _source.NextChar();
+
+            // No more at the beginning of a string.
+            leadingChars = false;
+        }
+
+        if (c != terminator)
+        {
+            throw new Exception($"'{terminator}' expected.");
+        }
+
+        if (_source.CurrentChar != 0 && IsWhiteSpace(_source.CurrentChar) == false)
+        {
+            throw new Exception("The EOF or an white character after a string terminator expected.");
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Parses a special (or escape) characters defined for string literals.
+    /// When finishes, the CurrentChar contains the character behind the escaped character.
+    /// </summary>
+    /// <returns>A string containing the parsed special character.</returns>
+    private string ParseStringSpecialChar()
+    {
+        _source.NextChar();  // eat '\'
+
+        switch (_source.CurrentChar)
+        {
+            case 'a': _source.NextChar(); return "\a";         // \a BEL (alert, ASCII 7)
+            case 'b': _source.NextChar(); return "\b";         // \b BS (backspace, ASCII 8)
+            case 'e': _source.NextChar(); return "\u001B";     // \e ESC (escape, ASCII 27)
+            case 'f': _source.NextChar(); return "\f";         // \f FF (form feed, ASCII 12)
+            case 'l': _source.NextChar(); return "\n";         // \l LF (line feed, ASCII 10)
+            case 'm': _source.NextChar(); return "\r\n";       // \m CR/LF pair (ASCII 13, 10)
+            case 'n': _source.NextChar(); return "\n";         // newline (implementation dependent , e.g., CR/LF, CR, LF, LF/CR)
+            case 'q':                                  // \q double-quote(ASCII 34)
+            case '\"': _source.NextChar(); return "\"";        // \" double-quote (ASCII 34)
+            case 'r': _source.NextChar(); return "\r";         // \r CR (carriage return, ASCII 13)
+            case 't': _source.NextChar(); return "\t";         // \t HT (horizontal tab, ASCII 9)
+            case 'v': _source.NextChar(); return "\v";         // \v VT (vertical tab, ASCII 11)
+            case 'z':                                  // \z NUL (no character, ASCII 0)
+            case '0': _source.NextChar(); return "\0";         // \0 NUL (no character, ASCII 0)
+            case '\\': _source.NextChar(); return "\\";        // \\ backslash itself (ASCII 92)
+            case '\'': _source.NextChar(); return "\'";
+
+            case 'u':                                  // A sequence of 4 hex characters.
+                {
+                    _source.NextChar();
+                    var c = 0;
+                    for (var i = 0; i < 4; i++)
+                    {
+                        if (IsDigit(_source.CurrentChar))
+                        {
+                            c = (c * 16) + (_source.CurrentChar - '0');
+                        }
+                        else if (_source.CurrentChar >= 'a' && _source.CurrentChar <= 'f')
+                        {
+                            c = (c * 16) + (_source.CurrentChar - 'a' + 10);
+                        }
+                        else if (_source.CurrentChar >= 'A' && _source.CurrentChar <= 'F')
+                        {
+                            c = (c * 16) + (_source.CurrentChar - 'A' + 10);
+                        }
+                        else
+                        {
+                            throw new Exception("A hex digit expected in \\u string escape character.");
+                        }
+
+                        _source.NextChar();
+                    }
+
+                    return string.Empty + (char)c;
+                }
+
+            case 'x':                                  // A hex sequence of 1 to 4 hex characters.
+            case 'X':
+                {
+                    _source.NextChar();
+                    var c = 0;
+                    for (var i = 0; i < 4; i++)
+                    {
+                        if (IsDigit(_source.CurrentChar))
+                        {
+                            c = (c * 16) + (_source.CurrentChar - '0');
+                        }
+                        else if (_source.CurrentChar >= 'a' && _source.CurrentChar <= 'f')
+                        {
+                            c = (c * 16) + (_source.CurrentChar - 'a' + 10);
+                        }
+                        else if (_source.CurrentChar >= 'A' && _source.CurrentChar <= 'F')
+                        {
+                            c = (c * 16) + (_source.CurrentChar - 'A' + 10);
+                        }
+                        else
+                        {
+                            if (i == 0) throw new Exception("A hex digit expected in \\x string escape character.");
+
+                            break;
+                        }
+
+                        _source.NextChar();
+                    }
+
+                    return string.Empty + (char)c;
+                }
+
+            default:
+                throw new Exception($"Unexpected character with code {_source.CurrentChar} in string escape definition.");
+        }
+    }
+
+    // ---
+
     /// <summary>
     /// Parses a integer or a floating point number.
     /// It is called by the interpreter directly, because a word must be checked, if it is defined/known, 
