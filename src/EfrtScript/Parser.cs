@@ -47,7 +47,7 @@ internal class Parser
             }
 
             wordBuff ??= new StringBuilder();
-            wordBuff.Append((char) c);
+            wordBuff.Append((char)c);
 
             c = _source.NextChar();
         }
@@ -63,8 +63,6 @@ internal class Parser
     {
         return ParseTerminatedString('\"', true);
     }
-
-    // ---
 
     /// <summary>
     /// Parses a terminated string literal.
@@ -88,7 +86,7 @@ internal class Parser
                 break;
             }
 
-            if (allowSpecialChars && _source.CurrentChar == '\\')
+            if (allowSpecialChars && c == '\\')
             {
                 stringBuff.Append(ParseStringSpecialChar());
                 c = _source.CurrentChar;  // The CurrentChar contains the character following the escaped special char.
@@ -123,7 +121,7 @@ internal class Parser
     /// <returns>A string containing the parsed special character.</returns>
     private string ParseStringSpecialChar()
     {
-        _ = _source.NextChar();  // eat '\'
+        _source.NextChar();  // eat '\'
 
         switch (_source.CurrentChar)
         {
@@ -186,8 +184,6 @@ internal class Parser
                 throw new Exception($"An unexpected character with code {_source.CurrentChar} in a string escape definition found.");
         }
     }
-
-    // ---
 
     /// <summary>
     /// Parses a integer or a floating point number.
@@ -485,24 +481,24 @@ internal class Parser
     }
 
 
-    public static int ParseInteger(string s, int radix)
-    {
-        if (string.IsNullOrWhiteSpace(s))
-        {
-            throw new Exception("A nonempty string with a number expected.");
-        }
+    // public static int ParseInteger(string s, int radix)
+    // {
+    //     if (string.IsNullOrWhiteSpace(s))
+    //     {
+    //         throw new Exception("A nonempty string with a number expected.");
+    //     }
 
-        if (radix is < 2 or > 36)
-        {
-            throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
-        }
+    //     if (radix is < 2 or > 36)
+    //     {
+    //         throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
+    //     }
 
-        var n = 0;
+    //     var n = 0;
 
         
         
-        return n;
-    }
+    //     return n;
+    // }
 
 
     public static int CharToDigit(char c, int radix)
