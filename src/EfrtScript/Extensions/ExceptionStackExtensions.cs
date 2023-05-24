@@ -23,7 +23,7 @@ public static class ExceptionStackExtensions
 
     
     public static ExceptionFrame ExceptionStackPeek(this IInterpreter interpreter)
-        => interpreter.State.ExceptionStack.Peek() ?? throw NullValueNotAllowedInStackException();
+        => interpreter.State.ExceptionStack.Peek() ?? throw NullValueNotAllowedInExceptionStackException();
 
     
     public static void ExceptionStackPush(this IInterpreter interpreter, ExceptionFrame exceptionFrame)
@@ -35,7 +35,7 @@ public static class ExceptionStackExtensions
     
     
     public static ExceptionFrame ExceptionStackPop(this IInterpreter interpreter)
-        => interpreter.State.ExceptionStack.Pop() ?? throw NullValueNotAllowedInStackException();
+        => interpreter.State.ExceptionStack.Pop() ?? throw NullValueNotAllowedInExceptionStackException();
     
     /// <summary>
     /// Expects N free items on the exception stack, so N items can be pushed to the exception stack.
@@ -54,6 +54,6 @@ public static class ExceptionStackExtensions
     }
 
     
-    private static Exception NullValueNotAllowedInStackException()
+    private static Exception NullValueNotAllowedInExceptionStackException()
         => new NullReferenceException("Null as value should not be stored in the exception stack.");
 }
