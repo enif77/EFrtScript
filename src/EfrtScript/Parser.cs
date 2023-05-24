@@ -13,12 +13,20 @@ internal class Parser
     private readonly ISourceReader _source;
     
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="source">A source reader.</param>
     public Parser(ISourceReader source)
     {
         _source = source ?? throw new ArgumentNullException(nameof(source));
     }
 
 
+    /// <summary>
+    /// Parses a word.
+    /// </summary>
+    /// <returns>A word or null if no more chars left.</returns>    
     public string? ParseWord()
     {
         StringBuilder? wordBuff = null;
@@ -47,29 +55,13 @@ internal class Parser
         return wordBuff?.ToString();
     }
 
-
+    /// <summary>
+    /// Parses a double quotes terminated string.
+    /// </summary>
+    /// <returns>A string.</returns>
     public string ParseString()
     {
-        var stringBuff = new StringBuilder();
-        var c = _source.NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).
-        while (c >= 0)
-        {
-            if (c == '"')
-            {
-                break;
-            }
-
-            stringBuff.Append((char)c);
-
-            c = _source.NextChar();
-        }
-
-        if (c < 0)
-        {
-            throw new Exception("A string literal end expected");
-        }
-
-        return stringBuff.ToString();
+        return ParseTerminatedString('\"', true);
     }
 
     // ---
@@ -79,40 +71,21 @@ internal class Parser
     /// </summary>
     /// <param name="terminator">A character, that terminates the parsed string literal.</param>
     /// <param name="allowSpecialChars">If special (escape) characters are supported in the parsed string literal.</param>
-    /// <param name="skipLeadingTerminators">If true, leading terminator chars are skipped.</param>
     /// <returns>A string.</returns>
-    public string ParseTerminatedString(char terminator, bool allowSpecialChars = false, bool skipLeadingTerminators = false)
+    public string ParseTerminatedString(char terminator, bool allowSpecialChars = false)
     {
         var stringBuff = new StringBuilder();
 
         var c = _source.NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).
-        var leadingChars = true;
-        while (_source.CurrentChar >= 0)
+        var terminatorFound = false;
+        while (c >= 0)
         {
-            if (_source.CurrentChar == terminator)
+            if (c == terminator)
             {
-                if (skipLeadingTerminators && leadingChars)
-                {
-                    while (_source.CurrentChar == terminator)
-                    {
-                        _source.NextChar();
+                c =_source.NextChar();  // Eat the terminator.
+                terminatorFound = true;
 
-                        if (_source.CurrentChar == 0)
-                        {
-                            // Terminators only = an empty string.
-                            return string.Empty;
-                        }
-                    }
-
-                    // We are at char behind the last terminator.
-                }
-                else
-                {
-                    // Eat the terminator.
-                    _source.NextChar();
-
-                    break;
-                }
+                break;
             }
 
             if (allowSpecialChars && _source.CurrentChar == '\\')
@@ -124,21 +97,18 @@ internal class Parser
             }
             else
             {
-                stringBuff.Append(_source.CurrentChar);
+                stringBuff.Append((char)c);
             }
 
             c = _source.NextChar();
-
-            // No more at the beginning of a string.
-            leadingChars = false;
         }
 
-        if (c != terminator)
+        if (terminatorFound == false)
         {
-            throw new Exception($"'{terminator}' expected.");
+            throw new Exception($"'{terminator}' string terminator expected.");
         }
 
-        if (_source.CurrentChar != 0 && IsWhiteSpace(_source.CurrentChar) == false)
+        if (c >= 0 && IsWhiteSpace(c) == false)
         {
             throw new Exception("The EOF or an white character after a string terminator expected.");
         }
@@ -181,7 +151,7 @@ internal class Parser
                     for (var i = 0; i < 4; i++)
                     {
                         charCode = (charCode * 16) + CharToDigit((char)c, 16);
-                        
+
                         c = _source.NextChar();
                     }
 
