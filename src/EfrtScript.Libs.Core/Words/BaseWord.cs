@@ -27,7 +27,7 @@ https://forth-standard.org/standard/core/BASE
 
 BASE
 
-( -- index )
+( -- addr )
 addr is the index of a value containing the current number-conversion radix {{2...36}}.
 
  */
