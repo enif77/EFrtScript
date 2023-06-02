@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\EFrtScript.Libs.Core\EFrtScript.Libs.Core.csproj" />
+      <ProjectReference Include="..\EFrtScript.Libs.Exception\EFrtScript.Libs.Exception.csproj" />
       <ProjectReference Include="..\EFrtScript\EFrtScript.csproj" />
     </ItemGroup>
 

@@ -1,11 +1,11 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Words;
+namespace EFrtScript.Libs.Exception.Words;
 
 using System;
 
 using EFrtScript.Extensions;
-using EFrtScript.Libs.Core.Values;
+using EFrtScript.Libs.Exception.Values;
 
 
 /// <summary>

@@ -1,6 +1,6 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Words;
+namespace EFrtScript.Libs.Exception.Words;
 
 using EFrtScript.Extensions;
 

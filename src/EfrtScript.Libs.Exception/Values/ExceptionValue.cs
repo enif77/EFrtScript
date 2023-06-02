@@ -1,6 +1,6 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Values;
+namespace EFrtScript.Libs.Exception.Values;
 
 using System;
 

@@ -7,7 +7,6 @@ using System.IO;
 using EFrtScript;
 using EFrtScript.IO;
 using EFrtScript.Extensions;
-using EFrtScript.Libs.Core;
 
 using EFrtScriptApp.Words;
 
@@ -18,8 +17,8 @@ internal static class Program
     {
         var interpreter = new Interpreter(new ConsoleOutputWriter());
 
-        var coreLib = new Library();
-        coreLib.Initialize(interpreter);
+        new EFrtScript.Libs.Core.Library().Initialize(interpreter);
+        new EFrtScript.Libs.Exception.Library().Initialize(interpreter);
 
         interpreter.RegisterWord(new ReadAllTextWord());
 

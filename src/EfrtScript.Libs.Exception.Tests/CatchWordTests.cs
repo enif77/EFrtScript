@@ -1,10 +1,10 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Tests;
+namespace EFrtScript.Libs.Exception.Tests;
 
 using Xunit;
 
-using EFrtScript.Libs.Core.Words;
+using EFrtScript.Libs.Exception.Words;
 
 
 public class CatchWordTests
