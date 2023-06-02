@@ -209,8 +209,7 @@ public class Interpreter : IInterpreter
         if (Parser.TryParseNumber(wordName, out var result))
         {
             // This will show the value in the output of the TRACE word.
-            State.CurrentWord = new ConstantValueWord(result);
-            ExecuteWord(State.CurrentWord);
+            ExecuteWordInternal(new ConstantValueWord(result));
 
             return;
         }
