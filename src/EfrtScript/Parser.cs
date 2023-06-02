@@ -93,10 +93,8 @@ internal class Parser
 
                 continue;
             }
-            else
-            {
-                stringBuff.Append((char)c);
-            }
+
+            stringBuff.Append((char)c);
 
             c = _source.NextChar();
         }
@@ -144,7 +142,7 @@ internal class Parser
 
             case 'u':                                       // A sequence of 4 hex characters.
                 {
-                    var c = _source.NextChar();             // eat 'u'
+                    var c = _source.NextChar();          // eat 'u'
                     var charCode = 0;
                     for (var i = 0; i < 4; i++)
                     {
@@ -159,7 +157,7 @@ internal class Parser
             case 'x':                                       // A hex sequence of 1 to 4 hex characters.
             case 'X':
                 {
-                    var c = _source.NextChar();             // eat 'x'
+                    var c = _source.NextChar();          // eat 'x'
                     var charCode = 0;
                     for (var i = 0; i < 4; i++)
                     {
@@ -501,7 +499,7 @@ internal class Parser
     // }
 
 
-    public static int CharToDigit(char c, int radix)
+    private static int CharToDigit(char c, int radix)
     {
         if (c < '0')
         {
