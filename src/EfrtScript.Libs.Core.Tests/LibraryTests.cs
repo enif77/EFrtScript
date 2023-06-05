@@ -25,7 +25,6 @@ public class LibraryTests
     [InlineData("DECIMAL")]
     [InlineData("DUP")]
     [InlineData("EMIT")]
-    [InlineData("HEX")]
     [InlineData("-")]
     [InlineData("NEGATE")]
     [InlineData("+")]

@@ -24,14 +24,12 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new EvaluateWord());
         
         interpreter.RegisterWord(new ParenWord());
-        interpreter.RegisterWord(new LineCommentWord());
 
         interpreter.RegisterWord(new BeginNewWordCompilationWord());
         interpreter.RegisterWord(new EndNewWordCompilationWord());
 
         interpreter.RegisterWord(new BaseWord());
         interpreter.RegisterWord(new DecimalWord());
-        interpreter.RegisterWord(new HexWord());
 
         interpreter.RegisterWord(new StoreWord());
         interpreter.RegisterWord(new FetchWord());

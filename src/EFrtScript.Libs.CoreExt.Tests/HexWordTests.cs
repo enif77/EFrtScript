@@ -1,12 +1,12 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Tests;
+namespace EFrtScript.Libs.CoreExt.Tests;
 
 using Xunit;
 
 using EFrtScript.Extensions;
 using EFrtScript.IO;
-using EFrtScript.Libs.Core.Words;
+using EFrtScript.Libs.CoreExt.Words;
 
 
 public class HexWordTests

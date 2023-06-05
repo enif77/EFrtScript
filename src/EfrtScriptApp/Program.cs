@@ -18,6 +18,7 @@ internal static class Program
         var interpreter = new Interpreter(new ConsoleOutputWriter());
 
         new EFrtScript.Libs.Core.Library().Initialize(interpreter);
+        new EFrtScript.Libs.CoreExt.Library().Initialize(interpreter);
         new EFrtScript.Libs.Exception.Library().Initialize(interpreter);
 
         interpreter.RegisterWord(new ReadAllTextWord());

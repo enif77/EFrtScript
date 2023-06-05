@@ -1,9 +1,8 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Words;
+namespace EFrtScript.Libs.CoreExt.Words;
 
 using EFrtScript.Extensions;
-using EFrtScript.Values;
 
 
 internal class HexWord : IWord

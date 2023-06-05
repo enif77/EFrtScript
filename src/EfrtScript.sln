@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfrtScript.Libs.Exception",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfrtScript.Libs.Exception.Tests", "EfrtScript.Libs.Exception.Tests\EfrtScript.Libs.Exception.Tests.csproj", "{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.CoreExt", "EFrtScript.Libs.CoreExt\EFrtScript.Libs.CoreExt.csproj", "{0575463F-BA11-4607-951E-62BCDBCCF89E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.CoreExt.Tests", "EFrtScript.Libs.CoreExt.Tests\EFrtScript.Libs.CoreExt.Tests.csproj", "{E3A04C6B-D392-443F-8ADC-FF2B13256D06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,10 +60,19 @@ Global
 		{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0575463F-BA11-4607-951E-62BCDBCCF89E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0575463F-BA11-4607-951E-62BCDBCCF89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0575463F-BA11-4607-951E-62BCDBCCF89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0575463F-BA11-4607-951E-62BCDBCCF89E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3A04C6B-D392-443F-8ADC-FF2B13256D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A04C6B-D392-443F-8ADC-FF2B13256D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A04C6B-D392-443F-8ADC-FF2B13256D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A04C6B-D392-443F-8ADC-FF2B13256D06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{22121B08-BA76-40F2-9692-5B8E11C06B9D} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
 		{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
 		{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
+		{E3A04C6B-D392-443F-8ADC-FF2B13256D06} = {3E3646E9-EA67-4111-AFF5-5BB465EF7656}
 	EndGlobalSection
 EndGlobal
