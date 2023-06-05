@@ -110,17 +110,6 @@ NOTE: Not yet implemented. :-)
 | ABORT" str | yes  | C    | **Abort with message**<br>(flag -- )<br>Prints the string literal that follows in line, then aborts, clearing all execution state to return to the interpreter. Extended version. |
 
 
-## STRING library
-
-String manipulation words.
-
-### Words
-
-| Name | Imm. | Mode | Description                                                                 |
-|------|------|------|-----------------------------------------------------------------------------|
-| S.   | no   | IC   | **Print string**<br>(s -- )<br>A string on the top of the stack is printed. |
-
-
 ## TOOLS library
 
 Various helper words.

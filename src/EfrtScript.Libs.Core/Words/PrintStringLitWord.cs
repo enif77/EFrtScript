@@ -16,9 +16,9 @@ internal class PrintStringLitWord : IWord
     {
         interpreter.CheckIsCompiling(this);
 
-        // ." -> S" abc" S.
+        // ." -> S" abc" TYPE
         interpreter.WordBeingDefined!.AddWord(new ConstantValueWord(interpreter.CurrentInputSource!.ReadString()));
-        interpreter.WordBeingDefined!.AddWord(new PrintStringWord());
+        interpreter.WordBeingDefined!.AddWord(new TypeWord());
 
         return 1;
     }

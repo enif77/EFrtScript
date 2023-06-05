@@ -69,7 +69,6 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new LessThanZeroWord());
         
         interpreter.RegisterWord(new PrintStringLitWord());
-        interpreter.RegisterWord(new PrintStringWord());
         interpreter.RegisterWord(new StringLitWord());
 
         interpreter.RegisterWord(new IfWord());
