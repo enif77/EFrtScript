@@ -74,7 +74,7 @@ internal class Parser
     {
         var stringBuff = new StringBuilder();
 
-        var c = _source.NextChar();  // Skip the white-space behind the string literal opening word (S., .", ...).
+        var c = _source.NextChar();  // Skip the white-space behind the string literal opening word (.", ...).
         var terminatorFound = false;
         while (c >= 0)
         {

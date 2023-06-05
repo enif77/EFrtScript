@@ -1,8 +1,8 @@
-S" --- Stack operations ---" S. CR
+S" --- Stack operations ---" TYPE CR
 
 ( ?DUP - true )
 1 ?DUP . CR         ( 1)
-: StrOne S" 1" ; StrOne ?DUP S. CR    ( 1)
+: StrOne S" 1" ; StrOne ?DUP TYPE CR    ( 1)
 
 ( ?DUP - false )
 0 ?DUP . CR         ( 0)

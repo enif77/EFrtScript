@@ -1,4 +1,4 @@
-S" --- DO LOOP ---" S. CR
+S" --- DO LOOP ---" TYPE CR
 
 : test
   5 0 DO

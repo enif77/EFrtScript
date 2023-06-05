@@ -1,2 +1,2 @@
 ( Hello world in Pico Forth! )
-S" Hello, World!" S. CR
+S" Hello, World!" TYPE CR

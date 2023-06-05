@@ -1,4 +1,4 @@
-S" --- IF THEN ELSE ---" S. CR
+S" --- IF THEN ELSE ---" TYPE CR
 
 : check
   IF 

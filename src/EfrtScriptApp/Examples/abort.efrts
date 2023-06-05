@@ -1,7 +1,7 @@
-S" --- ABORT ---" S. CR
+S" --- ABORT ---" TYPE CR
 
-S" Before ABORT... " S. CR
+S" Before ABORT... " TYPE CR
 
 ABORT
 
-S" After ABORT! " S. CR  ( Wont be executed. )
+S" After ABORT! " TYPE CR  ( Wont be executed. )

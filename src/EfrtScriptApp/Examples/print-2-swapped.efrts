@@ -1,6 +1,6 @@
-S" --- Return stack swap ---" S. CR
+S" --- Return stack swap ---" TYPE CR
 
-( Pushes 2 nubers to the stack and prints them in reverse order.   )
+( Pushes 2 numbers to the stack and prints them in reverse order.   )
 1 2 . SPACE . CR          ( 2 1)
 1 2 >R . SPACE R> . CR    ( 1 2)
 

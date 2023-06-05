@@ -1,4 +1,4 @@
-S" --- NEGATE ---" S. CR
+S" --- NEGATE ---" TYPE CR
 
 10 NEGATE . CR  ( -10 )
 -5 NEGATE . CR  ( 5 )

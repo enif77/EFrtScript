@@ -1,4 +1,4 @@
-S" --- Comparisons ---" S. CR
+S" --- Comparisons ---" TYPE CR
 
 ( 0< -> 0 0 -1 )
  0 0< . SPACE

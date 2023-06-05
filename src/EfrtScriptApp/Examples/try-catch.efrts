@@ -1,4 +1,4 @@
-S" --- TRY - CATCH ---" S. CR
+S" --- TRY - CATCH ---" TYPE CR
 
 : could-fail ( -- n )
   DUP 1 = IF 123 THROW THEN ;

@@ -1,4 +1,4 @@
-S" --- ABORT with message ---" S. CR
+S" --- ABORT with message ---" TYPE CR
 
 : abort-if-1   ( n -- )
   DUP 1 =      ( n -- n f )

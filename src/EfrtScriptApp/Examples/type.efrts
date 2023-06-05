@@ -1,6 +1,6 @@
-S" --- TYPE ---" S. CR
+S" --- TYPE ---" TYPE CR
 
 1 TYPE CR  ( 1 )
-2 S. CR    ( 2 )
+2 TYPE CR  ( 2 )
 : StrAaa S" aaa" ; StrAaa TYPE CR  ( aaa )
 S" aaa" S" bbb" SWAP TYPE CR ( aaa )
