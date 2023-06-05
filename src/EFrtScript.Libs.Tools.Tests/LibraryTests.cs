@@ -1,6 +1,6 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Tests;
+namespace EFrtScript.Libs.Tools.Tests;
 
 using Xunit;
 
@@ -13,26 +13,16 @@ public class LibraryTests
     [Fact]
     public void HasExpectedName()
     {
-        Assert.Equal("CORE", new Library().Name);
+        Assert.Equal("TOOLS", new Library().Name);
     }
     
     
     [Theory]
-    [InlineData("ABS")]
-    [InlineData("BASE")]
-    [InlineData("CR")]
-    [InlineData("DECIMAL")]
-    [InlineData("DUP")]
-    [InlineData("EMIT")]
-    [InlineData("-")]
-    [InlineData("NEGATE")]
-    [InlineData("+")]
-    [InlineData("(")]
+    [InlineData("BYE")]
     public void HasWordRegistered(string wordName)
     {
         var interpreter = new Interpreter(new NullOutputWriter());
-        var coreLib = new Library();
-        coreLib.Initialize(interpreter);
+        new Library().Initialize(interpreter);
         
         Assert.True(interpreter.IsWordRegistered(wordName));
     }

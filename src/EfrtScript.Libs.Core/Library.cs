@@ -76,8 +76,6 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new DoWord());
         interpreter.RegisterWord(new LoopWord());
 
-        interpreter.RegisterWord(new ByeWord());
-        
         interpreter.RegisterWord(new GetExecutionTokenWord());
     }
 }

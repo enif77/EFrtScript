@@ -20,6 +20,7 @@ internal static class Program
         new EFrtScript.Libs.Core.Library().Initialize(interpreter);
         new EFrtScript.Libs.CoreExt.Library().Initialize(interpreter);
         new EFrtScript.Libs.Exception.Library().Initialize(interpreter);
+        new EFrtScript.Libs.Tools.Library().Initialize(interpreter);
 
         interpreter.RegisterWord(new ReadAllTextWord());
 

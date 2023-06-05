@@ -1,12 +1,11 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-namespace EFrtScript.Libs.Core.Tests;
+namespace EFrtScript.Libs.Tools.Tests;
 
 using Xunit;
 
-using EFrtScript.Extensions;
 using EFrtScript.IO;
-using EFrtScript.Libs.Core.Words;
+using EFrtScript.Libs.Tools.Words;
 
 
 public class ByeWordTests
