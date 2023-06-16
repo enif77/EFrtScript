@@ -128,6 +128,14 @@ internal static class Program
 
 /*
 
+dotnet publish -c Release --runtime win-x64 --force --self-contained true -p:PublishSingleFile=true
+dotnet publish -c Release --runtime osx-x64 --force --self-contained true -p:PublishSingleFile=true
+dotnet publish -c Release --runtime osx-arm64 --force --self-contained true -p:PublishSingleFile=true
+
+dotnet publish -c Release --runtime win-x64 --force --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
+
+---
+
 ~/.../EFrtScript/src$ dotnet run --project ./EFrtScriptApp/EFrtScriptApp.csproj
 ~/.../EFrtScript/src$ dotnet run --project EfrtScriptApp/EfrtScriptApp.csproj ./EfrtScriptApp/Examples/hello-world.efrts
 
