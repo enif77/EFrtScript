@@ -10,6 +10,11 @@ using System;
 /// </summary>
 public class InterpreterEventArgs : EventArgs
 {
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="word">A word.</param>
+    /// <exception cref="ArgumentNullException">Thrown, when the word parameter is null.</exception>
     public InterpreterEventArgs(IWord word)
     {
         Word = word ?? throw new ArgumentNullException(nameof(word));

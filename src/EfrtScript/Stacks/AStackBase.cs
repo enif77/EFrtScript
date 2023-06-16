@@ -3,17 +3,29 @@
 namespace EFrtScript.Stacks;
 
 
+/// <summary>
+/// Base class for all stacks.
+/// </summary>
+/// <typeparam name="T">A type of values stored in the stack.</typeparam>
 public abstract class AStackBase<T> : IGenericStack<T>
 {
+    /// <inheritdoc cref="IInterpreter"/>
     public T?[] Items { get; }
 
+    /// <inheritdoc cref="IInterpreter"/>
     public int Top { get; set; }
 
+    /// <inheritdoc cref="IInterpreter"/>
     public int Count => Top + 1;
     
+    /// <inheritdoc cref="IInterpreter"/>
     public bool IsEmpty => Count < 1;
 
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="capacity">The stack capacity.</param>
     protected AStackBase(int capacity = 32)
     {
         Items = new T[capacity];
@@ -21,7 +33,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
         Init(default(T));
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public void Init(T? defaultValue)
     {
         Top = -1;
@@ -31,50 +43,50 @@ public abstract class AStackBase<T> : IGenericStack<T>
         }
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public void Clear()
     {
         Init(default(T));
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public T? Peek()
     {
         return Items[Top];
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public T? Pick(int index)
     {
         return Items[Top - index];
     }
 
-    // (a -- )
+    /// <inheritdoc cref="IInterpreter"/>
     public T? Pop()
     {
         return Items[Top--];
     }
 
-    // (-- a)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Push(T? a)
     {
         Items[++Top] = a;
     }
 
-    // (a -- a a)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Dup()
     {
         Items[Top + 1] = Items[Top];
         Top++;
     }
 
-    // (a --)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Drop(int n = 1)
     {
         Top -= n;
     }
 
-    // (a b -- b a)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Swap()
     {
         // t = b
@@ -87,14 +99,14 @@ public abstract class AStackBase<T> : IGenericStack<T>
         Items[Top - 1] = t;
     }
 
-    // (a b -- a b a)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Over()
     {
         Items[Top + 1] = Items[Top - 1];
         Top++;
     }
 
-    // (a b c -- b c a)
+    /// <inheritdoc cref="IInterpreter"/>
     public void Rot()
     {
         // t = a
@@ -110,7 +122,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
         Items[Top] = t;
     }
 
-    // ( -- )
+    /// <inheritdoc cref="IInterpreter"/>
     public void Roll(int index)
     {
         var item = Items[Top - index];

@@ -7,16 +7,29 @@ using EFrtScript.IO;
 using EFrtScript.Words;
 
 
+/// <summary>
+/// Default interpreter implementation.
+/// </summary>
 public class Interpreter : IInterpreter
 {
+    /// <inheritdoc cref="IInterpreter"/>
     public IInterpreterState State { get; }
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public IOutputWriter Output { get; }
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public IInputSource? CurrentInputSource =>
         (State.InputSourceStack.Count > 0) 
             ? State.InputSourceStack.Peek() 
             : null;
 
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="outputWriter">An IOutputWriter instance used to output strings and chars from IO words.</param>
+    /// <exception cref="ArgumentNullException">Thrown, when the outputWriter argument is null.</exception>
     public Interpreter(IOutputWriter outputWriter)
     {
         State = new InterpreterState();
@@ -28,9 +41,11 @@ public class Interpreter : IInterpreter
 
     #region words compilation
 
+    /// <inheritdoc cref="IInterpreter"/>
     public INonPrimitiveWord? WordBeingDefined { get; private set; }
 
-
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public void BeginNewWordCompilation(string wordName)
     {
         if (IsCompiling)
@@ -42,7 +57,7 @@ public class Interpreter : IInterpreter
         _interpreterState = InterpreterStateCode.Compiling;
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public void EndNewWordCompilation()
     {
         if (IsCompiling == false)
@@ -62,13 +77,21 @@ public class Interpreter : IInterpreter
     #region execution
 
     private InterpreterStateCode _interpreterState;
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public bool IsCompiling => _interpreterState == InterpreterStateCode.Compiling;
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public bool IsExecutionTerminated => _interpreterState == InterpreterStateCode.Breaking || _interpreterState == InterpreterStateCode.Terminating;
 
+    /// <inheritdoc cref="IInterpreter"/>
     public event EventHandler<InterpreterEventArgs>? ExecutingWord;
+    
+    /// <inheritdoc cref="IInterpreter"/>
     public event EventHandler<InterpreterEventArgs>? WordExecuted;
 
 
+    /// <inheritdoc cref="IInterpreter"/>
     public void Interpret(string src)
     {
         State.InputSourceStack.Push(
@@ -114,7 +137,7 @@ public class Interpreter : IInterpreter
         }
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public int ExecuteWord(IWord word)
     {
         if (word == null) throw new ArgumentNullException(nameof(word));
@@ -122,14 +145,14 @@ public class Interpreter : IInterpreter
         return ExecuteWordInternal(word);
     }
     
-
+    /// <inheritdoc cref="IInterpreter"/>
     public void Reset()
     {
         State.Reset();
         _interpreterState = InterpreterStateCode.Interpreting;
     }
     
-    
+    /// <inheritdoc cref="IInterpreter"/>
     public void Abort()
     {
         State.Stack.Clear();
@@ -141,20 +164,20 @@ public class Interpreter : IInterpreter
         Quit();
     }
 
-
+    /// <inheritdoc cref="IInterpreter"/>
     public void Quit()
     {
         State.ReturnStack.Clear();
         _interpreterState = InterpreterStateCode.Breaking;
     }
     
-    
+    /// <inheritdoc cref="IInterpreter"/>
     public void Throw(int exceptionCode, string? message = null)
     {
         ThrowInternal(exceptionCode, message);
     }
     
-    
+    /// <inheritdoc cref="IInterpreter"/>
     public void TerminateExecution()
     {
         _interpreterState = InterpreterStateCode.Terminating;

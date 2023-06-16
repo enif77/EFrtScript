@@ -8,8 +8,19 @@ namespace EFrtScript;
 /// </summary>
 public interface IInterpreter
 {
+    /// <summary>
+    /// An interpreter state.
+    /// </summary>
     IInterpreterState State { get; }
+    
+    /// <summary>
+    /// The output.
+    /// </summary>
     IOutputWriter Output { get; }
+    
+    /// <summary>
+    /// The current input source.
+    /// </summary>
     IInputSource? CurrentInputSource { get; }
 
 
