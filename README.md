@@ -42,12 +42,12 @@ The table below shows all special characters.
 | \l        | LF (line feed, ASCII 10) |
 | \m        | CR/LF pair (ASCII 13, 10) |
 | \n        | newline (implementation dependent , e.g., CR/LF, CR, LF, LF/CR) |
-| \q or \"  | double-quote (ASCII 34) |
+| \q or \\" | double-quote (ASCII 34) |
 | \r        | CR (carriage return, ASCII 13) |
 | \t        | HT (horizontal tab, ASCII 9) |
 | \v        | VT (vertical tab, ASCII 11) |
 | \z or \0  | NUL (no character, ASCII 0) |
-| \\        | backslash itself (ASCII 92) |
+| \\\\      | backslash itself (ASCII 92) |
 | \'        | double-quote (ASCII 39) |
 | \uHHHH    | A sequence of 4 hex characters. |
 | \x or \X  | A hex sequence of 1 to 4 hex characters. |
