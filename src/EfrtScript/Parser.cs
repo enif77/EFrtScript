@@ -2,6 +2,7 @@
 
 namespace EFrtScript;
 
+using System;
 using System.Text;
 
 using EFrtScript.IO;
@@ -203,11 +204,33 @@ internal class Parser
     /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
     public static bool TryParseNumber(string? s, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
     {
-        if (string.IsNullOrWhiteSpace(s))
+        try
+        {
+            result = ParseNumber(s, allowLeadingWhite, allowTrailingWhite, allowTrailingChars);
+
+            return true;
+        }
+        catch
         {
             result = new IntegerValue(0);
 
             return false;
+        }
+    }
+
+    /// <summary>
+    /// Parses a number from a string. 
+    /// Decimal numbers are supported only and floating point numbers are returned as type Double.
+    /// </summary>
+    /// <param name="s">A string to parse.</param>
+    /// <param name="allowLeadingWhite">If true, leading white chars are ignored.</param>
+    /// <param name="allowTrailingWhite">If true, trailing white chars are ignored.</param>
+    /// <param name="allowTrailingChars">If true, trailing chars are ignored.</param>
+    public static IValue ParseNumber(string? s, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            throw new ArgumentException("A non-empty numeric string expected.", nameof(s));
         }
 
         var isFloatingPoint = false;
@@ -241,9 +264,7 @@ internal class Parser
         if (IsDigit(sourceReader.CurrentChar) == false)
         {
             // No digit yet = badly formatted number.
-            result = new IntegerValue(0);
-
-            return false;
+            throw new Exception("At least one digit expected.");
         }
 
         // Parse the first digit sequence.
@@ -297,9 +318,7 @@ internal class Parser
             // 123D. is not allowed.
             if (hasFloatingPointMarker)
             {
-                result = new IntegerValue(0);
-
-                return false;
+                throw new Exception("The fractional part of a floating point number cannot follow the floating point marker. (123D. is not allowed.)");
             }
 
             if (isFloatingPoint == false)
@@ -313,10 +332,7 @@ internal class Parser
 
             if (IsDigit(sourceReader.CurrentChar) == false)
             {
-                //throw new Exception("A fractional part of a real number expected.");
-                result = new IntegerValue(0);
-
-                return false;
+                throw new Exception("A fractional part of a real number expected.");
             }
 
             var scale = 1.0;
@@ -338,9 +354,7 @@ internal class Parser
             // 123De is not allowed.
             if (hasFloatingPointMarker)
             {
-                result = new IntegerValue(0);
-
-                return false;
+                throw new Exception("The scale-factor part of a floating point number cannot follow the floating point marker. (123De is not allowed.)");
             }
 
             if (isFloatingPoint == false)
@@ -366,10 +380,7 @@ internal class Parser
             
             if (IsDigit(sourceReader.CurrentChar) == false)
             {
-                //throw new Exception("A scale factor of a real number expected.");
-                result = new IntegerValue(0);
-
-                return false;
+                throw new Exception("A scale factor of a floating point number expected.");
             }
 
             var fact = 0.0;
@@ -392,17 +403,42 @@ internal class Parser
         // We expect to eat all chars from a word while parsing a number.
         if (sourceReader.CurrentChar >= 0 && allowTrailingChars == false)
         {
-            result = new IntegerValue(0);
-
-            return false;
+            throw new Exception("No leading chars after the floating point number allowed.");
         }
 
         // We eat all chars, its a number.
-        result = isFloatingPoint
+        return isFloatingPoint
             ? new FloatValue(floatingPointValue * sign)
             : new IntegerValue(integerValue * sign);
+    }
 
-        return true;
+    /// <summary>
+    /// Parses a string into an integer number using the provided number conversion radix.
+    /// </summary>
+    /// <param name="s">A string to parse.</param>
+    /// <param name="radix">A number conversion radix. Can be from the 2 .. 36 range.</param>
+    /// <param name="allowLeadingWhite">Indicates whether leading white chars are allowed.</param>
+    /// <param name="allowTrailingWhite">Indicates whether trailing white chars are allowed.</param>
+    /// <param name="allowTrailingChars">Indicates whether trailing chars are allowed.</param>
+    public static int ParseInteger(string? s, int radix, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            throw new Exception("A nonempty string with a number expected.");
+        }
+
+        if (radix is < 2 or > 36)
+        {
+            throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
+        }
+
+        throw new NotImplementedException();
+
+        //var n = 0;
+
+        // ...
+
+        //return n;
     }
 
     /// <summary>
@@ -466,7 +502,7 @@ internal class Parser
     /// Checks, if a character is a digit of a certain radix.
     /// </summary>
     /// <param name="c">A character.</param>
-    /// <param name="radix">A numeric radix. Can be from the 2 .. 36 range.</param>
+    /// <param name="radix">A number conversion radix. Can be from the 2 .. 36 range.</param>
     /// <returns>true, if c is a digit of a radix, otherwise false.</returns>
     public static bool IsDigit(int c, int radix)
     {
@@ -477,26 +513,6 @@ internal class Parser
         
         return IsDigitInternal(c, radix);
     }
-
-
-    // public static int ParseInteger(string s, int radix)
-    // {
-    //     if (string.IsNullOrWhiteSpace(s))
-    //     {
-    //         throw new Exception("A nonempty string with a number expected.");
-    //     }
-
-    //     if (radix is < 2 or > 36)
-    //     {
-    //         throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
-    //     }
-
-    //     var n = 0;
-
-        
-        
-    //     return n;
-    // }
 
 
     private static int CharToDigit(char c, int radix)

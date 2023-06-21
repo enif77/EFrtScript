@@ -181,6 +181,24 @@ radix: 2 .. 36
 
 ---
 
+https://forth-standard.org/standard/float
+
+If the Floating-Point word set is present in the dictionary and the current base is DECIMAL, the input number-conversion
+algorithm shall be extended to recognize floating-point numbers in this form:
+
+Convertible string	:=	<significand><exponent>
+<significand>	:=	[<sign>]<digits>[.<digits0>]
+<exponent>	:=	E[<sign>]<digits0>
+<sign>	:=	{ + | - }
+<digits>	:=	<digit><digits0>
+<digits0>	:=	<digit>*
+<digit>	:=	{ 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 }
+
+These are examples of valid representations of floating-point numbers in program source:
+
+1E      1.E      1.E0      +1.23E-1      -1.23E+1
+
+---
 
 INT -> converts a value on the stack to integer.
 ?INT -> returns true, if a value on the stack is integer.
