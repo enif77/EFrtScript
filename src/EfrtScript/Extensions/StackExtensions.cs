@@ -11,22 +11,33 @@ using EFrtScript.Values;
 /// </summary>
 public static class StackExtensions
 {
+    /// <summary>
+    /// Returns the number of items on the stack.
+    /// </summary>
     public static int GetStackDepth(this IInterpreter interpreter)
         => interpreter.State.Stack.Count;
     
-    
+    /// <summary>
+    /// Removes all items from the stack.
+    /// </summary>
     public static void StackClear(this IInterpreter interpreter)
         => interpreter.State.Stack.Clear();
 
-    
+    /// <summary>
+    /// Returns true if the stack is empty.
+    /// </summary>
     public static bool StackIsEmpty(this IInterpreter interpreter)
         => interpreter.State.Stack.IsEmpty;
 
-    
+    /// <summary>
+    /// Returns the top item from the stack.
+    /// </summary>
     public static IValue StackPeek(this IInterpreter interpreter)
         => interpreter.State.Stack.Peek() ?? throw NullValueNotAllowedInStackException();
 
-    
+    /// <summary>
+    /// Pushes the given value to the stack.
+    /// </summary>
     public static void StackPush(this IInterpreter interpreter, IValue v)
     {
         if (v == null) throw new ArgumentNullException(nameof(v));
@@ -34,29 +45,39 @@ public static class StackExtensions
         interpreter.State.Stack.Push(v);
     }
     
-    
+    /// <summary>
+    /// Pushes the given integer value to the stack.
+    /// </summary>
     public static void StackPush(this IInterpreter interpreter, int v)
     {
         StackPush(interpreter, new IntegerValue(v));
     }
 
-
+    /// <summary>
+    /// Pushes the given double value to the stack.
+    /// </summary>
     public static void StackPush(this IInterpreter interpreter, double v)
     {
         StackPush(interpreter, new FloatValue(v));
     }
     
-    
+    /// <summary>
+    /// Pushes the given string value to the stack.
+    /// </summary>
     public static void StackPush(this IInterpreter interpreter, string v)
     {
         StackPush(interpreter, new StringValue(v));
     }
     
-    
+    /// <summary>
+    /// Returns the top item from the stack and removes it from the stack.
+    /// </summary>
     public static IValue StackPop(this IInterpreter interpreter)
         => interpreter.State.Stack.Pop() ?? throw NullValueNotAllowedInStackException();
 
-
+    /// <summary>
+    /// Removes top item from the stack.
+    /// </summary>
     public static void StackDrop(this IInterpreter interpreter)
         => interpreter.State.Stack.Drop();
     

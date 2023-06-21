@@ -11,22 +11,33 @@ using EFrtScript.Values;
 /// </summary>
 public static class ReturnStackExtensions
 {
+    /// <summary>
+    /// Returns the number of items on the return stack.
+    /// </summary>
     public static int GetReturnStackDepth(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Count;
     
-
+    /// <summary>
+    /// Removes all items from the return stack.
+    /// </summary>
     public static void ReturnStackClear(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Clear();
 
-    
+    /// <summary>
+    /// Returns true if the return stack is empty.
+    /// </summary>
     public static bool ReturnStackIsEmpty(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Count == 0;
 
-    
+    /// <summary>
+    /// Returns the top item from the return stack.
+    /// </summary>
     public static IValue ReturnStackPeek(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Peek() ?? throw NullValueNotAllowedInReturnStackException();
 
-    
+    /// <summary>
+    /// Pushes the given value to the return stack.
+    /// </summary>
     public static void ReturnStackPush(this IInterpreter interpreter, IValue v)
     {
         if (v == null) throw new ArgumentNullException(nameof(v));
@@ -34,20 +45,25 @@ public static class ReturnStackExtensions
         interpreter.State.ReturnStack.Push(v);
     }
 
-    
+    /// <summary>
+    /// Pushes the given integer value to the return stack.
+    /// </summary>
     public static void ReturnStackPush(this IInterpreter interpreter, int v)
     {
         ReturnStackPush(interpreter, new IntegerValue(v));
     }
     
-    
+    /// <summary>
+    /// Returns the top item from the return stack and removes it from the return stack.
+    /// </summary>
     public static IValue ReturnStackPop(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();
     
-
+    /// <summary>
+    /// Removes the top item from the return stack.
+    /// </summary>
     public static void ReturnStackDrop(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Drop();
-
     
     /// <summary>
     /// Expects N items on the return stack.
