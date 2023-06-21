@@ -71,7 +71,7 @@ public sealed class ParserTests
     [InlineData(" 123 ", 123)]
     public void TryParseNumberReturnsExpectedInteger(string src, int expected)
     {
-        var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
+        var result = Parser.TryParseNumber(src, 10, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
         
         Assert.True(result);
         Assert.True(value.IsIntegerValue());
@@ -89,7 +89,7 @@ public sealed class ParserTests
     [InlineData("100.465e+2", 10046.5)]
     public void TryParseNumberReturnsExpectedFloatingPoint(string src, double expected)
     {
-        var result = Parser.TryParseNumber(src, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
+        var result = Parser.TryParseNumber(src, 10, out var value, allowLeadingWhite: true, allowTrailingWhite: true);
         
         Assert.True(result);
         Assert.True(value.IsFloatingPointValue());

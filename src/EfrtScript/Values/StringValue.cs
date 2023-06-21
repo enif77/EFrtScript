@@ -14,7 +14,8 @@ internal class StringValue : IValue
     {
         get
         {
-            if (Parser.TryParseNumber(String, out var result))
+            // TODO: Use radix from the interpreter.
+            if (Parser.TryParseNumber(String, 10, out var result))
             {
                 return result.Integer;
             }
@@ -28,7 +29,8 @@ internal class StringValue : IValue
     {
         get
         {
-            if (Parser.TryParseNumber(String, out var result))
+            // TODO: Use radix from the interpreter.
+            if (Parser.TryParseNumber(String, 10, out var result))
             {
                 return result.Float;
             }

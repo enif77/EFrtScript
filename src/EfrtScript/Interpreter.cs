@@ -209,7 +209,7 @@ public class Interpreter : IInterpreter
             return;
         }
         
-        if (Parser.TryParseNumber(wordName, out var result))
+        if (Parser.TryParseNumber(wordName, this.GetNumericConversionRadix(), out var result))
         {
             WordBeingDefined!.AddWord(new ConstantValueWord(result));
 
@@ -229,7 +229,7 @@ public class Interpreter : IInterpreter
             return;
         }
 
-        if (Parser.TryParseNumber(wordName, out var result))
+        if (Parser.TryParseNumber(wordName, this.GetNumericConversionRadix(), out var result))
         {
             // This will show the value in the output of the TRACE word.
             ExecuteWordInternal(new ConstantValueWord(result));

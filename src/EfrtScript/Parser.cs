@@ -197,16 +197,19 @@ internal class Parser
     /// sign :: '+' | '-' .
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
+    /// <param name="radix">A number conversion radix. Can be from the 2 .. 36 range.</param>
     /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
     /// <param name="allowLeadingWhite">Allows leading white-space characters. Ex. "   123.4" is returned as 123.4.</param>
     /// <param name="allowTrailingWhite">Allows trailing white-space characters. Ex. "123.4   " is returned as 123.4.</param>
     /// <param name="allowTrailingChars">Allows non numeric characters behind the parsed number. Ex. "123.4aaa" is returned as 132.4.</param>
     /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
-    public static bool TryParseNumber(string? s, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
+    public static bool TryParseNumber(string? s, int radix, out IValue result, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
     {
         try
         {
-            result = ParseNumber(s, allowLeadingWhite, allowTrailingWhite, allowTrailingChars);
+            result = (radix == 10)
+                ? ParseNumber(s, allowLeadingWhite, allowTrailingWhite, allowTrailingChars)
+                : ParseInteger(s, radix, allowLeadingWhite, allowTrailingWhite, allowTrailingChars);
 
             return true;
         }
@@ -420,25 +423,68 @@ internal class Parser
     /// <param name="allowLeadingWhite">Indicates whether leading white chars are allowed.</param>
     /// <param name="allowTrailingWhite">Indicates whether trailing white chars are allowed.</param>
     /// <param name="allowTrailingChars">Indicates whether trailing chars are allowed.</param>
-    public static int ParseInteger(string? s, int radix, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
+    public static IValue ParseInteger(string? s, int radix, bool allowLeadingWhite = false, bool allowTrailingWhite = false, bool allowTrailingChars = false)
     {
         if (string.IsNullOrWhiteSpace(s))
         {
-            throw new Exception("A nonempty string with a number expected.");
+            throw new ArgumentException("A non-empty numeric string expected.", nameof(s));
         }
 
-        if (radix is < 2 or > 36)
+        CheckRadix(radix);
+
+        var integerValue = 0;
+        
+        var sourceReader = new StringSourceReader(s);
+
+        // Read the first char.
+        sourceReader.NextChar();
+
+        // Skip leading white chars.
+        while (allowLeadingWhite && IsWhiteSpace(sourceReader.CurrentChar))
         {
-            throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
+            sourceReader.NextChar();
         }
 
-        throw new NotImplementedException();
+        // Parse sign, if provided.
+        var sign = 1;
+        if (sourceReader.CurrentChar == '-')
+        {
+            sign = -1;
+            sourceReader.NextChar();
+        }
+        else if (sourceReader.CurrentChar == '+')
+        {
+            sourceReader.NextChar();
+        }
 
-        //var n = 0;
+        // Check, that we have at least one digit here.
+        if (IsDigitInternal(sourceReader.CurrentChar, radix) == false)
+        {
+            // No digit yet = badly formatted number.
+            throw new Exception("At least one digit expected.");
+        }
 
-        // ...
+        // Parse the digit sequence.
+        while (IsDigitInternal(sourceReader.CurrentChar, radix))
+        {
+            integerValue = (integerValue * radix) + CharToDigit((char)sourceReader.CurrentChar, radix);
+            sourceReader.NextChar();
+        }
+        
+        // Skip leading white chars.
+        while (allowTrailingWhite && IsWhiteSpace(sourceReader.CurrentChar))
+        {
+            sourceReader.NextChar();
+        }
 
-        //return n;
+        // We expect to eat all chars from a word while parsing a number.
+        if (sourceReader.CurrentChar >= 0 && allowTrailingChars == false)
+        {
+            throw new Exception("No leading chars after the integer number allowed.");
+        }
+
+        // We eat all chars, its a number.
+        return new IntegerValue(integerValue * sign);
     }
 
     /// <summary>
@@ -506,12 +552,18 @@ internal class Parser
     /// <returns>true, if c is a digit of a radix, otherwise false.</returns>
     public static bool IsDigit(int c, int radix)
     {
+        CheckRadix(radix);
+
+        return IsDigitInternal(c, radix);
+    }
+
+    
+    private static void CheckRadix(int radix)
+    {
         if (radix is < 2 or > 36)
         {
             throw new ArgumentOutOfRangeException(nameof(radix), $"The {radix} radix is out of the 2 .. 36 range.");
         }
-        
-        return IsDigitInternal(c, radix);
     }
 
 
@@ -544,7 +596,7 @@ internal class Parser
             // a .. (radix - 10 - 1)
             if (c < radix - 10 + 'a')
             {
-                return c - 'a';
+                return (c - 'a') + 10;
             }
 
             // Above letters.
@@ -554,7 +606,7 @@ internal class Parser
         if (c >= 'A' && c < radix - 10 + 'A')
         {
             // A .. (radix - 10 - 1)
-            return c - 'A';
+            return (c - 'A') + 10;
         }
         
         throw new Exception($"Unsupported char '{c}' for radix {radix}.");
