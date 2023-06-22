@@ -160,4 +160,74 @@ public static class InterpreterExtensions
 
         return string.Concat(sb.ToString().Reverse());
     }
+
+    #region Value conversions
+
+    /// <summary>
+    /// Converts a value to an integer.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="value">An IValue instance to be converted to an integer.</param>
+    /// <returns>An IValue converted to integer value.</returns>
+    public static IValue ConvertToInteger(this IInterpreter interpreter, IValue value)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
+
+        if (value.IsStringValue())
+        {
+            if (Parser.TryParseNumber(
+                    value.String,
+                    interpreter.GetNumericConversionRadix(),
+                    out var result,
+                    allowLeadingWhite: true,
+                    allowTrailingWhite: true))
+            {
+                // NOTE: We can return a floating point value here, if the string contains a floating point number.
+                return result;
+            }
+            
+            interpreter.Throw(-22, $"Invalid numeric string '{value.String}'");
+        }
+
+        // All non-string values can convert themself to an integer.
+        return value;
+    }
+    
+    /// <summary>
+    /// Converts a value to a floating point number.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="value">An IValue instance to be converted to an integer.</param>
+    /// <returns>An IValue converted to floating point value.</returns>
+    public static IValue ConvertToFloat(this IInterpreter interpreter, IValue value)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
+
+        var numericConversionRadix = interpreter.GetNumericConversionRadix();
+        if (numericConversionRadix != 10)
+        {
+            interpreter.Throw(-24, $"Numeric conversion radix {numericConversionRadix} is not supported for floating point numbers.");
+        }
+        
+        if (value.IsStringValue())
+        {
+            if (Parser.TryParseNumber(
+                    value.String,
+                    numericConversionRadix,
+                    out var result,
+                    allowLeadingWhite: true,
+                    allowTrailingWhite: true))
+            {
+                // NOTE: We can return an integer value here, if the value is integer.
+                return result;
+            }
+            
+            interpreter.Throw(-22, $"Invalid numeric string '{value.String}'");
+        }
+
+        // All non-string values can convert themself to a floating point value.
+        return value;
+    }
+
+    #endregion
 }
