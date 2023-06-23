@@ -16,5 +16,9 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new LineCommentWord());
 
         interpreter.RegisterWord(new HexWord());
+        
+        interpreter.RegisterWord(new QuestionIntWord());
+        interpreter.RegisterWord(new QuestionFloatWord());
+        interpreter.RegisterWord(new QuestionStringWord());
     }
 }

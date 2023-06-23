@@ -20,6 +20,9 @@ public class LibraryTests
     [Theory]
     [InlineData("HEX")]
     [InlineData("\\")]
+    [InlineData("?INT")]
+    [InlineData("?FLOAT")]
+    [InlineData("?STRING")]
     public void HasWordRegistered(string wordName)
     {
         var interpreter = new Interpreter(new NullOutputWriter());

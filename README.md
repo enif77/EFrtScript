@@ -109,10 +109,13 @@ Common words for all base operations.
 
 ### Words (EXT)
 
-| Name     | Imm. | Mode | Description |
-|----------|------|------|---|
-| \        | yes  | IC   | **Line comment**<br>Skips all source characters till the closing EOLN character. |
-| HEX      | no   | IC   | **Set the numeric conversion radix to sixteen**<br>( -- )<br>Sets the numeric conversion radix to sixteen (hexadecimal). |
+| Name    | Imm. | Mode | Description                                                                                                              |
+|---------|------|------|--------------------------------------------------------------------------------------------------------------------------|
+| \       | yes  | IC   | **Line comment**<br>Skips all source characters till the closing EOLN character.                                         |
+| HEX     | no   | IC   | **Set the numeric conversion radix to sixteen**<br>( -- )<br>Sets the numeric conversion radix to sixteen (hexadecimal). |
+| ?INT    | no   | IC   | **Checks if x is an integer value**<br>(x -- flag)<br>Sets flag to true, if x is an integer value.                       |
+| ?FLOAT  | no   | IC   | **Checks if x is a floating point value**<br>(x -- flag)<br>Sets flag to true, if x is a floating point value.           |
+| ?STRING | no   | IC   | **Checks if x is a string value**<br>(x -- flag)<br>Sets flag to true, if x is a string value.                           |
 
 
 ## EXCEPTION library
