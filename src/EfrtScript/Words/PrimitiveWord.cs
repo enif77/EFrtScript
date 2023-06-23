@@ -14,7 +14,7 @@ internal class PrimitiveWord : IWord
     /// <summary>
     /// The body of this word.
     /// </summary>
-    public Func<IInterpreter, int> Action { get; }
+    private readonly Func<IInterpreter, int> _action;
 
 
     /// <summary>
@@ -25,12 +25,12 @@ internal class PrimitiveWord : IWord
     public PrimitiveWord(string wordName, Func<IInterpreter, int> action)
     {
         Name = wordName;
-        Action = action;
+        _action = action;
     }
 
 
     public int Execute(IInterpreter interpreter)
     {
-        return Action(interpreter);
+        return _action(interpreter);
     }
 }
