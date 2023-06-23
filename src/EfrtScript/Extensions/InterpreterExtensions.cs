@@ -206,7 +206,7 @@ public static class InterpreterExtensions
         var numericConversionRadix = interpreter.GetNumericConversionRadix();
         if (numericConversionRadix != 10)
         {
-            interpreter.Throw(-24, $"Numeric conversion radix {numericConversionRadix} is not supported for floating point numbers.");
+            interpreter.Throw(-40, "invalid BASE for floating point conversion");
         }
         
         if (value.IsStringValue())
