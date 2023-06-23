@@ -10,36 +10,10 @@ internal class StringValue : IValue
 {
     public bool Boolean => string.IsNullOrEmpty(String) == false;
 
-    public int Integer
-    {
-        get
-        {
-            // TODO: Use radix from the interpreter.
-            if (Parser.TryParseNumber(String, 10, out var result))
-            {
-                return result.Integer;
-            }
+    public int Integer => throw new NotSupportedException($"'{String}' cannot be converted to an integer number.");
 
-            // TODO: Throw a forth exception? (-24 invalid numeric argument)
-            throw new Exception($"'{String}' cannot be converted to an integer number.");
-        }
-    }
-    
-    public double Float
-    {
-        get
-        {
-            // TODO: Use radix from the interpreter.
-            if (Parser.TryParseNumber(String, 10, out var result))
-            {
-                return result.Float;
-            }
+    public double Float => throw new NotSupportedException($"'{String}' cannot be converted to a floating point number.");
 
-            // TODO: Throw a forth exception?
-            throw new Exception($"'{String}' cannot be converted to a floating point number.");
-        }
-    }
-    
     public string String { get; }
 
 
