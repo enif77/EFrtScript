@@ -194,6 +194,23 @@ public static class InterpreterExtensions
     }
     
     /// <summary>
+    /// Try to parse a string as a number.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="s">A string containing a number to convert.</param>
+    /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
+    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
+    public static bool TryParseNumber(this IInterpreter interpreter, string s, out IValue result)
+    {
+        return Parser.TryParseNumber(
+            s,
+            interpreter.GetNumericConversionRadix(),
+            out result,
+            allowLeadingWhite: true,
+            allowTrailingWhite: true);
+    }
+    
+    /// <summary>
     /// Converts a value to a floating point number.
     /// </summary>
     /// <param name="interpreter">An IInterpreter instance.</param>
