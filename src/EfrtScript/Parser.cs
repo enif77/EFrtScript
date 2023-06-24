@@ -215,6 +215,8 @@ internal class Parser
         }
         catch
         {
+            // TODO: Return the error message.
+            
             result = new IntegerValue(0);
 
             return false;
