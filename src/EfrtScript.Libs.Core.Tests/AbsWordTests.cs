@@ -56,10 +56,47 @@ public class AbsWordTests
     
     
     [Theory]
+    [InlineData( "0", 0)]
+    [InlineData( "1", 1)]
+    [InlineData("-1", 1)]
+    public void CalculationResultsMatchExpectedStringIntegerMathResults(string a, int expected)
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(a);
+        
+        new AbsWord().Execute(interpreter);
+        
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsIntegerValue());
+        Assert.Equal(expected, result.Integer);
+    }
+    
+    
+    [Theory]
     [InlineData( 0.0, 0.0)]
     [InlineData( 1.0, 1.0)]
     [InlineData(-1.0, 1.0)]
     public void CalculationResultsMatchExpectedFloatingPointMathResults(double a, double expected)
+    {
+        var interpreter = new Interpreter(new NullOutputWriter());
+        
+        interpreter.StackPush(a);
+    
+        new AbsWord().Execute(interpreter);
+        
+        var result = interpreter.StackPop();
+
+        Assert.True(result.IsFloatingPointValue());
+        Assert.Equal(expected, result.Float);
+    }
+    
+    [Theory]
+    [InlineData( "0.0", 0.0)]
+    [InlineData( "1.0", 1.0)]
+    [InlineData("-1.0", 1.0)]
+    public void CalculationResultsMatchExpectedStringFloatingPointMathResults(string a, double expected)
     {
         var interpreter = new Interpreter(new NullOutputWriter());
         

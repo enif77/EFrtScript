@@ -16,6 +16,15 @@ internal class AbsWord : IWord
         interpreter.StackExpect(1);
 
         var a = interpreter.StackPop();
+        if (a.IsStringValue())
+        {
+            var numberStr = a.String;
+            if (interpreter.TryParseNumber(numberStr, out a) == false)
+            {
+                interpreter.Throw(-24, $"The '{numberStr}' string is not a valid number.");
+            }
+        }
+
         if (a.IsFloatingPointValue())
         {
             interpreter.StackPush(Math.Abs(a.Float));
