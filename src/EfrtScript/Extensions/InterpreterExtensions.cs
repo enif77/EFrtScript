@@ -1,9 +1,8 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using System.Globalization;
-
 namespace EFrtScript.Extensions;
 
+using System.Globalization;
 using System.Text;
 
 using EFrtScript;
