@@ -15,7 +15,7 @@ internal class EqualToZeroWord : IWord
     {
         interpreter.StackExpect(1);
 
-        interpreter.StackPush(interpreter.StackPop().Integer == 0);
+        interpreter.StackPush(interpreter.StackPopInteger() == 0);
 
         return 1;
     }
