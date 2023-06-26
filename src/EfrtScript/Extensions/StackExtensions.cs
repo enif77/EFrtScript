@@ -46,6 +46,14 @@ public static class StackExtensions
     }
     
     /// <summary>
+    /// Pushes the given boolean value to the stack.
+    /// </summary>
+    public static void StackPush(this IInterpreter interpreter, bool v)
+    {
+        StackPush(interpreter, new IntegerValue(v ? -1 : 0));
+    }
+    
+    /// <summary>
     /// Pushes the given integer value to the stack.
     /// </summary>
     public static void StackPush(this IInterpreter interpreter, int v)

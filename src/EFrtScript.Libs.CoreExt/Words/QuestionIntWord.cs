@@ -15,7 +15,7 @@ internal class QuestionIntWord : IWord
     {
         interpreter.StackExpect(1);
         
-        interpreter.StackPush(interpreter.StackPop().IsIntegerValue() ? -1 : 0);
+        interpreter.StackPush(interpreter.StackPop().IsIntegerValue());
 
         return 1;
     }

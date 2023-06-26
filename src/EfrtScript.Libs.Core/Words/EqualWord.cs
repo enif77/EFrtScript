@@ -16,7 +16,7 @@ internal class EqualWord : IWord
         interpreter.StackExpect(2);
 
         var b = interpreter.StackPop();
-        interpreter.StackPush(interpreter.StackPop().Integer == b.Integer ? -1 : 0);
+        interpreter.StackPush(interpreter.StackPop().Integer == b.Integer);
 
         return 1;
     }

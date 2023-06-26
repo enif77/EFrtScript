@@ -15,7 +15,7 @@ internal class QuestionStringWord : IWord
     {
         interpreter.StackExpect(1);
         
-        interpreter.StackPush(interpreter.StackPop().IsStringValue() ? -1 : 0);
+        interpreter.StackPush(interpreter.StackPop().IsStringValue());
 
         return 1;
     }

@@ -15,7 +15,7 @@ internal class QuestionFloatWord : IWord
     {
         interpreter.StackExpect(1);
         
-        interpreter.StackPush(interpreter.StackPop().IsFloatingPointValue() ? -1 : 0);
+        interpreter.StackPush(interpreter.StackPop().IsFloatingPointValue());
 
         return 1;
     }
