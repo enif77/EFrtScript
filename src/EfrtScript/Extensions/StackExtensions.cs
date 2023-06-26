@@ -82,6 +82,16 @@ public static class StackExtensions
     /// </summary>
     public static IValue StackPop(this IInterpreter interpreter)
         => interpreter.State.Stack.Pop() ?? throw NullValueNotAllowedInStackException();
+    
+    /// <summary>
+    /// Returns the top item from the stack as integer and removes it from the stack.
+    /// </summary>
+    public static int StackPopInteger(this IInterpreter interpreter)
+    {
+        return interpreter.ConvertToInteger(
+            interpreter.State.Stack.Pop() ?? throw NullValueNotAllowedInStackException()
+            ).Integer;
+    }
 
     /// <summary>
     /// Removes top item from the stack.
