@@ -164,6 +164,23 @@ public static class InterpreterExtensions
     #region Value conversions
 
     /// <summary>
+    /// Try to parse a string as a number.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="s">A string containing a number to convert.</param>
+    /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
+    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
+    public static bool TryParseNumber(this IInterpreter interpreter, string s, out IValue result)
+    {
+        return Parser.TryParseNumber(
+            s,
+            interpreter.GetNumericConversionRadix(),
+            out result,
+            allowLeadingWhite: true,
+            allowTrailingWhite: true);
+    }
+    
+    /// <summary>
     /// Converts a value to an integer.
     /// </summary>
     /// <param name="interpreter">An IInterpreter instance.</param>
@@ -192,24 +209,7 @@ public static class InterpreterExtensions
         // All non-string values can convert themself to an integer.
         return value;
     }
-    
-    /// <summary>
-    /// Try to parse a string as a number.
-    /// </summary>
-    /// <param name="interpreter">An IInterpreter instance.</param>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="result">When this method returns, contains the signed integer or floating point value equivalent of the number contained in s.</param>
-    /// <returns>Returns rue if s was converted successfully; otherwise, false.</returns>
-    public static bool TryParseNumber(this IInterpreter interpreter, string s, out IValue result)
-    {
-        return Parser.TryParseNumber(
-            s,
-            interpreter.GetNumericConversionRadix(),
-            out result,
-            allowLeadingWhite: true,
-            allowTrailingWhite: true);
-    }
-    
+
     /// <summary>
     /// Converts a value to a floating point number.
     /// </summary>
