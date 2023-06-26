@@ -1,5 +1,7 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
+using System.Globalization;
+
 namespace EFrtScript.Extensions;
 
 using System.Text;
@@ -122,6 +124,8 @@ public static class InterpreterExtensions
         interpreter.HeapStore(NumericConversionRadixHeapIndex, new IntegerValue(radix));
     }
     
+    #region Value conversions
+    
     /// <summary>
     /// Converts an integer value to a string.
     /// </summary>
@@ -161,8 +165,6 @@ public static class InterpreterExtensions
         return string.Concat(sb.ToString().Reverse());
     }
 
-    #region Value conversions
-
     /// <summary>
     /// Try to parse a string as a number.
     /// </summary>
@@ -178,6 +180,31 @@ public static class InterpreterExtensions
             out result,
             allowLeadingWhite: true,
             allowTrailingWhite: true);
+    }
+    
+    /// <summary>
+    /// Converts a value to a string.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="value">An IValue instance to be converted to a string.</param>
+    /// <returns>An IValue converted to string value.</returns>
+    public static IValue ConvertToString(this IInterpreter interpreter, IValue value)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
+
+        if (value.IsStringValue())
+        {
+            return value;
+        }
+
+        if (value.IsIntegerValue())
+        {
+            return new StringValue(interpreter.ToStringValue(value.Integer, interpreter.GetNumericConversionRadix()));
+        }
+        
+        return new StringValue(value.IsFloatingPointValue()
+                ? string.Format(CultureInfo.InvariantCulture, "{0}", value.Float)
+                : value.String);
     }
     
     /// <summary>
