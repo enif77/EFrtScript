@@ -41,12 +41,46 @@ public class EmitWordTests
     [Theory]
     [InlineData( 0,  "\0")]
     [InlineData( 32,  " ")]
-    public void ExpectedCharAddedToOutput(char value, string expectedOutput)
+    public void ExpectedCharAddedToOutput(int value, string expectedOutput)
     {
         var output = new TestsOutputWriter();
         var interpreter = new Interpreter(output);
         
-        interpreter.StackPush((int)value);
+        interpreter.StackPush(value);
+
+        new EmitWord().Execute(interpreter);
+        
+        Assert.True(output.WriteCharCalled);
+        Assert.Equal(expectedOutput, output.Output);
+    }
+    
+    [Theory]
+    [InlineData( 0.0,  "\0")]
+    [InlineData( 32.4,  " ")]
+    public void ExpectedCharInFloatingPointAddedToOutput(double value, string expectedOutput)
+    {
+        var output = new TestsOutputWriter();
+        var interpreter = new Interpreter(output);
+        
+        interpreter.StackPush(value);
+
+        new EmitWord().Execute(interpreter);
+        
+        Assert.True(output.WriteCharCalled);
+        Assert.Equal(expectedOutput, output.Output);
+    }
+    
+    [Theory]
+    [InlineData( "0.0",  "\0")]
+    [InlineData( "32.4",  " ")]
+    [InlineData( " 32",  " ")]
+    [InlineData( " 0 ",  "\0")]
+    public void ExpectedCharInStringAddedToOutput(string value, string expectedOutput)
+    {
+        var output = new TestsOutputWriter();
+        var interpreter = new Interpreter(output);
+        
+        interpreter.StackPush(value);
 
         new EmitWord().Execute(interpreter);
         

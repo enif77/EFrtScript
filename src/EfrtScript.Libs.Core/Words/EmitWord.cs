@@ -15,7 +15,7 @@ internal class EmitWord : IWord
     {
         interpreter.StackExpect(1);
 
-        interpreter.Output.Write((char)interpreter.StackPop().Integer);
+        interpreter.Output.Write((char)interpreter.StackPopInteger());
 
         return 1;
     }
