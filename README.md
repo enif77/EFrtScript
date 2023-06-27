@@ -33,7 +33,7 @@ fractional-part :: digit-sequence .
 sign :: '+' | '-' .
 ```
 
-Note: Forth style numbers parsing using the BASE variable will is implemented also.
+Note: Forth style numbers parsing using the BASE variable is implemented also.
 
 ## Strings
 
@@ -106,9 +106,6 @@ that a word was executed. The `ExecutingWord` event is fired before a word is ex
 ## Examples
 
 NOTE: These examples are not tested/implemented yet.
-
-```
-( Hello world! )
 
 ```
 ( Hello world! )
