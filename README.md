@@ -46,15 +46,13 @@ The table below shows all special characters.
 | \uHHHH    | A sequence of 4 hex characters. |
 | \x or \X  | A hex sequence of 1 to 4 hex characters. |
 
-
 ## Libraries
 
- * [CORE](EFrtScript.Libs.Core/README.md)
- * [CORE-EXT](EFrtScript.Libs.CoreExt/README.md)
- * [EXCEPTION](EFrtScript.Libs.Exception/README.md)
- * [TOOLS](EFrtScript.Libs.Tools/README.md)
+ * [CORE](src/EFrtScript.Libs.Core/README.md)
+ * [CORE-EXT](src/EFrtScript.Libs.CoreExt/README.md)
+ * [EXCEPTION](src/EFrtScript.Libs.Exception/README.md)
+ * [TOOLS](src/EFrtScript.Libs.Tools/README.md)
  
-
 ## EXTRA Words
 
 Various helper words defined by the EFrt Script app.
