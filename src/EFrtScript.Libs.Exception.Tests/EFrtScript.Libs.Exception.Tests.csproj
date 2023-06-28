@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\EfrtScript.Libs.Exception\EfrtScript.Libs.Exception.csproj" />
+      <ProjectReference Include="..\EFrtScript.Libs.Exception\EFrtScript.Libs.Exception.csproj" />
       <ProjectReference Include="..\EFrtScript\EFrtScript.csproj" />
     </ItemGroup>
 

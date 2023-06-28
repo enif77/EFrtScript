@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3E3646E9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.Core.Tests", "EFrtScript.Libs.Core.Tests\EFrtScript.Libs.Core.Tests.csproj", "{D0392DAD-B0D0-4D33-AC72-3AD88CB616DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfrtScript.Libs.Exception", "EfrtScript.Libs.Exception\EfrtScript.Libs.Exception.csproj", "{35EE79B9-7437-4AA4-B227-80F3B082BA6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.Exception", "EFrtScript.Libs.Exception\EFrtScript.Libs.Exception.csproj", "{35EE79B9-7437-4AA4-B227-80F3B082BA6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfrtScript.Libs.Exception.Tests", "EfrtScript.Libs.Exception.Tests\EfrtScript.Libs.Exception.Tests.csproj", "{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.Exception.Tests", "EFrtScript.Libs.Exception.Tests\EFrtScript.Libs.Exception.Tests.csproj", "{A24506BB-EEED-48FE-8C5E-286D0B0C8FE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFrtScript.Libs.CoreExt", "EFrtScript.Libs.CoreExt\EFrtScript.Libs.CoreExt.csproj", "{0575463F-BA11-4607-951E-62BCDBCCF89E}"
 EndProject
