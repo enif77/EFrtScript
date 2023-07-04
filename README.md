@@ -64,9 +64,9 @@ NOTE: The `\U` escape sequence will be added later.
 
 ## Libraries
 
- * [CORE](src/EfrtScript.Libs.Core/README.md)
+ * [CORE](src/EFrtScript.Libs.Core/README.md)
  * [CORE-EXT](src/EFrtScript.Libs.CoreExt/README.md)
- * [EXCEPTION](src/EfrtScript.Libs.Exception/README.md)
+ * [EXCEPTION](src/EFrtScript.Libs.Exception/README.md)
  * [TOOLS](src/EFrtScript.Libs.Tools/README.md)
  
 ## EXTRA Words
