@@ -9,7 +9,7 @@ namespace EFrtScript.Stacks;
 /// <typeparam name="T">A type of values stored in the stack.</typeparam>
 public abstract class AStackBase<T> : IGenericStack<T>
 {
-    private T?[] _items; 
+    private readonly T?[] _items; 
 
 
     /// <summary>
@@ -17,8 +17,8 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// </summary>
     public T? this[int i]
     {
-        get { return _items[i]; }
-        set { _items[i] = value; }
+        get => _items[i];
+        protected set => _items[i] = value;
     }
 
     /// <inheritdoc/>
@@ -28,7 +28,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
         {
             if (Count < 1)
             {
-                return new T[0];
+                return Array.Empty<T>();
             }
 
             var a = new T[Count];
@@ -119,14 +119,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Swap()
     {
-        // t = b
-        var t = _items[Top];
-
-        // a a
-        _items[Top] = _items[Top - 1];
-
-        // b a
-        _items[Top - 1] = t;
+        (_items[Top], _items[Top - 1]) = (_items[Top - 1], _items[Top]);
     }
 
     /// <inheritdoc/>
