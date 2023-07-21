@@ -10,25 +10,25 @@ using EFrtScript.Stacks;
 /// </summary>
 public class InterpreterState : IInterpreterState
 {
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public IDictionary<string, IWord> Words { get; }
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public IWord? CurrentWord { get; set; }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public ValueStack Stack { get; }
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public ValueStack ReturnStack { get; }
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public ExceptionStack ExceptionStack { get; }
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public InputSourceStack InputSourceStack { get; }
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public Heap Heap { get; }
 
 
@@ -46,7 +46,7 @@ public class InterpreterState : IInterpreterState
     }
 
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void Reset()
     {
         Words.Clear();

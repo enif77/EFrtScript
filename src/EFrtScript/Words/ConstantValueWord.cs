@@ -11,10 +11,10 @@ using EFrtScript.Values;
 /// </summary>
 public class ConstantValueWord : IWord
 {
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public string Name => $"LITERAL({_value.String})";
     
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public bool IsImmediate => false;
 
 
@@ -66,7 +66,7 @@ public class ConstantValueWord : IWord
     }
 
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public int Execute(IInterpreter interpreter)
     {
         interpreter.StackFree(1);

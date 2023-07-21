@@ -8,25 +8,25 @@ namespace EFrtScript.IO;
 /// </summary>
 public class ConsoleOutputWriter : IOutputWriter
 {
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void Write(string format, params object[] arg)
     {
         Console.Write(format, arg);
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void Write(char value)
     {
         Console.Write(value);
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void WriteLine()
     {
         Console.WriteLine();
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void WriteLine(string format, params object[] arg)
     {
         Console.WriteLine(format, arg);

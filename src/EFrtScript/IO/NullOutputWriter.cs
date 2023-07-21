@@ -8,22 +8,22 @@ namespace EFrtScript.IO;
 /// </summary>
 public class NullOutputWriter : IOutputWriter
 {
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void Write(string format, params object[] arg)
     {
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void Write(char value)
     {
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void WriteLine()
     {
     }
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public void WriteLine(string format, params object[] arg)
     {
     }

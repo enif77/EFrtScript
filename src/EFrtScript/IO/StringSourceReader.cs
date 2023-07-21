@@ -8,7 +8,7 @@ namespace EFrtScript.IO;
 /// </summary>
 public class StringSourceReader : ISourceReader
 {
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public int CurrentChar =>
         (_srcPos < 0 || _srcPos >= _src.Length)
             ? -1
@@ -26,7 +26,7 @@ public class StringSourceReader : ISourceReader
     }
 
 
-    /// <inheritdoc cref="IInterpreter"/>
+    /// <inheritdoc/>
     public int NextChar()
     {
         var srcPos = _srcPos + 1;
