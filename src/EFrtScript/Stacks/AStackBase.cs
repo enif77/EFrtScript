@@ -9,8 +9,35 @@ namespace EFrtScript.Stacks;
 /// <typeparam name="T">A type of values stored in the stack.</typeparam>
 public abstract class AStackBase<T> : IGenericStack<T>
 {
+    private T?[] _items; 
+
+
+    /// <summary>
+    /// Indexer. Allows direct access to the internal values storage.
+    /// </summary>
+    public T? this[int i]
+    {
+        get { return _items[i]; }
+        set { _items[i] = value; }
+    }
+
     /// <inheritdoc/>
-    public T?[] Items { get; }
+    public T?[] Items
+    {
+        get
+        {
+            if (Count < 1)
+            {
+                return new T[0];
+            }
+
+            var a = new T[Count];
+
+            Array.Copy(_items, 0, a, 0, Count);
+
+            return a;
+        }
+    }
 
     /// <inheritdoc/>
     public int Top { get; set; }
@@ -18,6 +45,9 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public int Count => Top + 1;
     
+    /// <inheritdoc/>
+    public int Capacity => _items.Length;
+
     /// <inheritdoc/>
     public bool IsEmpty => Count < 1;
 
@@ -28,7 +58,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <param name="capacity">The stack capacity.</param>
     protected AStackBase(int capacity = 32)
     {
-        Items = new T[capacity];
+        _items = new T[capacity];
 
         Init(default(T));
     }
@@ -37,9 +67,9 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public void Init(T? defaultValue)
     {
         Top = -1;
-        for (var i = 0; i < Items.Length; i++)
+        for (var i = 0; i < _items.Length; i++)
         {
-            Items[i] = defaultValue;
+            _items[i] = defaultValue;
         }
     }
 
@@ -52,31 +82,31 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public T? Peek()
     {
-        return Items[Top];
+        return _items[Top];
     }
 
     /// <inheritdoc/>
     public T? Pick(int index)
     {
-        return Items[Top - index];
+        return _items[Top - index];
     }
 
     /// <inheritdoc/>
     public T? Pop()
     {
-        return Items[Top--];
+        return _items[Top--];
     }
 
     /// <inheritdoc/>
     public void Push(T? a)
     {
-        Items[++Top] = a;
+        _items[++Top] = a;
     }
 
     /// <inheritdoc/>
     public void Dup()
     {
-        Items[Top + 1] = Items[Top];
+        _items[Top + 1] = _items[Top];
         Top++;
     }
 
@@ -90,19 +120,19 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public void Swap()
     {
         // t = b
-        var t = Items[Top];
+        var t = _items[Top];
 
         // a a
-        Items[Top] = Items[Top - 1];
+        _items[Top] = _items[Top - 1];
 
         // b a
-        Items[Top - 1] = t;
+        _items[Top - 1] = t;
     }
 
     /// <inheritdoc/>
     public void Over()
     {
-        Items[Top + 1] = Items[Top - 1];
+        _items[Top + 1] = _items[Top - 1];
         Top++;
     }
 
@@ -110,27 +140,27 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public void Rot()
     {
         // t = a
-        var t = Items[Top - 2];
+        var t = _items[Top - 2];
 
         // b b c
-        Items[Top - 2] = Items[Top - 1];
+        _items[Top - 2] = _items[Top - 1];
 
         // b c c
-        Items[Top - 1] = Items[Top];
+        _items[Top - 1] = _items[Top];
 
         // b c a
-        Items[Top] = t;
+        _items[Top] = t;
     }
 
     /// <inheritdoc/>
     public void Roll(int index)
     {
-        var item = Items[Top - index];
+        var item = _items[Top - index];
         for (var i = (Top - index) + 1; i <= Top; i++)
         {
-            Items[i - 1] = Items[i];
+            _items[i - 1] = _items[i];
         }
 
-        Items[Top] = item;
+        _items[Top] = item;
     }
 }

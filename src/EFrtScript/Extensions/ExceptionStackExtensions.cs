@@ -74,7 +74,7 @@ public static class ExceptionStackExtensions
     {
         if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
 
-        if ((interpreter.State.ExceptionStack.Count + expectedFreeItemsCount) >= interpreter.State.ExceptionStack.Items.Length)
+        if ((interpreter.State.ExceptionStack.Count + expectedFreeItemsCount) >= interpreter.State.ExceptionStack.Capacity)
         {
             interpreter.Throw(-53, "exception stack overflow");
         }

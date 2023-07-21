@@ -14,6 +14,11 @@ public interface IStack
     int Count { get; }
 
     /// <summary>
+    /// The capacity of this stack.
+    /// </summary>
+    int Capacity { get; }
+
+    /// <summary>
     /// Is true, when no items are in this stack.
     /// </summary>
     bool IsEmpty { get; }

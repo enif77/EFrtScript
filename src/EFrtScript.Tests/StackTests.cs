@@ -23,7 +23,7 @@ public class StackTests
     {
         var s = new Stack(10);
 
-        Assert.Equal(10, s.Items.Length);
+        Assert.Equal(10, s.Capacity);
     }
 
     [Fact]
@@ -47,27 +47,22 @@ public class StackTests
     {
         var s = new Stack(10);
 
-        s.Push(123);
-
-        Assert.Equal(1, s.Count);
-        
-        for (var i = 0; i < s.Items.Length; i++)
+        for (var i = 0; i < s.Capacity; i++)
         {
-            s.Items[i] = i + 1;
+            s.Push(i + 1);
         }
 
-        Assert.Equal(1, s.Items[0]);
-        Assert.Equal(5, s.Items[4]);
-        Assert.Equal(8, s.Items[7]);
+        Assert.Equal(1, s[0]);
+        Assert.Equal(5, s[4]);
+        Assert.Equal(8, s[7]);
         
         s.Init(0);
         
         Assert.Equal(0, s.Count);
-        
-        foreach (var t in s.Items)
-        {
-            Assert.Equal(0, t);
-        }
+
+        Assert.Equal(0, s[0]);
+        Assert.Equal(0, s[4]);
+        Assert.Equal(0, s[7]);
     }
     
     [Fact]
@@ -113,9 +108,9 @@ public class StackTests
 
         Push123(s);
 
-        Assert.Equal(3, s.Pick(0));
-        Assert.Equal(2, s.Pick(1));
-        Assert.Equal(1, s.Pick(2));
+        Assert.Equal(1, s[0]);
+        Assert.Equal(2, s[1]);
+        Assert.Equal(3, s[2]);
     }
 
     [Fact]
@@ -137,13 +132,13 @@ public class StackTests
 
         s.Push(123);
         
-        Assert.Equal(123, s.Items[0]);
-        Assert.Equal(0, s.Items[1]);
+        Assert.Equal(123, s[0]);
+        Assert.Equal(0, s[1]);
 
         s.Dup();
 
-        Assert.Equal(123, s.Items[0]);
-        Assert.Equal(123, s.Items[1]);
+        Assert.Equal(123, s[0]);
+        Assert.Equal(123, s[1]);
     }
     
     [Fact]
@@ -168,13 +163,13 @@ public class StackTests
         s.Push(123);
         s.Push(456);
         
-        Assert.Equal(123, s.Items[0]);
-        Assert.Equal(456, s.Items[1]);
+        Assert.Equal(123, s[0]);
+        Assert.Equal(456, s[1]);
 
         s.Swap();
 
-        Assert.Equal(456, s.Items[0]);
-        Assert.Equal(123, s.Items[1]);
+        Assert.Equal(456, s[0]);
+        Assert.Equal(123, s[1]);
     }
     
     [Fact]
@@ -185,15 +180,15 @@ public class StackTests
         s.Push(123);
         s.Push(456);
         
-        Assert.Equal(123, s.Items[0]);
-        Assert.Equal(456, s.Items[1]);
-        Assert.Equal(0, s.Items[2]);
+        Assert.Equal(123, s[0]);
+        Assert.Equal(456, s[1]);
+        Assert.Equal(0,   s[2]);
 
         s.Over();
 
-        Assert.Equal(123, s.Items[0]);
-        Assert.Equal(456, s.Items[1]);
-        Assert.Equal(123, s.Items[2]);
+        Assert.Equal(123, s[0]);
+        Assert.Equal(456, s[1]);
+        Assert.Equal(123, s[2]);
     }
 
     [Fact]
@@ -203,15 +198,15 @@ public class StackTests
 
         Push123(s);
         
-        Assert.Equal(1, s.Items[0]);
-        Assert.Equal(2, s.Items[1]);
-        Assert.Equal(3, s.Items[2]);
+        Assert.Equal(1, s[0]);
+        Assert.Equal(2, s[1]);
+        Assert.Equal(3, s[2]);
 
         s.Rot();
 
-        Assert.Equal(2, s.Items[0]);
-        Assert.Equal(3, s.Items[1]);
-        Assert.Equal(1, s.Items[2]);
+        Assert.Equal(2, s[0]);
+        Assert.Equal(3, s[1]);
+        Assert.Equal(1, s[2]);
     }
     
     [Fact]
@@ -224,17 +219,17 @@ public class StackTests
             s.Push(i);
         }
 
-        Assert.Equal(2, s.Items[1]);
-        Assert.Equal(3, s.Items[2]);
-        Assert.Equal(10, s.Items[9]);
-        Assert.Equal(0, s.Items[10]);
+        Assert.Equal(2,  s[1]);
+        Assert.Equal(3,  s[2]);
+        Assert.Equal(10, s[9]);
+        Assert.Equal(0,  s[10]);
 
         s.Roll(7);
 
-        Assert.Equal(2, s.Items[1]);
-        Assert.Equal(4, s.Items[2]);
-        Assert.Equal(3, s.Items[9]);
-        Assert.Equal(0, s.Items[10]);
+        Assert.Equal(2, s[1]);
+        Assert.Equal(4, s[2]);
+        Assert.Equal(3, s[9]);
+        Assert.Equal(0, s[10]);
     }
 
 

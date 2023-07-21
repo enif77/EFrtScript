@@ -125,7 +125,7 @@ public static class StackExtensions
     {
         if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
 
-        if ((interpreter.State.Stack.Count + expectedFreeItemsCount) >= interpreter.State.Stack.Items.Length)
+        if ((interpreter.State.Stack.Count + expectedFreeItemsCount) >= interpreter.State.Stack.Capacity)
         {
             interpreter.Throw(-3, "stack overflow");
         }
