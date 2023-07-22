@@ -27,7 +27,8 @@ public interface IGenericStack<T> : IStack
     void Init(T? defaultValue);
     
     /// <summary>
-    /// Removes N items from the top of this stack.
+    /// Removes N itemss from the top of this stack.
+    /// (a -- )
     /// </summary>
     /// <param name="n">The number of items to remove.</param>
     void Drop(int n = 1);
@@ -39,26 +40,28 @@ public interface IGenericStack<T> : IStack
     void Dup();
 
     /// <summary>
-    /// Gets an item on the stack.
+    /// Gets a item from the stack.
     /// </summary>
     /// <param name="index">A position of the item in the stack. 0 = the top of the stack.</param>
-    /// <returns></returns>
+    /// <returns>An item from the stack.</returns>
     T? Pick(int index);
             
     /// <summary>
-    /// Returns a value from the top of the stack.
+    /// Returns an item from the top of the stack.
     /// </summary>
-    /// <returns>A value from the top of the stack.</returns>
+    /// <returns>An item from the top of the stack.</returns>
     T? Peek();
 
     /// <summary>
-    /// Removes a value from the top of the stack and returns it.
+    /// Removes an item from the top of the stack and returns it.
+    /// (a -- )
     /// </summary>
-    /// <returns>A value from the top of the stack.</returns>
+    /// <returns>An item from the top of the stack.</returns>
     T? Pop();
 
     /// <summary>
-    /// Pushes a value on the top of the stack.
+    /// Pushes a value to the top of the stack.
+    /// ( -- a)
     /// </summary>
     /// <param name="a">A value.</param>
     void Push(T? a);
@@ -80,7 +83,8 @@ public interface IGenericStack<T> : IStack
     void Roll(int index);
 
     /// <summary>
-    /// Swaps the two top most values on the stack.
+    /// Swaps the two top most items on the stack.
+    /// (a b -- b a)
     /// </summary>
     void Swap();
 }
