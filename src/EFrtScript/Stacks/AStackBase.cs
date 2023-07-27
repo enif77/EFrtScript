@@ -48,6 +48,9 @@ public abstract class AStackBase<T> : IGenericStack<T>
 
         set
         {
+            // TODO: Zvětšit items, pokud je value > Top.
+            // TODO: Zmenšit items, pokud je value < Top + nějaká hranice.
+
             _top = value;
         }
     }
@@ -56,7 +59,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public int Count => Top + 1;
     
     /// <inheritdoc/>
-    public int Capacity => _items.Length;
+    public int Capacity => _items.Length;  // TODO: Vracet int.max.
 
     /// <inheritdoc/>
     public bool IsEmpty => Count < 1;
@@ -77,6 +80,8 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Init(T? defaultValue)
     {
+        // TODO: Doplnit range, který se inicializuje.
+
         _top = -1;
         for (var i = 0; i < _items.Length; i++)
         {
