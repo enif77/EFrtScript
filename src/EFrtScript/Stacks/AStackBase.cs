@@ -9,8 +9,10 @@ namespace EFrtScript.Stacks;
 /// <typeparam name="T">A type of values stored in the stack.</typeparam>
 public abstract class AStackBase<T> : IGenericStack<T>
 {
-    private readonly T?[] _items; 
-
+    private int _initialCapacity;
+    private int _top;
+    private T?[] _items; 
+    
 
     /// <summary>
     /// Indexer. Allows direct access to the internal values storage.
@@ -40,7 +42,15 @@ public abstract class AStackBase<T> : IGenericStack<T>
     }
 
     /// <inheritdoc/>
-    public int Top { get; set; }
+    public int Top
+    {
+        get => _top;
+
+        set
+        {
+            _top = value;
+        }
+    }
 
     /// <inheritdoc/>
     public int Count => Top + 1;
@@ -58,6 +68,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <param name="capacity">The stack capacity.</param>
     protected AStackBase(int capacity = 32)
     {
+        _initialCapacity = capacity;
         _items = new T[capacity];
 
         Init(default(T));
@@ -66,7 +77,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Init(T? defaultValue)
     {
-        Top = -1;
+        _top = -1;
         for (var i = 0; i < _items.Length; i++)
         {
             _items[i] = defaultValue;
@@ -76,6 +87,13 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Clear()
     {
+        // Clear/free up the old stuff.
+        Init(default(T));
+
+        // Create new items at the initial capacity.
+        _items = new T[_initialCapacity];
+
+        // Set all stack items to the default value.
         Init(default(T));
     }
 
@@ -106,8 +124,8 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Dup()
     {
-        _items[Top + 1] = _items[Top];
         Top++;
+        _items[Top] = _items[Top - 1];
     }
 
     /// <inheritdoc/>
@@ -125,8 +143,8 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Over()
     {
-        _items[Top + 1] = _items[Top - 1];
         Top++;
+        _items[Top] = _items[Top - 2];
     }
 
     /// <inheritdoc/>
