@@ -10,6 +10,7 @@ namespace EFrtScript.Stacks;
 public abstract class AStackBase<T> : IGenericStack<T>
 {
     private int _initialCapacity;
+    private int _qrowthFactor;
     private int _top;
     private T?[] _items; 
     
@@ -48,8 +49,48 @@ public abstract class AStackBase<T> : IGenericStack<T>
 
         set
         {
-            // TODO: Zvětšit items, pokud je value > Top.
-            // TODO: Zmenšit items, pokud je value < Top + nějaká hranice.
+            if (value > _top && value >= _items.Length)
+            {
+                // We are growing above the current capacity.
+                var lastCapacity = _items.Length;
+                
+                var newCapacity = lastCapacity + _qrowthFactor;
+                while (newCapacity <= value && newCapacity > 0)
+                {
+                    newCapacity += _qrowthFactor;
+                }
+
+                if (newCapacity < 0)
+                {
+                    throw new InvalidOperationException("Cannot grow stack beyond the Int32.MaxValue.");
+                }
+                
+                Array.Resize(ref _items, newCapacity);
+                InitInternal(default(T), lastCapacity, _items.Length - 1);
+            }
+            else if (value < _top)
+            {
+                var halfCapacity = _items.Length / 2;
+                if (halfCapacity > _initialCapacity)
+                {
+                    if (value < halfCapacity)
+                    {
+                        // We are returning to the half of the current capacity,
+                        // but we will be still bigger than the initial capacity.
+                        Array.Resize(ref _items, halfCapacity);
+                        InitInternal(default(T), value + 1, _items.Length - 1);
+                    }
+                }
+                else if (_items.Length > _initialCapacity)
+                {
+                    if (value < _initialCapacity)
+                    {
+                        // We are returning to the initial capacity.
+                        Array.Resize(ref _items, _initialCapacity);
+                        InitInternal(default(T), value + 1, _items.Length - 1);
+                    }
+                }
+            }
 
             _top = value;
         }
@@ -59,7 +100,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public int Count => Top + 1;
     
     /// <inheritdoc/>
-    public int Capacity => _items.Length;  // TODO: Vracet int.max.
+    public int Capacity => int.MaxValue;
 
     /// <inheritdoc/>
     public bool IsEmpty => Count < 1;
@@ -72,6 +113,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     protected AStackBase(int capacity = 32)
     {
         _initialCapacity = capacity;
+        _qrowthFactor = Math.Max(capacity / 2, 8);
         _items = new T[capacity];
 
         Init(default(T));
@@ -80,13 +122,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     /// <inheritdoc/>
     public void Init(T? defaultValue)
     {
-        // TODO: Doplnit range, který se inicializuje.
-
-        _top = -1;
-        for (var i = 0; i < _items.Length; i++)
-        {
-            _items[i] = defaultValue;
-        }
+        InitInternal(defaultValue, 0, _items.Length - 1);
     }
 
     /// <inheritdoc/>
@@ -178,5 +214,15 @@ public abstract class AStackBase<T> : IGenericStack<T>
         }
 
         _items[Top] = item;
+    }
+
+
+    private void InitInternal(T? defaultValue, int from, int to)
+    {
+        _top = -1;
+        for (var i = from; i <= to; i++)
+        {
+            _items[i] = defaultValue;
+        }
     }
 }

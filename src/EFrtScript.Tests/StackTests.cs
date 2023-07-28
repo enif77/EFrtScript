@@ -23,7 +23,7 @@ public class StackTests
     {
         var s = new Stack(10);
 
-        Assert.Equal(10, s.Capacity);
+        Assert.True(s.Capacity >= 10);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class StackTests
     {
         var s = new Stack(10);
 
-        for (var i = 0; i < s.Capacity; i++)
+        for (var i = 0; i < 10; i++)
         {
             s.Push(i + 1);
         }
