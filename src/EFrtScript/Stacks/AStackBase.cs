@@ -9,8 +9,8 @@ namespace EFrtScript.Stacks;
 /// <typeparam name="T">A type of values stored in the stack.</typeparam>
 public abstract class AStackBase<T> : IGenericStack<T>
 {
-    private int _initialCapacity;
-    private int _qrowthFactor;
+    private readonly int _initialCapacity;
+    private readonly int _growthFactor;
     private int _top;
     private T?[] _items; 
     
@@ -54,10 +54,10 @@ public abstract class AStackBase<T> : IGenericStack<T>
                 // We are growing above the current capacity.
                 var lastCapacity = _items.Length;
                 
-                var newCapacity = lastCapacity + _qrowthFactor;
+                var newCapacity = lastCapacity + _growthFactor;
                 while (newCapacity <= value && newCapacity > 0)
                 {
-                    newCapacity += _qrowthFactor;
+                    newCapacity += _growthFactor;
                 }
 
                 if (newCapacity < 0)
@@ -81,14 +81,11 @@ public abstract class AStackBase<T> : IGenericStack<T>
                         InitInternal(default(T), value + 1, _items.Length - 1);
                     }
                 }
-                else if (_items.Length > _initialCapacity)
+                else if (_items.Length > _initialCapacity && value < _initialCapacity)
                 {
-                    if (value < _initialCapacity)
-                    {
-                        // We are returning to the initial capacity.
-                        Array.Resize(ref _items, _initialCapacity);
-                        InitInternal(default(T), value + 1, _items.Length - 1);
-                    }
+                    // We are returning to the initial capacity.
+                    Array.Resize(ref _items, _initialCapacity);
+                    InitInternal(default(T), value + 1, _items.Length - 1);
                 }
             }
 
@@ -113,7 +110,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
     protected AStackBase(int capacity = 32)
     {
         _initialCapacity = capacity;
-        _qrowthFactor = Math.Max(capacity / 2, 8);
+        _growthFactor = Math.Max(capacity / 2, 8);
         _items = new T[capacity];
 
         Init(default(T));
