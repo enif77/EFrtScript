@@ -91,7 +91,8 @@ public static class ReturnStackExtensions
     {
         if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
 
-        if ((interpreter.State.ReturnStack.Count + expectedFreeItemsCount) >= interpreter.State.ReturnStack.Capacity)
+        var expectedStackCapacity = interpreter.State.ReturnStack.Count + expectedFreeItemsCount;
+        if (expectedStackCapacity > interpreter.State.ReturnStack.Capacity || expectedStackCapacity < 0)
         {
             interpreter.Throw(-3, "return stack overflow");
         }
