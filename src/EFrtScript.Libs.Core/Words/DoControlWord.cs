@@ -21,7 +21,7 @@ internal class DoControlWord : IWord
 
         var index = interpreter.StackPop();
         interpreter.ReturnStackPush(interpreter.StackPop());  // limit
-        interpreter.ReturnStackPush(index);                   // index
+        interpreter.ReturnStackPush(index);                     // index
 
         return 1;
     }

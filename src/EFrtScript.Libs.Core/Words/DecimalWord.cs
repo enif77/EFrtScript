@@ -3,7 +3,6 @@
 namespace EFrtScript.Libs.Core.Words;
 
 using EFrtScript.Extensions;
-using EFrtScript.Values;
 
 
 internal class DecimalWord : IWord
