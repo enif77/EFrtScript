@@ -138,7 +138,7 @@ public class WordsList : IWordsList
 
             if (nextWord)
             {
-                sb.Append(" ");
+                sb.Append(' ');
             }
             else
             {
