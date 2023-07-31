@@ -10,6 +10,7 @@ internal class ReadAllTextWord : IWord
 {
     public string Name => "READ-ALL-TEXT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

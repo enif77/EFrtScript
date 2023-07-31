@@ -12,6 +12,7 @@ internal class DoControlWord : IWord
 {
     public string Name => "DO";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
     
 
     public int Execute(IInterpreter interpreter)

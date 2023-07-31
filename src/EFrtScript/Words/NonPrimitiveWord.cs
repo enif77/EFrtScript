@@ -5,8 +5,14 @@ namespace EFrtScript.Words;
 
 internal class NonPrimitiveWord : INonPrimitiveWord
 {
+    /// <inheritdoc/>
     public string Name { get; }
+    
+    /// <inheritdoc/>
     public bool IsImmediate { get; private set; }
+
+    /// <inheritdoc/>
+    public int ExecutionToken { get; set; }
 
     /// <summary>
     /// Returns the index of the next word, that will be inserted into this word.

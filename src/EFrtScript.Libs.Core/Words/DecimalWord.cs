@@ -9,6 +9,7 @@ internal class DecimalWord : IWord
 {
     public string Name => "DECIMAL";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

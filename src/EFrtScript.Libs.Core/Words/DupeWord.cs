@@ -9,6 +9,7 @@ internal class DupeWord : IWord
 {
     public string Name => "DUP";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

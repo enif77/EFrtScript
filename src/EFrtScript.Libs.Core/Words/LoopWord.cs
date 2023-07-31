@@ -11,6 +11,7 @@ internal class LoopWord : IWord
 {
     public string Name => "LOOP";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

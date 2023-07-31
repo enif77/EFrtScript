@@ -1,7 +1,5 @@
 /* Copyright (C) Premysl Fara and Contributors */
 
-using EFrtScript.Words;
-
 namespace EFrtScript.Libs.Core.Words;
 
 using EFrtScript.Extensions;
@@ -12,6 +10,7 @@ internal class StringLitWord : IWord
 {
     public string Name => "S\"";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

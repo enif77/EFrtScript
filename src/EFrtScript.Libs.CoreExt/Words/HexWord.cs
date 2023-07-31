@@ -9,6 +9,7 @@ internal class HexWord : IWord
 {
     public string Name => "HEX";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

@@ -9,6 +9,7 @@ internal class EvaluateWord : IWord
 {
     public string Name => "EVALUATE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

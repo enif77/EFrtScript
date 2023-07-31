@@ -8,8 +8,14 @@ namespace EFrtScript.Words;
 /// </summary>
 internal class PrimitiveWord : IWord
 {
+    /// <inheritdoc/>
     public string Name { get; }
+    
+    /// <inheritdoc/>
     public bool IsImmediate => false;
+
+    /// <inheritdoc/>
+    public int ExecutionToken { get; set; }
 
     /// <summary>
     /// The body of this word.

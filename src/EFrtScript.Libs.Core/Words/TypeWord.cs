@@ -11,6 +11,7 @@ internal class TypeWord : IWord
 {
     public string Name => "TYPE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

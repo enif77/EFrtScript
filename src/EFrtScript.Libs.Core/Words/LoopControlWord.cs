@@ -12,6 +12,7 @@ internal class LoopControlWord : IWord
 {
     public string Name => "LOOP";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     /// <summary>

@@ -9,6 +9,7 @@ internal class AbsWord : IWord
 {
     public string Name => "ABS";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

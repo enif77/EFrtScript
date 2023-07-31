@@ -9,6 +9,7 @@ internal class BaseWord : IWord
 {
     public string Name => "BASE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

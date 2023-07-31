@@ -9,6 +9,7 @@ internal class SpacesWord : IWord
 {
     public string Name => "SPACES";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

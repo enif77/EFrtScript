@@ -11,6 +11,7 @@ internal class ElseWord : IWord
 {
     public string Name => "ELSE";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

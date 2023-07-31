@@ -17,6 +17,9 @@ public class ConstantValueWord : IWord
     /// <inheritdoc/>
     public bool IsImmediate => false;
 
+    /// <inheritdoc/>
+    public int ExecutionToken { get; set; }
+
 
     /// <summary>
     /// Constructor.

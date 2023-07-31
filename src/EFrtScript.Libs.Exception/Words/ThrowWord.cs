@@ -9,6 +9,7 @@ internal class ThrowWord : IWord
 {
     public string Name => "THROW";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

@@ -7,6 +7,7 @@ internal class EndNewWordCompilationWord : IWord
 {
     public string Name => ";";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

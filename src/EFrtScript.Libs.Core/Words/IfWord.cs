@@ -9,6 +9,7 @@ internal class IfWord : IWord
 {
     public string Name => "IF";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

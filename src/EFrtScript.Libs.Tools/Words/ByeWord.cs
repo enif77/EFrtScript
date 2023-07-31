@@ -7,6 +7,7 @@ internal class ByeWord : IWord
 {
     public string Name => "BYE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

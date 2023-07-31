@@ -18,6 +18,12 @@ public interface IWord
     /// </summary>
     bool IsImmediate { get; }
 
+    /// <summary>
+    /// An execution token. Used by the EXECUTE word to find a words definition for execution.
+    /// Its set by the IWordsList.AddWord() and the IWordsList.RemoveWord() methods.
+    /// </summary>
+    int ExecutionToken { get; set; }
+
 
     /// <summary>
     /// Executes this word's action.

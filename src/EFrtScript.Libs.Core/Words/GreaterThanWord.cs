@@ -9,6 +9,7 @@ internal class GreaterThanWord : IWord
 {
     public string Name => ">";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

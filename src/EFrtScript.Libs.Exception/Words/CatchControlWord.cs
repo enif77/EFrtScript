@@ -15,6 +15,7 @@ internal class CatchControlWord : IWord
 {
     public string Name => "CATCH";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
     
     
     /// <summary>

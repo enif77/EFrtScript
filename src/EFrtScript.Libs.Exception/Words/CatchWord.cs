@@ -9,6 +9,7 @@ internal class CatchWord : IWord
 {
     public string Name => "CATCH";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

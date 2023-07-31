@@ -7,6 +7,7 @@ internal class AbortWord : IWord
 {
     public string Name => "ABORT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

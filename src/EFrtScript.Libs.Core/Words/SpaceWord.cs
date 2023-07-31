@@ -7,6 +7,7 @@ internal class SpaceWord : IWord
 {
     public string Name => "SPACE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

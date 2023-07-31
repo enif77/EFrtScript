@@ -11,6 +11,7 @@ internal class ThenWord : IWord
 {
     public string Name => "THEN";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

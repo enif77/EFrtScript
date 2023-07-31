@@ -9,6 +9,7 @@ internal class EmitWord : IWord
 {
     public string Name => "EMIT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

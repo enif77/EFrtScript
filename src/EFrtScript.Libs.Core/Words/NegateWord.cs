@@ -9,6 +9,7 @@ internal class NegateWord : IWord
 {
     public string Name => "NEGATE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

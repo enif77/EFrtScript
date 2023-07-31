@@ -9,6 +9,7 @@ internal class QuestionFloatWord : IWord
 {
     public string Name => "?FLOAT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

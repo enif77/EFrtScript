@@ -9,6 +9,7 @@ internal class RotWord : IWord
 {
     public string Name => "ROT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

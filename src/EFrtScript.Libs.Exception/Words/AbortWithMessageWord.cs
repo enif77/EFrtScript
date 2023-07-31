@@ -9,6 +9,7 @@ internal class AbortWithMessageWord : IWord
 {
     public string Name => "ABORT\"";
     public bool IsImmediate => true;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

@@ -9,6 +9,7 @@ internal class QuestionIntWord : IWord
 {
     public string Name => "?INT";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

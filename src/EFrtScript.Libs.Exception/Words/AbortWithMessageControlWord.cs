@@ -12,6 +12,7 @@ internal class AbortWithMessageControlWord : IWord
 {
     public string Name => "ABORT\"";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
     
     
     /// <summary>

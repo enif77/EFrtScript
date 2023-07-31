@@ -12,6 +12,7 @@ internal class IfControlWord : IWord
 {
     public string Name => "IF";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     /// <summary>

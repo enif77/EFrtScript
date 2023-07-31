@@ -9,6 +9,7 @@ internal class DepthWord : IWord
 {
     public string Name => "DEPTH";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)

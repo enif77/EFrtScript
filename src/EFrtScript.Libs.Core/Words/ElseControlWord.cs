@@ -10,6 +10,7 @@ internal class ElseControlWord : IWord
 {
     public string Name => "ELSE";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     /// <summary>

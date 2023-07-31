@@ -9,6 +9,7 @@ internal class SwapWord : IWord
 {
     public string Name => "SWAP";
     public bool IsImmediate => false;
+    public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)
