@@ -125,8 +125,8 @@ public static class StackExtensions
     {
         if (expectedFreeItemsCount < 0) throw new ArgumentOutOfRangeException(nameof(expectedFreeItemsCount));
 
-        // If the expected capacity is less then zero, we have an overflow, which indicates,
-        // that we have an overflow, because the stack cannot be bigger, than Int.MaxValue items.
+        // If the expected capacity is less then zero, we had an integer overflow while calculating it.
+        // It indicates, that we have a stack overflow, because the stack cannot be bigger than Int.MaxValue items.
         var expectedStackCapacity = interpreter.State.Stack.Count + expectedFreeItemsCount;
         if (expectedStackCapacity > interpreter.State.Stack.Capacity || expectedStackCapacity < 0)
         {
