@@ -53,7 +53,7 @@ public class Interpreter : IInterpreter
             Throw(-29, "compiler nesting");
         }
 
-        WordBeingDefined = new NonPrimitiveWord(wordName);
+        WordBeingDefined = new NonPrimitiveWord(wordName.ToUpperInvariant());
         _interpreterState = InterpreterStateCode.Compiling;
     }
 
@@ -188,10 +188,10 @@ public class Interpreter : IInterpreter
     {
         if (this.IsWordRegistered(wordName))
         {
-            var word = State.Words[wordName];
+            var word = State.Words.Get(wordName);
             if (word.IsImmediate)
             {
-                ExecuteWordInternal(State.Words[wordName]);
+                ExecuteWordInternal(word);
             }
             else
             {
@@ -224,7 +224,7 @@ public class Interpreter : IInterpreter
     {
         if (this.IsWordRegistered(wordName))
         {
-            ExecuteWordInternal(State.Words[wordName]);
+            ExecuteWordInternal(State.Words.Get(wordName));
             
             return;
         }

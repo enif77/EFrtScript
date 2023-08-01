@@ -113,7 +113,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
         _growthFactor = Math.Max(capacity / 2, 8);
         _items = new T[capacity];
 
-        Init(default(T));
+        Init(default);
     }
 
     /// <inheritdoc/>
@@ -126,13 +126,13 @@ public abstract class AStackBase<T> : IGenericStack<T>
     public void Clear()
     {
         // Clear/free up the old stuff.
-        Init(default(T));
+        Init(default);
 
         // Create new items at the initial capacity.
         _items = new T[_initialCapacity];
 
         // Set all stack items to the default value.
-        Init(default(T));
+        Init(default);
     }
 
     /// <inheritdoc/>

@@ -11,7 +11,7 @@ using EFrtScript.Stacks;
 public class InterpreterState : IInterpreterState
 {
     /// <inheritdoc/>
-    public IDictionary<string, IWord> Words { get; }
+    public IWordsList Words { get; }
     
     /// <inheritdoc/>
     public IWord? CurrentWord { get; set; }
@@ -37,7 +37,7 @@ public class InterpreterState : IInterpreterState
     /// </summary>
     public InterpreterState()
     {
-        Words = new Dictionary<string, IWord>();
+        Words = new WordsList();
         Stack = new ValueStack();
         ReturnStack = new ValueStack();
         ExceptionStack = new ExceptionStack();

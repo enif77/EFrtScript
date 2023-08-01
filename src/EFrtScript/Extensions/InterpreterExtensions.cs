@@ -25,7 +25,7 @@ public static class InterpreterExtensions
     /// <param name="wordName">A new word name.</param>
     /// <returns>True, if a word is already registered.</returns>
     public static bool IsWordRegistered(this IInterpreter interpreter, string wordName)
-        => string.IsNullOrWhiteSpace(wordName) == false && interpreter.State.Words.ContainsKey(wordName);
+        => string.IsNullOrWhiteSpace(wordName) == false && interpreter.State.Words.IsDefined(wordName);
 
     /// <summary>
     /// Gets a registered word. Throws an exception if no such word is registered.
@@ -40,16 +40,16 @@ public static class InterpreterExtensions
             interpreter.Throw(-13, $"The '{wordName}' word is undefined.");
         }
 
-        return interpreter.State.Words[wordName];
+        return interpreter.State.Words.Get(wordName);
     }
 
     /// <summary>
-    /// Registers a new word. Throws an exception, if such word is already registered.
+    /// Registers a new word.
     /// </summary>
     /// <param name="interpreter">An IInterpreter instance.</param>
     /// <param name="word">A word to be registered.</param>
     public static void RegisterWord(this IInterpreter interpreter, IWord word)
-        => interpreter.State.Words.Add(word.Name.ToUpperInvariant(), word);
+        => interpreter.State.Words.Add(word);
 
     /// <summary>
     /// Adds a primitive word to the words list.

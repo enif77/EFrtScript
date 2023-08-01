@@ -5,7 +5,6 @@ A Forth language implementation with scripting languages twist.
 ## Forth differences
 
 - Selected words are implemented only.
-- Words cannot be redefined.
 - Stack, return stack and the heap contains value objects (integers, strings etc.).
 - No "direct" memory access.
 - No low level stuff.

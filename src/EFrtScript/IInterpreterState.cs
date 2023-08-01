@@ -11,9 +11,9 @@ using EFrtScript.Stacks;
 public interface IInterpreterState
 {
     /// <summary>
-    /// The words dictionary.
+    /// The list of all known words.
     /// </summary>
-    IDictionary<string, IWord> Words { get; }
+    IWordsList Words { get; }
 
     /// <summary>
     /// The currently running word.
