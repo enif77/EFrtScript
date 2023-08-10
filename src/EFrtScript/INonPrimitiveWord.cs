@@ -23,6 +23,6 @@ public interface INonPrimitiveWord : IWord
     /// <summary>
     /// Adds a new word to the internal list of words.
     /// </summary>
-    /// <returns>The index of the word in the internel list of words.</returns>
+    /// <returns>The index of the word in the internal list of words.</returns>
     int AddWord(IWord word);
 }
