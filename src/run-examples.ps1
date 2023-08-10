@@ -2,8 +2,8 @@
 #dotnet exec ./EfrtScriptApp/bin/Debug/net7.0/EFrtScriptApp.dll ./EfrtScriptApp/Examples/hello-world.efrts
 #& ./EfrtScriptApp/bin/Debug/net7.0/EFrtScriptApp ./EfrtScriptApp/Examples/hello-world.efrts
 
-$efrt_path = "./EfrtScriptApp/bin/Debug/net7.0/efrts"
-$examples_path = "./EfrtScriptApp/Examples/"
+$efrt_path = "./EFrtScriptApp/bin/Debug/net7.0/efrts"
+$examples_path = "./EFrtScriptApp/Examples/"
 
 $scripts = (
     "hello-world.efrts",
