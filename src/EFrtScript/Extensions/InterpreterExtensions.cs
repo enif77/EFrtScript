@@ -22,10 +22,19 @@ public static class InterpreterExtensions
     /// Checks, if a word is already registered.
     /// </summary>
     /// <param name="interpreter">An IInterpreter instance.</param>
-    /// <param name="wordName">A new word name.</param>
+    /// <param name="wordName">A word name.</param>
     /// <returns>True, if a word is already registered.</returns>
     public static bool IsWordRegistered(this IInterpreter interpreter, string wordName)
         => string.IsNullOrWhiteSpace(wordName) == false && interpreter.State.Words.IsDefined(wordName);
+
+    /// <summary>
+    /// Checks, if a word is already registered.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="executionToken">A word execution token.</param>
+    /// <returns>True, if a word is already registered.</returns>
+    public static bool IsWordRegistered(this IInterpreter interpreter, int executionToken)
+        => interpreter.State.Words.IsDefined(executionToken);
 
     /// <summary>
     /// Gets a registered word. Throws an exception if no such word is registered.
@@ -41,6 +50,22 @@ public static class InterpreterExtensions
         }
 
         return interpreter.State.Words.Get(wordName);
+    }
+
+    /// <summary>
+    /// Gets a registered word. Throws an exception if no such word is registered.
+    /// </summary>
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="executionToken">A requested word execution token.</param>
+    /// <returns>A registered word instance.</returns>
+    public static IWord GetRegisteredWord(this IInterpreter interpreter, int executionToken)
+    {
+        if (interpreter.IsWordRegistered(executionToken) == false)
+        {
+            interpreter.Throw(-13, $"A word with execution token {executionToken} is not defined.");
+        }
+
+        return interpreter.State.Words.Get(executionToken);
     }
 
     /// <summary>

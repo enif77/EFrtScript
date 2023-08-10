@@ -53,8 +53,7 @@ internal class CatchControlWord : IWord
         {
             // Execute the word.
             var index = interpreter.ExecuteWord(
-                interpreter.GetRegisteredWord(
-                    interpreter.StackPop().String.ToUpperInvariant()));
+                interpreter.GetRegisteredWord(interpreter.StackPop().Integer));
 
             // Remove the unused exception frame (nothing failed here).
             _ = interpreter.ExceptionStackPop();

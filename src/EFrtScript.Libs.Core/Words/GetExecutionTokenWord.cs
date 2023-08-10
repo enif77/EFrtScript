@@ -17,14 +17,19 @@ internal class GetExecutionTokenWord : IWord
     {
         interpreter.CheckIsCompiling(this);
 
-        var word = interpreter.CurrentInputSource!.ReadWord();
-        if (string.IsNullOrEmpty(word))
+        var wordName = interpreter.CurrentInputSource!.ReadWord();
+        if (string.IsNullOrEmpty(wordName))
         {
             throw new InterpreterException("A word name expected.");
         }
 
+        if (interpreter.IsWordRegistered(wordName.ToUpperInvariant()) == false)
+        {
+            throw new InterpreterException($"The word '{wordName}' is not registered.");
+        }
+
         interpreter.WordBeingDefined!
-            .AddWord(new ConstantValueWord(word.ToUpperInvariant()));
+            .AddWord(new ConstantValueWord(interpreter.GetRegisteredWord(wordName).ExecutionToken));
         
         return 1;
     }
