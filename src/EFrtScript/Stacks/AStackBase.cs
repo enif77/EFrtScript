@@ -66,7 +66,7 @@ public abstract class AStackBase<T> : IGenericStack<T>
                 }
                 
                 Array.Resize(ref _items, newCapacity);
-                InitInternal(default(T), lastCapacity, _items.Length - 1);
+                InitInternal(default, lastCapacity, _items.Length - 1);
             }
             else if (value < _top)
             {
@@ -78,14 +78,14 @@ public abstract class AStackBase<T> : IGenericStack<T>
                         // We are returning to the half of the current capacity,
                         // but we will be still bigger than the initial capacity.
                         Array.Resize(ref _items, halfCapacity);
-                        InitInternal(default(T), value + 1, _items.Length - 1);
+                        InitInternal(default, value + 1, _items.Length - 1);
                     }
                 }
                 else if (_items.Length > _initialCapacity && value < _initialCapacity)
                 {
                     // We are returning to the initial capacity.
                     Array.Resize(ref _items, _initialCapacity);
-                    InitInternal(default(T), value + 1, _items.Length - 1);
+                    InitInternal(default, value + 1, _items.Length - 1);
                 }
             }
 
