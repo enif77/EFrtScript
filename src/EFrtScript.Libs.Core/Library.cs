@@ -22,6 +22,7 @@ public class Library : IWordsLibrary
     public void Initialize(IInterpreter interpreter)
     {
         interpreter.RegisterWord(new EvaluateWord());
+        interpreter.RegisterWord(new ExecuteWord());
         
         interpreter.RegisterWord(new ParenWord());
 

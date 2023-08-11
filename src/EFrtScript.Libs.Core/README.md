@@ -46,6 +46,7 @@ Words definition table columns:
 | ELSE     | yes  | C    | **Else**<br><br>Used in an IF—ELSE—THEN sequence, delimits the code to be executed if the if-condition was false. |
 | EMIT     | no   | IC   | **Emit**<br>(n -- )<br>Displays n as a character. |
 | EVALUATE | no   | IC   | **Evaluate string**<br>{s -- }<br>Evaluates a string the top of the stack. |
+| EXECUTE  | no   | IC   | **Execute a word**<br>{xt -- }<br>Executes a word defined by its execution token at the top of the stack. |
 | IF       | yes  | C    | **Conditional statement**<br>(flag --)<br>If flag is nonzero, the following statements are executed. Otherwise, execution resumes after the matching ELSE clause, if any, or after the matching THEN. |
 | LOOP     | yes  | C    | **Increment loop index**<br>Adds one to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
 | NEGATE   | no   | IC   | **n2 = -n1**<br>(n1 -- n2)<br>Negates the value the top of the stack. |
