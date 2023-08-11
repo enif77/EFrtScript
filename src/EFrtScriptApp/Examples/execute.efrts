@@ -1,0 +1,21 @@
+S" --- EXECUTE ---" TYPE CR
+
+( A word we can use to execute a word on the stack. )
+: TEST 1 TYPE CR ;
+
+( A word that will execute TEST. )
+: EXECUTE-TEST
+
+( Get the execution token of TEST. )
+['] TEST
+
+( Print out the execution token. )
+DUP . CR    ( execution token )
+
+( Use EXECUTE to execute the word TEST. )
+EXECUTE   
+
+( EXECUTE-TEST end ) 
+;  
+
+EXECUTE-TEST

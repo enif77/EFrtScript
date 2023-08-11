@@ -24,7 +24,8 @@ $scripts = (
     "abort-with-message.efrts",
     "evaluate.efrts",
     "negate.efrts",
-    "depth.efrts")
+    "depth.efrts",
+    "execute.efrts")
 
 foreach ($s in $scripts) {
     & $efrt_path ($examples_path + $s)
