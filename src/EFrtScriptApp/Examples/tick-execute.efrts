@@ -1,0 +1,7 @@
+S" --- TICK - EXECUTE ---" TYPE CR
+
+: GT1 123 ;
+' GT1 EXECUTE
+
+( -> 123 )
+. CR

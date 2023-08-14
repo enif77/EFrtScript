@@ -29,6 +29,8 @@ public class LibraryTests
     [InlineData("NEGATE")]
     [InlineData("+")]
     [InlineData("(")]
+    [InlineData("'")]
+    [InlineData("[']")]
     public void HasWordRegistered(string wordName)
     {
         var interpreter = new Interpreter(new NullOutputWriter());
