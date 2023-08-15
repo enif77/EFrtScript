@@ -53,6 +53,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new SpaceWord());
         interpreter.RegisterWord(new SpacesWord());
         interpreter.RegisterWord(new TypeWord());
+        interpreter.RegisterWord(new BlWord());
 
         interpreter.RegisterWord(new AbsWord());
         interpreter.RegisterWord(new NegateWord());
