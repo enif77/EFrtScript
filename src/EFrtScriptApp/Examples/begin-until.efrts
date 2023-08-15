@@ -1,0 +1,14 @@
+S" --- BEGIN-UNTIL ---" TYPE CR
+
+: test
+    1
+    BEGIN
+        1 +
+        DUP . CR
+
+        DUP
+        5 > 
+    UNTIL
+    DROP ;
+
+test

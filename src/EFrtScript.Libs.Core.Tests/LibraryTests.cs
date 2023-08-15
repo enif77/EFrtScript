@@ -33,6 +33,7 @@ public class LibraryTests
     [InlineData("(")]
     [InlineData("'")]
     [InlineData("[']")]
+    [InlineData("UNTIL")]
     public void HasWordRegistered(string wordName)
     {
         var interpreter = new Interpreter(new NullOutputWriter());
