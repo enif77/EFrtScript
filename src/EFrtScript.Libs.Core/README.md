@@ -37,6 +37,7 @@ Words definition table columns:
 | ABORT" str | yes  | C    | **Abort with message**<br>(flag -- )<br>Prints the string literal that follows in line, then aborts, clearing all execution state to return to the interpreter. |
 | ABS      | no   | IC   | **n2 = Abs(n1)**<br>(n1 -- n2)<br>Replaces the top of stack with its absolute value. |
 | BASE     | no   | IC   | **Obtain the numeric conversion radix heap index**<br>( -- addr)<br>addr is the index of a value containing the current number-conversion radix {{2...36}}. |
+| BEGIN    | no   | C    | **Begin loop**<br>(R: -- dest)<br>Begins a loop. The end of the loop is marked by the matching AGAIN, REPEAT, or UNTIL. |
 | BL       | no   | IC   | **Blank**<br>( -- char)<br>Leaves 32 (the ASCII code of the SPACE char) on the top of the stack. |
 | CR       | no   | IC   | **Carriage return**<br>( -- )<br>The following output will start at the new line. |
 | DECIMAL  | no   | IC   | **Set the numeric conversion radix to ten**<br>( -- )<br>Sets the numeric conversion radix to ten (decimal). |

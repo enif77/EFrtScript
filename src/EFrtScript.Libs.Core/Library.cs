@@ -75,6 +75,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new ThenWord());
         interpreter.RegisterWord(new ElseWord());
 
+        interpreter.RegisterWord(new BeginWord());
         interpreter.RegisterWord(new DoWord());
         interpreter.RegisterWord(new LoopWord());
 

@@ -20,6 +20,7 @@ public class LibraryTests
     [Theory]
     [InlineData("ABS")]
     [InlineData("BASE")]
+    [InlineData("BEGIN")]
     [InlineData("BL")]
     [InlineData("CR")]
     [InlineData("DECIMAL")]
