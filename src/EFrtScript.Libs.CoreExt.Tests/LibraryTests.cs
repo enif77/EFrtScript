@@ -18,6 +18,7 @@ public class LibraryTests
     
     
     [Theory]
+    [InlineData("AGAIN")]
     [InlineData("HEX")]
     [InlineData("\\")]
     [InlineData("?INT")]

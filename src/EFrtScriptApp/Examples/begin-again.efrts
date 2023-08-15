@@ -1,0 +1,15 @@
+S" --- BEGIN-AGAIN ---" TYPE CR
+
+: test
+    1
+    BEGIN
+        1 +
+        DUP
+        5 > IF
+            ABORT
+        THEN
+        DUP . CR
+    AGAIN
+    DROP ;
+
+test

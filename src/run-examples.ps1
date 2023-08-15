@@ -26,7 +26,8 @@ $scripts = (
     "negate.efrts",
     "depth.efrts",
     "execute.efrts",
-    "tick-execute.efrts")
+    "tick-execute.efrts",
+    "begin-again.efrts")
 
 foreach ($s in $scripts) {
     & $efrt_path ($examples_path + $s)
