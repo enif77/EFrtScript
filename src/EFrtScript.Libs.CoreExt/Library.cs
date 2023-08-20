@@ -18,6 +18,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new HexWord());
         
         interpreter.RegisterWord(new IntWord());
+        interpreter.RegisterWord(new FloatWord());
         
         interpreter.RegisterWord(new QuestionIntWord());
         interpreter.RegisterWord(new QuestionFloatWord());

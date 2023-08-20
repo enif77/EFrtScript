@@ -22,6 +22,7 @@ public class LibraryTests
     [InlineData("HEX")]
     [InlineData("\\")]
     [InlineData("INT")]
+    [InlineData("FLOAT")]
     [InlineData("?INT")]
     [InlineData("?FLOAT")]
     [InlineData("?STRING")]

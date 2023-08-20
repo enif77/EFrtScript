@@ -200,7 +200,6 @@ These are examples of valid representations of floating-point numbers in program
 
 ---
 
-FLOAT -> converts a value on the stack to floating point. 
 STRING -> converts a value on the stack to string.
 
 ?DO +LOOP I J LEAVE REPEAT UNLOOP WHILE 
