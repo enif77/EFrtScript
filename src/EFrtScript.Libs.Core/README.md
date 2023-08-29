@@ -49,11 +49,13 @@ Words definition table columns:
 | EMIT     | no   | IC   | **Emit**<br>(n -- )<br>Displays n as a character. |
 | EVALUATE | no   | IC   | **Evaluate string**<br>{s -- }<br>Evaluates a string the top of the stack. |
 | EXECUTE  | no   | IC   | **Execute a word**<br>{xt -- }<br>Executes a word defined by its execution token at the top of the stack. |
+| EXIT     | yes  | C    | **Exit the current word**<br>( -- )<br>Exits the currently running word. |
 | IF       | yes  | C    | **Conditional statement**<br>(flag --)<br>If flag is nonzero, the following statements are executed. Otherwise, execution resumes after the matching ELSE clause, if any, or after the matching THEN. |
 | LOOP     | yes  | C    | **Increment loop index**<br>Adds one to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
 | NEGATE   | no   | IC   | **n2 = -n1**<br>(n1 -- n2)<br>Negates the value the top of the stack. |
 | OVER     | no   | IC   | **Duplicate second item**<br>(n1 n2 -- n1 n2 n1)<br>The second item on the stack is copied to the top. |
 | R>       | no   | IC   | **From return stack**<br>( -- n) [n - ]<br>The top value is removed from the return stack and pushed onto the stack. |
+| REPEAT   | no   | C    | **End BEGIN-WHILE-REPEAT loop**<br>(R: -- dest)<br>Ends the BEGIN-WHILE-REPEAT a loop. |
 | ROT      | no   | IC   | **Rotate 3 items**<br>(n1 n2 n3 -- n2 n3 n1)<br>The third item on the stack is placed on the top of the stack and the second and first items are moved down. |
 | S" str   | yes  | IC   | **String literal**<br>( -- s)<br>Consume all source characters till the closing `"` character, creating a string from them and storing the result on the top of the stack. |
 | SPACE    | no   | IC   | **Print SPACE**<br>Prints out the SPACE character. |
@@ -62,5 +64,6 @@ Words definition table columns:
 | THEN     | yes  | C    | **End if**<br>( -- flag)<br>Used in an IF—ELSE—THEN sequence, marks the end of the conditional statement. |
 | TYPE     | no   | IC   | **Print string**<br>(s -- )<br>Prints out a value on the top of the stack as a string. |
 | UNTIL    | yes  | C    | **End BEGIN—UNTIL loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching BEGIN. If flag is nonzero, the loop is exited and the word following the UNTIL is executed. |
+| WHILE    | yes  | C    | **Bein BEGIN—WHILE-REPEAT loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching REPEAT. If flag is nonzero, the loop is continuing behind the word BEGIN.
 | '        | no   | IC   | **Obtain execution token**<br>Places the execution token of the following word on the top of the stack. |
 | [']      | yes  | C    | **Obtain execution token**<br>Places the execution token of the following word to the currently compiled word as a literal. |

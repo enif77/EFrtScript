@@ -27,13 +27,16 @@ public class LibraryTests
     [InlineData("DUP")]
     [InlineData("EMIT")]
     [InlineData("EXECUTE")]
+    [InlineData("EXIT")]
     [InlineData("-")]
     [InlineData("NEGATE")]
     [InlineData("+")]
     [InlineData("(")]
     [InlineData("'")]
     [InlineData("[']")]
+    [InlineData("REPEAT")]
     [InlineData("UNTIL")]
+    [InlineData("WHILE")]
     public void HasWordRegistered(string wordName)
     {
         var interpreter = new Interpreter(new NullOutputWriter());

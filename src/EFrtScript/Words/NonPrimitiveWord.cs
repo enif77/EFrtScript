@@ -90,6 +90,12 @@ internal class NonPrimitiveWord : INonPrimitiveWord
     }
 
 
+    public void BreakExecution()
+    {
+        _executionBreaked = true;
+    }
+
+
     /// <summary>
     /// Words defining this word.
     /// </summary>

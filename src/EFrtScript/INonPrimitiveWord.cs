@@ -25,4 +25,9 @@ public interface INonPrimitiveWord : IWord
     /// </summary>
     /// <returns>The index of the word in the internal list of words.</returns>
     int AddWord(IWord word);
+
+    /// <summary>
+    /// If called, no more words from this word are executed.
+    /// </summary>
+    void BreakExecution();
 }

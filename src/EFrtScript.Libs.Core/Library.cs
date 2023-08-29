@@ -28,6 +28,7 @@ public class Library : IWordsLibrary
 
         interpreter.RegisterWord(new BeginNewWordCompilationWord());
         interpreter.RegisterWord(new EndNewWordCompilationWord());
+        interpreter.RegisterWord(new ExitWord());
 
         interpreter.RegisterWord(new BaseWord());
         interpreter.RegisterWord(new DecimalWord());
@@ -79,6 +80,8 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new UntilWord());
         interpreter.RegisterWord(new DoWord());
         interpreter.RegisterWord(new LoopWord());
+        interpreter.RegisterWord(new WhileWord());
+        interpreter.RegisterWord(new RepeatWord());
 
         interpreter.RegisterWord(new TickWord());
         interpreter.RegisterWord(new GetExecutionTokenWord());
