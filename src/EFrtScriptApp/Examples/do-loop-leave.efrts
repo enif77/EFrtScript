@@ -1,0 +1,14 @@
+S" --- DO LOOP ---" TYPE CR
+
+: test
+  15 0 DO
+    S" Hi!" TYPE CR
+
+    R@ 5 > IF
+      S"   -> Leaving at 6" TYPE CR
+      LEAVE
+    THEN
+
+  LOOP ;
+
+test

@@ -29,7 +29,8 @@ $scripts = (
     "tick-execute.efrts",
     "begin-again.efrts",
     "begin-until.efrts",
-    "begin-while-repeat.efrts")
+    "begin-while-repeat.efrts",
+    "do-loop-leave.efrts")
 
 foreach ($s in $scripts) {
     & $efrt_path ($examples_path + $s)

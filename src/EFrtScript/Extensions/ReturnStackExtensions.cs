@@ -60,6 +60,12 @@ public static class ReturnStackExtensions
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();
     
     /// <summary>
+    /// Duplicates the top item on the return stack.
+    /// </summary>
+    public static void ReturnStackDup(this IInterpreter interpreter)
+        => interpreter.State.ReturnStack.Dup();
+
+    /// <summary>
     /// Removes the top item from the return stack.
     /// </summary>
     public static void ReturnStackDrop(this IInterpreter interpreter)
