@@ -1,0 +1,10 @@
+S" --- DO ?LOOP ---" TYPE CR
+
+: GD2
+  DO
+    R@ DUP . SPACE
+  -1 +LOOP
+  CR ;
+
+1 4 GD2   \ -> 4 3 2
+-1 2 GD2  \ -> 2 1 0

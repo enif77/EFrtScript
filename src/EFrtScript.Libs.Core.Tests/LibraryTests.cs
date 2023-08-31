@@ -32,6 +32,7 @@ public class LibraryTests
     [InlineData("-")]
     [InlineData("NEGATE")]
     [InlineData("+")]
+    [InlineData("+LOOP")]
     [InlineData("(")]
     [InlineData("'")]
     [InlineData("[']")]
