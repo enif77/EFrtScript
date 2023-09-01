@@ -200,7 +200,7 @@ These are examples of valid representations of floating-point numbers in program
 
 ---
 
-?DO +LOOP I J LEAVE REPEAT UNLOOP WHILE 
+?DO I J UNLOOP 
 
 COUNT
 
