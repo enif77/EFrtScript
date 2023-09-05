@@ -68,8 +68,10 @@ public static class ReturnStackExtensions
     /// <summary>
     /// Removes the top item from the return stack.
     /// </summary>
-    public static void ReturnStackDrop(this IInterpreter interpreter)
-        => interpreter.State.ReturnStack.Drop();
+    /// <param name="interpreter">An IInterpreter instance.</param>
+    /// <param name="n">The number of stack items to be removed from the return stack.</param>
+    public static void ReturnStackDrop(this IInterpreter interpreter, int n = 1)
+        => interpreter.State.ReturnStack.Drop(n);
     
     /// <summary>
     /// Expects N items on the return stack.
