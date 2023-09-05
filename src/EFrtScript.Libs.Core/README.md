@@ -65,6 +65,7 @@ Words definition table columns:
 | SWAP     | no   | IC   | **Swap top two items**<br>(n1 n2 -- n2 n1)<br>The top two stack items are interchanged. |
 | THEN     | yes  | C    | **End if**<br>( -- flag)<br>Used in an IF—ELSE—THEN sequence, marks the end of the conditional statement. |
 | TYPE     | no   | IC   | **Print string**<br>(s -- )<br>Prints out a value on the top of the stack as a string. |
+| UNLOOP   | no   | C    | **Discard DO—LOOP control parameters**<br>[limit index -- ]<br>Loop control parameters are removed from the return stack. Use this before the EXITing a loop. |
 | UNTIL    | yes  | C    | **End BEGIN—UNTIL loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching BEGIN. If flag is nonzero, the loop is exited and the word following the UNTIL is executed. |
 | WHILE    | yes  | C    | **Bein BEGIN—WHILE-REPEAT loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching REPEAT. If flag is nonzero, the loop is continuing behind the word BEGIN.
 | '        | no   | IC   | **Obtain execution token**<br>Places the execution token of the following word on the top of the stack. |

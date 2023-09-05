@@ -84,6 +84,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new WhileWord());
         interpreter.RegisterWord(new RepeatWord());
         interpreter.RegisterWord(new LeaveWord());
+        interpreter.RegisterWord(new UnloopWord());
 
         interpreter.RegisterWord(new TickWord());
         interpreter.RegisterWord(new GetExecutionTokenWord());
