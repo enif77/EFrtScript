@@ -58,6 +58,12 @@ public static class ReturnStackExtensions
     /// </summary>
     public static IValue ReturnStackPop(this IInterpreter interpreter)
         => interpreter.State.ReturnStack.Pop() ?? throw NullValueNotAllowedInReturnStackException();
+
+    /// <summary>
+    /// Returns the Nth item from the return stack.
+    /// </summary>
+    public static IValue ReturnStackPick(this IInterpreter interpreter, int n)
+        => interpreter.State.ReturnStack.Pick(n) ?? throw NullValueNotAllowedInReturnStackException();
     
     /// <summary>
     /// Duplicates the top item on the return stack.

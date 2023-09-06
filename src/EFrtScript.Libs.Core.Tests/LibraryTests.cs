@@ -39,6 +39,8 @@ public class LibraryTests
     [InlineData("EVALUATE")]
     [InlineData("EXECUTE")]
     [InlineData("EXIT")]
+    [InlineData("I")]
+    [InlineData("J")]
     [InlineData("LEAVE")]
     [InlineData("-")]
     [InlineData("NEGATE")]

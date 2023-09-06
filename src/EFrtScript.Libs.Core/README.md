@@ -51,7 +51,9 @@ Words definition table columns:
 | EVALUATE | no   | IC   | **Evaluate string**<br>{s -- }<br>Evaluates a string the top of the stack. |
 | EXECUTE  | no   | IC   | **Execute a word**<br>{xt -- }<br>Executes a word defined by its execution token at the top of the stack. |
 | EXIT     | yes  | C    | **Exit the current word**<br>( -- )<br>Exits the currently running word. |
+| I        | yes  | C    | **Inner loop index**<br>( -- n) [n -- n]<br>The index of the innermost DO—LOOP is placed on the stack. |
 | IF       | yes  | C    | **Conditional statement**<br>(flag --)<br>If flag is nonzero, the following statements are executed. Otherwise, execution resumes after the matching ELSE clause, if any, or after the matching THEN. |
+| J        | yes  | C    | **Outer loop index**<br>( -- n) [J lim I -- J lim I]<br>The loop index of the next to innermost DO—LOOP is placed on the stack. |
 | LEAVE    | yes  | C    | **Exit DO—LOOP**<br>The innermost DO—LOOP is immediately exited. Execution resumes after the LOOP statement marking the end of the loop. |
 | LOOP     | yes  | C    | **Increment loop index**<br>Adds one to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
 | NEGATE   | no   | IC   | **n2 = -n1**<br>(n1 -- n2)<br>Negates the value the top of the stack. |
