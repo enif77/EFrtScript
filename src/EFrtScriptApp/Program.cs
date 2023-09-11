@@ -200,8 +200,6 @@ These are examples of valid representations of floating-point numbers in program
 
 ---
 
-?DO I J 
-
 COUNT
 
 >NUMBER S>D
