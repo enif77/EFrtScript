@@ -31,7 +31,8 @@ $scripts = (
     "begin-until.efrts",
     "begin-while-repeat.efrts",
     "do-loop-leave.efrts",
-    "do-question-loop.efrts")
+    "do-question-loop.efrts",
+    "question-do-loop.efrts")
 
 foreach ($s in $scripts) {
     & $efrt_path ($examples_path + $s)

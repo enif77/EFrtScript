@@ -1,0 +1,7 @@
+S" --- ?DO-LOOP ---" TYPE CR
+
+: qd ?DO I . CR LOOP ;
+
+789 789 qd      \ -> 
+-9876 -9876 qd  \ -> 
+5 0 qd          \ -> 0 1 2 3 4

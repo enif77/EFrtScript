@@ -24,6 +24,7 @@ public class LibraryTests
     [InlineData("INT")]
     [InlineData("FLOAT")]
     [InlineData("STRING")]
+    [InlineData("?DO")]
     [InlineData("?INT")]
     [InlineData("?FLOAT")]
     [InlineData("?STRING")]
