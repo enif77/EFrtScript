@@ -16,7 +16,7 @@ internal class ExitControlWord : IWord
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="indexIncrement">The index increment to jump to the beginning of a loop.</param>
+    /// <param name="definitionWord">In which word is this word defined.</param>
     public ExitControlWord(INonPrimitiveWord definitionWord)
     {
         _definitionWord = definitionWord;
