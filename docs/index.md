@@ -63,10 +63,10 @@ NOTE: The `\U` escape sequence will be added later.
 
 ## Libraries
 
- * [CORE](../src/EFrtScript.Libs.Core/README.md)
- * [CORE-EXT](../src/EFrtScript.Libs.CoreExt/README.md)
- * [EXCEPTION](../src/EFrtScript.Libs.Exception/README.md)
- * [TOOLS](../src/EFrtScript.Libs.Tools/README.md)
+ * [CORE](lib-core.md)
+ * [CORE-EXT](lib-core-ext.md)
+ * [EXCEPTION](lib-exception.md)
+ * [TOOLS](lib-tools.md)
  
 ## EXTRA Words
 

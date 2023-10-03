@@ -2,7 +2,7 @@
 
 A Forth language implementation with scripting languages twist.
 
-See [Documentation](docs/index.md) for more info.
+See the [documentation](docs/index.md) for more info.
 
 ## Examples
 
