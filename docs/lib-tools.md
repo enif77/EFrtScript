@@ -6,4 +6,4 @@ See the [Forth standard description](https://forth-standard.org/standard/tools) 
 
 ## Words
 
-- [BYE](docs/libs/tools/bye.md) 
+- [BYE](libs/tools/bye.md) 
