@@ -4,18 +4,10 @@ Exceptions handling words.
 
 ## Words
 
-Words definition table columns:
+- [CATCH](libs/exception/catch.md)
+- [THROW](libs/exception/throw.md)
 
-- Name: A name of a word with optional parameters.
-- Imm.: Immediate - if a word is executed even if we are in the compilation mode.
-- Mode: I = interpretation mode only (not available during compilation), C = compilation mode only
-  (not available during interpretation), IC = available in both modes, S = suspended compilation only (not available in I, C or IC).
-- Description: A word name, followed by the stack diagram - () = data stack, [] = return stack - and description of the word itself.
-
-| Name     | Imm. | Mode | Description |
-| ---      | ---  | ---  | --- |
-| CATCH    | yes  | C    | **Catch an exception**<br>(xt -- n)<br>Pushes the current execution state to the exception stack, executes xt, and returns 0 for no-error execution (dropping the exception frame) and non-zero, if a THROW was executed. |
-| THROW    | no   | C    | **Throw an exception**<br>(n -- )<br>If n is zero, does nothing. Otherwise throws an error, terminating the current execution, returning to the CATCH, if a exception frame was found on the exception stack. |
+---
 
 ## Words (EXT)
 
