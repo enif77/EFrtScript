@@ -6,7 +6,7 @@ See the [documentation](docs/index.md) for more info.
 
 ## Examples
 
-NOTE: These examples are not tested/implemented yet.
+NOTE: These examples are (mostly) not tested/implemented yet.
 
 ```
 ( Hello world! )
@@ -230,11 +230,6 @@ Variable column# ( current_offset)
 
 ### Forth related links
 
-- https://www.root.cz/serialy/programovaci-jazyk-forth/
-- https://www.forth.com/starting-forth/
-- https://en.wikipedia.org/wiki/Forth_(programming_language)
-- https://www.fourmilab.ch/atlast/atlast.html
-- http://users.ece.cmu.edu/~koopman/stack_computers/
 - https://www.root.cz/serialy/programovaci-jazyk-forth/
 - https://www.forth.com/starting-forth/
 - https://en.wikipedia.org/wiki/Forth_(programming_language)
