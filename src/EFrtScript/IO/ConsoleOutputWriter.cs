@@ -11,7 +11,15 @@ public class ConsoleOutputWriter : IOutputWriter
     /// <inheritdoc/>
     public void Write(string format, params object[] arg)
     {
-        Console.Write(format, arg);
+        if (arg == null || arg.Length == 0)
+        {
+            // We dont want he Write() method to parse the contents the format parameter if there are no args.
+            Console.Write(format);    
+        }
+        else
+        {
+            Console.Write(format, arg);
+        }
     }
 
     /// <inheritdoc/>
@@ -29,6 +37,14 @@ public class ConsoleOutputWriter : IOutputWriter
     /// <inheritdoc/>
     public void WriteLine(string format, params object[] arg)
     {
-        Console.WriteLine(format, arg);
+        if (arg == null || arg.Length == 0)
+        {
+            // We dont want he WriteLine() method to parse the contents the format parameter if there are no args.
+            Console.WriteLine(format);    
+        }
+        else
+        {
+            Console.WriteLine(format, arg);
+        }
     }
 }
