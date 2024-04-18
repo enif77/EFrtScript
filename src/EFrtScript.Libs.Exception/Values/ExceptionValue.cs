@@ -3,7 +3,6 @@
 namespace EFrtScript.Libs.Exception.Values;
 
 using System;
-using System.Text.Json.Serialization;
 
 
 /// <summary>
@@ -11,18 +10,10 @@ using System.Text.Json.Serialization;
 /// </summary>
 internal class ExceptionValue : IValue
 {
-    [JsonIgnore]
     public bool Boolean => Integer != 0;
-
-    [JsonIgnore]
     public int Integer => _exception.ExceptionCode;
-
-    [JsonIgnore]
     public double Float => Integer;
-    
     public string String => _exception.Message;
-
-    [JsonIgnore]
     public Exception Exception => _exception;
 
 

@@ -3,7 +3,6 @@
 namespace EFrtScript.Values;
 
 using System.Globalization;
-using System.Text.Json.Serialization;
 
 
 /// <summary>
@@ -11,15 +10,9 @@ using System.Text.Json.Serialization;
 /// </summary>
 internal class FloatValue : IValue
 {
-    [JsonIgnore]
     public bool Boolean => Integer != 0;
-
-    [JsonIgnore]
     public int Integer => (int) Float;
-    
     public double Float { get; }
-
-    [JsonIgnore]
     public string String => Float.ToString(CultureInfo.InvariantCulture);
 
 
