@@ -28,6 +28,6 @@ STRING-LENGTH
 
 ( string -- n )
 
-n is the length of the string.
+The n is the length of the string.
  
  */
