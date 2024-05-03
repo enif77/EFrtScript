@@ -1,7 +1,7 @@
-# STRING-IS-EMPTY
+# ?STRING-IS-EMPTY
 
 - Library: STRING
-- Common name: string-is-empty
+- Common name: ?string-is-empty
 - Is immediate: no
 - Mode: interpretation and compilation
 - Stack image: `(string -- flag)`
