@@ -17,8 +17,10 @@ public class LibraryTests
     
     
     [Theory]
-    [InlineData("STRING-IS-EMPTY")]
+    [InlineData("?STRING-IS-EMPTY")]
+    [InlineData("?STRING-STARTS-WITH")]
     [InlineData("STRING-LENGTH")]
+    [InlineData("STRING-SUBSTRING")]
     [InlineData("STRING-TRIM")]
     public void HasWordRegistered(string wordName)
     {

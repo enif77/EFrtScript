@@ -12,7 +12,9 @@ public class Library : IWordsLibrary
     public void Initialize(IInterpreter interpreter)
     {
         interpreter.RegisterWord(new StringIsEmptyWord());
+        interpreter.RegisterWord(new StringStartsWithWord());
         interpreter.RegisterWord(new StringLengthWord());
+        interpreter.RegisterWord(new StringSubstringWord());
         interpreter.RegisterWord(new StringTrimWord());
     }
 }

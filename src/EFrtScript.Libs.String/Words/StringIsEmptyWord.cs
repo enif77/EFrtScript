@@ -7,7 +7,7 @@ using EFrtScript.Extensions;
 
 internal class StringIsEmptyWord : IWord
 {
-    public string Name => "STRING-IS-EMPTY";
+    public string Name => "?STRING-IS-EMPTY";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
@@ -24,7 +24,7 @@ internal class StringIsEmptyWord : IWord
 
 /*
  
-STRING-IS-EMPTY
+?STRING-IS-EMPTY
 
 ( string -- flag )
 

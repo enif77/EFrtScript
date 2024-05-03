@@ -5,21 +5,22 @@ namespace EFrtScript.Libs.String.Words;
 using EFrtScript.Extensions;
 
 
-internal class StringTrimWord : IWord
+internal class StringSubstringWord : IWord
 {
-    public string Name => "STRING-TRIM";
+    public string Name => "STRING-SUBSTRING";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
 
     public int Execute(IInterpreter interpreter)
     {
-        interpreter.StackExpect(1);
+        interpreter.StackExpect(2);
             
+        var startIndex = interpreter.StackPop().Integer;
+
         interpreter.StackPush(
             interpreter.StackPop().String
-                .Trim()
-                .TrimEnd(Environment.NewLine.ToCharArray()));
+                .Substring(startIndex));
         
         return 1;
     }
@@ -27,10 +28,10 @@ internal class StringTrimWord : IWord
 
 /*
  
-STRING-TRIM
+STRING-SUBSTRING
 
-( string -- string )
+( string startIndex -- substring )
 
-Removes all leading and trailing white-space and end-of-line characters from the string.
+Returns a substring of the string starting at the startIndex.
  
  */

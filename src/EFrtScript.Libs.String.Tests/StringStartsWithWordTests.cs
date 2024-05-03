@@ -7,18 +7,18 @@ using Xunit;
 using EFrtScript.Libs.String.Words;
 
 
-public class StringIsEmptyWordTests
+public class StringStartsWithWordTests
 {
     [Fact]
     public void HasExpectedName()
     {
-        Assert.Equal("?STRING-IS-EMPTY", new StringIsEmptyWord().Name);
+        Assert.Equal("?STRING-STARTS-WITH", new StringStartsWithWord().Name);
     }
     
     
     [Fact]
     public void IsImmediate()
     {
-        Assert.False(new StringIsEmptyWord().IsImmediate);
+        Assert.False(new StringStartsWithWord().IsImmediate);
     }
 }
