@@ -1,0 +1,133 @@
+\ The app config.
+S" Resources/config.efrts" INCLUDE-SCRIPT
+
+\ The shared words definition.
+S" Resources/app-included.efrts" INCLUDE-SCRIPT
+
+\ Miscelaneous tests.
+S" Resources/misc.efrts" INCLUDE-SCRIPT
+
+
+\ The app script body.
+
+: TYPE-CURRENT-VALUE
+    S" v: '" TYPE
+    DUP TYPE
+    S" '" TYPE
+    CR
+;
+
+
+: TYPE-EMPTY
+    S" <EMPTY>" TYPE CR
+;
+
+
+: PROCESS-EMPTY-STRING
+    DUP 
+    ?STRING-EMPTY IF
+        DROP    \ Drop the empty string.
+        TYPE-EMPTY
+        -1      \ Command processed.
+    ELSE
+        0       \ Nothing we could understand. Somebody else must try to process it.
+    THEN
+;
+
+
+: PROCESS-BYE-COMMAND
+    DUP
+    S" bye" = IF
+        DROP       \ DROP the "bye" string.
+        S" Bye!" TYPE CR
+        -1         
+    ELSE
+        0
+    THEN
+;
+
+
+: PROCESS-EVALUATE-COMMAND
+    S" !"
+    DDUP
+    ?STRING-STARTS-WITH IF
+        DROP        \ Drop the "!" string.
+
+        \ Remove the '!' character from the beginning of the sring.
+        1 STRING-SUBSTRING
+        
+        \ Remove any spaces between '!' and the rest of the string.
+        STRING-TRIM
+        
+        \ Do nothing, if the resulting string is empty.
+        DUP ?STRING-EMPTY IF
+            DROP
+            TYPE-EMPTY
+        ELSE
+            \ Interpret the string.
+            EVALUATE
+        THEN
+
+        -1
+    ELSE
+        DROP        \ Drop "!".
+        0
+    THEN
+;
+
+
+( string -- flag ) 
+: PROCESS-COMMAND
+    STRING-TRIM
+
+    \ Process an empty string.
+    PROCESS-EMPTY-STRING IF
+        0       \ Continue with commands processing.
+        EXIT
+    THEN
+
+    \ Process the bye command.
+    PROCESS-BYE-COMMAND IF
+        -1      \ The bye command stops further commands processing.
+        EXIT
+    THEN
+
+    \ Process the ! command.
+    PROCESS-EVALUATE-COMMAND IF
+        0
+        EXIT
+    THEN
+
+    TYPE CR     \ Type the command and continue.
+    0           \ Do not stop now flag.
+;
+
+( string flag -- )
+: PROCESS-LINE
+    DUP IF
+        DROP        \ drop the flag
+        PROCESS-COMMAND
+    ELSE
+        IS-EOF IF
+            DDROP    \ drop the flag and the empty string
+            CR S" <EOF>" TYPE CR
+            -1       \ stop
+        ELSE
+            DROP    \ drop the flag
+            S" There was an error: " TYPE CR
+            -1      \ stop
+        THEN
+    THEN
+;
+
+
+: RUN-APP
+    BEGIN
+        S" Enter something: " TYPE READ-LINE THROW
+        PROCESS-LINE
+    UNTIL
+;
+
+RUN-APP
+
+S" >>> DONE <<<" TYPE CR

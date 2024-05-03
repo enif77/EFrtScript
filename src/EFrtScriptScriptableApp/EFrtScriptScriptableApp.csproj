@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>EFrtScriptScriptableApp</RootNamespace>
+        <AssemblyName>efrts</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="Resources/**" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\EFrtScript.Libs.Core\EFrtScript.Libs.Core.csproj" />
+        <ProjectReference Include="..\EFrtScript.Libs.CoreExt\EFrtScript.Libs.CoreExt.csproj" />
+        <ProjectReference Include="..\EFrtScript.Libs.Exception\EFrtScript.Libs.Exception.csproj" />
+        <ProjectReference Include="..\EFrtScript.Libs.String\EFrtScript.Libs.String.csproj" />
+        <ProjectReference Include="..\EFrtScript.Libs.Tools\EFrtScript.Libs.Tools.csproj" />
+        <ProjectReference Include="..\EFrtScript\EFrtScript.csproj" />
+    </ItemGroup>
+    
+</Project>

@@ -1,0 +1,45 @@
+( App support words. )
+
+( Prints the app name. ) 
+: PRINT-APP-NAME
+    S" AppName: " TYPE GET-AppName TYPE CR
+;
+
+( Prints the app version. )
+: PRINT-APP-VERSION
+    S" AppVersion: " TYPE GET-AppVersion TYPE CR
+;
+
+( Prints the "---" separator. )
+: PRINT-SEPARATOR
+    S" ---" TYPE CR
+;
+
+\ ---
+
+( value1 value2 -- )
+: DDROP
+    DROP
+    DROP
+;
+
+( value1 value2 -- value1 value2 value1 value2 )
+: DDUP
+    OVER  \ value1 value2 value1
+    OVER  \ value1 value2 value1 value2
+;
+
+( string flag1 -- string flag1 flag2 )
+: IS-EOF
+    DUP IF
+        0  \ The flag1 is true, so it cannot be EOF.
+    ELSE
+        SWAP            \ flag1 string 
+        DUP             \ flag1 string string
+        ?STRING-EMPTY   \ flag1 string flag2
+        ROT             \ string flag2 flag1
+        SWAP            \ string flag1 flag2
+    THEN
+;
+
+S" Common app words loaded." DEBUG
