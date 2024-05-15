@@ -63,17 +63,27 @@ internal class CatchControlWord : IWord
 
             return index;
         }
-        catch (InterpreterException ex)
-        {
-            CleanExceptionStack(interpreter, exceptionFrame);
-
-            interpreter.StackPush(new ExceptionValue(ex));
-        }
         catch (Exception ex)
         {
-            CleanExceptionStack(interpreter, exceptionFrame);
+            if (interpreter.ExceptionStackIsEmpty() || interpreter.ExceptionStackPeek() != exceptionFrame)
+            {
+                throw new InvalidOperationException("This CATCH word created exception frame not found.");
+            }
+        
+            // Remove the exception frame.
+            _ = interpreter.State.ExceptionStack.Pop();
 
+            // Restore the previous execution state.
+            interpreter.State.Stack.Top = exceptionFrame.StackTop;
+            interpreter.State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
+            interpreter.State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
+            interpreter.State.CurrentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
+
+            // Push the exception to the stack.
             interpreter.StackPush(new ExceptionValue(ex));
+
+            // Push "yes we had an exception" flag to the stack.
+            interpreter.StackPush(-1);
         }
 
         // Go to the word behind us.
@@ -82,13 +92,4 @@ internal class CatchControlWord : IWord
     
     private readonly IWord _parentWord;
     private readonly int _nextWordIndex;
-
-
-    private void CleanExceptionStack(IInterpreter interpreter, ExceptionFrame exceptionFrame)
-    {
-        if (interpreter.ExceptionStackIsEmpty() == false && interpreter.ExceptionStackPeek() == exceptionFrame)
-        {
-            _ = interpreter.ExceptionStackPop();
-        }
-    }
 }
