@@ -1,21 +1,30 @@
 S" --- TRY - CATCH ---" TYPE CR
 
-: could-fail ( -- n )
-  DUP 1 = IF 123 THROW THEN ;
+: could-fail ( n -- n )
+    DUP 1 = IF
+        123 THROW
+    THEN
+;
    
-: do-it ( a b -- c)
-  DROP DROP could-fail ;
+: do-it ( n a b -- n )
+  DROP DROP
+  could-fail
+;
 
 : try-it ( --)
-   1 2 ['] do-it CATCH IF
-   ( x1 x2 ) DROP DROP ." There was an exception" CR
-   ELSE ." The number was " . CR
-   THEN
+    1 2
+    ['] do-it CATCH IF
+        ( x1 x2 ) DROP DROP
+        ." There was an exception..." CR
+    THEN
+
+    ." The number was " . CR
 ;
 
 2 try-it
 3 try-it
-1 try-it
+1 try-it  \ Will throw an exception caught by the CATCH word.
+4 try-it  \ Will be executed too, because we caught the exception from the previous word execution.
 
 \ ; retry-it ( -- )
 \    BEGIN 1 2 ['] do-it CATCH WHILE
