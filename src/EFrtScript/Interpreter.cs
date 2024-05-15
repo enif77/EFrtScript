@@ -253,7 +253,7 @@ public class Interpreter : IInterpreter
         }
         catch (InterpreterException ex)
         {
-            Throw(ex.ExceptionCode, ex.Message);
+            ThrowInternal(ex.ExceptionCode, ex.Message);
         }
         catch (ExecutionException)
         {
@@ -261,7 +261,7 @@ public class Interpreter : IInterpreter
         }
         catch (Exception ex)
         {
-            Throw(-100, ex.Message);
+            ThrowInternal(-100, ex.Message);
         }
         finally
         {
@@ -301,14 +301,6 @@ public class Interpreter : IInterpreter
             // Throw an exception here, so we never return to the caller!
             throw new ExecutionException();
         }
-
-        // Restore the previous execution state.
-        var exceptionFrame = State.ExceptionStack.Pop();
-
-        State.Stack.Top = exceptionFrame!.StackTop;
-        State.ReturnStack.Top = exceptionFrame.ReturnStackTop;
-        State.InputSourceStack.Top = exceptionFrame.InputSourceStackTop;
-        State.CurrentWord = exceptionFrame.ExecutingWord ?? throw new InvalidOperationException("Exception frame without a executing word reference.");
 
         // Will be caught by the CATCH word.
         throw new InterpreterException(exceptionCode, message);
