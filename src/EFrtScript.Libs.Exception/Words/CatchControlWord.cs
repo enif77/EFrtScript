@@ -38,6 +38,9 @@ internal class CatchControlWord : IWord
         // A place for a new exception frame must be available.
         interpreter.ExceptionStackFree(1);
 
+        // Remove the execution token from the stact so we'll return to a correct place when an exception occurs.
+        var executionToken = interpreter.StackPop().Integer;
+
         var exceptionFrame = new ExceptionFrame()
         {
             StackTop = interpreter.State.Stack.Top,
@@ -53,7 +56,7 @@ internal class CatchControlWord : IWord
         {
             // Execute the word.
             var index = interpreter.ExecuteWord(
-                interpreter.GetRegisteredWord(interpreter.StackPop().Integer));
+                interpreter.GetRegisteredWord(executionToken));
 
             // Remove the unused exception frame (nothing failed here).
             _ = interpreter.ExceptionStackPop();
