@@ -23,13 +23,14 @@ internal class GetExecutionTokenWord : IWord
             throw new InterpreterException("A word name expected.");
         }
 
-        if (interpreter.IsWordRegistered(wordName.ToUpperInvariant()) == false)
+        var wordNameUpper = wordName.ToUpperInvariant();
+        if (interpreter.IsWordRegistered(wordNameUpper) == false)
         {
             throw new InterpreterException($"The word '{wordName}' is not registered.");
         }
 
         interpreter.WordBeingDefined!
-            .AddWord(new ConstantValueWord(interpreter.GetRegisteredWord(wordName).ExecutionToken));
+            .AddWord(new ConstantValueWord(interpreter.GetRegisteredWord(wordNameUpper).ExecutionToken));
         
         return 1;
     }
