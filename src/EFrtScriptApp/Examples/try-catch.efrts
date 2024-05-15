@@ -11,14 +11,16 @@ S" --- TRY - CATCH ---" TYPE CR
   could-fail
 ;
 
-: try-it ( --)
-    1 2
-    ['] do-it CATCH IF
-        ( x1 x2 ) DROP DROP
-        ." There was an exception..." CR
+: try-it ( n -- )
+    1 2                                       \ n a b
+    ['] do-it                                 \ n a b x
+    CATCH                                     \ n 0 | n a b exception -1
+    IF                                        \ n | n a b exception
+        ." There was an exception: " TYPE CR  \ n a b exception -- n a b
+        DROP DROP                             \ n a b -- n
     THEN
 
-    ." The number was " . CR
+    ." The number was " . CR                  \ n --
 ;
 
 2 try-it
