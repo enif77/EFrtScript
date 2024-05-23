@@ -16,8 +16,28 @@ internal class StarWord : IWord
     {
         interpreter.StackExpect(1);
 
-        interpreter.StackPush(interpreter.StackPop().Integer * interpreter.StackPop().Integer);
-
+        var b = interpreter.StackPop();
+        var a = interpreter.StackPop();
+        
+        if (a.IsFloatingPointValue() || b.IsFloatingPointValue())
+        {
+            interpreter.StackPush(a.Float * b.Float);
+        }
+        else
+        {
+            try   
+            {
+                checked
+                {
+                    interpreter.StackPush(a.Integer * b.Integer);
+                }
+            }
+            catch (OverflowException)
+            {
+                interpreter.StackPush(a.Float * b.Float);
+            }
+        }
+        
         return 1;
     }
 }

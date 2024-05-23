@@ -16,8 +16,27 @@ internal class NegateWord : IWord
     {
         interpreter.StackExpect(1);
         
-        interpreter.StackPush(-interpreter.StackPop().Integer);
-
+        var a = interpreter.StackPop();
+        
+        if (a.IsFloatingPointValue())
+        {
+            interpreter.StackPush(-a.Float);
+        }
+        else
+        {     
+            try   
+            {
+                checked
+                {
+                    interpreter.StackPush(-a.Integer);
+                }
+            }
+            catch (OverflowException)
+            {
+                interpreter.StackPush(-a.Float);
+            }
+        }
+        
         return 1;
     }
 }

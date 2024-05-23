@@ -16,9 +16,30 @@ internal class SlashWord : IWord
     {
         interpreter.StackExpect(2);
 
-        var b = interpreter.StackPop().Integer;
-        interpreter.StackPush(interpreter.StackPop().Integer / b);
-
+        var b = interpreter.StackPop();
+        var a = interpreter.StackPop();
+        
+        if (a.IsFloatingPointValue() || b.IsFloatingPointValue())
+        {
+            try
+            {
+                interpreter.StackPush(a.Float / b.Float);
+            }
+            catch (DivideByZeroException)
+            {
+                interpreter.Throw(-10, "division by zero");
+            }
+        }
+        else
+        {
+            if (b.Integer == 0)
+            {
+                interpreter.Throw(-10, "division by zero");
+            }
+            
+            interpreter.StackPush(a.Integer / b.Integer);
+        }
+        
         return 1;
     }
 }
