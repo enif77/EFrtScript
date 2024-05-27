@@ -1,0 +1,209 @@
+( Kalkul - The ultimate calculator v1.0.0 )
+
+( -- flag )
+: OK
+    -1
+;
+
+( -- flag )
+: NOT-A-NUMBER
+    0
+;
+
+( -- flag )
+: OPERATOR-UNKNOWN
+    0
+;
+
+( -- flag )
+: OPERATOR-EMPTY
+    0
+;
+
+( -- flag )
+: CONTINUE
+    0
+;
+
+( -- flag )
+: STOP-PROCESSING
+    -1
+;
+
+( string flag1 -- flag2 )
+: IS-EOF
+    IF
+        DROP    \ Drop the string.
+        0       \ The flag1 is true, so it cannot be EOF.
+    ELSE
+        ?STRING-IS-EMPTY   \ If it was an empty string, it is EOF.
+    THEN
+;
+
+( message error-message -- flag flag )
+: READ-LINE-FAILED
+    \ something bad happened during reading the line...
+    TYPE CR     \ type the error message
+    DROP        \ drop the message
+    0           \ we failed flag
+    STOP-PROCESSING
+;
+
+( -- )
+: BYE-BYE
+    ." >>> DONE <<<" CR
+;
+
+
+( string - x flag | flag )
+: TRY-PARSE-OPERATOR
+    DUP                 \ string string
+    STRING-TRIM         \ string trimmed-string
+
+    DUP                 \ string trimmed-string trimmed-string
+    S" +" =             \ string trimmed-string flag
+    IF  
+        2DROP           \ drop both strings
+        ['] +           \ push the operator
+        OK
+        EXIT
+    THEN
+
+    DUP S" -" = IF  
+        2DROP
+        ['] -
+        OK
+        EXIT
+    THEN
+
+    DUP S" *" = IF  
+        2DROP
+        ['] *
+        OK
+        EXIT
+    THEN
+
+    DUP S" /" = IF  
+        2DROP
+        ['] /
+        OK
+        EXIT
+    THEN
+
+    ?STRING-IS-EMPTY IF
+        DROP    \ drop the original string
+        OPERATOR-EMPTY
+    ELSE
+        ." '" TYPE ." ' is not a known operator. Try again!" CR
+        OPERATOR-UNKNOWN
+    THEN
+;
+
+
+( message -- operator flag | flag )
+: GET-OPERATOR
+    BEGIN
+        DUP TYPE        \ print out the message
+        READ-LINE THROW
+        IF
+            TRY-PARSE-OPERATOR  
+            IF
+                \ it was a known operator!
+                SWAP DROP   \ drop the message
+                OK          \ we have a number
+                STOP-PROCESSING
+            ELSE
+                \ not a known operator, try again.
+                CONTINUE
+            THEN 
+        ELSE
+            READ-LINE-FAILED
+        THEN
+    UNTIL
+;
+
+
+( string -- number flag | exception flag )
+: TRY-PARSE-NUMBER
+    ['] FLOAT           \ string x
+    CATCH               \ float 0 | exception -1
+    IF
+        SWAP DROP       \ drop the bad string, keep the exception
+        NOT-A-NUMBER    \ not a number
+    ELSE
+        OK              \ a valid number
+    THEN
+;
+
+
+( mesage -- number flag | flag )
+: GET-NUMBER
+    BEGIN 
+        DUP TYPE         \ print out the message
+        READ-LINE THROW  \ read the line; throw an exception, if something bad happens.
+        IF
+            STRING-TRIM
+
+            DUP ?STRING-IS-EMPTY IF
+                DROP
+                CONTINUE
+            ELSE
+                \ we have some input...
+                TRY-PARSE-NUMBER
+                IF
+                    \ it was a number!
+                    SWAP DROP   \ drop the message
+                    OK          \ we have a number
+                    STOP-PROCESSING
+                ELSE
+                    \ not a number, try again.
+                    TYPE CR \ print out the error message
+                    CONTINUE
+                THEN     
+            THEN
+        ELSE
+            READ-LINE-FAILED
+        THEN
+    UNTIL
+;
+
+
+: TYPE-OK
+    ."  OK" CR
+;
+
+: TYPE-BAD
+    ." BAD" CR
+;
+
+
+: RUN-APP
+    ." Kalkul v1.0.0" CR
+
+    S" Enter the first number: " GET-NUMBER
+    IF
+        DUP . TYPE-OK
+    ELSE
+        TYPE-BAD
+        EXIT
+    THEN
+
+    S" Enter the second number: " GET-NUMBER
+    IF
+        DUP . TYPE-OK
+    ELSE
+        TYPE-BAD
+        EXIT
+    THEN
+
+    \ get command (+ - * / %)
+    S" Enter the operator: " GET-OPERATOR IF
+        EXECUTE . CR
+    ELSE
+        TYPE-BAD
+    THEN
+
+    BYE-BYE
+;
+
+RUN-APP
