@@ -4,6 +4,8 @@ Common words for all base operations.
 
 ## Words
 
+- [LITERAL](libs/core/literal.md)
+
 Words definition table columns:
 
 - Name: A name of a word with optional parameters.

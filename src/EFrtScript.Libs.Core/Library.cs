@@ -90,5 +90,7 @@ public class Library : IWordsLibrary
 
         interpreter.RegisterWord(new TickWord());
         interpreter.RegisterWord(new GetExecutionTokenWord());
+        
+        interpreter.RegisterWord(new LiteralWord());
     }
 }
