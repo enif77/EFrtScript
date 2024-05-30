@@ -21,7 +21,6 @@ Words definition table columns:
 | FLOAT   | no   | IC   | **Convert to floating point value**<br>(x -- n)<br>Converts a value on the top of the stack to a floating point value.   |
 | HEX     | no   | IC   | **Set the numeric conversion radix to sixteen**<br>( -- )<br>Sets the numeric conversion radix to sixteen (hexadecimal). |
 | INT     | no   | IC   | **Convert to integer value**<br>(x -- n)<br>Converts a value on the top of the stack to an integer value.                |
-| PICK    | no   | IC   | **Pick value**<br>(index -- n)<br>Picks a value at the index from the top of the stack and places it on the top of the stack. |
 | STRING  | no   | IC   | **Convert to string value**<br>(x -- str)<br>Converts a value on the top of the stack to a string value.                 |
 | ?DO      | yes  | C    | **Conditional loop**<br>(limit index -- ) [ - limit index ]<br>If n equals limit, skip immediately to the matching LOOP or +LOOP. Otherwise, enter the loop, which is thenceforth treated as a normal DO loop. |
 | ?INT    | no   | IC   | **Checks if x is an integer value**<br>(x -- flag)<br>Sets flag to true, if x is an integer value.                       |

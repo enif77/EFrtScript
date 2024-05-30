@@ -7,3 +7,5 @@
 - Stack image: `(xu ... x1 x0 u -- xu ... x1 x0 xu)`
 
 Removes u. Copy the xu to the top of the stack. 0 PICK is equivalent to DUP. 1 PICK is equivalent to OVER.
+
+See the [Forth standard description](https://forth-standard.org/standard/core/PICK) for more info.

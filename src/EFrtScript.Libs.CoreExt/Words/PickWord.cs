@@ -34,7 +34,9 @@ internal class PickWord : IWord
 }
 
 /*
-
+  
+https://forth-standard.org/standard/core/PICK 
+   
 PICK
 
 (xu ... x1 x0 u -- xu ... x1 x0 xu)
