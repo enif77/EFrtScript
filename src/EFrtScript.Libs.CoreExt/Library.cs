@@ -27,5 +27,7 @@ public class Library : IWordsLibrary
 
         interpreter.RegisterWord(new AgainWord());
         interpreter.RegisterWord(new QuestionDoWord());
+        
+        interpreter.RegisterWord(new PickWord());
     }
 }
