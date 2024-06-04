@@ -43,6 +43,17 @@ public interface IInterpreter
     /// </summary>
     /// <param name="wordName">A new word name. Required parameter.</param>
     void BeginNewWordCompilation(string wordName);
+
+    /// <summary>
+    /// Suspends a new word compilation.
+    /// Call the ResumeNewWordCompilation() method to return to the Compiling state.
+    /// </summary>
+    void SuspendNewWordCompilation();
+
+    /// <summary>
+    /// Resumes a new word compilation.
+    /// </summary>
+    void ResumeNewWordCompilation();
     
     /// <summary>
     /// Ends a new word compilation an adds the new word to the words dictionary.
