@@ -58,6 +58,30 @@ public class Interpreter : IInterpreter
     }
 
     /// <inheritdoc/>
+    public void SuspendNewWordCompilation()
+    {
+        // Cannot suspend a compilation, when not compiling.
+        if (IsCompiling == false)
+        {
+            Throw(-14, "not in a new word compilation");
+        }
+
+        _interpreterState = InterpreterStateCode.SuspendingCompilation;
+    }
+
+    /// <inheritdoc/>
+    public void ResumeNewWordCompilation()
+    {
+        // Cannot resume a compilation, when not suspended.
+        if (_interpreterState != InterpreterStateCode.SuspendingCompilation)
+        {
+            Throw(-14, "new word compilation is not suspended");
+        }
+
+        _interpreterState = InterpreterStateCode.Compiling;
+    }
+
+    /// <inheritdoc/>
     public void EndNewWordCompilation()
     {
         if (IsCompiling == false)
