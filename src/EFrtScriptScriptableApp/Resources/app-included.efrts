@@ -36,7 +36,7 @@
     ELSE
         SWAP            \ flag1 string 
         DUP             \ flag1 string string
-        ?STRING-EMPTY   \ flag1 string flag2
+        ?STRING-IS-EMPTY   \ flag1 string flag2
         ROT             \ string flag2 flag1
         SWAP            \ string flag1 flag2
     THEN

@@ -77,68 +77,6 @@ internal static class Program
         });
 
 
-        // ?STRING-EMPTY (string -- flag)
-        interpreter.AddPrimitiveWord("?STRING-EMPTY", (i) => 
-        {
-            i.StackExpect(1);
-
-            i.StackPush(string.IsNullOrEmpty(i.StackPop().String));
-
-            return 1;
-        });
-
-        // ?STRING-STARTS-WITH (string1 string2 -- flag)
-        interpreter.AddPrimitiveWord("?STRING-STARTS-WITH", (i) => 
-        {
-            i.StackExpect(2);
-
-            var shouldStartWith = i.StackPop().String;
-
-            i.StackPush(
-                i.StackPop().String
-                    .StartsWith(shouldStartWith));
-
-            return 1;
-        });
-
-        // STRING-LENGTH (string -- int)
-        interpreter.AddPrimitiveWord("STRING-LENGTH", (i) => 
-        {
-            i.StackExpect(1);
-
-            i.StackPush(i.StackPop().String.Length);
-
-            return 1;
-        });
-
-        // STRING-TRIM (string -- string)
-        interpreter.AddPrimitiveWord("STRING-TRIM", (i) => 
-        {
-            i.StackExpect(1);
-
-            i.StackPush(
-                i.StackPop().String
-                    .Trim()
-                    .TrimEnd(Environment.NewLine.ToCharArray()));
-
-            return 1;
-        });
-
-        // STRING-SUBSTRING (string startIndex -- string)
-        interpreter.AddPrimitiveWord("STRING-SUBSTRING", (i) => 
-        {
-            i.StackExpect(1);
-
-            var startIndex = i.StackPop().Integer;
-
-            i.StackPush(
-                i.StackPop().String
-                    .Substring(startIndex));
-
-            return 1;
-        });
-
-
         // READ-LINE ( -- string flag ior)
         interpreter.AddPrimitiveWord("READ-LINE", (i) => 
         {

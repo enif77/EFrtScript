@@ -25,7 +25,7 @@ S" Resources/misc.efrts" INCLUDE-SCRIPT
 
 : PROCESS-EMPTY-STRING
     DUP 
-    ?STRING-EMPTY IF
+    ?STRING-IS-EMPTY IF
         DROP    \ Drop the empty string.
         TYPE-EMPTY
         -1      \ Command processed.
@@ -60,7 +60,7 @@ S" Resources/misc.efrts" INCLUDE-SCRIPT
         STRING-TRIM
         
         \ Do nothing, if the resulting string is empty.
-        DUP ?STRING-EMPTY IF
+        DUP ?STRING-IS-EMPTY IF
             DROP
             TYPE-EMPTY
         ELSE
