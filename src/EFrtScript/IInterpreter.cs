@@ -32,6 +32,11 @@ public interface IInterpreter
     bool IsCompiling { get; }
 
     /// <summary>
+    /// True, if is the new word compilation suspended.
+    /// </summary>
+    bool IsCompilationSuspended { get; }
+    
+    /// <summary>
     /// A new word, that is currently compiled, or null.
     /// </summary>
     INonPrimitiveWord? WordBeingDefined { get; }

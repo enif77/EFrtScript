@@ -106,6 +106,9 @@ public class Interpreter : IInterpreter
     public bool IsCompiling => _interpreterState == InterpreterStateCode.Compiling;
     
     /// <inheritdoc/>
+    public bool IsCompilationSuspended => _interpreterState == InterpreterStateCode.SuspendingCompilation;
+    
+    /// <inheritdoc/>
     public bool IsExecutionTerminated => _interpreterState == InterpreterStateCode.Breaking || _interpreterState == InterpreterStateCode.Terminating;
 
     /// <inheritdoc/>
@@ -323,7 +326,7 @@ public class Interpreter : IInterpreter
             }
 
             // Throw an exception here, so we never return to the caller!
-            throw new ExecutionException();
+            throw new ExecutionException();  // TODO: Add the exception code and message to the ExecutionException.
         }
 
         // Will be caught by the CATCH word.
