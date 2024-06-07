@@ -27,6 +27,8 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new ParenWord());
 
         interpreter.RegisterWord(new BeginNewWordCompilationWord());
+        interpreter.RegisterWord(new SuspendNewWordCompilationWord());
+        interpreter.RegisterWord(new ResumeNewWordCompilationWord());
         interpreter.RegisterWord(new EndNewWordCompilationWord());
         interpreter.RegisterWord(new ExitWord());
 

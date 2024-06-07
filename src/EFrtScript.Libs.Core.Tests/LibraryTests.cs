@@ -19,6 +19,8 @@ public class LibraryTests
     
     [Theory]
     [InlineData(":")]
+    [InlineData("[")]
+    [InlineData("]")]
     [InlineData(";")]
     [InlineData(".")]
     [InlineData("0=")]

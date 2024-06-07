@@ -5,6 +5,8 @@ Common words for all base operations.
 ## Words
 
 - [LITERAL](libs/core/literal.md)
+- [left-bracket](libs/core/suspend-new-word-compilation.md) (`[`)
+- [right-bracket](libs/core/resume-new-word-compilation.md) (`]`)
 
 Words definition table columns:
 
