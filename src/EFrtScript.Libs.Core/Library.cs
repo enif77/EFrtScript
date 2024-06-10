@@ -94,5 +94,6 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new GetExecutionTokenWord());
         
         interpreter.RegisterWord(new LiteralWord());
+        interpreter.RegisterWord(new ConstantWord());
     }
 }

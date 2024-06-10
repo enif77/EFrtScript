@@ -29,6 +29,7 @@ public class LibraryTests
     [InlineData("BASE")]
     [InlineData("BEGIN")]
     [InlineData("BL")]
+    [InlineData("CONSTANT")]
     [InlineData("CR")]
     [InlineData("DECIMAL")]
     [InlineData("DEPTH")]
