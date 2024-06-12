@@ -84,6 +84,11 @@ public interface IInterpreter
     /// An event fired, when a word was executed.
     /// </summary>
     event EventHandler<InterpreterEventArgs>? WordExecuted;
+    
+    /// <summary>
+    /// An event fired, when an interpreter exception is thrown.
+    /// </summary>
+    event EventHandler<InterpreterExceptionEventArgs>? InterpreterExceptionThrown;
 
     
     /// <summary>

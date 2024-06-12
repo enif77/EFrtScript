@@ -34,6 +34,11 @@ public class Interpreter : IInterpreter
     {
         State = new InterpreterState();
         Output = outputWriter ?? throw new ArgumentNullException(nameof(outputWriter));
+     
+        InterpreterExceptionThrown += (sender, args) =>
+        {
+            Output.WriteLine($"Execution aborted: [{args.Exception.ExceptionCode}] {args.Exception.Message}");
+        };
         
         this.SetNumericConversionRadix(10);
     }
@@ -117,6 +122,9 @@ public class Interpreter : IInterpreter
     /// <inheritdoc/>
     public event EventHandler<InterpreterEventArgs>? WordExecuted;
 
+    /// <inheritdoc/>
+    public event EventHandler<InterpreterExceptionEventArgs>? InterpreterExceptionThrown;
+    
 
     /// <inheritdoc/>
     public void Interpret(string src)
@@ -313,7 +321,8 @@ public class Interpreter : IInterpreter
                 case -1: break;
                 case -2: Output.WriteLine(message ?? "Execution aborted!"); break;
                 default:
-                    Output.WriteLine($"Execution aborted: [{exceptionCode}] {message ?? string.Empty}");
+                    InterpreterExceptionThrown?.Invoke(this, new InterpreterExceptionEventArgs(
+                        new InterpreterException(exceptionCode, message)));
                     break;
             }
 
@@ -329,8 +338,14 @@ public class Interpreter : IInterpreter
             throw new ExecutionException();  // TODO: Add the exception code and message to the ExecutionException.
         }
 
+        // Create an interpreter exception.
+        var interpreterException = new InterpreterException(exceptionCode, message);
+        
+        // Fire the event.
+        InterpreterExceptionThrown?.Invoke(this, new InterpreterExceptionEventArgs(interpreterException));
+        
         // Will be caught by the CATCH word.
-        throw new InterpreterException(exceptionCode, message);
+        throw interpreterException;
     }
 
     #endregion
