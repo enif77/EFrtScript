@@ -31,6 +31,8 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new PickWord());
         
         interpreter.RegisterWord(new CaseWord());
+        interpreter.RegisterWord(new OfWord());
+        interpreter.RegisterWord(new EndOfWord());
         interpreter.RegisterWord(new EndCaseWord());
     }
 }

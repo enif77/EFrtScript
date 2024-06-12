@@ -21,6 +21,15 @@ internal class EndCaseWord : IWord
         var endCaseIndex = interpreter.WordBeingDefined!.NextWordIndex;
         
         // ... find all ENDOF word references in the return stack and set their index to the ENDCASE index.
+        var returnStackValue = interpreter.ReturnStackPeek();
+        while (returnStackValue is EndOfControlWordReferenceValue)
+        {
+            var endOfControlWord = ((EndOfControlWordReferenceValue)interpreter.ReturnStackPop()).ControlWord;
+            
+            endOfControlWord.SetEndCaseIndex(endCaseIndex);
+            
+            returnStackValue = interpreter.ReturnStackPeek();
+        }
         
         // Check, if we are inside of CASE (we have CASE index in R).
         if (interpreter.ReturnStackPeek() is not CaseControlWordReferenceValue)
