@@ -1,0 +1,32 @@
+S" --- CASE - ENDCASE ---" TYPE CR
+
+: test
+    CASE
+        1 OF ." 1" ENDOF
+        2 OF ." 2" ENDOF
+        3 OF ." 3" ENDOF
+        4 OF ." 4" ENDOF
+        5 OF ." 5" ENDOF
+        
+        ." DEFAULT"
+    ENDCASE
+    
+    ."  test"
+;
+
+: test2
+    CASE
+        1 OF ." 1" ENDOF
+        2 OF ." 2" ENDOF
+    ENDCASE
+    
+    ."  test2"
+;
+
+ 1 test CR
+ 3 test CR
+ 5 test CR
+-1 test CR
+
+ 2 test2 CR
+-1 test2 CR
