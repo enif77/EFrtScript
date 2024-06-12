@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\EFrtScript.Libs.Core\EFrtScript.Libs.Core.csproj" />
         <ProjectReference Include="..\EFrtScript.Libs.CoreExt\EFrtScript.Libs.CoreExt.csproj" />
         <ProjectReference Include="..\EFrtScript\EFrtScript.csproj" />
     </ItemGroup>

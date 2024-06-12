@@ -19,6 +19,8 @@ public class LibraryTests
     
     [Theory]
     [InlineData("AGAIN")]
+    [InlineData("CASE")]
+    [InlineData("ENDCASE")]
     [InlineData("HEX")]
     [InlineData("\\")]
     [InlineData("INT")]

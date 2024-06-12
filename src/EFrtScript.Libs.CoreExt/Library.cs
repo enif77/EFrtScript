@@ -29,5 +29,8 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new QuestionDoWord());
         
         interpreter.RegisterWord(new PickWord());
+        
+        interpreter.RegisterWord(new CaseWord());
+        interpreter.RegisterWord(new EndCaseWord());
     }
 }
