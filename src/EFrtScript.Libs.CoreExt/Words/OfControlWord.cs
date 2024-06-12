@@ -37,12 +37,33 @@ internal class OfControlWord : IWord
 
 
     public int Execute(IInterpreter interpreter)
-    {
-        interpreter.StackExpect(1);
+    { 
+        interpreter.StackExpect(2);
 
-        if (interpreter.StackPop().Boolean)
+        var valueToCompareTo = interpreter.StackPop();
+        var caseSelectorValue = interpreter.StackPeek();
+        
+        bool areEqual;
+        
+        if (valueToCompareTo.IsStringValue() || caseSelectorValue.IsStringValue())
         {
-            // The flag is true, advance instruction index by one into the body of the OF-ENDOF structure.
+            areEqual = interpreter.ConvertToString(valueToCompareTo).String == interpreter.ConvertToString(caseSelectorValue).String;    
+        }
+        else if (valueToCompareTo.IsFloatingPointValue() || caseSelectorValue.IsFloatingPointValue())
+        {
+            areEqual = Math.Abs(valueToCompareTo.Float - caseSelectorValue.Float) < Tolerance;
+        }
+        else
+        {
+            areEqual = valueToCompareTo.Integer == caseSelectorValue.Integer;
+        }
+        
+        if (areEqual)
+        {
+            // Remove the caseSelectorValue from the stack.
+            interpreter.StackPop();
+            
+            // Advance instruction index by one into the body of the OF-ENDOF structure.
             return 1;
         }
 
@@ -50,6 +71,8 @@ internal class OfControlWord : IWord
         return _endOfIndexIncrement + 1;
     }
 
+    
+    private const double Tolerance = 0.00001;
 
     private readonly int _thisIndex;
     private int _endOfIndexIncrement;
