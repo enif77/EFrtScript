@@ -322,6 +322,64 @@ internal static class Program
 
             return 1;
         });
+
+        // EXECUTE-COMMAND (command -- exit-code)
+        interpreter.AddPrimitiveWord("EXECUTE-COMMAND", (i) => 
+        {
+            i.StackExpect(1);
+
+            var command = i.StackPop().String;
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c {command}",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            process.OutputDataReceived += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(e.Data))
+                {
+                    return;
+                }
+
+                i.Output.WriteLine($"   {e.Data}");
+            };
+
+            process.ErrorDataReceived += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(e.Data))
+                {
+                    return;
+                }
+                
+                i.Output.WriteLine($"E: {e.Data}");
+            };
+
+            try
+            {
+                process.Start();
+
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                process.WaitForExit();
+
+                i.StackPush(process.ExitCode); 
+            }
+            finally
+            {
+                process.Close();    
+            }
+
+            return 1;
+        });
     } 
     
 
