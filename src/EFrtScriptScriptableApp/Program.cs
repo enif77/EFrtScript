@@ -2,6 +2,7 @@
 
 namespace EFrtScriptScriptableApp;
 
+using System.Diagnostics;
 using System.IO;
 
 using EFrtScript;
