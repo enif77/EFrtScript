@@ -1,0 +1,216 @@
+( Prints the contents of the stack. )
+: .S
+    DEPTH
+    DUP 0 = IF
+        DROP
+        S" Stack is empty" TYPE CR
+        EXIT
+    THEN
+
+    0 DO
+        I PICK
+        S"  " TYPE
+        TYPE CR
+    LOOP
+  ;
+
+
+: TYPE-EMPTY
+    S" <EMPTY>" TYPE CR
+;
+
+
+( -- flag )
+: OK
+    TRUE
+;
+
+( -- flag )
+: CONTINUE-PROCESSING
+    FALSE
+;
+
+( -- flag )
+: COMMAND-PROCESSED
+    TRUE
+;
+
+( -- flag )
+: STOP-PROCESSING
+    TRUE
+;
+
+( -- )
+: BYE-BYE
+    CR
+    
+    ." Byeee!" CR
+
+    CR
+
+    \ Dump stack contents.
+    ." === " CR
+    .S
+    ." === " CR
+
+    CR
+
+    ." DONE" CR
+;
+
+( string -- flag | string flag )
+: PROCESS-EMPTY-STRING
+    DUP 
+    ?STRING-IS-EMPTY IF
+        DROP    \ Drop the empty string.
+        TYPE-EMPTY
+        COMMAND-PROCESSED   \ Command processed.
+    ELSE
+        CONTINUE-PROCESSING \ Nothing we could understand. Somebody else must try to process it.
+    THEN
+;
+
+( string -- flag | exception flag )
+: TRY-EVALUATE
+    ['] EVALUATE        \ string x
+    CATCH               \ 0 | exception -1
+    IF
+        SWAP DROP       \ drop the script, keep the exception
+        FALSE           \ script execution failed
+    ELSE
+        OK              \ script execution OK.
+    THEN
+;
+
+( string -- flag ) 
+: ?IS-EVALUATE-COMMAND
+    S" !" ?STRING-STARTS-WITH
+;
+
+( string -- )
+: PROCESS-EVALUATE-COMMAND
+    \ Remove the '!' character from the beginning of the sring.
+    1 STRING-SUBSTRING
+        
+    \ Remove any spaces between '!' and the rest of the string.
+    STRING-TRIM
+        
+    \ Do nothing, if the resulting string is empty.
+    DUP ?STRING-IS-EMPTY IF
+        DROP
+        TYPE-EMPTY
+        EXIT
+    THEN
+    
+    \ Interpret the string.
+    TRY-EVALUATE IF
+        S" OK" TYPE CR
+    ELSE
+        S" There was an exception thrown while evaluating the script." TYPE CR
+        TYPE CR   \ Type the exception.
+    THEN
+;
+
+( string -- exit-code flag | exception flag )
+: TRY-EXECUTE-COMMAND
+    ['] EXECUTE-COMMAND \ string x
+    CATCH               \ 0 | exception -1
+    IF
+        SWAP DROP       \ drop the script, keep the exception
+        FALSE           \ script execution failed
+    ELSE
+        OK              \ script execution OK.
+    THEN
+;
+
+( string -- flag ) 
+: ?IS-AT-COMMAND
+    S" @" ?STRING-STARTS-WITH
+;
+
+( string -- )
+: PROCESS-AT-COMMAND
+    \ Remove the '@' character from the beginning of the sring.
+    1 STRING-SUBSTRING
+
+    \ Remove any spaces between '@' and the rest of the string.
+    STRING-TRIM
+
+    \ Do nothing, if the resulting string is empty.
+    DUP ?STRING-IS-EMPTY IF
+        DROP
+        TYPE-EMPTY
+        EXIT
+    THEN
+
+    \ Execute the command.
+    TRY-EXECUTE-COMMAND IF
+        . ."  OK" CR  \ Type the command exit code and the OK message.
+    ELSE
+        ." There was an exception thrown while executing the command." CR
+        TYPE CR   \ Type the exception.
+    THEN
+;
+
+( string -- flag ) 
+: PROCESS-COMMAND
+    STRING-TRIM
+
+    \ Process an empty string.
+    PROCESS-EMPTY-STRING IF
+        CONTINUE-PROCESSING
+        EXIT
+    THEN
+
+    CASE
+
+    \ OF with a discrete value.
+    S" bye" OF
+        \ Process the bye command.
+        BYE-BYE
+        STOP-PROCESSING 
+    ENDOF
+
+    \ OF with a condition.
+    DUP ?IS-EVALUATE-COMMAND TRUE OF
+        PROCESS-EVALUATE-COMMAND
+        CONTINUE-PROCESSING
+    ENDOF
+
+    \ If the previous condition was not met, then the flag is still on the stack.
+    DROP    \ Drop the ?IS-EVALUATE-COMMAND flag.
+
+    \ OF with a condition.
+    DUP ?IS-AT-COMMAND TRUE OF
+        PROCESS-AT-COMMAND
+        CONTINUE-PROCESSING
+    ENDOF
+
+        \ This is the "default" part of the CASE statement.
+
+        \ If the previous condition was not met, then the flag is still on the stack.
+        DROP    \ Drop the ?IS-AT-COMMAND flag.
+
+        TYPE CR     \ Type the command.
+        CONTINUE-PROCESSING
+
+        0       \ ENDCASE removes this, not the CONTINUE-PROCESSING flag.
+    ENDCASE     
+;
+
+( -- )
+: RUN-APP
+    BEGIN
+        ." Enter something, dude: "
+        -1 ['] ACCEPT CATCH IF
+            ." There was an error while reading the input." CR
+            TYPE CR     \ Type the exception.
+            DROP        \ Drop the number of chars we wanted to accept.
+            STOP-PROCESSING
+        ELSE
+            PROCESS-COMMAND
+        THEN
+    UNTIL
+;
+
+RUN-APP
