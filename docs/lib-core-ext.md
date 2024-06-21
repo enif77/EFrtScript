@@ -4,6 +4,10 @@ Common words for all base operations (extra).
 
 ## Words
 
+- [CASE](libs/core-ext/case.md)
+- [ENDCASE](libs/core-ext/endcase.md)
+- [ENDOF](libs/core-ext/endof.md)
+- [OF](libs/core-ext/of.md)
 - [PICK](libs/core-ext/pick.md)
 
 Words definition table columns:
