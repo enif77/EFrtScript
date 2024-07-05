@@ -19,6 +19,7 @@ internal static class Program
         new EFrtScript.Libs.CoreExt.Library().Initialize(interpreter);
         new EFrtScript.Libs.Exception.Library().Initialize(interpreter);
         new EFrtScript.Libs.Tools.Library().Initialize(interpreter);
+        new EFrtScript.Libs.String.Library().Initialize(interpreter);
         
         Console.WriteLine("ScriptableApp is starting...");
 
