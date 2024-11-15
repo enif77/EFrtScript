@@ -17,6 +17,21 @@ public static class InterpreterExtensions
 {
     private const int NumericConversionRadixHeapIndex = 1;
     
+    
+    /// <summary>
+    /// Normalizes a word name to be used for searching in the list of registered word.
+    /// </summary>
+    /// <param name="wordName">A word name.</param>
+    /// <returns>Normalized word name.</returns>
+    public static string NormalizeWordName(this string wordName)
+    {
+        if (string.IsNullOrWhiteSpace(wordName))
+        {
+            throw new ArgumentException("A word name expected.");
+        }
+
+        return wordName.ToUpperInvariant();
+    }
 
     /// <summary>
     /// Checks, if a word is already registered.
