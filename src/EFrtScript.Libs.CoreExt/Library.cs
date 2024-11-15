@@ -34,5 +34,11 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new OfWord());
         interpreter.RegisterWord(new EndOfWord());
         interpreter.RegisterWord(new EndCaseWord());
+        
+        interpreter.RegisterWord(new DeferWord());
+        interpreter.RegisterWord(new DeferFetchWord());
+        interpreter.RegisterWord(new DeferStoreWord());
+        interpreter.RegisterWord(new IsWord());
+        interpreter.RegisterWord(new QuestionDeferWord());
     }
 }
