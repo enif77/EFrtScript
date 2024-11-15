@@ -22,12 +22,14 @@ internal class TickWord : IWord
             throw new InterpreterException("A word name expected.");
         }
 
-        if (interpreter.IsWordRegistered(wordName.ToUpperInvariant()) == false)
+        var normalizedWordName = wordName.NormalizeWordName();
+
+        if (interpreter.IsWordRegistered(normalizedWordName) == false)
         {
             throw new InterpreterException($"The word '{wordName}' is not registered.");
         }
 
-        interpreter.StackPush(interpreter.GetRegisteredWord(wordName).ExecutionToken);
+        interpreter.StackPush(interpreter.GetRegisteredWord(normalizedWordName).ExecutionToken);
 
         return 1;
     }
