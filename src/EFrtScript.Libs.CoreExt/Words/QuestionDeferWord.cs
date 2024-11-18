@@ -31,8 +31,6 @@ internal class QuestionDeferWord : IWord
 
 /*
 
-https://forth-standard.org/standard/core/DEFERFetch
-
 ?DEFER
 
 ( xt1 -- flag )

@@ -37,7 +37,7 @@ internal class DeferStoreWord : IWord
 
 /*
 
-https://forth-standard.org/standard/core/DEFERFetch
+https://forth-standard.org/standard/core/DEFERStore
 
 DEFER!
 
