@@ -35,6 +35,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new EndOfWord());
         interpreter.RegisterWord(new EndCaseWord());
         
+        interpreter.RegisterWord(new BeginNewAnonymousWordCompilationWord());
         interpreter.RegisterWord(new DeferWord());
         interpreter.RegisterWord(new DeferFetchWord());
         interpreter.RegisterWord(new DeferStoreWord());
