@@ -46,6 +46,10 @@ public class Interpreter : IInterpreter
 
     #region words compilation
 
+    // A name of the anonymous word.
+    private const string AnonymousWordName = ":NONAME WORD";
+    
+    
     /// <inheritdoc/>
     public INonPrimitiveWord? WordBeingDefined { get; private set; }
 
@@ -60,6 +64,13 @@ public class Interpreter : IInterpreter
 
         WordBeingDefined = new NonPrimitiveWord(wordName.ToUpperInvariant());
         _interpreterState = InterpreterStateCode.Compiling;
+    }
+    
+    /// <inheritdoc/>
+    public void BeginNewAnonymousWordCompilation()
+    {
+        // This word has no name. The registered name will be AnonymousWordName, which is not a valid word name.
+        BeginNewWordCompilation(AnonymousWordName);
     }
 
     /// <inheritdoc/>
@@ -94,7 +105,19 @@ public class Interpreter : IInterpreter
             Throw(-14, "not in a new word compilation");
         }
 
-        this.RegisterWord(WordBeingDefined ?? throw new InvalidOperationException(nameof(WordBeingDefined) + " is null."));
+        if (WordBeingDefined == null)
+        {
+            throw new InvalidOperationException(nameof(WordBeingDefined) + " is null.");
+        }
+        
+        // Registering the word will give us is execution token.
+        this.RegisterWord(WordBeingDefined);
+
+        // :NONAME, aka anonymous word, returns its execution token.
+        if (WordBeingDefined.Name == AnonymousWordName)
+        {
+            this.StackPush(WordBeingDefined.ExecutionToken);
+        }
 
         WordBeingDefined = null;
         _interpreterState = InterpreterStateCode.Interpreting;

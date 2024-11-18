@@ -4,7 +4,7 @@ namespace EFrtScript;
 
 
 /// <summary>
-/// Defines a non primitive word. A word composed of other words.
+/// Defines a non-primitive word. A word composed of other words.
 /// </summary>
 public interface INonPrimitiveWord : IWord
 {

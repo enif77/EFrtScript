@@ -48,6 +48,12 @@ public interface IInterpreter
     /// </summary>
     /// <param name="wordName">A new word name. Required parameter.</param>
     void BeginNewWordCompilation(string wordName);
+    
+    /// <summary>
+    /// Begins a new anonymous word compilation. Throws an exception, if a new word compilation is already happening.
+    /// Sets the WordBeingDefined property to the instance of the newly compiled word.
+    /// </summary>
+    void BeginNewAnonymousWordCompilation();
 
     /// <summary>
     /// Suspends a new word compilation.
