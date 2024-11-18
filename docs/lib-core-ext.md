@@ -5,8 +5,14 @@ Common words for all base operations (extra).
 ## Words
 
 - [CASE](libs/core-ext/case.md)
+- [DEFER](libs/core-ext/defer.md)
+- [DEFER@](libs/core-ext/defer-fetch.md)
+- [DEFER!](libs/core-ext/defer-store.md)
+- [?DEFER](libs/core-ext/question-defer.md)
 - [ENDCASE](libs/core-ext/endcase.md)
 - [ENDOF](libs/core-ext/endof.md)
+- [IS](libs/core-ext/is.md)
+- [:NONAME](libs/core-ext/noname.md)
 - [OF](libs/core-ext/of.md)
 - [PICK](libs/core-ext/pick.md)
 
