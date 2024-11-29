@@ -5,9 +5,9 @@ namespace EFrtScript.Libs.CoreExt.Words;
 using EFrtScript.Extensions;
 
 
-internal class QuestionFloatWord : IWord
+internal class FloatQuestionWord : IWord
 {
-    public string Name => "?FLOAT";
+    public string Name => "FLOAT?";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
@@ -24,7 +24,7 @@ internal class QuestionFloatWord : IWord
 
 /*
 
-?FLOAT
+FLOAT?
 
 (x -- flag)
 Checks if x is a floating point value.

@@ -34,5 +34,5 @@ Words definition table columns:
 | STRING  | no   | IC   | **Convert to string value**<br>(x -- str)<br>Converts a value on the top of the stack to a string value.                 |
 | ?DO      | yes  | C    | **Conditional loop**<br>(limit index -- ) [ - limit index ]<br>If n equals limit, skip immediately to the matching LOOP or +LOOP. Otherwise, enter the loop, which is thenceforth treated as a normal DO loop. |
 | ?INT    | no   | IC   | **Checks if x is an integer value**<br>(x -- flag)<br>Sets flag to true, if x is an integer value.                       |
-| ?FLOAT  | no   | IC   | **Checks if x is a floating point value**<br>(x -- flag)<br>Sets flag to true, if x is a floating point value.           |
+| FLOAT?  | no   | IC   | **Checks if x is a floating point value**<br>(x -- flag)<br>Sets flag to true, if x is a floating point value.           |
 | ?STRING | no   | IC   | **Checks if x is a string value**<br>(x -- flag)<br>Sets flag to true, if x is a string value.                           |
