@@ -1,7 +1,7 @@
-# ?DEFER
+# DEFER?
 
 - Library: CORE-EXT
-- Common name: ?defer
+- Common name: defer?
 - Is immediate: no
 - Mode: interpretation and compilation
 - Stack image: `( xt -- flag )`
