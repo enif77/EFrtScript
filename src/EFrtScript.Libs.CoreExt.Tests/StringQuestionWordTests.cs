@@ -9,19 +9,19 @@ using EFrtScript.IO;
 using EFrtScript.Libs.CoreExt.Words;
 
 
-public class QuestionStringWordTests
+public class StringQuestionWordTests
 {
     [Fact]
     public void HasExpectedName()
     {
-        Assert.Equal("?STRING", new QuestionStringWord().Name);
+        Assert.Equal("STRING?", new StringQuestionWord().Name);
     }
     
     
     [Fact]
     public void IsNotImmediate()
     {
-        Assert.False(new QuestionStringWord().IsImmediate);
+        Assert.False(new StringQuestionWord().IsImmediate);
     }
     
     
@@ -32,7 +32,7 @@ public class QuestionStringWordTests
         
         interpreter.StackPush(123);
         
-        Assert.Equal(1, new QuestionStringWord().Execute(interpreter));
+        Assert.Equal(1, new StringQuestionWord().Execute(interpreter));
     }
     
     [Fact]
@@ -42,7 +42,7 @@ public class QuestionStringWordTests
         
         interpreter.StackPush("123");
         
-        new QuestionStringWord().Execute(interpreter);
+        new StringQuestionWord().Execute(interpreter);
         
         var r = interpreter.StackPop();
 
@@ -57,7 +57,7 @@ public class QuestionStringWordTests
         
         interpreter.StackPush(123);
         
-        new QuestionStringWord().Execute(interpreter);
+        new StringQuestionWord().Execute(interpreter);
         
         var r = interpreter.StackPop();
 

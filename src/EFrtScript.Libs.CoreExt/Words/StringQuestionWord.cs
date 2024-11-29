@@ -5,9 +5,9 @@ namespace EFrtScript.Libs.CoreExt.Words;
 using EFrtScript.Extensions;
 
 
-internal class QuestionStringWord : IWord
+internal class StringQuestionWord : IWord
 {
-    public string Name => "?STRING";
+    public string Name => "STRING?";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
@@ -24,7 +24,7 @@ internal class QuestionStringWord : IWord
 
 /*
 
-?STRING
+STRING?
 
 (x -- flag)
 Checks if x is a string value.
