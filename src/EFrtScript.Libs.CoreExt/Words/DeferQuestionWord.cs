@@ -5,9 +5,9 @@ namespace EFrtScript.Libs.CoreExt.Words;
 using EFrtScript.Extensions;
 
 
-internal class QuestionDeferWord : IWord
+internal class DeferQuestionWord : IWord
 {
-    public string Name => "?DEFER";
+    public string Name => "DEFER?";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
@@ -31,7 +31,7 @@ internal class QuestionDeferWord : IWord
 
 /*
 
-?DEFER
+DEFER?
 
 ( xt1 -- flag )
 flag is true if the word with execution token xt1 is a deferred word.

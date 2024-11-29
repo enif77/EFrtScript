@@ -40,6 +40,6 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new DeferFetchWord());
         interpreter.RegisterWord(new DeferStoreWord());
         interpreter.RegisterWord(new IsWord());
-        interpreter.RegisterWord(new QuestionDeferWord());
+        interpreter.RegisterWord(new DeferQuestionWord());
     }
 }

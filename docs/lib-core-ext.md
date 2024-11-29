@@ -8,7 +8,7 @@ Common words for all base operations (extra).
 - [DEFER](libs/core-ext/defer.md)
 - [DEFER@](libs/core-ext/defer-fetch.md)
 - [DEFER!](libs/core-ext/defer-store.md)
-- [?DEFER](libs/core-ext/question-defer.md)
+- [DEFER?](libs/core-ext/defer-question.md)
 - [ENDCASE](libs/core-ext/endcase.md)
 - [ENDOF](libs/core-ext/endof.md)
 - [IS](libs/core-ext/is.md)
