@@ -21,7 +21,7 @@ public class Library : IWordsLibrary
         interpreter.RegisterWord(new FloatWord());
         interpreter.RegisterWord(new StringWord());
         
-        interpreter.RegisterWord(new QuestionIntWord());
+        interpreter.RegisterWord(new IntQuestionWord());
         interpreter.RegisterWord(new FloatQuestionWord());
         interpreter.RegisterWord(new QuestionStringWord());
 

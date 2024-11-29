@@ -5,9 +5,9 @@ namespace EFrtScript.Libs.CoreExt.Words;
 using EFrtScript.Extensions;
 
 
-internal class QuestionIntWord : IWord
+internal class IntQuestionWord : IWord
 {
-    public string Name => "?INT";
+    public string Name => "INT?";
     public bool IsImmediate => false;
     public int ExecutionToken { get; set; }
 
@@ -24,7 +24,7 @@ internal class QuestionIntWord : IWord
 
 /*
 
-?INT
+INT?
 
 (x -- flag)
 Checks if x is an integer value.
