@@ -4,10 +4,16 @@ Common words for all base operations.
 
 ## Words
 
-- [CONSTANT](libs/core/constant.md)
-- [LITERAL](libs/core/literal.md)
 - [left-bracket](libs/core/suspend-new-word-compilation.md) (`[`)
 - [right-bracket](libs/core/resume-new-word-compilation.md) (`]`)
+- [CONSTANT](libs/core/constant.md)
+- [/](libs/core/div.md)
+- [LITERAL](libs/core/literal.md)
+- [-](libs/core/minus.md)
+- [NEGATE](libs/core/negate.md)
+- [+](libs/core/plus.md)
+- [TYPE](libs/core/type.md)
+- [*](libs/core/times.md)
 
 Words definition table columns:
 
@@ -21,15 +27,11 @@ Words definition table columns:
 |----------|------|------|---|
 | !        | no   | IC   | **Store**<br>(x a-addr -- )<br>Store `x` at `addr` (a heap array index). |
 | (        | yes  | IC   | **Comment**<br>Skips all source characters till the closing `)` character. |
-| *        | no   | IC   | **n3 = n1 * n2**<br>(n1 n2 -- n3)<br>Multiplies n1 and n2 and leaves the product on the stack. |
-| +        | no   | IC   | **n3 = n1 + n2**<br>(n1 n2 -- n3)<br>Adds n1 and n2 and leaves the sum on the stack. |
 | +LOOP    | yes  | C    | **Add to loop index**<br>(n -- )<br>Adds n to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
-| -        | no   | IC   | **n3 = n1 - n2**<br>(n1 n2 -- n3)<br>Subtracts n2 from n1 and leaves the difference on the stack. |
 | .        | no   | IC   | **Print top of stack**<br>(n -- )<br>Prints the integer number on the top of the stack. |
 | ." str   | yes  | C    | **Print immediate string**<br>Prints the string that follows in the input stream. |
 | 0<       | no   | IC   | **Less than zero**<br>(n -- flag)<br>Returns -1 if n1 is less than 0, 0 otherwise. |
 | 0=       | no   | IC   | **Equal to zero**<br>(n -- flag)<br>Returns -1 if n1 is equal to 0, 0 otherwise. |
-| /        | no   | IC   | **n3 = n1 / n2**<br>(n1 n2 -- n3)<br>Divides n1 by n2 and leaves the quotient on the stack. |
 | : w      | yes  | I    | **Begin definition**<br>Begins compilation of a word named "w". |
 | ;        | yes  | C    | **End definition**<br>Ends compilation of a word. |
 | <        | no   | IC   | **Less than**<br>(n1 n2 -- flag)<br>Returns -1 if n1 < n2, 0 otherwise. |
@@ -61,7 +63,6 @@ Words definition table columns:
 | J        | yes  | C    | **Outer loop index**<br>( -- n) [J lim I -- J lim I]<br>The loop index of the next to innermost DO—LOOP is placed on the stack. |
 | LEAVE    | yes  | C    | **Exit DO—LOOP**<br>The innermost DO—LOOP is immediately exited. Execution resumes after the LOOP statement marking the end of the loop. |
 | LOOP     | yes  | C    | **Increment loop index**<br>Adds one to the index of the active loop. If the limit is reached, the loop is exited. Otherwise, another iteration is begun. |
-| NEGATE   | no   | IC   | **n2 = -n1**<br>(n1 -- n2)<br>Negates the value the top of the stack. |
 | OVER     | no   | IC   | **Duplicate second item**<br>(n1 n2 -- n1 n2 n1)<br>The second item on the stack is copied to the top. |
 | R>       | no   | IC   | **From return stack**<br>( -- n) [n - ]<br>The top value is removed from the return stack and pushed onto the stack. |
 | REPEAT   | no   | C    | **End BEGIN-WHILE-REPEAT loop**<br>(R: -- dest)<br>Ends the BEGIN-WHILE-REPEAT a loop. |
@@ -71,7 +72,6 @@ Words definition table columns:
 | SPACES   | no   | IC   | **Print spaces**<br>(n -- )<br>Prints out N characters of SPACE, where N is a number on the top of the stack. |
 | SWAP     | no   | IC   | **Swap top two items**<br>(n1 n2 -- n2 n1)<br>The top two stack items are interchanged. |
 | THEN     | yes  | C    | **End if**<br>( -- flag)<br>Used in an IF—ELSE—THEN sequence, marks the end of the conditional statement. |
-| TYPE     | no   | IC   | **Print string**<br>(s -- )<br>Prints out a value on the top of the stack as a string. |
 | UNLOOP   | no   | C    | **Discard DO—LOOP control parameters**<br>[limit index -- ]<br>Loop control parameters are removed from the return stack. Use this before the EXITing a loop. |
 | UNTIL    | yes  | C    | **End BEGIN—UNTIL loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching BEGIN. If flag is nonzero, the loop is exited and the word following the UNTIL is executed. |
 | WHILE    | yes  | C    | **Bein BEGIN—WHILE-REPEAT loop**<br>(s -- )<br>If flag is zero, the loop continues execution at the word following the matching REPEAT. If flag is nonzero, the loop is continuing behind the word BEGIN.

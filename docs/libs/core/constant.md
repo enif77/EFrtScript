@@ -7,22 +7,22 @@
 - Stack image: Compilation `( x "<spaces>name" -- )`, interpretation `( -- x)`
 
 Skip leading space delimiters. Parse name delimited by a space. Create a definition for name with the execution semantics defined below.
-   
+
 name is referred to as a "constant".
-   
-## name Execution:
+
+## name Execution
 
    `( -- x )`
 
    Place x on the stack.
-   
-## Rationale:
+
+## Rationale
 
    Typical use: `... DECIMAL 10 CONSTANT TEN ...`.
-   
-## Testing:
 
-```
+## Testing
+
+```forth
    T{ 123 CONSTANT X123 -> }T
    T{ X123 -> 123 }T
    T{ : EQU CONSTANT ; -> }T
